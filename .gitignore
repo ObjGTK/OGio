@@ -51,6 +51,12 @@ m4/lt~obsolete.m4
 # can automatically generate from config.status script
 # (which is called by configure script))
 Makefile
+extra.mk
+buildsys.mk
+src/.deps
+*.dep
+*.o
+*.oc
 
 # ---> Objective-C
 # Xcode
