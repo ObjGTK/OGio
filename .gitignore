@@ -53,10 +53,12 @@ m4/lt~obsolete.m4
 Makefile
 extra.mk
 buildsys.mk
-src/.deps
+.deps
 *.dep
 *.o
 *.oc
+*.so
+*.a
 
 # ---> Objective-C
 # Xcode
