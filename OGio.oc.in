@@ -1,0 +1,6 @@
+package_format 1
+package_depends_on OGObject
+
+CPPFLAGS="$CPPFLAGS @OGIO_CPPFLAGS@"
+LIBS="-logio @OGIO_LIBS@ $LIBS"
+FRAMEWORK_LIBS="-framework OGio @OGIO_LIBS@ $FRAMEWORK_LIBS"
