@@ -4,6 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#define G_SETTINGS_ENABLE_BACKEND
+
+#include <gio/gsettingsbackend.h>
+#include <gio/gdesktopappinfo.h>
+#include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
 #include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
