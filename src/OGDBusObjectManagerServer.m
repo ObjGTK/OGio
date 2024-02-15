@@ -46,7 +46,7 @@
 {
 	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_object_manager_server_get_connection([self castedGObject]));
 
-	OGDBusConnection* returnValue = [OGDBusConnection wrapperFor:gobjectValue];
+	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

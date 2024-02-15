@@ -12,7 +12,7 @@
 {
 	GUnixMountMonitor* gobjectValue = G_UNIX_MOUNT_MONITOR(g_unix_mount_monitor_get());
 
-	OGUnixMountMonitor* returnValue = [OGUnixMountMonitor wrapperFor:gobjectValue];
+	OGUnixMountMonitor* returnValue = [OGUnixMountMonitor withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

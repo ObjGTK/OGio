@@ -158,7 +158,7 @@
 {
 	GInputStream* gobjectValue = G_INPUT_STREAM(g_subprocess_get_stderr_pipe([self castedGObject]));
 
-	OGInputStream* returnValue = [OGInputStream wrapperFor:gobjectValue];
+	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -166,7 +166,7 @@
 {
 	GOutputStream* gobjectValue = G_OUTPUT_STREAM(g_subprocess_get_stdin_pipe([self castedGObject]));
 
-	OGOutputStream* returnValue = [OGOutputStream wrapperFor:gobjectValue];
+	OGOutputStream* returnValue = [OGOutputStream withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -174,7 +174,7 @@
 {
 	GInputStream* gobjectValue = G_INPUT_STREAM(g_subprocess_get_stdout_pipe([self castedGObject]));
 
-	OGInputStream* returnValue = [OGInputStream wrapperFor:gobjectValue];
+	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
 	return returnValue;
 }
 

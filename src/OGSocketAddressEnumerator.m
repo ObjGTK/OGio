@@ -30,7 +30,7 @@
 		@throw exception;
 	}
 
-	OGSocketAddress* returnValue = [OGSocketAddress wrapperFor:gobjectValue];
+	OGSocketAddress* returnValue = [OGSocketAddress withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -55,7 +55,7 @@
 		@throw exception;
 	}
 
-	OGSocketAddress* returnValue = [OGSocketAddress wrapperFor:gobjectValue];
+	OGSocketAddress* returnValue = [OGSocketAddress withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

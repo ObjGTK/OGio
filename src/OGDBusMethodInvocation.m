@@ -7,8 +7,8 @@
 #import "OGDBusMethodInvocation.h"
 
 #import "OGUnixFDList.h"
-#import "OGDBusConnection.h"
 #import "OGDBusMessage.h"
+#import "OGDBusConnection.h"
 
 @implementation OGDBusMethodInvocation
 
@@ -21,7 +21,7 @@
 {
 	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_method_invocation_get_connection([self castedGObject]));
 
-	OGDBusConnection* returnValue = [OGDBusConnection wrapperFor:gobjectValue];
+	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -37,7 +37,7 @@
 {
 	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_method_invocation_get_message([self castedGObject]));
 
-	OGDBusMessage* returnValue = [OGDBusMessage wrapperFor:gobjectValue];
+	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	return returnValue;
 }
 

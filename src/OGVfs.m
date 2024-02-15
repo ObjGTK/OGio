@@ -12,7 +12,7 @@
 {
 	GVfs* gobjectValue = G_VFS(g_vfs_get_default());
 
-	OGVfs* returnValue = [OGVfs wrapperFor:gobjectValue];
+	OGVfs* returnValue = [OGVfs withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -20,7 +20,7 @@
 {
 	GVfs* gobjectValue = G_VFS(g_vfs_get_local());
 
-	OGVfs* returnValue = [OGVfs wrapperFor:gobjectValue];
+	OGVfs* returnValue = [OGVfs withGObject:gobjectValue];
 	return returnValue;
 }
 

@@ -7,9 +7,9 @@
 #import "OGTlsConnection.h"
 
 #import "OGTlsCertificate.h"
+#import "OGTlsDatabase.h"
 #import "OGTlsInteraction.h"
 #import "OGCancellable.h"
-#import "OGTlsDatabase.h"
 
 @implementation OGTlsConnection
 
@@ -29,7 +29,7 @@
 {
 	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_connection_get_certificate([self castedGObject]));
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate wrapperFor:gobjectValue];
+	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -60,7 +60,7 @@
 {
 	GTlsDatabase* gobjectValue = G_TLS_DATABASE(g_tls_connection_get_database([self castedGObject]));
 
-	OGTlsDatabase* returnValue = [OGTlsDatabase wrapperFor:gobjectValue];
+	OGTlsDatabase* returnValue = [OGTlsDatabase withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -68,7 +68,7 @@
 {
 	GTlsInteraction* gobjectValue = G_TLS_INTERACTION(g_tls_connection_get_interaction([self castedGObject]));
 
-	OGTlsInteraction* returnValue = [OGTlsInteraction wrapperFor:gobjectValue];
+	OGTlsInteraction* returnValue = [OGTlsInteraction withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -84,7 +84,7 @@
 {
 	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_connection_get_peer_certificate([self castedGObject]));
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate wrapperFor:gobjectValue];
+	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	return returnValue;
 }
 

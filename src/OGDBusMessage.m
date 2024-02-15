@@ -118,7 +118,7 @@
 		@throw exception;
 	}
 
-	OGDBusMessage* returnValue = [OGDBusMessage wrapperFor:gobjectValue];
+	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -262,7 +262,7 @@
 {
 	GUnixFDList* gobjectValue = G_UNIX_FD_LIST(g_dbus_message_get_unix_fd_list([self castedGObject]));
 
-	OGUnixFDList* returnValue = [OGUnixFDList wrapperFor:gobjectValue];
+	OGUnixFDList* returnValue = [OGUnixFDList withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -275,7 +275,7 @@
 {
 	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new_method_error_literal([self castedGObject], [errorName UTF8String], [errorMessage UTF8String]));
 
-	OGDBusMessage* returnValue = [OGDBusMessage wrapperFor:gobjectValue];
+	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -285,7 +285,7 @@
 {
 	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new_method_error_valist([self castedGObject], [errorName UTF8String], [errorMessageFormat UTF8String], varArgs));
 
-	OGDBusMessage* returnValue = [OGDBusMessage wrapperFor:gobjectValue];
+	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -295,7 +295,7 @@
 {
 	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new_method_reply([self castedGObject]));
 
-	OGDBusMessage* returnValue = [OGDBusMessage wrapperFor:gobjectValue];
+	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

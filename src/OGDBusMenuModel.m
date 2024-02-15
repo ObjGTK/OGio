@@ -14,7 +14,7 @@
 {
 	GDBusMenuModel* gobjectValue = G_DBUS_MENU_MODEL(g_dbus_menu_model_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]));
 
-	OGDBusMenuModel* returnValue = [OGDBusMenuModel wrapperFor:gobjectValue];
+	OGDBusMenuModel* returnValue = [OGDBusMenuModel withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

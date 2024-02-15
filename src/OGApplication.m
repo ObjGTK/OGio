@@ -6,9 +6,9 @@
 
 #import "OGApplication.h"
 
+#import "OGNotification.h"
 #import "OGDBusConnection.h"
 #import "OGCancellable.h"
-#import "OGNotification.h"
 
 @implementation OGApplication
 
@@ -16,7 +16,7 @@
 {
 	GApplication* gobjectValue = G_APPLICATION(g_application_get_default());
 
-	OGApplication* returnValue = [OGApplication wrapperFor:gobjectValue];
+	OGApplication* returnValue = [OGApplication withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -85,7 +85,7 @@
 {
 	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_application_get_dbus_connection([self castedGObject]));
 
-	OGDBusConnection* returnValue = [OGDBusConnection wrapperFor:gobjectValue];
+	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	return returnValue;
 }
 

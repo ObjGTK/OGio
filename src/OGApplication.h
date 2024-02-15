@@ -4,19 +4,19 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
 #include <gio/gunixmounts.h>
-#include <gio/gunixoutputstream.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gio.h>
+#include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
+@class OGNotification;
 @class OGDBusConnection;
 @class OGCancellable;
-@class OGNotification;
 
 /**
  * A #GApplication is the foundation of an application.  It wraps some

@@ -66,7 +66,7 @@
 {
 	GUnixFDList* gobjectValue = G_UNIX_FD_LIST(g_unix_fd_message_get_fd_list([self castedGObject]));
 
-	OGUnixFDList* returnValue = [OGUnixFDList wrapperFor:gobjectValue];
+	OGUnixFDList* returnValue = [OGUnixFDList withGObject:gobjectValue];
 	return returnValue;
 }
 

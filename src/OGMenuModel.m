@@ -6,8 +6,8 @@
 
 #import "OGMenuModel.h"
 
-#import "OGMenuLinkIter.h"
 #import "OGMenuAttributeIter.h"
+#import "OGMenuLinkIter.h"
 
 @implementation OGMenuModel
 
@@ -27,7 +27,7 @@
 {
 	GMenuModel* gobjectValue = G_MENU_MODEL(g_menu_model_get_item_link([self castedGObject], itemIndex, [link UTF8String]));
 
-	OGMenuModel* returnValue = [OGMenuModel wrapperFor:gobjectValue];
+	OGMenuModel* returnValue = [OGMenuModel withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -56,7 +56,7 @@
 {
 	GMenuAttributeIter* gobjectValue = G_MENU_ATTRIBUTE_ITER(g_menu_model_iterate_item_attributes([self castedGObject], itemIndex));
 
-	OGMenuAttributeIter* returnValue = [OGMenuAttributeIter wrapperFor:gobjectValue];
+	OGMenuAttributeIter* returnValue = [OGMenuAttributeIter withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -66,7 +66,7 @@
 {
 	GMenuLinkIter* gobjectValue = G_MENU_LINK_ITER(g_menu_model_iterate_item_links([self castedGObject], itemIndex));
 
-	OGMenuLinkIter* returnValue = [OGMenuLinkIter wrapperFor:gobjectValue];
+	OGMenuLinkIter* returnValue = [OGMenuLinkIter withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

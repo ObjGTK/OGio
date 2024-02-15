@@ -35,7 +35,7 @@
 {
 	GFileInfo* gobjectValue = G_FILE_INFO(g_zlib_compressor_get_file_info([self castedGObject]));
 
-	OGFileInfo* returnValue = [OGFileInfo wrapperFor:gobjectValue];
+	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
 	return returnValue;
 }
 

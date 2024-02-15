@@ -7,8 +7,8 @@
 #import "OGIOStream.h"
 
 #import "OGOutputStream.h"
-#import "OGCancellable.h"
 #import "OGInputStream.h"
+#import "OGCancellable.h"
 
 @implementation OGIOStream
 
@@ -76,7 +76,7 @@
 {
 	GInputStream* gobjectValue = G_INPUT_STREAM(g_io_stream_get_input_stream([self castedGObject]));
 
-	OGInputStream* returnValue = [OGInputStream wrapperFor:gobjectValue];
+	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -84,7 +84,7 @@
 {
 	GOutputStream* gobjectValue = G_OUTPUT_STREAM(g_io_stream_get_output_stream([self castedGObject]));
 
-	OGOutputStream* returnValue = [OGOutputStream wrapperFor:gobjectValue];
+	OGOutputStream* returnValue = [OGOutputStream withGObject:gobjectValue];
 	return returnValue;
 }
 

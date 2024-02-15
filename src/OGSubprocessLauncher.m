@@ -98,7 +98,7 @@
 		@throw exception;
 	}
 
-	OGSubprocess* returnValue = [OGSubprocess wrapperFor:gobjectValue];
+	OGSubprocess* returnValue = [OGSubprocess withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

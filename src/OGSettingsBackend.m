@@ -17,7 +17,7 @@
 {
 	GSettingsBackend* gobjectValue = G_SETTINGS_BACKEND(g_settings_backend_get_default());
 
-	OGSettingsBackend* returnValue = [OGSettingsBackend wrapperFor:gobjectValue];
+	OGSettingsBackend* returnValue = [OGSettingsBackend withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

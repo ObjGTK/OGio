@@ -52,7 +52,7 @@
 {
 	GCancellable* gobjectValue = G_CANCELLABLE(g_task_get_cancellable([self castedGObject]));
 
-	OGCancellable* returnValue = [OGCancellable wrapperFor:gobjectValue];
+	OGCancellable* returnValue = [OGCancellable withGObject:gobjectValue];
 	return returnValue;
 }
 

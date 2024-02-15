@@ -6,8 +6,8 @@
 
 #import "OGIOStream.h"
 
-@class OGSocket;
 @class OGCancellable;
+@class OGSocket;
 @class OGSocketAddress;
 
 /**

@@ -6,8 +6,8 @@
 
 #import "OGDBusServer.h"
 
-#import "OGDBusAuthObserver.h"
 #import "OGCancellable.h"
+#import "OGDBusAuthObserver.h"
 
 @implementation OGDBusServer
 

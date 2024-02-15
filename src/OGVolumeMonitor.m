@@ -19,7 +19,7 @@
 {
 	GVolumeMonitor* gobjectValue = G_VOLUME_MONITOR(g_volume_monitor_get());
 
-	OGVolumeMonitor* returnValue = [OGVolumeMonitor wrapperFor:gobjectValue];
+	OGVolumeMonitor* returnValue = [OGVolumeMonitor withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

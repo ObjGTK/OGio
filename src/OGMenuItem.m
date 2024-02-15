@@ -90,7 +90,7 @@
 {
 	GMenuModel* gobjectValue = G_MENU_MODEL(g_menu_item_get_link([self castedGObject], [link UTF8String]));
 
-	OGMenuModel* returnValue = [OGMenuModel wrapperFor:gobjectValue];
+	OGMenuModel* returnValue = [OGMenuModel withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

@@ -12,7 +12,7 @@
 {
 	GSocketControlMessage* gobjectValue = G_SOCKET_CONTROL_MESSAGE(g_socket_control_message_deserialize(level, type, size, data));
 
-	OGSocketControlMessage* returnValue = [OGSocketControlMessage wrapperFor:gobjectValue];
+	OGSocketControlMessage* returnValue = [OGSocketControlMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

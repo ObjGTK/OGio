@@ -6,8 +6,8 @@
 
 #import "OGFileIOStream.h"
 
-#import "OGCancellable.h"
 #import "OGFileInfo.h"
+#import "OGCancellable.h"
 
 @implementation OGFileIOStream
 
@@ -38,7 +38,7 @@
 		@throw exception;
 	}
 
-	OGFileInfo* returnValue = [OGFileInfo wrapperFor:gobjectValue];
+	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -63,7 +63,7 @@
 		@throw exception;
 	}
 
-	OGFileInfo* returnValue = [OGFileInfo wrapperFor:gobjectValue];
+	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

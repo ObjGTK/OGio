@@ -6,9 +6,9 @@
 
 #import "OGDBusProxy.h"
 
+#import "OGDBusConnection.h"
 #import "OGUnixFDList.h"
 #import "OGCancellable.h"
-#import "OGDBusConnection.h"
 
 @implementation OGDBusProxy
 
@@ -219,7 +219,7 @@
 {
 	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_proxy_get_connection([self castedGObject]));
 
-	OGDBusConnection* returnValue = [OGDBusConnection wrapperFor:gobjectValue];
+	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	return returnValue;
 }
 

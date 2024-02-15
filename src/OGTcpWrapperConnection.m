@@ -6,9 +6,9 @@
 
 #import "OGTcpWrapperConnection.h"
 
-#import "OGSocket.h"
-#import "OGSocketConnection.h"
 #import "OGIOStream.h"
+#import "OGSocketConnection.h"
+#import "OGSocket.h"
 
 @implementation OGTcpWrapperConnection
 
@@ -37,7 +37,7 @@
 {
 	GIOStream* gobjectValue = G_IO_STREAM(g_tcp_wrapper_connection_get_base_io_stream([self castedGObject]));
 
-	OGIOStream* returnValue = [OGIOStream wrapperFor:gobjectValue];
+	OGIOStream* returnValue = [OGIOStream withGObject:gobjectValue];
 	return returnValue;
 }
 

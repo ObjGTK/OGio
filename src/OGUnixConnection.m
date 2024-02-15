@@ -30,7 +30,7 @@
 		@throw exception;
 	}
 
-	OGCredentials* returnValue = [OGCredentials wrapperFor:gobjectValue];
+	OGCredentials* returnValue = [OGCredentials withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -55,7 +55,7 @@
 		@throw exception;
 	}
 
-	OGCredentials* returnValue = [OGCredentials wrapperFor:gobjectValue];
+	OGCredentials* returnValue = [OGCredentials withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

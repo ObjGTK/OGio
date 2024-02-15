@@ -162,7 +162,7 @@
 {
 	GSettings* gobjectValue = G_SETTINGS(g_settings_get_child([self castedGObject], [name UTF8String]));
 
-	OGSettings* returnValue = [OGSettings wrapperFor:gobjectValue];
+	OGSettings* returnValue = [OGSettings withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

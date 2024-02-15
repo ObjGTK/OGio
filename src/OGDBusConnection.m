@@ -6,13 +6,13 @@
 
 #import "OGDBusConnection.h"
 
+#import "OGIOStream.h"
+#import "OGUnixFDList.h"
 #import "OGMenuModel.h"
 #import "OGDBusMessage.h"
 #import "OGDBusAuthObserver.h"
-#import "OGIOStream.h"
-#import "OGCancellable.h"
-#import "OGUnixFDList.h"
 #import "OGCredentials.h"
+#import "OGCancellable.h"
 
 @implementation OGDBusConnection
 
@@ -367,7 +367,7 @@
 {
 	GCredentials* gobjectValue = G_CREDENTIALS(g_dbus_connection_get_peer_credentials([self castedGObject]));
 
-	OGCredentials* returnValue = [OGCredentials wrapperFor:gobjectValue];
+	OGCredentials* returnValue = [OGCredentials withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -375,7 +375,7 @@
 {
 	GIOStream* gobjectValue = G_IO_STREAM(g_dbus_connection_get_stream([self castedGObject]));
 
-	OGIOStream* returnValue = [OGIOStream wrapperFor:gobjectValue];
+	OGIOStream* returnValue = [OGIOStream withGObject:gobjectValue];
 	return returnValue;
 }
 
@@ -478,7 +478,7 @@
 		@throw exception;
 	}
 
-	OGDBusMessage* returnValue = [OGDBusMessage wrapperFor:gobjectValue];
+	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -498,7 +498,7 @@
 		@throw exception;
 	}
 
-	OGDBusMessage* returnValue = [OGDBusMessage wrapperFor:gobjectValue];
+	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

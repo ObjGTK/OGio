@@ -51,7 +51,7 @@
 {
 	GInetAddress* gobjectValue = G_INET_ADDRESS(g_inet_socket_address_get_address([self castedGObject]));
 
-	OGInetAddress* returnValue = [OGInetAddress wrapperFor:gobjectValue];
+	OGInetAddress* returnValue = [OGInetAddress withGObject:gobjectValue];
 	return returnValue;
 }
 

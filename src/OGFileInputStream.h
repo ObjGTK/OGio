@@ -6,8 +6,8 @@
 
 #import "OGInputStream.h"
 
-@class OGFileInfo;
 @class OGCancellable;
+@class OGFileInfo;
 
 /**
  * GFileInputStream provides input streams that take their

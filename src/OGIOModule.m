@@ -8,6 +8,13 @@
 
 @implementation OGIOModule
 
++ (char**)query
+{
+	char** returnValue = g_io_module_query();
+
+	return returnValue;
+}
+
 - (instancetype)init:(OFString*)filename
 {
 	GIOModule* gobjectValue = G_IO_MODULE(g_io_module_new([filename UTF8String]));
@@ -28,5 +35,16 @@
 {
 	return G_IO_MODULE([self gObject]);
 }
+
+- (void)load
+{
+	g_io_module_load([self castedGObject]);
+}
+
+- (void)unload
+{
+	g_io_module_unload([self castedGObject]);
+}
+
 
 @end

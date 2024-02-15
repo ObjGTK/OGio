@@ -25,7 +25,7 @@
 {
 	GResolver* gobjectValue = G_RESOLVER(g_resolver_get_default());
 
-	OGResolver* returnValue = [OGResolver wrapperFor:gobjectValue];
+	OGResolver* returnValue = [OGResolver withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

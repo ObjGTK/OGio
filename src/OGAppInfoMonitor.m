@@ -12,7 +12,7 @@
 {
 	GAppInfoMonitor* gobjectValue = G_APP_INFO_MONITOR(g_app_info_monitor_get());
 
-	OGAppInfoMonitor* returnValue = [OGAppInfoMonitor wrapperFor:gobjectValue];
+	OGAppInfoMonitor* returnValue = [OGAppInfoMonitor withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

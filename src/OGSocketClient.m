@@ -6,8 +6,8 @@
 
 #import "OGSocketClient.h"
 
-#import "OGCancellable.h"
 #import "OGSocketConnection.h"
+#import "OGCancellable.h"
 #import "OGSocketAddress.h"
 
 @implementation OGSocketClient
@@ -52,7 +52,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -77,7 +77,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -97,7 +97,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -122,7 +122,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -142,7 +142,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -167,7 +167,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -187,7 +187,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -212,7 +212,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -236,7 +236,7 @@
 {
 	GSocketAddress* gobjectValue = G_SOCKET_ADDRESS(g_socket_client_get_local_address([self castedGObject]));
 
-	OGSocketAddress* returnValue = [OGSocketAddress wrapperFor:gobjectValue];
+	OGSocketAddress* returnValue = [OGSocketAddress withGObject:gobjectValue];
 	return returnValue;
 }
 

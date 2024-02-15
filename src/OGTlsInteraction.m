@@ -6,9 +6,9 @@
 
 #import "OGTlsInteraction.h"
 
-#import "OGTlsConnection.h"
 #import "OGCancellable.h"
 #import "OGTlsPassword.h"
+#import "OGTlsConnection.h"
 
 @implementation OGTlsInteraction
 

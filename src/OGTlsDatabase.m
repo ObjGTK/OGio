@@ -6,9 +6,9 @@
 
 #import "OGTlsDatabase.h"
 
+#import "OGTlsInteraction.h"
 #import "OGCancellable.h"
 #import "OGTlsCertificate.h"
-#import "OGTlsInteraction.h"
 
 @implementation OGTlsDatabase
 
@@ -39,7 +39,7 @@
 		@throw exception;
 	}
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate wrapperFor:gobjectValue];
+	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -64,7 +64,7 @@
 		@throw exception;
 	}
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate wrapperFor:gobjectValue];
+	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -84,7 +84,7 @@
 		@throw exception;
 	}
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate wrapperFor:gobjectValue];
+	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -109,7 +109,7 @@
 		@throw exception;
 	}
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate wrapperFor:gobjectValue];
+	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

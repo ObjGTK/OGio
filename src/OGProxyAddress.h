@@ -6,8 +6,8 @@
 
 #import "OGInetSocketAddress.h"
 
-@class OGInetAddress;
 @class OGSocketAddress;
+@class OGInetAddress;
 
 /**
  * Support for proxied #GInetSocketAddress.

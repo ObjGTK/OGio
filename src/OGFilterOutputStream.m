@@ -17,7 +17,7 @@
 {
 	GOutputStream* gobjectValue = G_OUTPUT_STREAM(g_filter_output_stream_get_base_stream([self castedGObject]));
 
-	OGOutputStream* returnValue = [OGOutputStream wrapperFor:gobjectValue];
+	OGOutputStream* returnValue = [OGOutputStream withGObject:gobjectValue];
 	return returnValue;
 }
 

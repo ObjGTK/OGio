@@ -34,7 +34,7 @@
 {
 	GMenuModel* gobjectValue = G_MENU_MODEL(g_menu_link_iter_get_value([self castedGObject]));
 
-	OGMenuModel* returnValue = [OGMenuModel wrapperFor:gobjectValue];
+	OGMenuModel* returnValue = [OGMenuModel withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

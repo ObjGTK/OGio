@@ -58,7 +58,7 @@
 {
 	GCredentials* gobjectValue = G_CREDENTIALS(g_unix_credentials_message_get_credentials([self castedGObject]));
 
-	OGCredentials* returnValue = [OGCredentials wrapperFor:gobjectValue];
+	OGCredentials* returnValue = [OGCredentials withGObject:gobjectValue];
 	return returnValue;
 }
 

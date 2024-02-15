@@ -43,7 +43,7 @@
 {
 	GFileInfo* gobjectValue = G_FILE_INFO(g_file_info_dup([self castedGObject]));
 
-	OGFileInfo* returnValue = [OGFileInfo wrapperFor:gobjectValue];
+	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

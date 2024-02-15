@@ -202,7 +202,7 @@
 {
 	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_certificate_get_issuer([self castedGObject]));
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate wrapperFor:gobjectValue];
+	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	return returnValue;
 }
 

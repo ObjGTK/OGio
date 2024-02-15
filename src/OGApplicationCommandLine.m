@@ -76,7 +76,7 @@
 {
 	GInputStream* gobjectValue = G_INPUT_STREAM(g_application_command_line_get_stdin([self castedGObject]));
 
-	OGInputStream* returnValue = [OGInputStream wrapperFor:gobjectValue];
+	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

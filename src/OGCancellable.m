@@ -12,7 +12,7 @@
 {
 	GCancellable* gobjectValue = G_CANCELLABLE(g_cancellable_get_current());
 
-	OGCancellable* returnValue = [OGCancellable wrapperFor:gobjectValue];
+	OGCancellable* returnValue = [OGCancellable withGObject:gobjectValue];
 	return returnValue;
 }
 

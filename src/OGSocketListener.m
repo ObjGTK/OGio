@@ -6,10 +6,10 @@
 
 #import "OGSocketListener.h"
 
-#import "OGSocketAddress.h"
-#import "OGSocket.h"
-#import "OGSocketConnection.h"
 #import "OGCancellable.h"
+#import "OGSocketAddress.h"
+#import "OGSocketConnection.h"
+#import "OGSocket.h"
 
 @implementation OGSocketListener
 
@@ -48,7 +48,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -73,7 +73,7 @@
 		@throw exception;
 	}
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -93,7 +93,7 @@
 		@throw exception;
 	}
 
-	OGSocket* returnValue = [OGSocket wrapperFor:gobjectValue];
+	OGSocket* returnValue = [OGSocket withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -118,7 +118,7 @@
 		@throw exception;
 	}
 
-	OGSocket* returnValue = [OGSocket wrapperFor:gobjectValue];
+	OGSocket* returnValue = [OGSocket withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

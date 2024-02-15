@@ -14,7 +14,7 @@
 {
 	GDBusActionGroup* gobjectValue = G_DBUS_ACTION_GROUP(g_dbus_action_group_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]));
 
-	OGDBusActionGroup* returnValue = [OGDBusActionGroup wrapperFor:gobjectValue];
+	OGDBusActionGroup* returnValue = [OGDBusActionGroup withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

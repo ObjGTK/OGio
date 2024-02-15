@@ -8,10 +8,10 @@
 
 #import "OGCredentials.h"
 #import "OGSocketAddress.h"
-#import "OGSocketConnection.h"
-#import "OGInetAddress.h"
 #import "OGCancellable.h"
+#import "OGSocketConnection.h"
 #import "OGSocketControlMessage.h"
+#import "OGInetAddress.h"
 
 @implementation OGSocket
 
@@ -86,7 +86,7 @@
 		@throw exception;
 	}
 
-	OGSocket* returnValue = [OGSocket wrapperFor:gobjectValue];
+	OGSocket* returnValue = [OGSocket withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -193,7 +193,7 @@
 {
 	GSocketConnection* gobjectValue = G_SOCKET_CONNECTION(g_socket_connection_factory_create_connection([self castedGObject]));
 
-	OGSocketConnection* returnValue = [OGSocketConnection wrapperFor:gobjectValue];
+	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -241,7 +241,7 @@
 		@throw exception;
 	}
 
-	OGCredentials* returnValue = [OGCredentials wrapperFor:gobjectValue];
+	OGCredentials* returnValue = [OGCredentials withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -289,7 +289,7 @@
 		@throw exception;
 	}
 
-	OGSocketAddress* returnValue = [OGSocketAddress wrapperFor:gobjectValue];
+	OGSocketAddress* returnValue = [OGSocketAddress withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -345,7 +345,7 @@
 		@throw exception;
 	}
 
-	OGSocketAddress* returnValue = [OGSocketAddress wrapperFor:gobjectValue];
+	OGSocketAddress* returnValue = [OGSocketAddress withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
 
 	return returnValue;

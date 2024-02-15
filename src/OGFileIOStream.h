@@ -6,8 +6,8 @@
 
 #import "OGIOStream.h"
 
-@class OGCancellable;
 @class OGFileInfo;
+@class OGCancellable;
 
 /**
  * GFileIOStream provides io streams that both read and write to the same
