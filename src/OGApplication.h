@@ -4,19 +4,19 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
+@class OGCancellable;
 @class OGNotification;
 @class OGDBusConnection;
-@class OGCancellable;
 
 /**
  * A #GApplication is the foundation of an application.  It wraps some
@@ -57,8 +57,8 @@
  * instance and g_application_run() promptly returns. See the code
  * examples below.
  * 
- * If used, the expected form of an application identifier is the
- * same as that of a
+ * If used, the expected form of an application identifier is the same as
+ * that of of a
  * [D-Bus well-known bus name](https://dbus.freedesktop.org/doc/dbus-specification.html#message-protocol-names-bus).
  * Examples include: `com.example.MyApp`, `org.example.internal_apps.Calculator`,
  * `org._7_zip.Archiver`.
@@ -85,10 +85,6 @@
  * the session bus, and GIO provides the #GDBusActionGroup wrapper to
  * conveniently access them remotely. GIO provides a #GDBusMenuModel wrapper
  * for remote access to exported #GMenuModels.
- * 
- * Note: Due to the fact that actions are exported on the session bus,
- * using `maybe` parameters is not supported, since D-Bus does not support
- * `maybe` types.
  * 
  * There is a number of different entry points into a GApplication:
  * 
@@ -277,8 +273,6 @@
  * inspected and modified.  If %G_APPLICATION_HANDLES_COMMAND_LINE is
  * set, then the resulting dictionary is sent to the primary instance,
  * where g_application_command_line_get_options_dict() will return it.
- * As it has been passed outside the process at this point, the types of all
- * values in the options dict must be checked before being used.
  * This "packing" is done according to the type of the argument --
  * booleans for normal flags, strings for strings, bytestrings for
  * filenames, etc.  The packing only occurs if the flag is given (ie: we
@@ -479,7 +473,7 @@
  * Increases the use count of @application.
  * 
  * Use this function to indicate that the application has a reason to
- * continue to run.  For example, g_application_hold() is called by GTK
+ * continue to run.  For example, g_application_hold() is called by GTK+
  * when a toplevel window is on the screen.
  * 
  * To cancel the hold, call g_application_release().

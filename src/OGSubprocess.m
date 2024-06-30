@@ -6,9 +6,9 @@
 
 #import "OGSubprocess.h"
 
-#import "OGOutputStream.h"
 #import "OGCancellable.h"
 #import "OGInputStream.h"
+#import "OGOutputStream.h"
 
 @implementation OGSubprocess
 

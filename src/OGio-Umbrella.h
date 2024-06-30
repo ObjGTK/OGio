@@ -49,7 +49,6 @@
 #import "OGFilenameCompleter.h"
 #import "OGFilterInputStream.h"
 #import "OGFilterOutputStream.h"
-#import "OGIOModule.h"
 #import "OGIOStream.h"
 #import "OGInetAddress.h"
 #import "OGInetAddressMask.h"

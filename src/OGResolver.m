@@ -6,8 +6,8 @@
 
 #import "OGResolver.h"
 
-#import "OGCancellable.h"
 #import "OGInetAddress.h"
+#import "OGCancellable.h"
 
 @implementation OGResolver
 
@@ -34,13 +34,6 @@
 - (GResolver*)castedGObject
 {
 	return G_RESOLVER([self gObject]);
-}
-
-- (unsigned)timeout
-{
-	unsigned returnValue = g_resolver_get_timeout([self castedGObject]);
-
-	return returnValue;
 }
 
 - (OFString*)lookupByAddressWithAddress:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable
@@ -223,11 +216,6 @@
 - (void)setDefault
 {
 	g_resolver_set_default([self castedGObject]);
-}
-
-- (void)setTimeout:(unsigned)timeoutMs
-{
-	g_resolver_set_timeout([self castedGObject], timeoutMs);
 }
 
 

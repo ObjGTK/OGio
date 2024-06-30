@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
@@ -273,7 +273,7 @@
 - (bool)isRemote;
 
 /**
- * Gets the options that were passed to g_application_command_line().
+ * Gets the options there were passed to g_application_command_line().
  * 
  * If you did not override local_command_line() then these are the same
  * options that were parsed according to the #GOptionEntrys added to the
@@ -282,9 +282,6 @@
  * 
  * If no options were sent then an empty dictionary is returned so that
  * you don't need to check for %NULL.
- * 
- * The data has been passed via an untrusted external process, so the types of
- * all values must be checked before being used.
  *
  * @return a #GVariantDict with the options
  */
@@ -297,9 +294,6 @@
  * context in which the invocation occurred.  It typically contains
  * information like the current working directory and the startup
  * notification ID.
- * 
- * It comes from an untrusted external process and hence the types of all
- * values must be validated before being used.
  * 
  * For local invocation, it will be %NULL.
  *

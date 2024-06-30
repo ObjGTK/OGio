@@ -6,10 +6,10 @@
 
 #import "OGTlsConnection.h"
 
-#import "OGTlsCertificate.h"
-#import "OGTlsDatabase.h"
 #import "OGTlsInteraction.h"
 #import "OGCancellable.h"
+#import "OGTlsCertificate.h"
+#import "OGTlsDatabase.h"
 
 @implementation OGTlsConnection
 

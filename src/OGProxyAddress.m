@@ -6,8 +6,8 @@
 
 #import "OGProxyAddress.h"
 
-#import "OGSocketAddress.h"
 #import "OGInetAddress.h"
+#import "OGSocketAddress.h"
 
 @implementation OGProxyAddress
 

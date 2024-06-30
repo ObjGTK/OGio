@@ -4,18 +4,18 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
-@class OGSocketConnection;
 @class OGCancellable;
+@class OGSocketConnection;
 @class OGSocketAddress;
 
 /**

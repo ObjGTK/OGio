@@ -4,19 +4,19 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
 @class OGTlsInteraction;
-@class OGCancellable;
 @class OGTlsCertificate;
+@class OGCancellable;
 
 /**
  * #GTlsDatabase is used to look up certificates and other information
@@ -181,7 +181,7 @@
  * g_tls_database_lookup_certificates_issued_by() for more information.
  * 
  * The database may choose to hold a reference to the issuer byte array for the duration
- * of this asynchronous operation. The byte array should not be modified during
+ * of of this asynchronous operation. The byte array should not be modified during
  * this time.
  *
  * @param issuerRawDn a #GByteArray which holds the DER encoded issuer DN.

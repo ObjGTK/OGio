@@ -4,19 +4,19 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
+@class OGCancellable;
 @class OGOutputStream;
 @class OGInputStream;
-@class OGCancellable;
 
 /**
  * GIOStream represents an object that has both read and write streams.
@@ -150,8 +150,7 @@
  *
  * @param ioPriority the io priority of the request
  * @param cancellable optional cancellable object
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
+ * @param callback callback to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)closeAsyncWithIoPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
@@ -218,9 +217,8 @@
  * @param flags a set of #GIOStreamSpliceFlags.
  * @param ioPriority the io priority of the request.
  * @param cancellable optional #GCancellable object, %NULL to ignore.
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
- * @param userData the data to pass to callback function
+ * @param callback a #GAsyncReadyCallback.
+ * @param userData user data passed to @callback.
  */
 - (void)spliceAsyncWithStream2:(OGIOStream*)stream2 flags:(GIOStreamSpliceFlags)flags ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 

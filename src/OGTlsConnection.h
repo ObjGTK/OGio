@@ -6,10 +6,10 @@
 
 #import "OGIOStream.h"
 
-@class OGTlsCertificate;
-@class OGTlsDatabase;
 @class OGTlsInteraction;
 @class OGCancellable;
+@class OGTlsCertificate;
+@class OGTlsDatabase;
 
 /**
  * #GTlsConnection is the base TLS connection class type, which wraps

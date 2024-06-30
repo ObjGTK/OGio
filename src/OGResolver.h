@@ -4,18 +4,18 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
-@class OGCancellable;
 @class OGInetAddress;
+@class OGCancellable;
 
 /**
  * #GResolver provides cancellable synchronous and asynchronous DNS
@@ -26,10 +26,6 @@
  * #GNetworkAddress and #GNetworkService provide wrappers around
  * #GResolver functionality that also implement #GSocketConnectable,
  * making it easy to connect to a remote host/service.
- * 
- * The default resolver (see g_resolver_get_default()) has a timeout of 30s set
- * on it since GLib 2.78. Earlier versions of GLib did not support resolver
- * timeouts.
  *
  */
 @interface OGResolver : OGObject
@@ -75,13 +71,6 @@
  */
 
 - (GResolver*)castedGObject;
-
-/**
- * Get the timeout applied to all resolver lookups. See #GResolver:timeout.
- *
- * @return the resolver timeout, in milliseconds, or `0` for no timeout
- */
-- (unsigned)timeout;
 
 /**
  * Synchronously reverse-resolves @address to determine its
@@ -365,12 +354,5 @@
  *
  */
 - (void)setDefault;
-
-/**
- * Set the timeout applied to all resolver lookups. See #GResolver:timeout.
- *
- * @param timeoutMs timeout in milliseconds, or `0` for no timeouts
- */
-- (void)setTimeout:(unsigned)timeoutMs;
 
 @end

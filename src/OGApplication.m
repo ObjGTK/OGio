@@ -6,9 +6,9 @@
 
 #import "OGApplication.h"
 
+#import "OGCancellable.h"
 #import "OGNotification.h"
 #import "OGDBusConnection.h"
-#import "OGCancellable.h"
 
 @implementation OGApplication
 

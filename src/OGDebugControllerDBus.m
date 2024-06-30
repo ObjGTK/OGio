@@ -6,8 +6,8 @@
 
 #import "OGDebugControllerDBus.h"
 
-#import "OGDBusConnection.h"
 #import "OGCancellable.h"
+#import "OGDBusConnection.h"
 
 @implementation OGDebugControllerDBus
 

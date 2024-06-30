@@ -6,9 +6,9 @@
 
 #import "OGIOStream.h"
 
+#import "OGCancellable.h"
 #import "OGOutputStream.h"
 #import "OGInputStream.h"
-#import "OGCancellable.h"
 
 @implementation OGIOStream
 

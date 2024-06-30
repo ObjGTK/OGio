@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
@@ -92,8 +92,7 @@
  *
  * @param ioPriority the [I/O priority][io-priority] of the request
  * @param cancellable optional cancellable object
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
+ * @param callback callback to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)closeAsyncWithIoPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
@@ -195,8 +194,7 @@
  * @param count the number of bytes that will be read from the stream
  * @param ioPriority the [I/O priority][io-priority] of the request
  * @param cancellable optional #GCancellable object, %NULL to ignore
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
+ * @param callback callback to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)readAllAsyncWithBuffer:(void*)buffer count:(gsize)count ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
@@ -248,8 +246,7 @@
  * @param ioPriority the [I/O priority][io-priority]
  * of the request.
  * @param cancellable optional #GCancellable object, %NULL to ignore.
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
+ * @param callback callback to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)readAsyncWithBuffer:(void*)buffer count:(gsize)count ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
@@ -311,8 +308,7 @@
  * @param count the number of bytes that will be read from the stream
  * @param ioPriority the [I/O priority][io-priority] of the request
  * @param cancellable optional #GCancellable object, %NULL to ignore.
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
+ * @param callback callback to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)readBytesAsyncWithCount:(gsize)count ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
@@ -392,8 +388,7 @@
  * @param count the number of bytes that will be skipped from the stream
  * @param ioPriority the [I/O priority][io-priority] of the request
  * @param cancellable optional #GCancellable object, %NULL to ignore.
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
+ * @param callback callback to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)skipAsyncWithCount:(gsize)count ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;

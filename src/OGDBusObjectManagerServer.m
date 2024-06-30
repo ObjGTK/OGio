@@ -6,8 +6,8 @@
 
 #import "OGDBusObjectManagerServer.h"
 
-#import "OGDBusConnection.h"
 #import "OGDBusObjectSkeleton.h"
+#import "OGDBusConnection.h"
 
 @implementation OGDBusObjectManagerServer
 

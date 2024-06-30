@@ -86,14 +86,6 @@
 	return returnValue;
 }
 
-- (OFString*)attributeFilePath:(OFString*)attribute
-{
-	const char* gobjectValue = g_file_info_get_attribute_file_path([self castedGObject], [attribute UTF8String]);
-
-	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
-	return returnValue;
-}
-
 - (gint32)attributeInt32:(OFString*)attribute
 {
 	gint32 returnValue = g_file_info_get_attribute_int32([self castedGObject], [attribute UTF8String]);
@@ -332,11 +324,6 @@
 - (void)setAttributeByteStringWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue
 {
 	g_file_info_set_attribute_byte_string([self castedGObject], [attribute UTF8String], [attrValue UTF8String]);
-}
-
-- (void)setAttributeFilePathWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue
-{
-	g_file_info_set_attribute_file_path([self castedGObject], [attribute UTF8String], [attrValue UTF8String]);
 }
 
 - (void)setAttributeInt32WithAttribute:(OFString*)attribute attrValue:(gint32)attrValue

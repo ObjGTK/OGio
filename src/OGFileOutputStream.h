@@ -6,8 +6,8 @@
 
 #import "OGOutputStream.h"
 
-@class OGCancellable;
 @class OGFileInfo;
+@class OGCancellable;
 
 /**
  * GFileOutputStream provides output streams that write their

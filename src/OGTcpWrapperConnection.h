@@ -6,9 +6,9 @@
 
 #import "OGTcpConnection.h"
 
+@class OGSocket;
 @class OGIOStream;
 @class OGSocketConnection;
-@class OGSocket;
 
 /**
  * A #GTcpWrapperConnection can be used to wrap a #GIOStream that is

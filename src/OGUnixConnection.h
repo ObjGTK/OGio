@@ -6,8 +6,8 @@
 
 #import "OGSocketConnection.h"
 
-@class OGCredentials;
 @class OGCancellable;
+@class OGCredentials;
 
 /**
  * This is the subclass of #GSocketConnection that is created
@@ -72,8 +72,7 @@
  * g_unix_connection_receive_credentials_finish() to get the result of the operation.
  *
  * @param cancellable optional #GCancellable object, %NULL to ignore.
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
+ * @param callback a #GAsyncReadyCallback to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)receiveCredentialsAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
@@ -138,8 +137,7 @@
  * g_unix_connection_send_credentials_finish() to get the result of the operation.
  *
  * @param cancellable optional #GCancellable object, %NULL to ignore.
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
+ * @param callback a #GAsyncReadyCallback to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)sendCredentialsAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;

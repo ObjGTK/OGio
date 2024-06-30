@@ -6,8 +6,8 @@
 
 #import "OGUnixConnection.h"
 
-#import "OGCredentials.h"
 #import "OGCancellable.h"
+#import "OGCredentials.h"
 
 @implementation OGUnixConnection
 

@@ -8,10 +8,10 @@
 
 #import "OGCredentials.h"
 #import "OGSocketAddress.h"
-#import "OGCancellable.h"
-#import "OGSocketConnection.h"
-#import "OGSocketControlMessage.h"
 #import "OGInetAddress.h"
+#import "OGCancellable.h"
+#import "OGSocketControlMessage.h"
+#import "OGSocketConnection.h"
 
 @implementation OGSocket
 

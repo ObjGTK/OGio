@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
@@ -41,10 +41,6 @@
  * Using #GTask requires the thread-default #GMainContext from when the
  * #GTask was constructed to be running at least until the task has completed
  * and its data has been freed.
- * 
- * If a #GTask has been constructed and its callback set, it is an error to
- * not call `g_task_return_*()` on it. GLib will warn at runtime if this happens
- * (since 2.76).
  * 
  * Here is an example for using GTask as a GAsyncResult:
  * |[<!-- language="C" -->
@@ -520,24 +516,6 @@
  *   having come from the `_async()` wrapper
  *   function (for "short-circuit" results, such as when passing
  *   0 to g_input_stream_read_async()).
- * 
- * ## Thread-safety considerations
- * 
- * Due to some infelicities in the API design, there is a
- * thread-safety concern that users of GTask have to be aware of:
- * 
- * If the `main` thread drops its last reference to the source object
- * or the task data before the task is finalized, then the finalizers
- * of these objects may be called on the worker thread.
- * 
- * This is a problem if the finalizers use non-threadsafe API, and
- * can lead to hard-to-debug crashes. Possible workarounds include:
- * 
- * - Clear task data in a signal handler for `notify::completed`
- * 
- * - Keep iterating a main context in the main thread and defer
- *   dropping the reference to the source object to that main
- *   context when the task is finalized
  *
  */
 @interface OGTask : OGObject
@@ -599,8 +577,7 @@
  * callback to @callback, with @task as the callback's `user_data`.
  * 
  * It will set the @source’s name to the task’s name (as set with
- * g_task_set_name()), if one has been set on the task and the source doesn’t
- * yet have a name.
+ * g_task_set_name()), if one has been set.
  * 
  * This takes a reference on @task until @source is destroyed.
  *
@@ -853,13 +830,6 @@
  * do this. If you have a very large number of tasks to run (several tens of
  * tasks), but don't want them to all run at once, you should only queue a
  * limited number of them (around ten) at a time.
- * 
- * Be aware that if your task depends on other tasks to complete, use of this
- * function could lead to a livelock if the other tasks also use this function
- * and enough of them (around 10) execute in a dependency chain, as that will
- * exhaust the thread pool. If this situation is possible, consider using a
- * separate worker thread or thread pool explicitly, rather than using
- * g_task_run_in_thread().
  *
  * @param taskFunc a #GTaskThreadFunc
  */
@@ -992,15 +962,6 @@
  * @param sourceTag an opaque pointer indicating the source of this task
  */
 - (void)setSourceTag:(gpointer)sourceTag;
-
-/**
- * Sets @task’s name, used in debugging and profiling.
- * 
- * This is a variant of g_task_set_name() that avoids copying @name.
- *
- * @param name a human readable name for the task. Must be a string literal
- */
-- (void)setStaticName:(OFString*)name;
 
 /**
  * Sets @task's task data (freeing the existing task data, if any).

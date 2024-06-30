@@ -89,8 +89,7 @@
  * @param attributes a file attribute query string.
  * @param ioPriority the [I/O priority][gio-GIOScheduler] of the request
  * @param cancellable optional #GCancellable object, %NULL to ignore.
- * @param callback a #GAsyncReadyCallback
- *   to call when the request is satisfied
+ * @param callback callback to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)queryInfoAsyncWithAttributes:(OFString*)attributes ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;

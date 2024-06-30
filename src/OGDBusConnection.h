@@ -4,23 +4,23 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
-@class OGIOStream;
-@class OGUnixFDList;
-@class OGMenuModel;
-@class OGDBusMessage;
-@class OGDBusAuthObserver;
-@class OGCredentials;
 @class OGCancellable;
+@class OGMenuModel;
+@class OGDBusAuthObserver;
+@class OGUnixFDList;
+@class OGDBusMessage;
+@class OGCredentials;
+@class OGIOStream;
 
 /**
  * The #GDBusConnection type is used for D-Bus connections to remote
@@ -528,10 +528,6 @@
  * constraint is violated, the export will fail and 0 will be
  * returned (with @error set accordingly).
  * 
- * Exporting menus with sections containing more than
- * %G_MENU_EXPORTER_MAX_SECTION_SIZE items is not supported and results in
- * undefined behavior.
- * 
  * You can unexport the menu model using
  * g_dbus_connection_unexport_menu_model() with the return value of
  * this function.
@@ -956,7 +952,7 @@
 - (void)setExitOnClose:(bool)exitOnClose;
 
 /**
- * Subscribes to signals on @connection and invokes @callback whenever
+ * Subscribes to signals on @connection and invokes @callback with a whenever
  * the signal is received. Note that @callback will be invoked in the
  * [thread-default main context][g-main-context-push-thread-default]
  * of the thread you are calling this method from.

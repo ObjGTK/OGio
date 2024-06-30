@@ -6,9 +6,9 @@
 
 #import "OGTcpWrapperConnection.h"
 
+#import "OGSocket.h"
 #import "OGIOStream.h"
 #import "OGSocketConnection.h"
-#import "OGSocket.h"
 
 @implementation OGTcpWrapperConnection
 

@@ -6,8 +6,8 @@
 
 #import "OGFilterOutputStream.h"
 
-@class OGOutputStream;
 @class OGCancellable;
+@class OGOutputStream;
 
 /**
  * Data output stream implements #GOutputStream and includes functions for

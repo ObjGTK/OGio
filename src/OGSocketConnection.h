@@ -6,9 +6,9 @@
 
 #import "OGIOStream.h"
 
-@class OGCancellable;
 @class OGSocket;
 @class OGSocketAddress;
+@class OGCancellable;
 
 /**
  * #GSocketConnection is a #GIOStream for a connected socket. They

@@ -7,8 +7,8 @@
 #import "OGTlsDatabase.h"
 
 #import "OGTlsInteraction.h"
-#import "OGCancellable.h"
 #import "OGTlsCertificate.h"
+#import "OGCancellable.h"
 
 @implementation OGTlsDatabase
 

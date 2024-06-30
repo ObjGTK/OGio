@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
@@ -71,10 +71,6 @@
  * comparing them with @equal_func until the first occurrence of @item which
  * matches. If @item was not found, then @position will not be set, and this
  * method will return %FALSE.
- * 
- * @item is always passed as second parameter to @equal_func.
- * 
- * Since GLib 2.76 it is possible to pass `NULL` for @item.
  *
  * @param item an item
  * @param equalFunc A custom equality check function
@@ -87,10 +83,6 @@
 /**
  * Like g_list_store_find_with_equal_func() but with an additional @user_data
  * that is passed to @equal_func.
- * 
- * @item is always passed as second parameter to @equal_func.
- * 
- * Since GLib 2.76 it is possible to pass `NULL` for @item.
  *
  * @param item an item
  * @param equalFunc A custom equality check function

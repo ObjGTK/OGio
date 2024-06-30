@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
+#include <gio/gunixoutputstream.h>
+#include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
 #include <gio/gio.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixfdmessage.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
 
@@ -117,7 +117,7 @@
  * @interface_. The returned function pointers should expect @interface_
  * itself to be passed as @user_data.
  *
- * @return the vtable of the D-Bus interface implemented by the skeleton
+ * @return A #GDBusInterfaceVTable (never %NULL).
  */
 - (GDBusInterfaceVTable*)vtable;
 

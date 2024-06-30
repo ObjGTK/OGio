@@ -256,11 +256,6 @@
 	g_task_set_source_tag([self castedGObject], sourceTag);
 }
 
-- (void)setStaticName:(OFString*)name
-{
-	g_task_set_static_name([self castedGObject], [name UTF8String]);
-}
-
 - (void)setTaskDataWithTaskData:(gpointer)taskData taskDataDestroy:(GDestroyNotify)taskDataDestroy
 {
 	g_task_set_task_data([self castedGObject], taskData, taskDataDestroy);
