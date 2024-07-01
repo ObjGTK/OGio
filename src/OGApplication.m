@@ -183,7 +183,7 @@
 	return returnValue;
 }
 
-- (void)release
+- (void)decreaseCount
 {
 	g_application_release([self castedGObject]);
 }
