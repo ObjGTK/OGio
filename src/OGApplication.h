@@ -584,7 +584,7 @@
  * call to g_application_hold().
  *
  */
-- (void)release;
+- (void)decreaseCount;
 
 /**
  * Runs the application.
