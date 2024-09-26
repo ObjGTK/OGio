@@ -10,13 +10,13 @@
 @class OGCredentials;
 
 /**
- * This is the subclass of #GSocketConnection that is created
+ * This is the subclass of [class@Gio.SocketConnection] that is created
  * for UNIX domain sockets.
  * 
  * It contains functions to do some of the UNIX socket specific
  * functionality like passing file descriptors.
  * 
- * Since GLib 2.72, #GUnixConnection is available on all platforms. It requires
+ * Since GLib 2.72, `GUnixConnection` is available on all platforms. It requires
  * underlying system support (such as Windows 10 with `AF_UNIX`) at run time.
  * 
  * Before GLib 2.72, `<gio/gunixconnection.h>` belonged to the UNIX-specific GIO
@@ -72,7 +72,8 @@
  * g_unix_connection_receive_credentials_finish() to get the result of the operation.
  *
  * @param cancellable optional #GCancellable object, %NULL to ignore.
- * @param callback a #GAsyncReadyCallback to call when the request is satisfied
+ * @param callback a #GAsyncReadyCallback
+ *   to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)receiveCredentialsAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
@@ -137,7 +138,8 @@
  * g_unix_connection_send_credentials_finish() to get the result of the operation.
  *
  * @param cancellable optional #GCancellable object, %NULL to ignore.
- * @param callback a #GAsyncReadyCallback to call when the request is satisfied
+ * @param callback a #GAsyncReadyCallback
+ *   to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
 - (void)sendCredentialsAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;

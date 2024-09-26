@@ -4,26 +4,26 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * #GInetAddress represents an IPv4 or IPv6 internet address. Use
- * g_resolver_lookup_by_name() or g_resolver_lookup_by_name_async() to
- * look up the #GInetAddress for a hostname. Use
- * g_resolver_lookup_by_address() or
- * g_resolver_lookup_by_address_async() to look up the hostname for a
- * #GInetAddress.
+ * `GInetAddress` represents an IPv4 or IPv6 internet address. Use
+ * [method@Gio.Resolver.lookup_by_name] or
+ * [method@Gio.Resolver.lookup_by_name_async] to look up the `GInetAddress` for
+ * a hostname. Use [method@Gio.Resolver.lookup_by_address] or
+ * [method@Gio.Resolver.lookup_by_address_async] to look up the hostname for a
+ * `GInetAddress`.
  * 
  * To actually connect to a remote host, you will need a
- * #GInetSocketAddress (which includes a #GInetAddress as well as a
+ * [class@Gio.InetSocketAddress] (which includes a `GInetAddress` as well as a
  * port number).
  *
  */

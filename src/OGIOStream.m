@@ -7,8 +7,8 @@
 #import "OGIOStream.h"
 
 #import "OGCancellable.h"
-#import "OGOutputStream.h"
 #import "OGInputStream.h"
+#import "OGOutputStream.h"
 
 @implementation OGIOStream
 

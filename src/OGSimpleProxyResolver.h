@@ -4,25 +4,25 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * #GSimpleProxyResolver is a simple #GProxyResolver implementation
+ * `GSimpleProxyResolver` is a simple [iface@Gio.ProxyResolver] implementation
  * that handles a single default proxy, multiple URI-scheme-specific
  * proxies, and a list of hosts that proxies should not be used for.
  * 
- * #GSimpleProxyResolver is never the default proxy resolver, but it
+ * `GSimpleProxyResolver` is never the default proxy resolver, but it
  * can be used as the base class for another proxy resolver
  * implementation, or it can be created and used manually, such as
- * with g_socket_client_set_proxy_resolver().
+ * with [method@Gio.SocketClient.set_proxy_resolver].
  *
  */
 @interface OGSimpleProxyResolver : OGObject

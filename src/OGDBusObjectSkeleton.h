@@ -4,24 +4,24 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 @class OGDBusInterfaceSkeleton;
 
 /**
- * A #GDBusObjectSkeleton instance is essentially a group of D-Bus
+ * A `GDBusObjectSkeleton` instance is essentially a group of D-Bus
  * interfaces. The set of exported interfaces on the object may be
  * dynamic and change at runtime.
  * 
- * This type is intended to be used with #GDBusObjectManager.
+ * This type is intended to be used with [iface@Gio.DBusObjectManager].
  *
  */
 @interface OGDBusObjectSkeleton : OGObject

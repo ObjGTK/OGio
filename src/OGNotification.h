@@ -4,61 +4,62 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * #GNotification is a mechanism for creating a notification to be shown
- * to the user -- typically as a pop-up notification presented by the
+ * `GNotification` is a mechanism for creating a notification to be shown
+ * to the user — typically as a pop-up notification presented by the
  * desktop environment shell.
  * 
- * The key difference between #GNotification and other similar APIs is
+ * The key difference between `GNotification` and other similar APIs is
  * that, if supported by the desktop environment, notifications sent
- * with #GNotification will persist after the application has exited,
+ * with `GNotification` will persist after the application has exited,
  * and even across system reboots.
  * 
  * Since the user may click on a notification while the application is
- * not running, applications using #GNotification should be able to be
- * started as a D-Bus service, using #GApplication.
+ * not running, applications using `GNotification` should be able to be
+ * started as a D-Bus service, using [class@Gio.Application].
  * 
- * In order for #GNotification to work, the application must have installed
+ * In order for `GNotification` to work, the application must have installed
  * a `.desktop` file. For example:
- * |[
- *  [Desktop Entry]
- *   Name=Test Application
- *   Comment=Description of what Test Application does
- *   Exec=gnome-test-application
- *   Icon=org.gnome.TestApplication
- *   Terminal=false
- *   Type=Application
- *   Categories=GNOME;GTK;TestApplication Category;
- *   StartupNotify=true
- *   DBusActivatable=true
- *   X-GNOME-UsesNotifications=true
- * ]|
+ * ```
+ * [Desktop Entry]
+ * Name=Test Application
+ * Comment=Description of what Test Application does
+ * Exec=gnome-test-application
+ * Icon=org.gnome.TestApplication
+ * Terminal=false
+ * Type=Application
+ * Categories=GNOME;GTK;TestApplication Category;
+ * StartupNotify=true
+ * DBusActivatable=true
+ * X-GNOME-UsesNotifications=true
+ * ```
  * 
  * The `X-GNOME-UsesNotifications` key indicates to GNOME Control Center
  * that this application uses notifications, so it can be listed in the
  * Control Center’s ‘Notifications’ panel.
  * 
  * The `.desktop` file must be named as `org.gnome.TestApplication.desktop`,
- * where `org.gnome.TestApplication` is the ID passed to g_application_new().
+ * where `org.gnome.TestApplication` is the ID passed to
+ * [ctor@Gio.Application.new].
  * 
  * User interaction with a notification (either the default action, or
  * buttons) must be associated with actions on the application (ie:
- * "app." actions).  It is not possible to route user interaction
+ * `app.` actions).  It is not possible to route user interaction
  * through the notification itself, because the object will not exist if
  * the application is autostarted as a result of a notification being
  * clicked.
  * 
- * A notification can be sent with g_application_send_notification().
+ * A notification can be sent with [method@Gio.Application.send_notification].
  *
  */
 @interface OGNotification : OGObject
@@ -148,7 +149,7 @@
  * application-wide action (start with "app.").
  * 
  * If @target is non-%NULL, @action will be activated with @target as
- * its parameter.
+ * its parameter. If @target is floating, it will be consumed.
  * 
  * When no default action is set, the application that the notification
  * was sent on is activated.

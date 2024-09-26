@@ -4,23 +4,23 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 @class OGInetAddress;
 
 /**
- * #GInetAddressMask represents a range of IPv4 or IPv6 addresses
+ * `GInetAddressMask` represents a range of IPv4 or IPv6 addresses
  * described by a base address and a length indicating how many bits
  * of the base address are relevant for matching purposes. These are
- * often given in string form. Eg, "10.0.0.0/8", or "fe80::/10".
+ * often given in string form. For example, `10.0.0.0/8`, or `fe80::/10`.
  *
  */
 @interface OGInetAddressMask : OGObject

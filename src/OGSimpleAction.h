@@ -4,22 +4,20 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * A #GSimpleAction is the obvious simple implementation of the #GAction
- * interface. This is the easiest way to create an action for purposes of
- * adding it to a #GSimpleActionGroup.
- * 
- * See also #GtkAction.
+ * A `GSimpleAction` is the obvious simple implementation of the
+ * [iface@Gio.Action] interface. This is the easiest way to create an action for
+ * purposes of adding it to a [class@Gio.SimpleActionGroup].
  *
  */
 @interface OGSimpleAction : OGObject

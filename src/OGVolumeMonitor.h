@@ -4,25 +4,25 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * #GVolumeMonitor is for listing the user interesting devices and volumes
+ * `GVolumeMonitor` is for listing the user interesting devices and volumes
  * on the computer. In other words, what a file selector or file manager
  * would show in a sidebar.
  * 
- * #GVolumeMonitor is not
- * [thread-default-context aware][g-main-context-push-thread-default],
- * and so should not be used other than from the main thread, with no
- * thread-default-context active.
+ * `GVolumeMonitor` is not
+ * thread-default-context aware (see
+ * [method@GLib.MainContext.push_thread_default]), and so should not be used
+ * other than from the main thread, with no thread-default-context active.
  * 
  * In order to receive updates about volumes and mounts monitored through GVFS,
  * a main loop must be running.
@@ -38,11 +38,34 @@
  */
 
 /**
- * Instead of using this function, #GVolumeMonitor
- * implementations should instead create shadow mounts with the URI of
- * the mount they intend to adopt. See the proxy volume monitor in
- * gvfs for an example of this. Also see g_mount_is_shadowed(),
- * g_mount_shadow() and g_mount_unshadow() functions.
+ * This function should be called by any #GVolumeMonitor
+ * implementation when a new #GMount object is created that is not
+ * associated with a #GVolume object. It must be called just before
+ * emitting the @mount_added signal.
+ * 
+ * If the return value is not %NULL, the caller must associate the
+ * returned #GVolume object with the #GMount. This involves returning
+ * it in its g_mount_get_volume() implementation. The caller must
+ * also listen for the "removed" signal on the returned object
+ * and give up its reference when handling that signal
+ * 
+ * Similarly, if implementing g_volume_monitor_adopt_orphan_mount(),
+ * the implementor must take a reference to @mount and return it in
+ * its g_volume_get_mount() implemented. Also, the implementor must
+ * listen for the "unmounted" signal on @mount and give up its
+ * reference upon handling that signal.
+ * 
+ * There are two main use cases for this function.
+ * 
+ * One is when implementing a user space file system driver that reads
+ * blocks of a block device that is already represented by the native
+ * volume monitor (for example a CD Audio file system driver). Such
+ * a driver will generate its own #GMount object that needs to be
+ * associated with the #GVolume object that represents the volume.
+ * 
+ * The other is for implementing a #GVolumeMonitor whose sole purpose
+ * is to return #GVolume objects representing entries in the users
+ * "favorite servers" list or similar.
  *
  * @param mount a #GMount object to find a parent for
  * @return the #GVolume object that is the parent for @mount or %NULL

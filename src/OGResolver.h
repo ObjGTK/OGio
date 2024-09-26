@@ -4,28 +4,39 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
-@class OGInetAddress;
 @class OGCancellable;
+@class OGInetAddress;
 
 /**
- * #GResolver provides cancellable synchronous and asynchronous DNS
- * resolution, for hostnames (g_resolver_lookup_by_address(),
- * g_resolver_lookup_by_name() and their async variants) and SRV
- * (service) records (g_resolver_lookup_service()).
+ * The object that handles DNS resolution. Use [func@Gio.Resolver.get_default]
+ * to get the default resolver.
  * 
- * #GNetworkAddress and #GNetworkService provide wrappers around
- * #GResolver functionality that also implement #GSocketConnectable,
- * making it easy to connect to a remote host/service.
+ * `GResolver` provides cancellable synchronous and asynchronous DNS
+ * resolution, for hostnames ([method@Gio.Resolver.lookup_by_address],
+ * [method@Gio.Resolver.lookup_by_name] and their async variants) and SRV
+ * (service) records ([method@Gio.Resolver.lookup_service]).
+ * 
+ * [class@Gio.NetworkAddress] and [class@Gio.NetworkService] provide wrappers
+ * around `GResolver` functionality that also implement
+ * [iface@Gio.SocketConnectable], making it easy to connect to a remote
+ * host/service.
+ * 
+ * The default resolver (see [func@Gio.Resolver.get_default]) has a timeout of
+ * 30s set on it since GLib 2.78. Earlier versions of GLib did not support
+ * resolver timeouts.
+ * 
+ * This is an abstract type; subclasses of it implement different resolvers for
+ * different platforms and situations.
  *
  */
 @interface OGResolver : OGObject
@@ -71,6 +82,13 @@
  */
 
 - (GResolver*)castedGObject;
+
+/**
+ * Get the timeout applied to all resolver lookups. See #GResolver:timeout.
+ *
+ * @return the resolver timeout, in milliseconds, or `0` for no timeout
+ */
+- (unsigned)timeout;
 
 /**
  * Synchronously reverse-resolves @address to determine its
@@ -354,5 +372,12 @@
  *
  */
 - (void)setDefault;
+
+/**
+ * Set the timeout applied to all resolver lookups. See #GResolver:timeout.
+ *
+ * @param timeoutMs timeout in milliseconds, or `0` for no timeouts
+ */
+- (void)setTimeout:(unsigned)timeoutMs;
 
 @end

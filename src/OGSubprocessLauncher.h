@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
@@ -21,7 +21,7 @@
  * such as where its standard input and output will be directed, the
  * argument list, the environment, and more.
  * 
- * While the #GSubprocess class has high level functions covering
+ * While the [class@Gio.Subprocess] class has high level functions covering
  * popular cases, use of this class allows access to more advanced
  * options.  It can also be used to launch multiple subprocesses with
  * a similar configuration.
@@ -179,7 +179,7 @@
  * 
  * This feature is only available on UNIX.
  *
- * @param path
+ * @param path a filename or %NULL
  */
 - (void)setStdinFilePath:(OFString*)path;
 

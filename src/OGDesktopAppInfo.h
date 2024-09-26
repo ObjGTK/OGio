@@ -4,25 +4,25 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 @class OGAppLaunchContext;
 
 /**
- * #GDesktopAppInfo is an implementation of #GAppInfo based on
+ * `GDesktopAppInfo` is an implementation of [iface@Gio.AppInfo] based on
  * desktop files.
  * 
  * Note that `<gio/gdesktopappinfo.h>` belongs to the UNIX-specific
  * GIO interfaces, thus you have to use the `gio-unix-2.0.pc` pkg-config
- * file when using it.
+ * file or the `GioUnix-2.0` GIR namespace when using it.
  *
  */
 @interface OGDesktopAppInfo : OGObject

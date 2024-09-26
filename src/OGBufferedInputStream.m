@@ -6,8 +6,8 @@
 
 #import "OGBufferedInputStream.h"
 
-#import "OGCancellable.h"
 #import "OGInputStream.h"
+#import "OGCancellable.h"
 
 @implementation OGBufferedInputStream
 
@@ -106,7 +106,7 @@
 
 - (void*)peekBuffer:(gsize*)count
 {
-	void* returnValue = (void*)g_buffered_input_stream_peek_buffer([self castedGObject], count);
+	void* returnValue = g_buffered_input_stream_peek_buffer([self castedGObject], count);
 
 	return returnValue;
 }

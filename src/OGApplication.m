@@ -6,9 +6,9 @@
 
 #import "OGApplication.h"
 
+#import "OGDBusConnection.h"
 #import "OGCancellable.h"
 #import "OGNotification.h"
-#import "OGDBusConnection.h"
 
 @implementation OGApplication
 
@@ -140,6 +140,14 @@
 	return returnValue;
 }
 
+- (OFString*)version
+{
+	const gchar* gobjectValue = g_application_get_version([self castedGObject]);
+
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
+	return returnValue;
+}
+
 - (void)hold
 {
 	g_application_hold([self castedGObject]);
@@ -175,7 +183,7 @@
 	return returnValue;
 }
 
-- (void)decreaseCount
+- (void)release
 {
 	g_application_release([self castedGObject]);
 }
@@ -235,6 +243,11 @@
 - (void)setResourceBasePath:(OFString*)resourcePath
 {
 	g_application_set_resource_base_path([self castedGObject], [resourcePath UTF8String]);
+}
+
+- (void)setVersion:(OFString*)version
+{
+	g_application_set_version([self castedGObject], [version UTF8String]);
 }
 
 - (void)unbindBusyPropertyWithObject:(gpointer)object property:(OFString*)property

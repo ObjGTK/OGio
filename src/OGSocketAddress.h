@@ -4,20 +4,21 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * #GSocketAddress is the equivalent of struct sockaddr in the BSD
- * sockets API. This is an abstract class; use #GInetSocketAddress
- * for internet sockets, or #GUnixSocketAddress for UNIX domain sockets.
+ * `GSocketAddress` is the equivalent of
+ * [`struct sockaddr`](man:sockaddr(3type)) and its subtypes in the BSD sockets
+ * API. This is an abstract class; use [class@Gio.InetSocketAddress] for
+ * internet sockets, or [class@Gio.UnixSocketAddress] for UNIX domain sockets.
  *
  */
 @interface OGSocketAddress : OGObject

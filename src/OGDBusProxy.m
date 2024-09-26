@@ -6,9 +6,9 @@
 
 #import "OGDBusProxy.h"
 
-#import "OGUnixFDList.h"
 #import "OGDBusConnection.h"
 #import "OGCancellable.h"
+#import "OGUnixFDList.h"
 
 @implementation OGDBusProxy
 

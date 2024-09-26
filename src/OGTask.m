@@ -209,6 +209,11 @@
 	g_task_return_int([self castedGObject], result);
 }
 
+- (void)returnNewErrorLiteralWithDomain:(GQuark)domain code:(gint)code message:(OFString*)message
+{
+	g_task_return_new_error_literal([self castedGObject], domain, code, [message UTF8String]);
+}
+
 - (void)returnPointerWithResult:(gpointer)result resultDestroy:(GDestroyNotify)resultDestroy
 {
 	g_task_return_pointer([self castedGObject], result, resultDestroy);
@@ -254,6 +259,11 @@
 - (void)setSourceTag:(gpointer)sourceTag
 {
 	g_task_set_source_tag([self castedGObject], sourceTag);
+}
+
+- (void)setStaticName:(OFString*)name
+{
+	g_task_set_static_name([self castedGObject], [name UTF8String]);
 }
 
 - (void)setTaskDataWithTaskData:(gpointer)taskData taskDataDestroy:(GDestroyNotify)taskDataDestroy

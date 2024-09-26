@@ -10,7 +10,7 @@
 @class OGSocketAddress;
 
 /**
- * Support for proxied #GInetSocketAddress.
+ * A [class@Gio.InetSocketAddress] representing a connection via a proxy server.
  *
  */
 @interface OGProxyAddress : OGInetSocketAddress

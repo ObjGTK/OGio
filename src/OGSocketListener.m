@@ -6,10 +6,10 @@
 
 #import "OGSocketListener.h"
 
-#import "OGCancellable.h"
-#import "OGSocketAddress.h"
 #import "OGSocketConnection.h"
+#import "OGSocketAddress.h"
 #import "OGSocket.h"
+#import "OGCancellable.h"
 
 @implementation OGSocketListener
 

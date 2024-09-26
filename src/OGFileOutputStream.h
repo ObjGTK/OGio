@@ -10,20 +10,20 @@
 @class OGCancellable;
 
 /**
- * GFileOutputStream provides output streams that write their
+ * `GFileOutputStream` provides output streams that write their
  * content to a file.
  * 
- * GFileOutputStream implements #GSeekable, which allows the output
+ * `GFileOutputStream` implements [iface@Gio.Seekable], which allows the output
  * stream to jump to arbitrary positions in the file and to truncate
  * the file, provided the filesystem of the file supports these
  * operations.
  * 
- * To find the position of a file output stream, use g_seekable_tell().
+ * To find the position of a file output stream, use [method@Gio.Seekable.tell].
  * To find out if a file output stream supports seeking, use
- * g_seekable_can_seek().To position a file output stream, use
- * g_seekable_seek(). To find out if a file output stream supports
- * truncating, use g_seekable_can_truncate(). To truncate a file output
- * stream, use g_seekable_truncate().
+ * [method@Gio.Seekable.can_seek].To position a file output stream, use
+ * [method@Gio.Seekable.seek]. To find out if a file output stream supports
+ * truncating, use [method@Gio.Seekable.can_truncate]. To truncate a file output
+ * stream, use [method@Gio.Seekable.truncate].
  *
  */
 @interface OGFileOutputStream : OGOutputStream
@@ -81,7 +81,8 @@
  * g_file_output_stream_query_info().
  *
  * @param attributes a file attribute query string.
- * @param ioPriority the [I/O priority][gio-GIOScheduler] of the request
+ * @param ioPriority the [I/O priority](iface.AsyncResult.html#io-priority) of the
+ *   request
  * @param cancellable optional #GCancellable object, %NULL to ignore.
  * @param callback callback to call when the request is satisfied
  * @param userData the data to pass to callback function

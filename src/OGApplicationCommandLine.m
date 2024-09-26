@@ -22,6 +22,11 @@
 	return returnValue;
 }
 
+- (void)done
+{
+	g_application_command_line_done([self castedGObject]);
+}
+
 - (gchar**)arguments:(int*)argc
 {
 	gchar** returnValue = g_application_command_line_get_arguments([self castedGObject], argc);
@@ -88,6 +93,16 @@
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
+}
+
+- (void)printLiteral:(OFString*)message
+{
+	g_application_command_line_print_literal([self castedGObject], [message UTF8String]);
+}
+
+- (void)printerrLiteral:(OFString*)message
+{
+	g_application_command_line_printerr_literal([self castedGObject], [message UTF8String]);
 }
 
 - (void)setExitStatus:(int)exitStatus

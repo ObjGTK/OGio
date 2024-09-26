@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
@@ -18,9 +18,9 @@
 @class OGDBusConnection;
 
 /**
- * #GDBusObjectManagerServer is used to export #GDBusObject instances using
- * the standardized
- * [org.freedesktop.DBus.ObjectManager](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
+ * `GDBusObjectManagerServer` is used to export [iface@Gio.DBusObject] instances
+ * using the standardized
+ * [`org.freedesktop.DBus.ObjectManager`](http://dbus.freedesktop.org/doc/dbus-specification.html#standard-interfaces-objectmanager)
  * interface. For example, remote D-Bus clients can get all objects
  * and properties in a single call. Additionally, any change in the
  * object hierarchy is broadcast using signals. This means that D-Bus
@@ -36,10 +36,9 @@
  * It is supported, but not recommended, to export an object manager at the root
  * path, `/`.
  * 
- * See #GDBusObjectManagerClient for the client-side code that is
- * intended to be used with #GDBusObjectManagerServer or any D-Bus
- * object implementing the org.freedesktop.DBus.ObjectManager
- * interface.
+ * See [class@Gio.DBusObjectManagerClient] for the client-side code that is
+ * intended to be used with `GDBusObjectManagerServer` or any D-Bus
+ * object implementing the `org.freedesktop.DBus.ObjectManager` interface.
  *
  */
 @interface OGDBusObjectManagerServer : OGObject

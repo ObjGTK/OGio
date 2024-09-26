@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
@@ -18,7 +18,7 @@
 
 /**
  * A type for representing D-Bus messages that can be sent or received
- * on a #GDBusConnection.
+ * on a [class@Gio.DBusConnection].
  *
  */
 @interface OGDBusMessage : OGObject
@@ -71,11 +71,24 @@
 
 /**
  * Convenience to get the first item in the body of @message.
+ * 
+ * See [method@Gio.DBusMessage.get_arg0_path] for returning object-path-typed
+ * arg0 values.
  *
  * @return The string item or %NULL if the first item in the body of
  * @message is not a string.
  */
 - (OFString*)arg0;
+
+/**
+ * Convenience to get the first item in the body of @message.
+ * 
+ * See [method@Gio.DBusMessage.get_arg0] for returning string-typed arg0 values.
+ *
+ * @return The object path item or `NULL` if the first item in the
+ *   body of @message is not an object path.
+ */
+- (OFString*)arg0Path;
 
 /**
  * Gets the body of a message.
@@ -262,7 +275,7 @@
  * The contents of the description has no ABI guarantees, the contents
  * and formatting is subject to change at any time. Typical output
  * looks something like this:
- * |[
+ * ```
  * Flags:   none
  * Version: 0
  * Serial:  4
@@ -274,9 +287,9 @@
  * Body: ()
  * UNIX File Descriptors:
  *   (none)
- * ]|
+ * ```
  * or
- * |[
+ * ```
  * Flags:   no-reply-expected
  * Version: 0
  * Serial:  477
@@ -288,10 +301,10 @@
  * Body: ()
  * UNIX File Descriptors:
  *   fd 12: dev=0:10,mode=020620,ino=5,uid=500,gid=5,rdev=136:2,size=0,atime=1273085037,mtime=1273085851,ctime=1272982635
- * ]|
+ * ```
  *
  * @param indent Indentation level.
- * @return A string that should be freed with g_free().
+ * @return A string that should be freed with [func@GLib.free].
  */
 - (OFString*)print:(guint)indent;
 

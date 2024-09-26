@@ -4,18 +4,18 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * #GNetworkAddress provides an easy way to resolve a hostname and
+ * `GNetworkAddress` provides an easy way to resolve a hostname and
  * then attempt to connect to that host, handling the possibility of
  * multiple IP addresses and multiple address families.
  * 
@@ -23,7 +23,7 @@
  * as this object is kept alive which may have unexpected results if
  * alive for too long.
  * 
- * See #GSocketConnectable for an example of using the connectable
+ * See [iface@Gio.SocketConnectable] for an example of using the connectable
  * interface.
  *
  */

@@ -4,46 +4,53 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * Functionality for manipulating basic metadata for files. #GFileInfo
+ * Stores information about a file system object referenced by a [iface@Gio.File].
+ * 
+ * Functionality for manipulating basic metadata for files. `GFileInfo`
  * implements methods for getting information that all files should
  * contain, and allows for manipulation of extended attributes.
  * 
- * See [GFileAttribute][gio-GFileAttribute] for more information on how
- * GIO handles file attributes.
+ * See [file-attributes.html](file attributes) for more information on how GIO
+ * handles file attributes.
  * 
- * To obtain a #GFileInfo for a #GFile, use g_file_query_info() (or its
- * async variant). To obtain a #GFileInfo for a file input or output
- * stream, use g_file_input_stream_query_info() or
- * g_file_output_stream_query_info() (or their async variants).
+ * To obtain a `GFileInfo` for a [iface@Gio.File], use
+ * [method@Gio.File.query_info] (or its async variant). To obtain a `GFileInfo`
+ * for a file input or output stream, use [method@Gio.FileInputStream.query_info]
+ * or [method@Gio.FileOutputStream.query_info] (or their async variants).
  * 
  * To change the actual attributes of a file, you should then set the
- * attribute in the #GFileInfo and call g_file_set_attributes_from_info()
- * or g_file_set_attributes_async() on a GFile.
+ * attribute in the `GFileInfo` and call [method@Gio.File.set_attributes_from_info]
+ * or [method@Gio.File.set_attributes_async] on a `GFile`.
  * 
  * However, not all attributes can be changed in the file. For instance,
- * the actual size of a file cannot be changed via g_file_info_set_size().
- * You may call g_file_query_settable_attributes() and
- * g_file_query_writable_namespaces() to discover the settable attributes
+ * the actual size of a file cannot be changed via [method@Gio.FileInfo.set_size].
+ * You may call [method@Gio.File.query_settable_attributes] and
+ * [method@Gio.File.query_writable_namespaces] to discover the settable attributes
  * of a particular file at runtime.
  * 
- * The direct accessors, such as g_file_info_get_name(), are slightly more
+ * The direct accessors, such as [method@Gio.FileInfo.get_name], are slightly more
  * optimized than the generic attribute accessors, such as
- * g_file_info_get_attribute_byte_string().This optimization will matter
+ * [method@Gio.FileInfo.get_attribute_byte_string].This optimization will matter
  * only if calling the API in a tight loop.
  * 
- * #GFileAttributeMatcher allows for searching through a #GFileInfo for
- * attributes.
+ * It is an error to call these accessors without specifying their required file
+ * attributes when creating the `GFileInfo`. Use
+ * [method@Gio.FileInfo.has_attribute] or [method@Gio.FileInfo.list_attributes]
+ * to check what attributes are specified for a `GFileInfo`.
+ * 
+ * [struct@Gio.FileAttributeMatcher] allows for searching through a `GFileInfo`
+ * for attributes.
  *
  */
 @interface OGFileInfo : OGObject
@@ -88,9 +95,10 @@
  * Gets the access time of the current @info and returns it as a
  * #GDateTime.
  * 
- * This requires the %G_FILE_ATTRIBUTE_TIME_ACCESS attribute. If
- * %G_FILE_ATTRIBUTE_TIME_ACCESS_USEC is provided, the resulting #GDateTime
- * will have microsecond precision.
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_TIME_ACCESS. If %G_FILE_ATTRIBUTE_TIME_ACCESS_USEC is
+ * provided, the resulting #GDateTime will additionally have microsecond
+ * precision.
  * 
  * If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_ACCESS_NSEC must
  * be queried separately using g_file_info_get_attribute_uint32().
@@ -100,7 +108,7 @@
 - (GDateTime*)accessDateTime;
 
 /**
- * Gets the value of a attribute, formatted as a string.
+ * Gets the value of an attribute, formatted as a string.
  * This escapes things as needed to make the string valid
  * UTF-8.
  *
@@ -142,6 +150,20 @@
  *      %FALSE otherwise.
  */
 - (bool)attributeDataWithAttribute:(OFString*)attribute type:(GFileAttributeType*)type valuePp:(gpointer*)valuePp status:(GFileAttributeStatus*)status;
+
+/**
+ * Gets the value of a byte string attribute as a file path.
+ * 
+ * If the attribute does not contain a byte string, `NULL` will be returned.
+ * 
+ * This function is meant to be used by language bindings that have specific
+ * handling for Unix paths.
+ *
+ * @param attribute a file attribute key.
+ * @return the contents of the @attribute value as
+ * a file path, or %NULL otherwise.
+ */
+- (OFString*)attributeFilePath:(OFString*)attribute;
 
 /**
  * Gets a signed 32-bit integer contained within the attribute. If the
@@ -233,6 +255,9 @@
 
 /**
  * Gets the file's content type.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_CONTENT_TYPE.
  *
  * @return a string containing the file's content type,
  * or %NULL if unknown.
@@ -243,9 +268,10 @@
  * Gets the creation time of the current @info and returns it as a
  * #GDateTime.
  * 
- * This requires the %G_FILE_ATTRIBUTE_TIME_CREATED attribute. If
- * %G_FILE_ATTRIBUTE_TIME_CREATED_USEC is provided, the resulting #GDateTime
- * will have microsecond precision.
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_TIME_CREATED. If %G_FILE_ATTRIBUTE_TIME_CREATED_USEC is
+ * provided, the resulting #GDateTime will additionally have microsecond
+ * precision.
  * 
  * If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_CREATED_NSEC must
  * be queried separately using g_file_info_get_attribute_uint32().
@@ -256,8 +282,8 @@
 
 /**
  * Returns the #GDateTime representing the deletion date of the file, as
- * available in G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the
- * G_FILE_ATTRIBUTE_TRASH_DELETION_DATE attribute is unset, %NULL is returned.
+ * available in %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE. If the
+ * %G_FILE_ATTRIBUTE_TRASH_DELETION_DATE attribute is unset, %NULL is returned.
  *
  * @return a #GDateTime, or %NULL.
  */
@@ -265,6 +291,9 @@
 
 /**
  * Gets a display name for a file. This is guaranteed to always be set.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_DISPLAY_NAME.
  *
  * @return a string containing the display name.
  */
@@ -272,14 +301,20 @@
 
 /**
  * Gets the edit name for a file.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_EDIT_NAME.
  *
  * @return a string containing the edit name.
  */
 - (OFString*)editName;
 
 /**
- * Gets the [entity tag][gfile-etag] for a given
+ * Gets the [entity tag](iface.File.html#entity-tags) for a given
  * #GFileInfo. See %G_FILE_ATTRIBUTE_ETAG_VALUE.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_ETAG_VALUE.
  *
  * @return a string containing the value of the "etag:value" attribute.
  */
@@ -288,6 +323,9 @@
 /**
  * Gets a file's type (whether it is a regular file, symlink, etc).
  * This is different from the file's content type, see g_file_info_get_content_type().
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_TYPE.
  *
  * @return a #GFileType for the given file.
  */
@@ -295,6 +333,9 @@
 
 /**
  * Gets the icon for a file.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_ICON.
  *
  * @return #GIcon for the given @info.
  */
@@ -302,6 +343,9 @@
 
 /**
  * Checks if a file is a backup file.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_IS_BACKUP.
  *
  * @return %TRUE if file is a backup file, %FALSE otherwise.
  */
@@ -309,6 +353,9 @@
 
 /**
  * Checks if a file is hidden.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_IS_HIDDEN.
  *
  * @return %TRUE if the file is a hidden file, %FALSE otherwise.
  */
@@ -316,6 +363,9 @@
 
 /**
  * Checks if a file is a symlink.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_IS_SYMLINK.
  *
  * @return %TRUE if the given @info is a symlink.
  */
@@ -325,9 +375,10 @@
  * Gets the modification time of the current @info and returns it as a
  * #GDateTime.
  * 
- * This requires the %G_FILE_ATTRIBUTE_TIME_MODIFIED attribute. If
- * %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC is provided, the resulting #GDateTime
- * will have microsecond precision.
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_TIME_MODIFIED. If %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC is
+ * provided, the resulting #GDateTime will additionally have microsecond
+ * precision.
  * 
  * If nanosecond precision is needed, %G_FILE_ATTRIBUTE_TIME_MODIFIED_NSEC must
  * be queried separately using g_file_info_get_attribute_uint32().
@@ -339,6 +390,10 @@
 /**
  * Gets the modification time of the current @info and sets it
  * in @result.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_TIME_MODIFIED. If %G_FILE_ATTRIBUTE_TIME_MODIFIED_USEC is
+ * provided it will be used too.
  *
  * @param result a #GTimeVal.
  */
@@ -346,6 +401,9 @@
 
 /**
  * Gets the name for a file. This is guaranteed to always be set.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_NAME.
  *
  * @return a string containing the file name.
  */
@@ -355,6 +413,9 @@
  * Gets the file's size (in bytes). The size is retrieved through the value of
  * the %G_FILE_ATTRIBUTE_STANDARD_SIZE attribute and is converted
  * from #guint64 to #goffset before returning the result.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_SIZE.
  *
  * @return a #goffset containing the file's size (in bytes).
  */
@@ -363,6 +424,9 @@
 /**
  * Gets the value of the sort_order attribute from the #GFileInfo.
  * See %G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_SORT_ORDER.
  *
  * @return a #gint32 containing the value of the "standard::sort_order" attribute.
  */
@@ -370,6 +434,9 @@
 
 /**
  * Gets the symbolic icon for a file.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_SYMBOLIC_ICON.
  *
  * @return #GIcon for the given @info.
  */
@@ -377,6 +444,9 @@
 
 /**
  * Gets the symlink target for a given #GFileInfo.
+ * 
+ * It is an error to call this if the #GFileInfo does not contain
+ * %G_FILE_ATTRIBUTE_STANDARD_SYMLINK_TARGET.
  *
  * @return a string containing the symlink target.
  */
@@ -457,6 +527,18 @@
  * @param attrValue a byte string.
  */
 - (void)setAttributeByteStringWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue;
+
+/**
+ * Sets the @attribute to contain the given @attr_value,
+ * if possible.
+ * 
+ * This function is meant to be used by language bindings that have specific
+ * handling for Unix paths.
+ *
+ * @param attribute a file attribute key.
+ * @param attrValue a file path.
+ */
+- (void)setAttributeFilePathWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue;
 
 /**
  * Sets the @attribute to contain the given @attr_value,

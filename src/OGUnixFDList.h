@@ -4,23 +4,25 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * A #GUnixFDList contains a list of file descriptors.  It owns the file
+ * A `GUnixFDList` contains a list of file descriptors.  It owns the file
  * descriptors that it contains, closing them when finalized.
  * 
- * It may be wrapped in a #GUnixFDMessage and sent over a #GSocket in
- * the %G_SOCKET_FAMILY_UNIX family by using g_socket_send_message()
- * and received using g_socket_receive_message().
+ * It may be wrapped in a
+ * [`GUnixFDMessage`](../gio-unix/class.UnixFDMessage.html) and sent over a
+ * [class@Gio.Socket] in the `G_SOCKET_FAMILY_UNIX` family by using
+ * [method@Gio.Socket.send_message] and received using
+ * [method@Gio.Socket.receive_message].
  * 
  * Before 2.74, `<gio/gunixfdlist.h>` belonged to the UNIX-specific GIO
  * interfaces, thus you had to use the `gio-unix-2.0.pc` pkg-config file when

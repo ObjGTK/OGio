@@ -4,28 +4,29 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
-@class OGUnixFDList;
 @class OGDBusMessage;
+@class OGUnixFDList;
 @class OGDBusConnection;
 
 /**
- * Instances of the #GDBusMethodInvocation class are used when
+ * Instances of the `GDBusMethodInvocation` class are used when
  * handling D-Bus method calls. It provides a way to asynchronously
  * return results and errors.
  * 
- * The normal way to obtain a #GDBusMethodInvocation object is to receive
- * it as an argument to the handle_method_call() function in a
- * #GDBusInterfaceVTable that was passed to g_dbus_connection_register_object().
+ * The normal way to obtain a `GDBusMethodInvocation` object is to receive
+ * it as an argument to the `handle_method_call()` function in a
+ * [type@Gio.DBusInterfaceVTable] that was passed to
+ * [method@Gio.DBusConnection.register_object].
  *
  */
 @interface OGDBusMethodInvocation : OGObject

@@ -4,22 +4,24 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 @class OGDBusConnection;
 
 /**
- * #GDBusActionGroup is an implementation of the #GActionGroup
- * interface that can be used as a proxy for an action group
- * that is exported over D-Bus with g_dbus_connection_export_action_group().
+ * `GDBusActionGroup` is an implementation of the [iface@Gio.ActionGroup]
+ * interface.
+ * 
+ * `GDBusActionGroup` can be used as a proxy for an action group
+ * that is exported over D-Bus with [method@Gio.DBusConnection.export_action_group].
  *
  */
 @interface OGDBusActionGroup : OGObject

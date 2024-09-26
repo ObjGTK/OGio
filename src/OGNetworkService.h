@@ -4,25 +4,25 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * Like #GNetworkAddress does with hostnames, #GNetworkService
+ * Like [class@Gio.NetworkAddress] does with hostnames, `GNetworkService`
  * provides an easy way to resolve a SRV record, and then attempt to
  * connect to one of the hosts that implements that service, handling
  * service priority/weighting, multiple IP addresses, and multiple
  * address families.
  * 
- * See #GSrvTarget for more information about SRV records, and see
- * #GSocketConnectable for an example of using the connectable
+ * See [struct@Gio.SrvTarget] for more information about SRV records, and see
+ * [iface@Gio.SocketConnectable] for an example of using the connectable
  * interface.
  *
  */

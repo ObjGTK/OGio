@@ -4,30 +4,29 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
  * Monitors a file or directory for changes.
  * 
- * To obtain a #GFileMonitor for a file or directory, use
- * g_file_monitor(), g_file_monitor_file(), or
- * g_file_monitor_directory().
+ * To obtain a `GFileMonitor` for a file or directory, use
+ * [method@Gio.File.monitor], [method@Gio.File.monitor_file], or
+ * [method@Gio.File.monitor_directory].
  * 
  * To get informed about changes to the file or directory you are
- * monitoring, connect to the #GFileMonitor::changed signal. The
- * signal will be emitted in the
- * [thread-default main context][g-main-context-push-thread-default]
- * of the thread that the monitor was created in
- * (though if the global default main context is blocked, this may
- * cause notifications to be blocked even if the thread-default
+ * monitoring, connect to the [signal@Gio.FileMonitor::changed] signal. The
+ * signal will be emitted in the thread-default main context (see
+ * [method@GLib.MainContext.push_thread_default]) of the thread that the monitor
+ * was created in (though if the global default main context is blocked, this
+ * may cause notifications to be blocked even if the thread-default
  * context is still running).
  *
  */

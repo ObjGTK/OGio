@@ -47,7 +47,6 @@ SRCS = OGAppInfoMonitor.m \
 	OGFilenameCompleter.m \
 	OGFilterInputStream.m \
 	OGFilterOutputStream.m \
-	OGIOModule.m \
 	OGIOStream.m \
 	OGInetAddress.m \
 	OGInetAddressMask.m \
@@ -96,6 +95,7 @@ SRCS = OGAppInfoMonitor.m \
 	OGTcpWrapperConnection.m \
 	OGTestDBus.m \
 	OGThemedIcon.m \
+	OGThreadedResolver.m \
 	OGThreadedSocketService.m \
 	OGTlsCertificate.m \
 	OGTlsConnection.m \

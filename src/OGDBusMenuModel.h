@@ -9,9 +9,9 @@
 @class OGDBusConnection;
 
 /**
- * #GDBusMenuModel is an implementation of #GMenuModel that can be used
- * as a proxy for a menu model that is exported over D-Bus with
- * g_dbus_connection_export_menu_model().
+ * `GDBusMenuModel` is an implementation of [class@Gio.MenuModel] that can be
+ * used as a proxy for a menu model that is exported over D-Bus with
+ * [method@Gio.DBusConnection.export_menu_model].
  *
  */
 @interface OGDBusMenuModel : OGMenuModel

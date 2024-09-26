@@ -12,12 +12,13 @@
 @class OGTlsDatabase;
 
 /**
- * #GTlsConnection is the base TLS connection class type, which wraps
- * a #GIOStream and provides TLS encryption on top of it. Its
- * subclasses, #GTlsClientConnection and #GTlsServerConnection,
- * implement client-side and server-side TLS, respectively.
+ * `GTlsConnection` is the base TLS connection class type, which wraps
+ * a [class@Gio.IOStream] and provides TLS encryption on top of it. Its
+ * subclasses, [iface@Gio.TlsClientConnection] and
+ * [iface@Gio.TlsServerConnection], implement client-side and server-side TLS,
+ * respectively.
  * 
- * For DTLS (Datagram TLS) support, see #GDtlsConnection.
+ * For DTLS (Datagram TLS) support, see [iface@Gio.DtlsConnection].
  *
  */
 @interface OGTlsConnection : OGIOStream

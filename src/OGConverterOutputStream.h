@@ -9,11 +9,11 @@
 @class OGOutputStream;
 
 /**
- * Converter output stream implements #GOutputStream and allows
+ * Converter output stream implements [class@Gio.OutputStream] and allows
  * conversion of data of various types during reading.
  * 
- * As of GLib 2.34, #GConverterOutputStream implements
- * #GPollableOutputStream.
+ * As of GLib 2.34, `GConverterOutputStream` implements
+ * [iface@Gio.PollableOutputStream].
  *
  */
 @interface OGConverterOutputStream : OGFilterOutputStream

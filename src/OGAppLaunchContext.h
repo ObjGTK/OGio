@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
@@ -60,13 +60,21 @@
 
 /**
  * Initiates startup notification for the application and returns the
- * `DESKTOP_STARTUP_ID` for the launched operation, if supported.
+ * `XDG_ACTIVATION_TOKEN` or `DESKTOP_STARTUP_ID` for the launched operation,
+ * if supported.
  * 
- * Startup notification IDs are defined in the
- * [FreeDesktop.Org Startup Notifications standard](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
+ * The returned token may be referred to equivalently as an ‘activation token’
+ * (using Wayland terminology) or a ‘startup sequence ID’ (using X11 terminology).
+ * The two [are interoperable](https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob/main/staging/xdg-activation/x11-interoperation.rst).
+ * 
+ * Activation tokens are defined in the [XDG Activation Protocol](https://wayland.app/protocols/xdg-activation-v1),
+ * and startup notification IDs are defined in the
+ * [freedesktop.org Startup Notification Protocol](http://standards.freedesktop.org/startup-notification-spec/startup-notification-latest.txt).
+ * 
+ * Support for the XDG Activation Protocol was added in GLib 2.76.
  *
  * @param info a #GAppInfo
- * @param files a #GList of of #GFile objects
+ * @param files a #GList of #GFile objects
  * @return a startup notification ID for the application, or %NULL if
  *     not supported.
  */

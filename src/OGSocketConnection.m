@@ -6,9 +6,9 @@
 
 #import "OGSocketConnection.h"
 
-#import "OGSocket.h"
-#import "OGSocketAddress.h"
 #import "OGCancellable.h"
+#import "OGSocketAddress.h"
+#import "OGSocket.h"
 
 @implementation OGSocketConnection
 

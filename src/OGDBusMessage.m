@@ -132,6 +132,14 @@
 	return returnValue;
 }
 
+- (OFString*)arg0Path
+{
+	const gchar* gobjectValue = g_dbus_message_get_arg0_path([self castedGObject]);
+
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
+	return returnValue;
+}
+
 - (GVariant*)body
 {
 	GVariant* returnValue = g_dbus_message_get_body([self castedGObject]);

@@ -6,12 +6,12 @@
 
 #import "OGSocket.h"
 
-#import "OGCredentials.h"
 #import "OGSocketAddress.h"
-#import "OGInetAddress.h"
-#import "OGCancellable.h"
-#import "OGSocketControlMessage.h"
 #import "OGSocketConnection.h"
+#import "OGCancellable.h"
+#import "OGInetAddress.h"
+#import "OGSocketControlMessage.h"
+#import "OGCredentials.h"
 
 @implementation OGSocket
 
@@ -466,6 +466,36 @@
 	GError* err = NULL;
 
 	gssize returnValue = g_socket_receive([self castedGObject], g_strdup([buffer UTF8String]), size, [cancellable castedGObject], &err);
+
+	if(err != NULL) {
+		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
+		g_error_free(err);
+		@throw exception;
+	}
+
+	return returnValue;
+}
+
+- (GBytes*)receiveBytesWithSize:(gsize)size timeoutUs:(gint64)timeoutUs cancellable:(OGCancellable*)cancellable
+{
+	GError* err = NULL;
+
+	GBytes* returnValue = g_socket_receive_bytes([self castedGObject], size, timeoutUs, [cancellable castedGObject], &err);
+
+	if(err != NULL) {
+		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
+		g_error_free(err);
+		@throw exception;
+	}
+
+	return returnValue;
+}
+
+- (GBytes*)receiveBytesFromWithAddress:(GSocketAddress**)address size:(gsize)size timeoutUs:(gint64)timeoutUs cancellable:(OGCancellable*)cancellable
+{
+	GError* err = NULL;
+
+	GBytes* returnValue = g_socket_receive_bytes_from([self castedGObject], address, size, timeoutUs, [cancellable castedGObject], &err);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

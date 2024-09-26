@@ -4,25 +4,25 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 @class OGEmblem;
 
 /**
- * #GEmblemedIcon is an implementation of #GIcon that supports
+ * `GEmblemedIcon` is an implementation of [iface@Gio.Icon] that supports
  * adding an emblem to an icon. Adding multiple emblems to an
- * icon is ensured via g_emblemed_icon_add_emblem().
+ * icon is ensured via [method@Gio.EmblemedIcon.add_emblem].
  * 
- * Note that #GEmblemedIcon allows no control over the position
- * of the emblems. See also #GEmblem for more information.
+ * Note that `GEmblemedIcon` allows no control over the position
+ * of the emblems. See also [class@Gio.Emblem] for more information.
  *
  */
 @interface OGEmblemedIcon : OGObject

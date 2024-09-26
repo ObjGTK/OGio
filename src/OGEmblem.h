@@ -4,20 +4,20 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * #GEmblem is an implementation of #GIcon that supports
+ * `GEmblem` is an implementation of [iface@Gio.Icon] that supports
  * having an emblem, which is an icon with additional properties.
- * It can than be added to a #GEmblemedIcon.
+ * It can than be added to a [class@Gio.EmblemedIcon].
  * 
  * Currently, only metainformation about the emblem's origin is
  * supported. More may be added in the future.

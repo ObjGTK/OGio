@@ -6,13 +6,13 @@
 
 #import "OGDBusConnection.h"
 
-#import "OGCancellable.h"
-#import "OGMenuModel.h"
 #import "OGDBusAuthObserver.h"
 #import "OGUnixFDList.h"
 #import "OGDBusMessage.h"
+#import "OGMenuModel.h"
 #import "OGCredentials.h"
 #import "OGIOStream.h"
+#import "OGCancellable.h"
 
 @implementation OGDBusConnection
 

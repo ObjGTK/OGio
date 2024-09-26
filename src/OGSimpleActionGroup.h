@@ -4,19 +4,20 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
 /**
- * #GSimpleActionGroup is a hash table filled with #GAction objects,
- * implementing the #GActionGroup and #GActionMap interfaces.
+ * `GSimpleActionGroup` is a hash table filled with [iface@Gio.Action] objects,
+ * implementing the [iface@Gio.ActionGroup] and [iface@Gio.ActionMap]
+ * interfaces.
  *
  */
 @interface OGSimpleActionGroup : OGObject

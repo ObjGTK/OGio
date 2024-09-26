@@ -6,8 +6,8 @@
 
 #import "OGFileInputStream.h"
 
-#import "OGCancellable.h"
 #import "OGFileInfo.h"
+#import "OGCancellable.h"
 
 @implementation OGFileInputStream
 

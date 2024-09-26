@@ -56,21 +56,12 @@ AC_MSG_CHECKING(for ObjFW package OGObject)
 AS_IF([$OBJFW_CONFIG --package OGObject], [AC_MSG_RESULT(yes)
 	CPPFLAGS="$CPPFLAGS $($OBJFW_CONFIG --package OGObject --cppflags)"
 	LIBS="$LIBS $($OBJFW_CONFIG --package OGObject --libs)"
+	FRAMEWORK_LIBS="$($OBJFW_CONFIG --package OGObject --framework-libs) $FRAMEWORK_LIBS"
 ], [
 	AC_MSG_ERROR(You need ObjFW package OGObject installed.)
 ])
 
 
-
-AC_ARG_WITH(giounix, AS_HELP_STRING([--with-giounix=PREFIX],
-	[build with gio-unix-2.0 in the specified prefix]))
-AS_IF([test x"$with_giounix" != x"no" -a x"$with_giounix" != x""], [
-       OGIO_CPPFLAGS="$OGIO_CPPFLAGS -I$with_giounix/include"
-       OGIO_LIBS="$OGIO_LIBS -L$with_giounix/lib"
-       CPPFLAGS="-I$with_giounix/include $CPPFLAGS"
-       LIBS="-L$with_giounix/lib $LIBS"
-       FRAMEWORK_LIBS="-L$with_giounix/lib $FRAMEWORK_LIBS"
-])
 
 AC_ARG_WITH(gio, AS_HELP_STRING([--with-gio=PREFIX],
 	[build with gio-2.0 in the specified prefix]))
@@ -82,23 +73,35 @@ AS_IF([test x"$with_gio" != x"no" -a x"$with_gio" != x""], [
        FRAMEWORK_LIBS="-L$with_gio/lib $FRAMEWORK_LIBS"
 ])
 
-
-PKG_CHECK_MODULES(giounix, [gio-unix-2.0 >= $(pkg-config --modversion gio-unix-2.0)], [
-	OGIO_CPPFLAGS="$OGIO_CPPFLAGS $giounix_CFLAGS"
-	OGIO_LIBS="$OGIO_LIBS $giounix_LIBS"
-	CPPFLAGS="$CPPFLAGS $giounix_CFLAGS"
-	LIBS="$LIBS $giounix_LIBS"
-], [
-	AC_MSG_ERROR(You need gio-unix-2.0 >= $(pkg-config --modversion gio-unix-2.0) installed!)
+AC_ARG_WITH(giounix, AS_HELP_STRING([--with-giounix=PREFIX],
+	[build with gio-unix-2.0 in the specified prefix]))
+AS_IF([test x"$with_giounix" != x"no" -a x"$with_giounix" != x""], [
+       OGIO_CPPFLAGS="$OGIO_CPPFLAGS -I$with_giounix/include"
+       OGIO_LIBS="$OGIO_LIBS -L$with_giounix/lib"
+       CPPFLAGS="-I$with_giounix/include $CPPFLAGS"
+       LIBS="-L$with_giounix/lib $LIBS"
+       FRAMEWORK_LIBS="-L$with_giounix/lib $FRAMEWORK_LIBS"
 ])
+
 
 PKG_CHECK_MODULES(gio, [gio-2.0 >= $(pkg-config --modversion gio-2.0)], [
 	OGIO_CPPFLAGS="$OGIO_CPPFLAGS $gio_CFLAGS"
 	OGIO_LIBS="$OGIO_LIBS $gio_LIBS"
 	CPPFLAGS="$CPPFLAGS $gio_CFLAGS"
 	LIBS="$LIBS $gio_LIBS"
+	FRAMEWORK_LIBS="$FRAMEWORK_LIBS $gio_LIBS"
 ], [
 	AC_MSG_ERROR(You need gio-2.0 >= $(pkg-config --modversion gio-2.0) installed!)
+])
+
+PKG_CHECK_MODULES(giounix, [gio-unix-2.0 >= $(pkg-config --modversion gio-unix-2.0)], [
+	OGIO_CPPFLAGS="$OGIO_CPPFLAGS $giounix_CFLAGS"
+	OGIO_LIBS="$OGIO_LIBS $giounix_LIBS"
+	CPPFLAGS="$CPPFLAGS $giounix_CFLAGS"
+	LIBS="$LIBS $giounix_LIBS"
+	FRAMEWORK_LIBS="$FRAMEWORK_LIBS $giounix_LIBS"
+], [
+	AC_MSG_ERROR(You need gio-unix-2.0 >= $(pkg-config --modversion gio-unix-2.0) installed!)
 ])
 
 AS_IF([test x"$GOBJC" = x"yes"], [
@@ -115,5 +118,5 @@ AC_SUBST(CPPFLAGS)
 AC_SUBST(OGIO_CPPFLAGS)
 AC_SUBST(OGIO_LIBS)
 
-AC_CONFIG_FILES([buildsys.mk extra.mk OGio.oc])
+AC_CONFIG_FILES([buildsys.mk extra.mk OGio.oc src/Info.plist])
 AC_OUTPUT

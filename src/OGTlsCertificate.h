@@ -4,13 +4,13 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixoutputstream.h>
-#include <gio/gunixinputstream.h>
-#include <gio/gunixmounts.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gio.h>
 #include <gio/gdesktopappinfo.h>
+#include <gio/gfiledescriptorbased.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
+#include <gio/gunixinputstream.h>
+#include <gio/gunixoutputstream.h>
+#include <gio/gio.h>
 
 #import <OGObject/OGObject.h>
 
@@ -19,7 +19,7 @@
  * This can represent either a certificate only (eg, the certificate
  * received by a client from a server), or the combination of
  * a certificate and a private key (which is needed when acting as a
- * #GTlsServerConnection).
+ * [iface@Gio.TlsServerConnection]).
  *
  */
 @interface OGTlsCertificate : OGObject
