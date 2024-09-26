@@ -95,7 +95,6 @@ SRCS = OGAppInfoMonitor.m \
 	OGTcpWrapperConnection.m \
 	OGTestDBus.m \
 	OGThemedIcon.m \
-	OGThreadedResolver.m \
 	OGThreadedSocketService.m \
 	OGTlsCertificate.m \
 	OGTlsConnection.m \
