@@ -97,7 +97,6 @@
 #import "OGTcpWrapperConnection.h"
 #import "OGTestDBus.h"
 #import "OGThemedIcon.h"
-#import "OGThreadedResolver.h"
 #import "OGThreadedSocketService.h"
 #import "OGTlsCertificate.h"
 #import "OGTlsConnection.h"
