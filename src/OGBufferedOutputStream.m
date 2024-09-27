@@ -12,7 +12,7 @@
 
 - (instancetype)init:(OGOutputStream*)baseStream
 {
-	GBufferedOutputStream* gobjectValue = G_BUFFERED_OUTPUT_STREAM(g_buffered_output_stream_new([baseStream castedGObject]));
+	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new([baseStream castedGObject]), GBufferedOutputStream, GBufferedOutputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,7 +28,7 @@
 
 - (instancetype)initSizedWithBaseStream:(OGOutputStream*)baseStream size:(gsize)size
 {
-	GBufferedOutputStream* gobjectValue = G_BUFFERED_OUTPUT_STREAM(g_buffered_output_stream_new_sized([baseStream castedGObject], size));
+	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new_sized([baseStream castedGObject], size), GBufferedOutputStream, GBufferedOutputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -44,7 +44,7 @@
 
 - (GBufferedOutputStream*)castedGObject
 {
-	return G_BUFFERED_OUTPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GBufferedOutputStream, GBufferedOutputStream);
 }
 
 - (bool)autoGrow

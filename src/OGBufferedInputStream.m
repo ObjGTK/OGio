@@ -6,14 +6,14 @@
 
 #import "OGBufferedInputStream.h"
 
-#import "OGInputStream.h"
 #import "OGCancellable.h"
+#import "OGInputStream.h"
 
 @implementation OGBufferedInputStream
 
 - (instancetype)init:(OGInputStream*)baseStream
 {
-	GBufferedInputStream* gobjectValue = G_BUFFERED_INPUT_STREAM(g_buffered_input_stream_new([baseStream castedGObject]));
+	GBufferedInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_input_stream_new([baseStream castedGObject]), GBufferedInputStream, GBufferedInputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -29,7 +29,7 @@
 
 - (instancetype)initSizedWithBaseStream:(OGInputStream*)baseStream size:(gsize)size
 {
-	GBufferedInputStream* gobjectValue = G_BUFFERED_INPUT_STREAM(g_buffered_input_stream_new_sized([baseStream castedGObject], size));
+	GBufferedInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_input_stream_new_sized([baseStream castedGObject], size), GBufferedInputStream, GBufferedInputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -45,7 +45,7 @@
 
 - (GBufferedInputStream*)castedGObject
 {
-	return G_BUFFERED_INPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GBufferedInputStream, GBufferedInputStream);
 }
 
 - (gssize)fillWithCount:(gssize)count cancellable:(OGCancellable*)cancellable
@@ -106,7 +106,7 @@
 
 - (void*)peekBuffer:(gsize*)count
 {
-	void* returnValue = (void*)g_buffered_input_stream_peek_buffer([self castedGObject], count);
+	void* returnValue = g_buffered_input_stream_peek_buffer([self castedGObject], count);
 
 	return returnValue;
 }

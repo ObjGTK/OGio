@@ -12,7 +12,7 @@
 
 - (instancetype)initWithFormat:(GZlibCompressorFormat)format level:(int)level
 {
-	GZlibCompressor* gobjectValue = G_ZLIB_COMPRESSOR(g_zlib_compressor_new(format, level));
+	GZlibCompressor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_zlib_compressor_new(format, level), GZlibCompressor, GZlibCompressor);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,12 +28,12 @@
 
 - (GZlibCompressor*)castedGObject
 {
-	return G_ZLIB_COMPRESSOR([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GZlibCompressor, GZlibCompressor);
 }
 
 - (OGFileInfo*)fileInfo
 {
-	GFileInfo* gobjectValue = G_FILE_INFO(g_zlib_compressor_get_file_info([self castedGObject]));
+	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_zlib_compressor_get_file_info([self castedGObject]), GFileInfo, GFileInfo);
 
 	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
 	return returnValue;

@@ -19,7 +19,7 @@
 
 - (instancetype)initWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData sourceTag:(gpointer)sourceTag
 {
-	GSimpleAsyncResult* gobjectValue = G_SIMPLE_ASYNC_RESULT(g_simple_async_result_new(sourceObject, callback, userData, sourceTag));
+	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new(sourceObject, callback, userData, sourceTag), GSimpleAsyncResult, GSimpleAsyncResult);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -35,7 +35,7 @@
 
 - (instancetype)initFromErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(const GError*)error
 {
-	GSimpleAsyncResult* gobjectValue = G_SIMPLE_ASYNC_RESULT(g_simple_async_result_new_from_error(sourceObject, callback, userData, error));
+	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_from_error(sourceObject, callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -51,7 +51,7 @@
 
 - (instancetype)initTakeErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(GError*)error
 {
-	GSimpleAsyncResult* gobjectValue = G_SIMPLE_ASYNC_RESULT(g_simple_async_result_new_take_error(sourceObject, callback, userData, error));
+	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_take_error(sourceObject, callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -67,7 +67,7 @@
 
 - (GSimpleAsyncResult*)castedGObject
 {
-	return G_SIMPLE_ASYNC_RESULT([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleAsyncResult, GSimpleAsyncResult);
 }
 
 - (void)complete

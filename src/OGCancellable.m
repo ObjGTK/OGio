@@ -10,7 +10,7 @@
 
 + (OGCancellable*)current
 {
-	GCancellable* gobjectValue = G_CANCELLABLE(g_cancellable_get_current());
+	GCancellable* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_cancellable_get_current(), GCancellable, GCancellable);
 
 	OGCancellable* returnValue = [OGCancellable withGObject:gobjectValue];
 	return returnValue;
@@ -18,7 +18,7 @@
 
 - (instancetype)init
 {
-	GCancellable* gobjectValue = G_CANCELLABLE(g_cancellable_new());
+	GCancellable* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_cancellable_new(), GCancellable, GCancellable);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -34,7 +34,7 @@
 
 - (GCancellable*)castedGObject
 {
-	return G_CANCELLABLE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GCancellable, GCancellable);
 }
 
 - (void)cancel

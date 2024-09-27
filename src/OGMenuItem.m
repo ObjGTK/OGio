@@ -12,7 +12,7 @@
 
 - (instancetype)initWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction
 {
-	GMenuItem* gobjectValue = G_MENU_ITEM(g_menu_item_new([label UTF8String], [detailedAction UTF8String]));
+	GMenuItem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_new([label UTF8String], [detailedAction UTF8String]), GMenuItem, GMenuItem);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,7 +28,7 @@
 
 - (instancetype)initFromModelWithModel:(OGMenuModel*)model itemIndex:(gint)itemIndex
 {
-	GMenuItem* gobjectValue = G_MENU_ITEM(g_menu_item_new_from_model([model castedGObject], itemIndex));
+	GMenuItem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_new_from_model([model castedGObject], itemIndex), GMenuItem, GMenuItem);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -44,7 +44,7 @@
 
 - (instancetype)initSectionWithLabel:(OFString*)label section:(OGMenuModel*)section
 {
-	GMenuItem* gobjectValue = G_MENU_ITEM(g_menu_item_new_section([label UTF8String], [section castedGObject]));
+	GMenuItem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_new_section([label UTF8String], [section castedGObject]), GMenuItem, GMenuItem);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -60,7 +60,7 @@
 
 - (instancetype)initSubmenuWithLabel:(OFString*)label submenu:(OGMenuModel*)submenu
 {
-	GMenuItem* gobjectValue = G_MENU_ITEM(g_menu_item_new_submenu([label UTF8String], [submenu castedGObject]));
+	GMenuItem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_new_submenu([label UTF8String], [submenu castedGObject]), GMenuItem, GMenuItem);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -76,7 +76,7 @@
 
 - (GMenuItem*)castedGObject
 {
-	return G_MENU_ITEM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMenuItem, GMenuItem);
 }
 
 - (GVariant*)attributeValueWithAttribute:(OFString*)attribute expectedType:(const GVariantType*)expectedType
@@ -88,7 +88,7 @@
 
 - (OGMenuModel*)link:(OFString*)link
 {
-	GMenuModel* gobjectValue = G_MENU_MODEL(g_menu_item_get_link([self castedGObject], [link UTF8String]));
+	GMenuModel* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_get_link([self castedGObject], [link UTF8String]), GMenuModel, GMenuModel);
 
 	OGMenuModel* returnValue = [OGMenuModel withGObject:gobjectValue];
 	g_object_unref(gobjectValue);

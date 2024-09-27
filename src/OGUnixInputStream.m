@@ -10,7 +10,7 @@
 
 - (instancetype)initWithFd:(gint)fd closeFd:(bool)closeFd
 {
-	GUnixInputStream* gobjectValue = G_UNIX_INPUT_STREAM(g_unix_input_stream_new(fd, closeFd));
+	GUnixInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_input_stream_new(fd, closeFd), GUnixInputStream, GUnixInputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GUnixInputStream*)castedGObject
 {
-	return G_UNIX_INPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixInputStream, GUnixInputStream);
 }
 
 - (bool)closeFd

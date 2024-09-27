@@ -6,15 +6,15 @@
 
 #import "OGTcpWrapperConnection.h"
 
-#import "OGSocket.h"
 #import "OGSocketConnection.h"
+#import "OGSocket.h"
 #import "OGIOStream.h"
 
 @implementation OGTcpWrapperConnection
 
 - (instancetype)initWithBaseIoStream:(OGIOStream*)baseIoStream socket:(OGSocket*)socket
 {
-	GTcpWrapperConnection* gobjectValue = G_TCP_WRAPPER_CONNECTION(g_tcp_wrapper_connection_new([baseIoStream castedGObject], [socket castedGObject]));
+	GTcpWrapperConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tcp_wrapper_connection_new([baseIoStream castedGObject], [socket castedGObject]), GTcpWrapperConnection, GTcpWrapperConnection);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -30,12 +30,12 @@
 
 - (GTcpWrapperConnection*)castedGObject
 {
-	return G_TCP_WRAPPER_CONNECTION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTcpWrapperConnection, GTcpWrapperConnection);
 }
 
 - (OGIOStream*)baseIoStream
 {
-	GIOStream* gobjectValue = G_IO_STREAM(g_tcp_wrapper_connection_get_base_io_stream([self castedGObject]));
+	GIOStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tcp_wrapper_connection_get_base_io_stream([self castedGObject]), GIOStream, GIOStream);
 
 	OGIOStream* returnValue = [OGIOStream withGObject:gobjectValue];
 	return returnValue;

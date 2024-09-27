@@ -10,7 +10,7 @@
 
 - (instancetype)init:(GFile*)file
 {
-	GFileIcon* gobjectValue = G_FILE_ICON(g_file_icon_new(file));
+	GFileIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_icon_new(file), GFileIcon, GFileIcon);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GFileIcon*)castedGObject
 {
-	return G_FILE_ICON([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileIcon, GFileIcon);
 }
 
 - (GFile*)file

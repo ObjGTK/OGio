@@ -10,7 +10,7 @@
 
 - (GFileMonitor*)castedGObject
 {
-	return G_FILE_MONITOR([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileMonitor, GFileMonitor);
 }
 
 - (bool)cancel

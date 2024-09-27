@@ -17,7 +17,7 @@
 
 - (GSimpleProxyResolver*)castedGObject
 {
-	return G_SIMPLE_PROXY_RESOLVER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleProxyResolver, GSimpleProxyResolver);
 }
 
 - (void)setDefaultProxy:(OFString*)defaultProxy

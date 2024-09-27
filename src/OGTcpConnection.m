@@ -10,7 +10,7 @@
 
 - (GTcpConnection*)castedGObject
 {
-	return G_TCP_CONNECTION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTcpConnection, GTcpConnection);
 }
 
 - (bool)gracefulDisconnect

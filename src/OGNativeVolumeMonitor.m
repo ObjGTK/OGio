@@ -10,7 +10,7 @@
 
 - (GNativeVolumeMonitor*)castedGObject
 {
-	return G_NATIVE_VOLUME_MONITOR([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GNativeVolumeMonitor, GNativeVolumeMonitor);
 }
 
 

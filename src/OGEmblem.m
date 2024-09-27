@@ -10,7 +10,7 @@
 
 - (instancetype)init:(GIcon*)icon
 {
-	GEmblem* gobjectValue = G_EMBLEM(g_emblem_new(icon));
+	GEmblem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblem_new(icon), GEmblem, GEmblem);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (instancetype)initWithOriginWithIcon:(GIcon*)icon origin:(GEmblemOrigin)origin
 {
-	GEmblem* gobjectValue = G_EMBLEM(g_emblem_new_with_origin(icon, origin));
+	GEmblem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblem_new_with_origin(icon, origin), GEmblem, GEmblem);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -42,7 +42,7 @@
 
 - (GEmblem*)castedGObject
 {
-	return G_EMBLEM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GEmblem, GEmblem);
 }
 
 - (GIcon*)icon

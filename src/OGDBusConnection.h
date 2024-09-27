@@ -5,22 +5,22 @@
  */
 
 #include <gio/gdesktopappinfo.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
+#include <gio/gfiledescriptorbased.h>
 
 #import <OGObject/OGObject.h>
 
 @class OGDBusAuthObserver;
+@class OGCancellable;
 @class OGUnixFDList;
 @class OGDBusMessage;
-@class OGMenuModel;
 @class OGCredentials;
+@class OGMenuModel;
 @class OGIOStream;
-@class OGCancellable;
 
 /**
  * The `GDBusConnection` type is used for D-Bus connections to remote

@@ -14,7 +14,7 @@
 
 - (GTlsDatabase*)castedGObject
 {
-	return G_TLS_DATABASE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTlsDatabase, GTlsDatabase);
 }
 
 - (OFString*)createCertificateHandle:(OGTlsCertificate*)certificate
@@ -29,7 +29,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_database_lookup_certificate_for_handle([self castedGObject], [handle UTF8String], [interaction castedGObject], flags, [cancellable castedGObject], &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_database_lookup_certificate_for_handle([self castedGObject], [handle UTF8String], [interaction castedGObject], flags, [cancellable castedGObject], &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -54,7 +54,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_database_lookup_certificate_for_handle_finish([self castedGObject], result, &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_database_lookup_certificate_for_handle_finish([self castedGObject], result, &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -74,7 +74,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_database_lookup_certificate_issuer([self castedGObject], [certificate castedGObject], [interaction castedGObject], flags, [cancellable castedGObject], &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_database_lookup_certificate_issuer([self castedGObject], [certificate castedGObject], [interaction castedGObject], flags, [cancellable castedGObject], &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -99,7 +99,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_database_lookup_certificate_issuer_finish([self castedGObject], result, &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_database_lookup_certificate_issuer_finish([self castedGObject], result, &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

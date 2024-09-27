@@ -15,7 +15,7 @@
 
 + (OGSettingsBackend*)default
 {
-	GSettingsBackend* gobjectValue = G_SETTINGS_BACKEND(g_settings_backend_get_default());
+	GSettingsBackend* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_backend_get_default(), GSettingsBackend, GSettingsBackend);
 
 	OGSettingsBackend* returnValue = [OGSettingsBackend withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -25,7 +25,7 @@
 
 - (GSettingsBackend*)castedGObject
 {
-	return G_SETTINGS_BACKEND([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSettingsBackend, GSettingsBackend);
 }
 
 - (void)changedWithKey:(OFString*)key originTag:(gpointer)originTag

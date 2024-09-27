@@ -10,7 +10,7 @@
 
 + (OGSocketControlMessage*)deserializeWithLevel:(int)level type:(int)type size:(gsize)size data:(gpointer)data
 {
-	GSocketControlMessage* gobjectValue = G_SOCKET_CONTROL_MESSAGE(g_socket_control_message_deserialize(level, type, size, data));
+	GSocketControlMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_control_message_deserialize(level, type, size, data), GSocketControlMessage, GSocketControlMessage);
 
 	OGSocketControlMessage* returnValue = [OGSocketControlMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -20,7 +20,7 @@
 
 - (GSocketControlMessage*)castedGObject
 {
-	return G_SOCKET_CONTROL_MESSAGE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocketControlMessage, GSocketControlMessage);
 }
 
 - (int)level

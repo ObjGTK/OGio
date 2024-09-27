@@ -13,14 +13,14 @@
 
 - (GFileInputStream*)castedGObject
 {
-	return G_FILE_INPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileInputStream, GFileInputStream);
 }
 
 - (OGFileInfo*)queryInfoWithAttributes:(OFString*)attributes cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = G_FILE_INFO(g_file_input_stream_query_info([self castedGObject], [attributes UTF8String], [cancellable castedGObject], &err));
+	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_input_stream_query_info([self castedGObject], [attributes UTF8String], [cancellable castedGObject], &err), GFileInfo, GFileInfo);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -45,7 +45,7 @@
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = G_FILE_INFO(g_file_input_stream_query_info_finish([self castedGObject], result, &err));
+	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_input_stream_query_info_finish([self castedGObject], result, &err), GFileInfo, GFileInfo);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

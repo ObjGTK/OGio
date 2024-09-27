@@ -27,7 +27,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_certificate_new_from_file([file UTF8String], &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_file([file UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -53,7 +53,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_certificate_new_from_file_with_password([file UTF8String], [password UTF8String], &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_file_with_password([file UTF8String], [password UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -79,7 +79,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_certificate_new_from_files([certFile UTF8String], [keyFile UTF8String], &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_files([certFile UTF8String], [keyFile UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -105,7 +105,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_certificate_new_from_pem([data UTF8String], length, &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pem([data UTF8String], length, &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -131,7 +131,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_certificate_new_from_pkcs11_uris([pkcs11Uri UTF8String], [privateKeyPkcs11Uri UTF8String], &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pkcs11_uris([pkcs11Uri UTF8String], [privateKeyPkcs11Uri UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -157,7 +157,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_certificate_new_from_pkcs12(data, length, [password UTF8String], &err));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pkcs12(data, length, [password UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -181,7 +181,7 @@
 
 - (GTlsCertificate*)castedGObject
 {
-	return G_TLS_CERTIFICATE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTlsCertificate, GTlsCertificate);
 }
 
 - (GPtrArray*)dnsNames
@@ -200,7 +200,7 @@
 
 - (OGTlsCertificate*)issuer
 {
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_certificate_get_issuer([self castedGObject]));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_get_issuer([self castedGObject]), GTlsCertificate, GTlsCertificate);
 
 	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	return returnValue;

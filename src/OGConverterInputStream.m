@@ -12,7 +12,7 @@
 
 - (instancetype)initWithBaseStream:(OGInputStream*)baseStream converter:(GConverter*)converter
 {
-	GConverterInputStream* gobjectValue = G_CONVERTER_INPUT_STREAM(g_converter_input_stream_new([baseStream castedGObject], converter));
+	GConverterInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_converter_input_stream_new([baseStream castedGObject], converter), GConverterInputStream, GConverterInputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,7 +28,7 @@
 
 - (GConverterInputStream*)castedGObject
 {
-	return G_CONVERTER_INPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GConverterInputStream, GConverterInputStream);
 }
 
 - (GConverter*)converter

@@ -13,14 +13,14 @@
 
 - (GUnixConnection*)castedGObject
 {
-	return G_UNIX_CONNECTION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixConnection, GUnixConnection);
 }
 
 - (OGCredentials*)receiveCredentials:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	GCredentials* gobjectValue = G_CREDENTIALS(g_unix_connection_receive_credentials([self castedGObject], [cancellable castedGObject], &err));
+	GCredentials* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_connection_receive_credentials([self castedGObject], [cancellable castedGObject], &err), GCredentials, GCredentials);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -45,7 +45,7 @@
 {
 	GError* err = NULL;
 
-	GCredentials* gobjectValue = G_CREDENTIALS(g_unix_connection_receive_credentials_finish([self castedGObject], result, &err));
+	GCredentials* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_connection_receive_credentials_finish([self castedGObject], result, &err), GCredentials, GCredentials);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

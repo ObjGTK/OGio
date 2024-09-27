@@ -10,7 +10,7 @@
 
 - (GMenuAttributeIter*)castedGObject
 {
-	return G_MENU_ATTRIBUTE_ITER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMenuAttributeIter, GMenuAttributeIter);
 }
 
 - (OFString*)name

@@ -31,7 +31,7 @@
 
 - (instancetype)init:(OFString*)desktopId
 {
-	GDesktopAppInfo* gobjectValue = G_DESKTOP_APP_INFO(g_desktop_app_info_new([desktopId UTF8String]));
+	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new([desktopId UTF8String]), GDesktopAppInfo, GDesktopAppInfo);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -47,7 +47,7 @@
 
 - (instancetype)initFromFilename:(OFString*)filename
 {
-	GDesktopAppInfo* gobjectValue = G_DESKTOP_APP_INFO(g_desktop_app_info_new_from_filename([filename UTF8String]));
+	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_filename([filename UTF8String]), GDesktopAppInfo, GDesktopAppInfo);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -63,7 +63,7 @@
 
 - (instancetype)initFromKeyfile:(GKeyFile*)keyFile
 {
-	GDesktopAppInfo* gobjectValue = G_DESKTOP_APP_INFO(g_desktop_app_info_new_from_keyfile(keyFile));
+	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_keyfile(keyFile), GDesktopAppInfo, GDesktopAppInfo);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -79,7 +79,7 @@
 
 - (GDesktopAppInfo*)castedGObject
 {
-	return G_DESKTOP_APP_INFO([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDesktopAppInfo, GDesktopAppInfo);
 }
 
 - (OFString*)actionName:(OFString*)actionName

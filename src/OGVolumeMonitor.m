@@ -17,7 +17,7 @@
 
 + (OGVolumeMonitor*)get
 {
-	GVolumeMonitor* gobjectValue = G_VOLUME_MONITOR(g_volume_monitor_get());
+	GVolumeMonitor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_volume_monitor_get(), GVolumeMonitor, GVolumeMonitor);
 
 	OGVolumeMonitor* returnValue = [OGVolumeMonitor withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -27,7 +27,7 @@
 
 - (GVolumeMonitor*)castedGObject
 {
-	return G_VOLUME_MONITOR([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GVolumeMonitor, GVolumeMonitor);
 }
 
 - (GList*)connectedDrives

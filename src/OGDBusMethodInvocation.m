@@ -6,20 +6,20 @@
 
 #import "OGDBusMethodInvocation.h"
 
-#import "OGDBusMessage.h"
 #import "OGUnixFDList.h"
 #import "OGDBusConnection.h"
+#import "OGDBusMessage.h"
 
 @implementation OGDBusMethodInvocation
 
 - (GDBusMethodInvocation*)castedGObject
 {
-	return G_DBUS_METHOD_INVOCATION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusMethodInvocation, GDBusMethodInvocation);
 }
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_method_invocation_get_connection([self castedGObject]));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_method_invocation_get_connection([self castedGObject]), GDBusConnection, GDBusConnection);
 
 	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	return returnValue;
@@ -35,7 +35,7 @@
 
 - (OGDBusMessage*)message
 {
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_method_invocation_get_message([self castedGObject]));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_method_invocation_get_message([self castedGObject]), GDBusMessage, GDBusMessage);
 
 	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	return returnValue;

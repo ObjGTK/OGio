@@ -6,15 +6,15 @@
 
 #import "OGTlsInteraction.h"
 
-#import "OGTlsConnection.h"
 #import "OGCancellable.h"
+#import "OGTlsConnection.h"
 #import "OGTlsPassword.h"
 
 @implementation OGTlsInteraction
 
 - (GTlsInteraction*)castedGObject
 {
-	return G_TLS_INTERACTION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTlsInteraction, GTlsInteraction);
 }
 
 - (GTlsInteractionResult)askPasswordWithPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable

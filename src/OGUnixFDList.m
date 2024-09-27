@@ -10,7 +10,7 @@
 
 - (instancetype)init
 {
-	GUnixFDList* gobjectValue = G_UNIX_FD_LIST(g_unix_fd_list_new());
+	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_list_new(), GUnixFDList, GUnixFDList);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (instancetype)initFromArrayWithFds:(const gint*)fds nfds:(gint)nfds
 {
-	GUnixFDList* gobjectValue = G_UNIX_FD_LIST(g_unix_fd_list_new_from_array(fds, nfds));
+	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_list_new_from_array(fds, nfds), GUnixFDList, GUnixFDList);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -42,7 +42,7 @@
 
 - (GUnixFDList*)castedGObject
 {
-	return G_UNIX_FD_LIST([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixFDList, GUnixFDList);
 }
 
 - (gint)append:(gint)fd

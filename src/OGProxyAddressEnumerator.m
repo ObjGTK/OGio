@@ -10,7 +10,7 @@
 
 - (GProxyAddressEnumerator*)castedGObject
 {
-	return G_PROXY_ADDRESS_ENUMERATOR([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GProxyAddressEnumerator, GProxyAddressEnumerator);
 }
 
 

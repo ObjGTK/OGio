@@ -6,15 +6,15 @@
 
 #import "OGApplication.h"
 
-#import "OGDBusConnection.h"
 #import "OGCancellable.h"
 #import "OGNotification.h"
+#import "OGDBusConnection.h"
 
 @implementation OGApplication
 
 + (OGApplication*)default
 {
-	GApplication* gobjectValue = G_APPLICATION(g_application_get_default());
+	GApplication* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_get_default(), GApplication, GApplication);
 
 	OGApplication* returnValue = [OGApplication withGObject:gobjectValue];
 	return returnValue;
@@ -29,7 +29,7 @@
 
 - (instancetype)initWithApplicationId:(OFString*)applicationId flags:(GApplicationFlags)flags
 {
-	GApplication* gobjectValue = G_APPLICATION(g_application_new([applicationId UTF8String], flags));
+	GApplication* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_new([applicationId UTF8String], flags), GApplication, GApplication);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -45,7 +45,7 @@
 
 - (GApplication*)castedGObject
 {
-	return G_APPLICATION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GApplication, GApplication);
 }
 
 - (void)activate
@@ -83,7 +83,7 @@
 
 - (OGDBusConnection*)dbusConnection
 {
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_application_get_dbus_connection([self castedGObject]));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_get_dbus_connection([self castedGObject]), GDBusConnection, GDBusConnection);
 
 	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	return returnValue;
@@ -183,7 +183,7 @@
 	return returnValue;
 }
 
-- (void)decreaseCount
+- (void)release
 {
 	g_application_release([self castedGObject]);
 }

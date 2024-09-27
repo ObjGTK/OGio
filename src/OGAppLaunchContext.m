@@ -10,7 +10,7 @@
 
 - (instancetype)init
 {
-	GAppLaunchContext* gobjectValue = G_APP_LAUNCH_CONTEXT(g_app_launch_context_new());
+	GAppLaunchContext* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_app_launch_context_new(), GAppLaunchContext, GAppLaunchContext);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GAppLaunchContext*)castedGObject
 {
-	return G_APP_LAUNCH_CONTEXT([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GAppLaunchContext, GAppLaunchContext);
 }
 
 - (char*)displayWithInfo:(GAppInfo*)info files:(GList*)files

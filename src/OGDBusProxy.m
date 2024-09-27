@@ -6,8 +6,8 @@
 
 #import "OGDBusProxy.h"
 
-#import "OGDBusConnection.h"
 #import "OGCancellable.h"
+#import "OGDBusConnection.h"
 #import "OGUnixFDList.h"
 
 @implementation OGDBusProxy
@@ -26,7 +26,7 @@
 {
 	GError* err = NULL;
 
-	GDBusProxy* gobjectValue = G_DBUS_PROXY(g_dbus_proxy_new_finish(res, &err));
+	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_finish(res, &err), GDBusProxy, GDBusProxy);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -52,7 +52,7 @@
 {
 	GError* err = NULL;
 
-	GDBusProxy* gobjectValue = G_DBUS_PROXY(g_dbus_proxy_new_for_bus_finish(res, &err));
+	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_for_bus_finish(res, &err), GDBusProxy, GDBusProxy);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -78,7 +78,7 @@
 {
 	GError* err = NULL;
 
-	GDBusProxy* gobjectValue = G_DBUS_PROXY(g_dbus_proxy_new_for_bus_sync(busType, flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err));
+	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_for_bus_sync(busType, flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err), GDBusProxy, GDBusProxy);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -104,7 +104,7 @@
 {
 	GError* err = NULL;
 
-	GDBusProxy* gobjectValue = G_DBUS_PROXY(g_dbus_proxy_new_sync([connection castedGObject], flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err));
+	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_sync([connection castedGObject], flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err), GDBusProxy, GDBusProxy);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -128,7 +128,7 @@
 
 - (GDBusProxy*)castedGObject
 {
-	return G_DBUS_PROXY([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusProxy, GDBusProxy);
 }
 
 - (void)callWithMethodName:(OFString*)methodName parameters:(GVariant*)parameters flags:(GDBusCallFlags)flags timeoutMsec:(gint)timeoutMsec cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
@@ -217,7 +217,7 @@
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_proxy_get_connection([self castedGObject]));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_get_connection([self castedGObject]), GDBusConnection, GDBusConnection);
 
 	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	return returnValue;

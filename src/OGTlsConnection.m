@@ -6,16 +6,16 @@
 
 #import "OGTlsConnection.h"
 
-#import "OGTlsInteraction.h"
-#import "OGCancellable.h"
-#import "OGTlsCertificate.h"
 #import "OGTlsDatabase.h"
+#import "OGTlsCertificate.h"
+#import "OGCancellable.h"
+#import "OGTlsInteraction.h"
 
 @implementation OGTlsConnection
 
 - (GTlsConnection*)castedGObject
 {
-	return G_TLS_CONNECTION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTlsConnection, GTlsConnection);
 }
 
 - (bool)emitAcceptCertificateWithPeerCert:(OGTlsCertificate*)peerCert errors:(GTlsCertificateFlags)errors
@@ -27,7 +27,7 @@
 
 - (OGTlsCertificate*)certificate
 {
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_connection_get_certificate([self castedGObject]));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_connection_get_certificate([self castedGObject]), GTlsCertificate, GTlsCertificate);
 
 	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	return returnValue;
@@ -58,7 +58,7 @@
 
 - (OGTlsDatabase*)database
 {
-	GTlsDatabase* gobjectValue = G_TLS_DATABASE(g_tls_connection_get_database([self castedGObject]));
+	GTlsDatabase* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_connection_get_database([self castedGObject]), GTlsDatabase, GTlsDatabase);
 
 	OGTlsDatabase* returnValue = [OGTlsDatabase withGObject:gobjectValue];
 	return returnValue;
@@ -66,7 +66,7 @@
 
 - (OGTlsInteraction*)interaction
 {
-	GTlsInteraction* gobjectValue = G_TLS_INTERACTION(g_tls_connection_get_interaction([self castedGObject]));
+	GTlsInteraction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_connection_get_interaction([self castedGObject]), GTlsInteraction, GTlsInteraction);
 
 	OGTlsInteraction* returnValue = [OGTlsInteraction withGObject:gobjectValue];
 	return returnValue;
@@ -82,7 +82,7 @@
 
 - (OGTlsCertificate*)peerCertificate
 {
-	GTlsCertificate* gobjectValue = G_TLS_CERTIFICATE(g_tls_connection_get_peer_certificate([self castedGObject]));
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_connection_get_peer_certificate([self castedGObject]), GTlsCertificate, GTlsCertificate);
 
 	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
 	return returnValue;

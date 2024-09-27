@@ -15,7 +15,7 @@
 
 - (instancetype)init:(GTestDBusFlags)flags
 {
-	GTestDBus* gobjectValue = G_TEST_DBUS(g_test_dbus_new(flags));
+	GTestDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_test_dbus_new(flags), GTestDBus, GTestDBus);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -31,7 +31,7 @@
 
 - (GTestDBus*)castedGObject
 {
-	return G_TEST_DBUS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTestDBus, GTestDBus);
 }
 
 - (void)addServiceDir:(OFString*)path

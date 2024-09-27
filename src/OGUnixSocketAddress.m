@@ -17,7 +17,7 @@
 
 - (instancetype)init:(OFString*)path
 {
-	GUnixSocketAddress* gobjectValue = G_UNIX_SOCKET_ADDRESS(g_unix_socket_address_new([path UTF8String]));
+	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new([path UTF8String]), GUnixSocketAddress, GUnixSocketAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -33,7 +33,7 @@
 
 - (instancetype)initAbstractWithPath:(OFString*)path pathLen:(gint)pathLen
 {
-	GUnixSocketAddress* gobjectValue = G_UNIX_SOCKET_ADDRESS(g_unix_socket_address_new_abstract([path UTF8String], pathLen));
+	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new_abstract([path UTF8String], pathLen), GUnixSocketAddress, GUnixSocketAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -49,7 +49,7 @@
 
 - (instancetype)initWithTypeWithPath:(OFString*)path pathLen:(gint)pathLen type:(GUnixSocketAddressType)type
 {
-	GUnixSocketAddress* gobjectValue = G_UNIX_SOCKET_ADDRESS(g_unix_socket_address_new_with_type([path UTF8String], pathLen, type));
+	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new_with_type([path UTF8String], pathLen, type), GUnixSocketAddress, GUnixSocketAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -65,7 +65,7 @@
 
 - (GUnixSocketAddress*)castedGObject
 {
-	return G_UNIX_SOCKET_ADDRESS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixSocketAddress, GUnixSocketAddress);
 }
 
 - (GUnixSocketAddressType)addressType

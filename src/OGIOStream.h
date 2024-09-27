@@ -5,18 +5,18 @@
  */
 
 #include <gio/gdesktopappinfo.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
+#include <gio/gfiledescriptorbased.h>
 
 #import <OGObject/OGObject.h>
 
 @class OGCancellable;
-@class OGInputStream;
 @class OGOutputStream;
+@class OGInputStream;
 
 /**
  * `GIOStream` represents an object that has both read and write streams.

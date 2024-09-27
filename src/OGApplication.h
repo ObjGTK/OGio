@@ -5,18 +5,18 @@
  */
 
 #include <gio/gdesktopappinfo.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
+#include <gio/gfiledescriptorbased.h>
 
 #import <OGObject/OGObject.h>
 
-@class OGDBusConnection;
 @class OGCancellable;
 @class OGNotification;
+@class OGDBusConnection;
 
 /**
  * `GApplication` is the core class for application support.
@@ -602,7 +602,7 @@
  * call to g_application_hold().
  *
  */
-- (void)decreaseCount;
+- (void)release;
 
 /**
  * Runs the application.

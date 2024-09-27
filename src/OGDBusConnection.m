@@ -7,12 +7,12 @@
 #import "OGDBusConnection.h"
 
 #import "OGDBusAuthObserver.h"
+#import "OGCancellable.h"
 #import "OGUnixFDList.h"
 #import "OGDBusMessage.h"
-#import "OGMenuModel.h"
 #import "OGCredentials.h"
+#import "OGMenuModel.h"
 #import "OGIOStream.h"
-#import "OGCancellable.h"
 
 @implementation OGDBusConnection
 
@@ -30,7 +30,7 @@
 {
 	GError* err = NULL;
 
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_connection_new_finish(res, &err));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_finish(res, &err), GDBusConnection, GDBusConnection);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -56,7 +56,7 @@
 {
 	GError* err = NULL;
 
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_connection_new_for_address_finish(res, &err));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_for_address_finish(res, &err), GDBusConnection, GDBusConnection);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -82,7 +82,7 @@
 {
 	GError* err = NULL;
 
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_connection_new_for_address_sync([address UTF8String], flags, [observer castedGObject], [cancellable castedGObject], &err));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_for_address_sync([address UTF8String], flags, [observer castedGObject], [cancellable castedGObject], &err), GDBusConnection, GDBusConnection);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -108,7 +108,7 @@
 {
 	GError* err = NULL;
 
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_connection_new_sync([stream castedGObject], [guid UTF8String], flags, [observer castedGObject], [cancellable castedGObject], &err));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_sync([stream castedGObject], [guid UTF8String], flags, [observer castedGObject], [cancellable castedGObject], &err), GDBusConnection, GDBusConnection);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -132,7 +132,7 @@
 
 - (GDBusConnection*)castedGObject
 {
-	return G_DBUS_CONNECTION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusConnection, GDBusConnection);
 }
 
 - (guint)addFilterWithFilterFunction:(GDBusMessageFilterFunction)filterFunction userData:(gpointer)userData userDataFreeFunc:(GDestroyNotify)userDataFreeFunc
@@ -365,7 +365,7 @@
 
 - (OGCredentials*)peerCredentials
 {
-	GCredentials* gobjectValue = G_CREDENTIALS(g_dbus_connection_get_peer_credentials([self castedGObject]));
+	GCredentials* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_get_peer_credentials([self castedGObject]), GCredentials, GCredentials);
 
 	OGCredentials* returnValue = [OGCredentials withGObject:gobjectValue];
 	return returnValue;
@@ -373,7 +373,7 @@
 
 - (OGIOStream*)stream
 {
-	GIOStream* gobjectValue = G_IO_STREAM(g_dbus_connection_get_stream([self castedGObject]));
+	GIOStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_get_stream([self castedGObject]), GIOStream, GIOStream);
 
 	OGIOStream* returnValue = [OGIOStream withGObject:gobjectValue];
 	return returnValue;
@@ -468,7 +468,7 @@
 {
 	GError* err = NULL;
 
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_connection_send_message_with_reply_finish([self castedGObject], res, &err));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_send_message_with_reply_finish([self castedGObject], res, &err), GDBusMessage, GDBusMessage);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -488,7 +488,7 @@
 {
 	GError* err = NULL;
 
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_connection_send_message_with_reply_sync([self castedGObject], [message castedGObject], flags, timeoutMsec, outSerial, [cancellable castedGObject], &err));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_send_message_with_reply_sync([self castedGObject], [message castedGObject], flags, timeoutMsec, outSerial, [cancellable castedGObject], &err), GDBusMessage, GDBusMessage);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

@@ -12,7 +12,7 @@
 
 + (OGDBusMenuModel*)getWithConnection:(OGDBusConnection*)connection busName:(OFString*)busName objectPath:(OFString*)objectPath
 {
-	GDBusMenuModel* gobjectValue = G_DBUS_MENU_MODEL(g_dbus_menu_model_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]));
+	GDBusMenuModel* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_menu_model_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]), GDBusMenuModel, GDBusMenuModel);
 
 	OGDBusMenuModel* returnValue = [OGDBusMenuModel withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -22,7 +22,7 @@
 
 - (GDBusMenuModel*)castedGObject
 {
-	return G_DBUS_MENU_MODEL([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusMenuModel, GDBusMenuModel);
 }
 
 

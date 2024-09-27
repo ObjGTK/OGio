@@ -12,7 +12,7 @@
 
 - (GDBusInterfaceSkeleton*)castedGObject
 {
-	return G_DBUS_INTERFACE_SKELETON([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusInterfaceSkeleton, GDBusInterfaceSkeleton);
 }
 
 - (bool)exportWithConnection:(OGDBusConnection*)connection objectPath:(OFString*)objectPath
@@ -37,7 +37,7 @@
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_interface_skeleton_get_connection([self castedGObject]));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_interface_skeleton_get_connection([self castedGObject]), GDBusConnection, GDBusConnection);
 
 	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	return returnValue;

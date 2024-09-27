@@ -10,7 +10,7 @@
 
 - (instancetype)init:(bool)allowed
 {
-	GSimplePermission* gobjectValue = G_SIMPLE_PERMISSION(g_simple_permission_new(allowed));
+	GSimplePermission* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_permission_new(allowed), GSimplePermission, GSimplePermission);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GSimplePermission*)castedGObject
 {
-	return G_SIMPLE_PERMISSION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimplePermission, GSimplePermission);
 }
 
 

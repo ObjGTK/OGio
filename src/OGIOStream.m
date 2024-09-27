@@ -7,8 +7,8 @@
 #import "OGIOStream.h"
 
 #import "OGCancellable.h"
-#import "OGInputStream.h"
 #import "OGOutputStream.h"
+#import "OGInputStream.h"
 
 @implementation OGIOStream
 
@@ -29,7 +29,7 @@
 
 - (GIOStream*)castedGObject
 {
-	return G_IO_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GIOStream, GIOStream);
 }
 
 - (void)clearPending
@@ -74,7 +74,7 @@
 
 - (OGInputStream*)inputStream
 {
-	GInputStream* gobjectValue = G_INPUT_STREAM(g_io_stream_get_input_stream([self castedGObject]));
+	GInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_io_stream_get_input_stream([self castedGObject]), GInputStream, GInputStream);
 
 	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
 	return returnValue;
@@ -82,7 +82,7 @@
 
 - (OGOutputStream*)outputStream
 {
-	GOutputStream* gobjectValue = G_OUTPUT_STREAM(g_io_stream_get_output_stream([self castedGObject]));
+	GOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_io_stream_get_output_stream([self castedGObject]), GOutputStream, GOutputStream);
 
 	OGOutputStream* returnValue = [OGOutputStream withGObject:gobjectValue];
 	return returnValue;

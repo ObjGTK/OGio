@@ -14,7 +14,7 @@
 {
 	GError* err = NULL;
 
-	GInetAddressMask* gobjectValue = G_INET_ADDRESS_MASK(g_inet_address_mask_new([addr castedGObject], length, &err));
+	GInetAddressMask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_mask_new([addr castedGObject], length, &err), GInetAddressMask, GInetAddressMask);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -40,7 +40,7 @@
 {
 	GError* err = NULL;
 
-	GInetAddressMask* gobjectValue = G_INET_ADDRESS_MASK(g_inet_address_mask_new_from_string([maskString UTF8String], &err));
+	GInetAddressMask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_mask_new_from_string([maskString UTF8String], &err), GInetAddressMask, GInetAddressMask);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -64,7 +64,7 @@
 
 - (GInetAddressMask*)castedGObject
 {
-	return G_INET_ADDRESS_MASK([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GInetAddressMask, GInetAddressMask);
 }
 
 - (bool)equal:(OGInetAddressMask*)mask2
@@ -76,7 +76,7 @@
 
 - (OGInetAddress*)address
 {
-	GInetAddress* gobjectValue = G_INET_ADDRESS(g_inet_address_mask_get_address([self castedGObject]));
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_mask_get_address([self castedGObject]), GInetAddress, GInetAddress);
 
 	OGInetAddress* returnValue = [OGInetAddress withGObject:gobjectValue];
 	return returnValue;

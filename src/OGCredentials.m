@@ -10,7 +10,7 @@
 
 - (instancetype)init
 {
-	GCredentials* gobjectValue = G_CREDENTIALS(g_credentials_new());
+	GCredentials* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_credentials_new(), GCredentials, GCredentials);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GCredentials*)castedGObject
 {
-	return G_CREDENTIALS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GCredentials, GCredentials);
 }
 
 - (gpointer)native:(GCredentialsType)nativeType

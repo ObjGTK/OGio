@@ -6,14 +6,14 @@
 
 #import "OGOutputStream.h"
 
-#import "OGCancellable.h"
 #import "OGInputStream.h"
+#import "OGCancellable.h"
 
 @implementation OGOutputStream
 
 - (GOutputStream*)castedGObject
 {
-	return G_OUTPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GOutputStream, GOutputStream);
 }
 
 - (void)clearPending

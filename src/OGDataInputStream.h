@@ -6,8 +6,8 @@
 
 #import "OGBufferedInputStream.h"
 
-@class OGCancellable;
 @class OGInputStream;
+@class OGCancellable;
 
 /**
  * Data input stream implements [class@Gio.InputStream] and includes functions

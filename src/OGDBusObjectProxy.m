@@ -12,7 +12,7 @@
 
 - (instancetype)initWithConnection:(OGDBusConnection*)connection objectPath:(OFString*)objectPath
 {
-	GDBusObjectProxy* gobjectValue = G_DBUS_OBJECT_PROXY(g_dbus_object_proxy_new([connection castedGObject], [objectPath UTF8String]));
+	GDBusObjectProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_proxy_new([connection castedGObject], [objectPath UTF8String]), GDBusObjectProxy, GDBusObjectProxy);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,12 +28,12 @@
 
 - (GDBusObjectProxy*)castedGObject
 {
-	return G_DBUS_OBJECT_PROXY([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusObjectProxy, GDBusObjectProxy);
 }
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_object_proxy_get_connection([self castedGObject]));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_proxy_get_connection([self castedGObject]), GDBusConnection, GDBusConnection);
 
 	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	return returnValue;

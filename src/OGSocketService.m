@@ -10,7 +10,7 @@
 
 - (instancetype)init
 {
-	GSocketService* gobjectValue = G_SOCKET_SERVICE(g_socket_service_new());
+	GSocketService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_service_new(), GSocketService, GSocketService);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GSocketService*)castedGObject
 {
-	return G_SOCKET_SERVICE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocketService, GSocketService);
 }
 
 - (bool)isActive

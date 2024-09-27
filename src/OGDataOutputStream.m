@@ -13,7 +13,7 @@
 
 - (instancetype)init:(OGOutputStream*)baseStream
 {
-	GDataOutputStream* gobjectValue = G_DATA_OUTPUT_STREAM(g_data_output_stream_new([baseStream castedGObject]));
+	GDataOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_data_output_stream_new([baseStream castedGObject]), GDataOutputStream, GDataOutputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -29,7 +29,7 @@
 
 - (GDataOutputStream*)castedGObject
 {
-	return G_DATA_OUTPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDataOutputStream, GDataOutputStream);
 }
 
 - (GDataStreamByteOrder)byteOrder

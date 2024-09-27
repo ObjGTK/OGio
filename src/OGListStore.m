@@ -10,7 +10,7 @@
 
 - (instancetype)init:(GType)itemType
 {
-	GListStore* gobjectValue = G_LIST_STORE(g_list_store_new(itemType));
+	GListStore* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_list_store_new(itemType), GListStore, GListStore);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GListStore*)castedGObject
 {
-	return G_LIST_STORE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GListStore, GListStore);
 }
 
 - (void)append:(gpointer)item

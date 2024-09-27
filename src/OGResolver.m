@@ -6,8 +6,8 @@
 
 #import "OGResolver.h"
 
-#import "OGCancellable.h"
 #import "OGInetAddress.h"
+#import "OGCancellable.h"
 
 @implementation OGResolver
 
@@ -23,7 +23,7 @@
 
 + (OGResolver*)default
 {
-	GResolver* gobjectValue = G_RESOLVER(g_resolver_get_default());
+	GResolver* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_resolver_get_default(), GResolver, GResolver);
 
 	OGResolver* returnValue = [OGResolver withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -33,7 +33,7 @@
 
 - (GResolver*)castedGObject
 {
-	return G_RESOLVER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GResolver, GResolver);
 }
 
 - (unsigned)timeout

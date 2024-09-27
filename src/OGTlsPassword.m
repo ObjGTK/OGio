@@ -10,7 +10,7 @@
 
 - (instancetype)initWithFlags:(GTlsPasswordFlags)flags description:(OFString*)description
 {
-	GTlsPassword* gobjectValue = G_TLS_PASSWORD(g_tls_password_new(flags, [description UTF8String]));
+	GTlsPassword* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_password_new(flags, [description UTF8String]), GTlsPassword, GTlsPassword);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GTlsPassword*)castedGObject
 {
-	return G_TLS_PASSWORD([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTlsPassword, GTlsPassword);
 }
 
 - (OFString*)description

@@ -12,7 +12,7 @@
 
 - (GInputStream*)castedGObject
 {
-	return G_INPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GInputStream, GInputStream);
 }
 
 - (void)clearPending

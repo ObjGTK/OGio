@@ -12,7 +12,7 @@
 
 - (instancetype)init
 {
-	GUnixFDMessage* gobjectValue = G_UNIX_FD_MESSAGE(g_unix_fd_message_new());
+	GUnixFDMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_message_new(), GUnixFDMessage, GUnixFDMessage);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,7 +28,7 @@
 
 - (instancetype)initWithFdList:(OGUnixFDList*)fdList
 {
-	GUnixFDMessage* gobjectValue = G_UNIX_FD_MESSAGE(g_unix_fd_message_new_with_fd_list([fdList castedGObject]));
+	GUnixFDMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_message_new_with_fd_list([fdList castedGObject]), GUnixFDMessage, GUnixFDMessage);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -44,7 +44,7 @@
 
 - (GUnixFDMessage*)castedGObject
 {
-	return G_UNIX_FD_MESSAGE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixFDMessage, GUnixFDMessage);
 }
 
 - (bool)appendFd:(gint)fd
@@ -64,7 +64,7 @@
 
 - (OGUnixFDList*)fdList
 {
-	GUnixFDList* gobjectValue = G_UNIX_FD_LIST(g_unix_fd_message_get_fd_list([self castedGObject]));
+	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_message_get_fd_list([self castedGObject]), GUnixFDList, GUnixFDList);
 
 	OGUnixFDList* returnValue = [OGUnixFDList withGObject:gobjectValue];
 	return returnValue;

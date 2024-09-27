@@ -10,7 +10,7 @@
 
 + (OGAppInfoMonitor*)get
 {
-	GAppInfoMonitor* gobjectValue = G_APP_INFO_MONITOR(g_app_info_monitor_get());
+	GAppInfoMonitor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_app_info_monitor_get(), GAppInfoMonitor, GAppInfoMonitor);
 
 	OGAppInfoMonitor* returnValue = [OGAppInfoMonitor withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -20,7 +20,7 @@
 
 - (GAppInfoMonitor*)castedGObject
 {
-	return G_APP_INFO_MONITOR([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GAppInfoMonitor, GAppInfoMonitor);
 }
 
 

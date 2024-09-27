@@ -27,7 +27,7 @@
 
 - (instancetype)init
 {
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new());
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new(), GDBusMessage, GDBusMessage);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -45,7 +45,7 @@
 {
 	GError* err = NULL;
 
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new_from_blob(blob, blobLen, capabilities, &err));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_from_blob(blob, blobLen, capabilities, &err), GDBusMessage, GDBusMessage);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -69,7 +69,7 @@
 
 - (instancetype)initMethodCallWithName:(OFString*)name path:(OFString*)path interface:(OFString*)interface method:(OFString*)method
 {
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new_method_call([name UTF8String], [path UTF8String], [interface UTF8String], [method UTF8String]));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_call([name UTF8String], [path UTF8String], [interface UTF8String], [method UTF8String]), GDBusMessage, GDBusMessage);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -85,7 +85,7 @@
 
 - (instancetype)initSignalWithPath:(OFString*)path interface:(OFString*)interface signal:(OFString*)signal
 {
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new_signal([path UTF8String], [interface UTF8String], [signal UTF8String]));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_signal([path UTF8String], [interface UTF8String], [signal UTF8String]), GDBusMessage, GDBusMessage);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -101,14 +101,14 @@
 
 - (GDBusMessage*)castedGObject
 {
-	return G_DBUS_MESSAGE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusMessage, GDBusMessage);
 }
 
 - (OGDBusMessage*)copy
 {
 	GError* err = NULL;
 
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_copy([self castedGObject], &err));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_copy([self castedGObject], &err), GDBusMessage, GDBusMessage);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -268,7 +268,7 @@
 
 - (OGUnixFDList*)unixFdList
 {
-	GUnixFDList* gobjectValue = G_UNIX_FD_LIST(g_dbus_message_get_unix_fd_list([self castedGObject]));
+	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_get_unix_fd_list([self castedGObject]), GUnixFDList, GUnixFDList);
 
 	OGUnixFDList* returnValue = [OGUnixFDList withGObject:gobjectValue];
 	return returnValue;
@@ -281,7 +281,7 @@
 
 - (OGDBusMessage*)newMethodErrorLiteralWithErrorName:(OFString*)errorName errorMessage:(OFString*)errorMessage
 {
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new_method_error_literal([self castedGObject], [errorName UTF8String], [errorMessage UTF8String]));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_error_literal([self castedGObject], [errorName UTF8String], [errorMessage UTF8String]), GDBusMessage, GDBusMessage);
 
 	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -291,7 +291,7 @@
 
 - (OGDBusMessage*)newMethodErrorValistWithErrorName:(OFString*)errorName errorMessageFormat:(OFString*)errorMessageFormat varArgs:(va_list)varArgs
 {
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new_method_error_valist([self castedGObject], [errorName UTF8String], [errorMessageFormat UTF8String], varArgs));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_error_valist([self castedGObject], [errorName UTF8String], [errorMessageFormat UTF8String], varArgs), GDBusMessage, GDBusMessage);
 
 	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -301,7 +301,7 @@
 
 - (OGDBusMessage*)newMethodReply
 {
-	GDBusMessage* gobjectValue = G_DBUS_MESSAGE(g_dbus_message_new_method_reply([self castedGObject]));
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_reply([self castedGObject]), GDBusMessage, GDBusMessage);
 
 	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
 	g_object_unref(gobjectValue);

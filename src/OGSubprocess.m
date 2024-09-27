@@ -16,7 +16,7 @@
 {
 	GError* err = NULL;
 
-	GSubprocess* gobjectValue = G_SUBPROCESS(g_subprocess_newv(argv, flags, &err));
+	GSubprocess* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_newv(argv, flags, &err), GSubprocess, GSubprocess);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -40,7 +40,7 @@
 
 - (GSubprocess*)castedGObject
 {
-	return G_SUBPROCESS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSubprocess, GSubprocess);
 }
 
 - (bool)communicateWithStdinBuf:(GBytes*)stdinBuf cancellable:(OGCancellable*)cancellable stdoutBuf:(GBytes**)stdoutBuf stderrBuf:(GBytes**)stderrBuf
@@ -156,7 +156,7 @@
 
 - (OGInputStream*)stderrPipe
 {
-	GInputStream* gobjectValue = G_INPUT_STREAM(g_subprocess_get_stderr_pipe([self castedGObject]));
+	GInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_get_stderr_pipe([self castedGObject]), GInputStream, GInputStream);
 
 	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
 	return returnValue;
@@ -164,7 +164,7 @@
 
 - (OGOutputStream*)stdinPipe
 {
-	GOutputStream* gobjectValue = G_OUTPUT_STREAM(g_subprocess_get_stdin_pipe([self castedGObject]));
+	GOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_get_stdin_pipe([self castedGObject]), GOutputStream, GOutputStream);
 
 	OGOutputStream* returnValue = [OGOutputStream withGObject:gobjectValue];
 	return returnValue;
@@ -172,7 +172,7 @@
 
 - (OGInputStream*)stdoutPipe
 {
-	GInputStream* gobjectValue = G_INPUT_STREAM(g_subprocess_get_stdout_pipe([self castedGObject]));
+	GInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_get_stdout_pipe([self castedGObject]), GInputStream, GInputStream);
 
 	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
 	return returnValue;

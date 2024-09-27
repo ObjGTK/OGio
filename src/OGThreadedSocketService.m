@@ -10,7 +10,7 @@
 
 - (instancetype)init:(int)maxThreads
 {
-	GThreadedSocketService* gobjectValue = G_THREADED_SOCKET_SERVICE(g_threaded_socket_service_new(maxThreads));
+	GThreadedSocketService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_threaded_socket_service_new(maxThreads), GThreadedSocketService, GThreadedSocketService);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GThreadedSocketService*)castedGObject
 {
-	return G_THREADED_SOCKET_SERVICE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GThreadedSocketService, GThreadedSocketService);
 }
 
 

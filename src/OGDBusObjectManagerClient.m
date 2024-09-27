@@ -25,7 +25,7 @@
 {
 	GError* err = NULL;
 
-	GDBusObjectManagerClient* gobjectValue = G_DBUS_OBJECT_MANAGER_CLIENT(g_dbus_object_manager_client_new_finish(res, &err));
+	GDBusObjectManagerClient* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_manager_client_new_finish(res, &err), GDBusObjectManagerClient, GDBusObjectManagerClient);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -51,7 +51,7 @@
 {
 	GError* err = NULL;
 
-	GDBusObjectManagerClient* gobjectValue = G_DBUS_OBJECT_MANAGER_CLIENT(g_dbus_object_manager_client_new_for_bus_finish(res, &err));
+	GDBusObjectManagerClient* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_manager_client_new_for_bus_finish(res, &err), GDBusObjectManagerClient, GDBusObjectManagerClient);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -77,7 +77,7 @@
 {
 	GError* err = NULL;
 
-	GDBusObjectManagerClient* gobjectValue = G_DBUS_OBJECT_MANAGER_CLIENT(g_dbus_object_manager_client_new_for_bus_sync(busType, flags, [name UTF8String], [objectPath UTF8String], getProxyTypeFunc, getProxyTypeUserData, getProxyTypeDestroyNotify, [cancellable castedGObject], &err));
+	GDBusObjectManagerClient* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_manager_client_new_for_bus_sync(busType, flags, [name UTF8String], [objectPath UTF8String], getProxyTypeFunc, getProxyTypeUserData, getProxyTypeDestroyNotify, [cancellable castedGObject], &err), GDBusObjectManagerClient, GDBusObjectManagerClient);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -103,7 +103,7 @@
 {
 	GError* err = NULL;
 
-	GDBusObjectManagerClient* gobjectValue = G_DBUS_OBJECT_MANAGER_CLIENT(g_dbus_object_manager_client_new_sync([connection castedGObject], flags, [name UTF8String], [objectPath UTF8String], getProxyTypeFunc, getProxyTypeUserData, getProxyTypeDestroyNotify, [cancellable castedGObject], &err));
+	GDBusObjectManagerClient* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_manager_client_new_sync([connection castedGObject], flags, [name UTF8String], [objectPath UTF8String], getProxyTypeFunc, getProxyTypeUserData, getProxyTypeDestroyNotify, [cancellable castedGObject], &err), GDBusObjectManagerClient, GDBusObjectManagerClient);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -127,12 +127,12 @@
 
 - (GDBusObjectManagerClient*)castedGObject
 {
-	return G_DBUS_OBJECT_MANAGER_CLIENT([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusObjectManagerClient, GDBusObjectManagerClient);
 }
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_object_manager_client_get_connection([self castedGObject]));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_manager_client_get_connection([self castedGObject]), GDBusConnection, GDBusConnection);
 
 	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	return returnValue;

@@ -10,7 +10,7 @@
 
 - (instancetype)init
 {
-	GMountOperation* gobjectValue = G_MOUNT_OPERATION(g_mount_operation_new());
+	GMountOperation* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_mount_operation_new(), GMountOperation, GMountOperation);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GMountOperation*)castedGObject
 {
-	return G_MOUNT_OPERATION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMountOperation, GMountOperation);
 }
 
 - (bool)anonymous

@@ -10,7 +10,7 @@
 
 - (instancetype)initWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain
 {
-	GNetworkService* gobjectValue = G_NETWORK_SERVICE(g_network_service_new([service UTF8String], [protocol UTF8String], [domain UTF8String]));
+	GNetworkService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_service_new([service UTF8String], [protocol UTF8String], [domain UTF8String]), GNetworkService, GNetworkService);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GNetworkService*)castedGObject
 {
-	return G_NETWORK_SERVICE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GNetworkService, GNetworkService);
 }
 
 - (OFString*)domain

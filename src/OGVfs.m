@@ -10,7 +10,7 @@
 
 + (OGVfs*)default
 {
-	GVfs* gobjectValue = G_VFS(g_vfs_get_default());
+	GVfs* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_vfs_get_default(), GVfs, GVfs);
 
 	OGVfs* returnValue = [OGVfs withGObject:gobjectValue];
 	return returnValue;
@@ -18,7 +18,7 @@
 
 + (OGVfs*)local
 {
-	GVfs* gobjectValue = G_VFS(g_vfs_get_local());
+	GVfs* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_vfs_get_local(), GVfs, GVfs);
 
 	OGVfs* returnValue = [OGVfs withGObject:gobjectValue];
 	return returnValue;
@@ -26,7 +26,7 @@
 
 - (GVfs*)castedGObject
 {
-	return G_VFS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GVfs, GVfs);
 }
 
 - (GFile*)fileForPath:(OFString*)path

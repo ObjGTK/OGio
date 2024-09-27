@@ -10,7 +10,7 @@
 
 - (instancetype)initWithName:(OFString*)name object:(gpointer)object propertyName:(OFString*)propertyName
 {
-	GPropertyAction* gobjectValue = G_PROPERTY_ACTION(g_property_action_new([name UTF8String], object, [propertyName UTF8String]));
+	GPropertyAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_property_action_new([name UTF8String], object, [propertyName UTF8String]), GPropertyAction, GPropertyAction);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GPropertyAction*)castedGObject
 {
-	return G_PROPERTY_ACTION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GPropertyAction, GPropertyAction);
 }
 
 

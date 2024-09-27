@@ -6,8 +6,8 @@
 
 #import "OGDBusServer.h"
 
-#import "OGDBusAuthObserver.h"
 #import "OGCancellable.h"
+#import "OGDBusAuthObserver.h"
 
 @implementation OGDBusServer
 
@@ -15,7 +15,7 @@
 {
 	GError* err = NULL;
 
-	GDBusServer* gobjectValue = G_DBUS_SERVER(g_dbus_server_new_sync([address UTF8String], flags, [guid UTF8String], [observer castedGObject], [cancellable castedGObject], &err));
+	GDBusServer* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_server_new_sync([address UTF8String], flags, [guid UTF8String], [observer castedGObject], [cancellable castedGObject], &err), GDBusServer, GDBusServer);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -39,7 +39,7 @@
 
 - (GDBusServer*)castedGObject
 {
-	return G_DBUS_SERVER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusServer, GDBusServer);
 }
 
 - (OFString*)clientAddress

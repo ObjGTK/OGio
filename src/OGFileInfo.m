@@ -10,7 +10,7 @@
 
 - (instancetype)init
 {
-	GFileInfo* gobjectValue = G_FILE_INFO(g_file_info_new());
+	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_info_new(), GFileInfo, GFileInfo);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GFileInfo*)castedGObject
 {
-	return G_FILE_INFO([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileInfo, GFileInfo);
 }
 
 - (void)clearStatus
@@ -41,7 +41,7 @@
 
 - (OGFileInfo*)dup
 {
-	GFileInfo* gobjectValue = G_FILE_INFO(g_file_info_dup([self castedGObject]));
+	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_info_dup([self castedGObject]), GFileInfo, GFileInfo);
 
 	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
 	g_object_unref(gobjectValue);

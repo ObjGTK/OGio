@@ -10,7 +10,7 @@
 
 - (instancetype)init
 {
-	GSimpleActionGroup* gobjectValue = G_SIMPLE_ACTION_GROUP(g_simple_action_group_new());
+	GSimpleActionGroup* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_group_new(), GSimpleActionGroup, GSimpleActionGroup);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GSimpleActionGroup*)castedGObject
 {
-	return G_SIMPLE_ACTION_GROUP([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleActionGroup, GSimpleActionGroup);
 }
 
 - (void)addEntriesWithEntries:(const GActionEntry*)entries nentries:(gint)nentries userData:(gpointer)userData

@@ -13,14 +13,14 @@
 
 - (GSocketAddressEnumerator*)castedGObject
 {
-	return G_SOCKET_ADDRESS_ENUMERATOR([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocketAddressEnumerator, GSocketAddressEnumerator);
 }
 
 - (OGSocketAddress*)next:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = G_SOCKET_ADDRESS(g_socket_address_enumerator_next([self castedGObject], [cancellable castedGObject], &err));
+	GSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_address_enumerator_next([self castedGObject], [cancellable castedGObject], &err), GSocketAddress, GSocketAddress);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -45,7 +45,7 @@
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = G_SOCKET_ADDRESS(g_socket_address_enumerator_next_finish([self castedGObject], result, &err));
+	GSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_address_enumerator_next_finish([self castedGObject], result, &err), GSocketAddress, GSocketAddress);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

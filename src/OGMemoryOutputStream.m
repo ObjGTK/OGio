@@ -10,7 +10,7 @@
 
 - (instancetype)initWithData:(gpointer)data size:(gsize)size reallocFunction:(GReallocFunc)reallocFunction destroyFunction:(GDestroyNotify)destroyFunction
 {
-	GMemoryOutputStream* gobjectValue = G_MEMORY_OUTPUT_STREAM(g_memory_output_stream_new(data, size, reallocFunction, destroyFunction));
+	GMemoryOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_output_stream_new(data, size, reallocFunction, destroyFunction), GMemoryOutputStream, GMemoryOutputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (instancetype)initResizable
 {
-	GMemoryOutputStream* gobjectValue = G_MEMORY_OUTPUT_STREAM(g_memory_output_stream_new_resizable());
+	GMemoryOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_output_stream_new_resizable(), GMemoryOutputStream, GMemoryOutputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -42,7 +42,7 @@
 
 - (GMemoryOutputStream*)castedGObject
 {
-	return G_MEMORY_OUTPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMemoryOutputStream, GMemoryOutputStream);
 }
 
 - (gpointer)data

@@ -36,7 +36,7 @@
 
 - (instancetype)init:(OFString*)schemaId
 {
-	GSettings* gobjectValue = G_SETTINGS(g_settings_new([schemaId UTF8String]));
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new([schemaId UTF8String]), GSettings, GSettings);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -52,7 +52,7 @@
 
 - (instancetype)initFullWithSchema:(GSettingsSchema*)schema backend:(OGSettingsBackend*)backend path:(OFString*)path
 {
-	GSettings* gobjectValue = G_SETTINGS(g_settings_new_full(schema, [backend castedGObject], [path UTF8String]));
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_full(schema, [backend castedGObject], [path UTF8String]), GSettings, GSettings);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -68,7 +68,7 @@
 
 - (instancetype)initWithBackendWithSchemaId:(OFString*)schemaId backend:(OGSettingsBackend*)backend
 {
-	GSettings* gobjectValue = G_SETTINGS(g_settings_new_with_backend([schemaId UTF8String], [backend castedGObject]));
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_backend([schemaId UTF8String], [backend castedGObject]), GSettings, GSettings);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -84,7 +84,7 @@
 
 - (instancetype)initWithBackendAndPathWithSchemaId:(OFString*)schemaId backend:(OGSettingsBackend*)backend path:(OFString*)path
 {
-	GSettings* gobjectValue = G_SETTINGS(g_settings_new_with_backend_and_path([schemaId UTF8String], [backend castedGObject], [path UTF8String]));
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_backend_and_path([schemaId UTF8String], [backend castedGObject], [path UTF8String]), GSettings, GSettings);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -100,7 +100,7 @@
 
 - (instancetype)initWithPathWithSchemaId:(OFString*)schemaId path:(OFString*)path
 {
-	GSettings* gobjectValue = G_SETTINGS(g_settings_new_with_path([schemaId UTF8String], [path UTF8String]));
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_path([schemaId UTF8String], [path UTF8String]), GSettings, GSettings);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -116,7 +116,7 @@
 
 - (GSettings*)castedGObject
 {
-	return G_SETTINGS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSettings, GSettings);
 }
 
 - (void)apply
@@ -160,7 +160,7 @@
 
 - (OGSettings*)child:(OFString*)name
 {
-	GSettings* gobjectValue = G_SETTINGS(g_settings_get_child([self castedGObject], [name UTF8String]));
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_get_child([self castedGObject], [name UTF8String]), GSettings, GSettings);
 
 	OGSettings* returnValue = [OGSettings withGObject:gobjectValue];
 	g_object_unref(gobjectValue);

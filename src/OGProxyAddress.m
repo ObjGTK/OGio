@@ -13,7 +13,7 @@
 
 - (instancetype)initWithInetaddr:(OGInetAddress*)inetaddr port:(guint16)port protocol:(OFString*)protocol destHostname:(OFString*)destHostname destPort:(guint16)destPort username:(OFString*)username password:(OFString*)password
 {
-	GProxyAddress* gobjectValue = G_PROXY_ADDRESS(g_proxy_address_new([inetaddr castedGObject], port, [protocol UTF8String], [destHostname UTF8String], destPort, [username UTF8String], [password UTF8String]));
+	GProxyAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_proxy_address_new([inetaddr castedGObject], port, [protocol UTF8String], [destHostname UTF8String], destPort, [username UTF8String], [password UTF8String]), GProxyAddress, GProxyAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -29,7 +29,7 @@
 
 - (GProxyAddress*)castedGObject
 {
-	return G_PROXY_ADDRESS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GProxyAddress, GProxyAddress);
 }
 
 - (OFString*)destinationHostname

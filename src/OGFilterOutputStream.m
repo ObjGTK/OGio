@@ -10,12 +10,12 @@
 
 - (GFilterOutputStream*)castedGObject
 {
-	return G_FILTER_OUTPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFilterOutputStream, GFilterOutputStream);
 }
 
 - (OGOutputStream*)baseStream
 {
-	GOutputStream* gobjectValue = G_OUTPUT_STREAM(g_filter_output_stream_get_base_stream([self castedGObject]));
+	GOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_filter_output_stream_get_base_stream([self castedGObject]), GOutputStream, GOutputStream);
 
 	OGOutputStream* returnValue = [OGOutputStream withGObject:gobjectValue];
 	return returnValue;

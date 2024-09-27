@@ -13,7 +13,7 @@
 
 - (instancetype)init
 {
-	GDBusAuthObserver* gobjectValue = G_DBUS_AUTH_OBSERVER(g_dbus_auth_observer_new());
+	GDBusAuthObserver* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_auth_observer_new(), GDBusAuthObserver, GDBusAuthObserver);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -29,7 +29,7 @@
 
 - (GDBusAuthObserver*)castedGObject
 {
-	return G_DBUS_AUTH_OBSERVER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusAuthObserver, GDBusAuthObserver);
 }
 
 - (bool)allowMechanism:(OFString*)mechanism

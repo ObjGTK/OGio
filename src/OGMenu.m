@@ -12,7 +12,7 @@
 
 - (instancetype)init
 {
-	GMenu* gobjectValue = G_MENU(g_menu_new());
+	GMenu* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_new(), GMenu, GMenu);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,7 +28,7 @@
 
 - (GMenu*)castedGObject
 {
-	return G_MENU([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMenu, GMenu);
 }
 
 - (void)appendWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction

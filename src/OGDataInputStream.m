@@ -6,14 +6,14 @@
 
 #import "OGDataInputStream.h"
 
-#import "OGCancellable.h"
 #import "OGInputStream.h"
+#import "OGCancellable.h"
 
 @implementation OGDataInputStream
 
 - (instancetype)init:(OGInputStream*)baseStream
 {
-	GDataInputStream* gobjectValue = G_DATA_INPUT_STREAM(g_data_input_stream_new([baseStream castedGObject]));
+	GDataInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_data_input_stream_new([baseStream castedGObject]), GDataInputStream, GDataInputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -29,7 +29,7 @@
 
 - (GDataInputStream*)castedGObject
 {
-	return G_DATA_INPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDataInputStream, GDataInputStream);
 }
 
 - (GDataStreamByteOrder)byteOrder

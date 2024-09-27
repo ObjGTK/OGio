@@ -10,7 +10,7 @@
 
 - (instancetype)init
 {
-	GFilenameCompleter* gobjectValue = G_FILENAME_COMPLETER(g_filename_completer_new());
+	GFilenameCompleter* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_filename_completer_new(), GFilenameCompleter, GFilenameCompleter);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GFilenameCompleter*)castedGObject
 {
-	return G_FILENAME_COMPLETER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFilenameCompleter, GFilenameCompleter);
 }
 
 - (char*)completionSuffix:(OFString*)initialText

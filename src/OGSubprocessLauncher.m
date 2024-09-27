@@ -12,7 +12,7 @@
 
 - (instancetype)init:(GSubprocessFlags)flags
 {
-	GSubprocessLauncher* gobjectValue = G_SUBPROCESS_LAUNCHER(g_subprocess_launcher_new(flags));
+	GSubprocessLauncher* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_launcher_new(flags), GSubprocessLauncher, GSubprocessLauncher);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,7 +28,7 @@
 
 - (GSubprocessLauncher*)castedGObject
 {
-	return G_SUBPROCESS_LAUNCHER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSubprocessLauncher, GSubprocessLauncher);
 }
 
 - (void)close
@@ -88,7 +88,7 @@
 {
 	GError* err = NULL;
 
-	GSubprocess* gobjectValue = G_SUBPROCESS(g_subprocess_launcher_spawnv([self castedGObject], argv, &err));
+	GSubprocess* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_launcher_spawnv([self castedGObject], argv, &err), GSubprocess, GSubprocess);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

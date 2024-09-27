@@ -10,7 +10,7 @@
 
 - (GThreadedResolver*)castedGObject
 {
-	return G_THREADED_RESOLVER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GThreadedResolver, GThreadedResolver);
 }
 
 

@@ -6,8 +6,8 @@
 
 #import "OGTcpConnection.h"
 
-@class OGSocket;
 @class OGSocketConnection;
+@class OGSocket;
 @class OGIOStream;
 
 /**

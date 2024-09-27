@@ -12,7 +12,7 @@
 {
 	GError* err = NULL;
 
-	GCharsetConverter* gobjectValue = G_CHARSET_CONVERTER(g_charset_converter_new([toCharset UTF8String], [fromCharset UTF8String], &err));
+	GCharsetConverter* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_charset_converter_new([toCharset UTF8String], [fromCharset UTF8String], &err), GCharsetConverter, GCharsetConverter);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -36,7 +36,7 @@
 
 - (GCharsetConverter*)castedGObject
 {
-	return G_CHARSET_CONVERTER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GCharsetConverter, GCharsetConverter);
 }
 
 - (guint)numFallbacks

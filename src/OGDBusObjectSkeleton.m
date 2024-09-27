@@ -12,7 +12,7 @@
 
 - (instancetype)init:(OFString*)objectPath
 {
-	GDBusObjectSkeleton* gobjectValue = G_DBUS_OBJECT_SKELETON(g_dbus_object_skeleton_new([objectPath UTF8String]));
+	GDBusObjectSkeleton* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_skeleton_new([objectPath UTF8String]), GDBusObjectSkeleton, GDBusObjectSkeleton);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,7 +28,7 @@
 
 - (GDBusObjectSkeleton*)castedGObject
 {
-	return G_DBUS_OBJECT_SKELETON([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusObjectSkeleton, GDBusObjectSkeleton);
 }
 
 - (void)addInterface:(OGDBusInterfaceSkeleton*)interface

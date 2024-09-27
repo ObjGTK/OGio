@@ -6,8 +6,8 @@
 
 #import "OGFilterInputStream.h"
 
-@class OGInputStream;
 @class OGCancellable;
+@class OGInputStream;
 
 /**
  * Buffered input stream implements #GFilterInputStream and provides

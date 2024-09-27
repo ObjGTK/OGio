@@ -6,14 +6,14 @@
 
 #import "OGFileOutputStream.h"
 
-#import "OGFileInfo.h"
 #import "OGCancellable.h"
+#import "OGFileInfo.h"
 
 @implementation OGFileOutputStream
 
 - (GFileOutputStream*)castedGObject
 {
-	return G_FILE_OUTPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileOutputStream, GFileOutputStream);
 }
 
 - (char*)etag
@@ -28,7 +28,7 @@
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = G_FILE_INFO(g_file_output_stream_query_info([self castedGObject], [attributes UTF8String], [cancellable castedGObject], &err));
+	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_output_stream_query_info([self castedGObject], [attributes UTF8String], [cancellable castedGObject], &err), GFileInfo, GFileInfo);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -53,7 +53,7 @@
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = G_FILE_INFO(g_file_output_stream_query_info_finish([self castedGObject], result, &err));
+	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_output_stream_query_info_finish([self castedGObject], result, &err), GFileInfo, GFileInfo);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

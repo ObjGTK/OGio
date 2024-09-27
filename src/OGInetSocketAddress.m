@@ -12,7 +12,7 @@
 
 - (instancetype)initWithAddress:(OGInetAddress*)address port:(guint16)port
 {
-	GInetSocketAddress* gobjectValue = G_INET_SOCKET_ADDRESS(g_inet_socket_address_new([address castedGObject], port));
+	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new([address castedGObject], port), GInetSocketAddress, GInetSocketAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,7 +28,7 @@
 
 - (instancetype)initFromStringWithAddress:(OFString*)address port:(guint)port
 {
-	GInetSocketAddress* gobjectValue = G_INET_SOCKET_ADDRESS(g_inet_socket_address_new_from_string([address UTF8String], port));
+	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new_from_string([address UTF8String], port), GInetSocketAddress, GInetSocketAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -44,12 +44,12 @@
 
 - (GInetSocketAddress*)castedGObject
 {
-	return G_INET_SOCKET_ADDRESS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GInetSocketAddress, GInetSocketAddress);
 }
 
 - (OGInetAddress*)address
 {
-	GInetAddress* gobjectValue = G_INET_ADDRESS(g_inet_socket_address_get_address([self castedGObject]));
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_get_address([self castedGObject]), GInetAddress, GInetAddress);
 
 	OGInetAddress* returnValue = [OGInetAddress withGObject:gobjectValue];
 	return returnValue;

@@ -12,7 +12,7 @@
 
 - (GMenuLinkIter*)castedGObject
 {
-	return G_MENU_LINK_ITER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMenuLinkIter, GMenuLinkIter);
 }
 
 - (OFString*)name
@@ -32,7 +32,7 @@
 
 - (OGMenuModel*)value
 {
-	GMenuModel* gobjectValue = G_MENU_MODEL(g_menu_link_iter_get_value([self castedGObject]));
+	GMenuModel* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_link_iter_get_value([self castedGObject]), GMenuModel, GMenuModel);
 
 	OGMenuModel* returnValue = [OGMenuModel withGObject:gobjectValue];
 	g_object_unref(gobjectValue);

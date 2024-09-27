@@ -5,17 +5,17 @@
  */
 
 #include <gio/gdesktopappinfo.h>
-#include <gio/gfiledescriptorbased.h>
-#include <gio/gunixmounts.h>
 #include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
+#include <gio/gunixmounts.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
+#include <gio/gfiledescriptorbased.h>
 
 #import <OGObject/OGObject.h>
 
-@class OGTlsConnection;
 @class OGCancellable;
+@class OGTlsConnection;
 @class OGTlsPassword;
 
 /**

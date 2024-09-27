@@ -40,7 +40,7 @@
 
 - (instancetype)initWithHostname:(OFString*)hostname port:(guint16)port
 {
-	GNetworkAddress* gobjectValue = G_NETWORK_ADDRESS(g_network_address_new([hostname UTF8String], port));
+	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new([hostname UTF8String], port), GNetworkAddress, GNetworkAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -56,7 +56,7 @@
 
 - (instancetype)initLoopback:(guint16)port
 {
-	GNetworkAddress* gobjectValue = G_NETWORK_ADDRESS(g_network_address_new_loopback(port));
+	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new_loopback(port), GNetworkAddress, GNetworkAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -72,7 +72,7 @@
 
 - (GNetworkAddress*)castedGObject
 {
-	return G_NETWORK_ADDRESS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GNetworkAddress, GNetworkAddress);
 }
 
 - (OFString*)hostname

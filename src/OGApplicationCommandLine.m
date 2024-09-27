@@ -12,7 +12,7 @@
 
 - (GApplicationCommandLine*)castedGObject
 {
-	return G_APPLICATION_COMMAND_LINE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GApplicationCommandLine, GApplicationCommandLine);
 }
 
 - (GFile*)createFileForArg:(OFString*)arg
@@ -79,7 +79,7 @@
 
 - (OGInputStream*)stdin
 {
-	GInputStream* gobjectValue = G_INPUT_STREAM(g_application_command_line_get_stdin([self castedGObject]));
+	GInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_command_line_get_stdin([self castedGObject]), GInputStream, GInputStream);
 
 	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
 	g_object_unref(gobjectValue);

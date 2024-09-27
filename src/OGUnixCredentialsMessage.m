@@ -19,7 +19,7 @@
 
 - (instancetype)init
 {
-	GUnixCredentialsMessage* gobjectValue = G_UNIX_CREDENTIALS_MESSAGE(g_unix_credentials_message_new());
+	GUnixCredentialsMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_new(), GUnixCredentialsMessage, GUnixCredentialsMessage);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -35,7 +35,7 @@
 
 - (instancetype)initWithCredentials:(OGCredentials*)credentials
 {
-	GUnixCredentialsMessage* gobjectValue = G_UNIX_CREDENTIALS_MESSAGE(g_unix_credentials_message_new_with_credentials([credentials castedGObject]));
+	GUnixCredentialsMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_new_with_credentials([credentials castedGObject]), GUnixCredentialsMessage, GUnixCredentialsMessage);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -51,12 +51,12 @@
 
 - (GUnixCredentialsMessage*)castedGObject
 {
-	return G_UNIX_CREDENTIALS_MESSAGE([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixCredentialsMessage, GUnixCredentialsMessage);
 }
 
 - (OGCredentials*)credentials
 {
-	GCredentials* gobjectValue = G_CREDENTIALS(g_unix_credentials_message_get_credentials([self castedGObject]));
+	GCredentials* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_get_credentials([self castedGObject]), GCredentials, GCredentials);
 
 	OGCredentials* returnValue = [OGCredentials withGObject:gobjectValue];
 	return returnValue;

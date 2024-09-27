@@ -10,7 +10,7 @@
 
 + (OGUnixMountMonitor*)get
 {
-	GUnixMountMonitor* gobjectValue = G_UNIX_MOUNT_MONITOR(g_unix_mount_monitor_get());
+	GUnixMountMonitor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_mount_monitor_get(), GUnixMountMonitor, GUnixMountMonitor);
 
 	OGUnixMountMonitor* returnValue = [OGUnixMountMonitor withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -20,7 +20,7 @@
 
 - (instancetype)init
 {
-	GUnixMountMonitor* gobjectValue = G_UNIX_MOUNT_MONITOR(g_unix_mount_monitor_new());
+	GUnixMountMonitor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_mount_monitor_new(), GUnixMountMonitor, GUnixMountMonitor);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -36,7 +36,7 @@
 
 - (GUnixMountMonitor*)castedGObject
 {
-	return G_UNIX_MOUNT_MONITOR([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixMountMonitor, GUnixMountMonitor);
 }
 
 - (void)setRateLimit:(int)limitMsec

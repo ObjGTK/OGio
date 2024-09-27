@@ -10,7 +10,7 @@
 
 - (instancetype)initWithNative:(gpointer)native len:(gsize)len
 {
-	GNativeSocketAddress* gobjectValue = G_NATIVE_SOCKET_ADDRESS(g_native_socket_address_new(native, len));
+	GNativeSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_native_socket_address_new(native, len), GNativeSocketAddress, GNativeSocketAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GNativeSocketAddress*)castedGObject
 {
-	return G_NATIVE_SOCKET_ADDRESS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GNativeSocketAddress, GNativeSocketAddress);
 }
 
 

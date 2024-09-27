@@ -13,7 +13,7 @@
 
 - (instancetype)init:(OFString*)objectPath
 {
-	GDBusObjectManagerServer* gobjectValue = G_DBUS_OBJECT_MANAGER_SERVER(g_dbus_object_manager_server_new([objectPath UTF8String]));
+	GDBusObjectManagerServer* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_manager_server_new([objectPath UTF8String]), GDBusObjectManagerServer, GDBusObjectManagerServer);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -29,7 +29,7 @@
 
 - (GDBusObjectManagerServer*)castedGObject
 {
-	return G_DBUS_OBJECT_MANAGER_SERVER([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusObjectManagerServer, GDBusObjectManagerServer);
 }
 
 - (void)export:(OGDBusObjectSkeleton*)object
@@ -44,7 +44,7 @@
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = G_DBUS_CONNECTION(g_dbus_object_manager_server_get_connection([self castedGObject]));
+	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_manager_server_get_connection([self castedGObject]), GDBusConnection, GDBusConnection);
 
 	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);

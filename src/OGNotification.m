@@ -10,7 +10,7 @@
 
 - (instancetype)init:(OFString*)title
 {
-	GNotification* gobjectValue = G_NOTIFICATION(g_notification_new([title UTF8String]));
+	GNotification* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_notification_new([title UTF8String]), GNotification, GNotification);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GNotification*)castedGObject
 {
-	return G_NOTIFICATION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GNotification, GNotification);
 }
 
 - (void)addButtonWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction

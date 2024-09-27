@@ -24,7 +24,7 @@
 
 - (instancetype)initWithSourceObject:(gpointer)sourceObject cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback callbackData:(gpointer)callbackData
 {
-	GTask* gobjectValue = G_TASK(g_task_new(sourceObject, [cancellable castedGObject], callback, callbackData));
+	GTask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_task_new(sourceObject, [cancellable castedGObject], callback, callbackData), GTask, GTask);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -40,7 +40,7 @@
 
 - (GTask*)castedGObject
 {
-	return G_TASK([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTask, GTask);
 }
 
 - (void)attachSourceWithSource:(GSource*)source callback:(GSourceFunc)callback
@@ -50,7 +50,7 @@
 
 - (OGCancellable*)cancellable
 {
-	GCancellable* gobjectValue = G_CANCELLABLE(g_task_get_cancellable([self castedGObject]));
+	GCancellable* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_task_get_cancellable([self castedGObject]), GCancellable, GCancellable);
 
 	OGCancellable* returnValue = [OGCancellable withGObject:gobjectValue];
 	return returnValue;

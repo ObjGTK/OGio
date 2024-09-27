@@ -12,7 +12,7 @@
 
 + (OGDBusActionGroup*)getWithConnection:(OGDBusConnection*)connection busName:(OFString*)busName objectPath:(OFString*)objectPath
 {
-	GDBusActionGroup* gobjectValue = G_DBUS_ACTION_GROUP(g_dbus_action_group_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]));
+	GDBusActionGroup* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_action_group_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]), GDBusActionGroup, GDBusActionGroup);
 
 	OGDBusActionGroup* returnValue = [OGDBusActionGroup withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -22,7 +22,7 @@
 
 - (GDBusActionGroup*)castedGObject
 {
-	return G_DBUS_ACTION_GROUP([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusActionGroup, GDBusActionGroup);
 }
 
 

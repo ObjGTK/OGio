@@ -12,7 +12,7 @@
 
 - (instancetype)initWithIcon:(GIcon*)icon emblem:(OGEmblem*)emblem
 {
-	GEmblemedIcon* gobjectValue = G_EMBLEMED_ICON(g_emblemed_icon_new(icon, [emblem castedGObject]));
+	GEmblemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblemed_icon_new(icon, [emblem castedGObject]), GEmblemedIcon, GEmblemedIcon);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -28,7 +28,7 @@
 
 - (GEmblemedIcon*)castedGObject
 {
-	return G_EMBLEMED_ICON([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GEmblemedIcon, GEmblemedIcon);
 }
 
 - (void)addEmblem:(OGEmblem*)emblem

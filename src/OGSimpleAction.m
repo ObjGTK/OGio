@@ -10,7 +10,7 @@
 
 - (instancetype)initWithName:(OFString*)name parameterType:(const GVariantType*)parameterType
 {
-	GSimpleAction* gobjectValue = G_SIMPLE_ACTION(g_simple_action_new([name UTF8String], parameterType));
+	GSimpleAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_new([name UTF8String], parameterType), GSimpleAction, GSimpleAction);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (instancetype)initStatefulWithName:(OFString*)name parameterType:(const GVariantType*)parameterType state:(GVariant*)state
 {
-	GSimpleAction* gobjectValue = G_SIMPLE_ACTION(g_simple_action_new_stateful([name UTF8String], parameterType, state));
+	GSimpleAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_new_stateful([name UTF8String], parameterType, state), GSimpleAction, GSimpleAction);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -42,7 +42,7 @@
 
 - (GSimpleAction*)castedGObject
 {
-	return G_SIMPLE_ACTION([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleAction, GSimpleAction);
 }
 
 - (void)setEnabled:(bool)enabled

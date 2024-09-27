@@ -6,12 +6,12 @@
 
 #import "OGSocket.h"
 
-#import "OGSocketAddress.h"
-#import "OGSocketConnection.h"
-#import "OGCancellable.h"
 #import "OGInetAddress.h"
-#import "OGSocketControlMessage.h"
 #import "OGCredentials.h"
+#import "OGSocketControlMessage.h"
+#import "OGCancellable.h"
+#import "OGSocketConnection.h"
+#import "OGSocketAddress.h"
 
 @implementation OGSocket
 
@@ -19,7 +19,7 @@
 {
 	GError* err = NULL;
 
-	GSocket* gobjectValue = G_SOCKET(g_socket_new(family, type, protocol, &err));
+	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_new(family, type, protocol, &err), GSocket, GSocket);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -45,7 +45,7 @@
 {
 	GError* err = NULL;
 
-	GSocket* gobjectValue = G_SOCKET(g_socket_new_from_fd(fd, &err));
+	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_new_from_fd(fd, &err), GSocket, GSocket);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -69,14 +69,14 @@
 
 - (GSocket*)castedGObject
 {
-	return G_SOCKET([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocket, GSocket);
 }
 
 - (OGSocket*)accept:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	GSocket* gobjectValue = G_SOCKET(g_socket_accept([self castedGObject], [cancellable castedGObject], &err));
+	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_accept([self castedGObject], [cancellable castedGObject], &err), GSocket, GSocket);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -191,7 +191,7 @@
 
 - (OGSocketConnection*)connectionFactoryCreateConnection
 {
-	GSocketConnection* gobjectValue = G_SOCKET_CONNECTION(g_socket_connection_factory_create_connection([self castedGObject]));
+	GSocketConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_connection_factory_create_connection([self castedGObject]), GSocketConnection, GSocketConnection);
 
 	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -231,7 +231,7 @@
 {
 	GError* err = NULL;
 
-	GCredentials* gobjectValue = G_CREDENTIALS(g_socket_get_credentials([self castedGObject], &err));
+	GCredentials* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_get_credentials([self castedGObject], &err), GCredentials, GCredentials);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -279,7 +279,7 @@
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = G_SOCKET_ADDRESS(g_socket_get_local_address([self castedGObject], &err));
+	GSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_get_local_address([self castedGObject], &err), GSocketAddress, GSocketAddress);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -335,7 +335,7 @@
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = G_SOCKET_ADDRESS(g_socket_get_remote_address([self castedGObject], &err));
+	GSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_get_remote_address([self castedGObject], &err), GSocketAddress, GSocketAddress);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

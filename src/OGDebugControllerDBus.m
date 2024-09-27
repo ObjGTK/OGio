@@ -15,7 +15,7 @@
 {
 	GError* err = NULL;
 
-	GDebugControllerDBus* gobjectValue = G_DEBUG_CONTROLLER_DBUS(g_debug_controller_dbus_new([connection castedGObject], [cancellable castedGObject], &err));
+	GDebugControllerDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_debug_controller_dbus_new([connection castedGObject], [cancellable castedGObject], &err), GDebugControllerDBus, GDebugControllerDBus);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
@@ -39,7 +39,7 @@
 
 - (GDebugControllerDBus*)castedGObject
 {
-	return G_DEBUG_CONTROLLER_DBUS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDebugControllerDBus, GDebugControllerDBus);
 }
 
 - (void)stop

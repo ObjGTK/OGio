@@ -13,7 +13,7 @@
 
 - (GFileEnumerator*)castedGObject
 {
-	return G_FILE_ENUMERATOR([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileEnumerator, GFileEnumerator);
 }
 
 - (bool)close:(OGCancellable*)cancellable
@@ -98,7 +98,7 @@
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = G_FILE_INFO(g_file_enumerator_next_file([self castedGObject], [cancellable castedGObject], &err));
+	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_enumerator_next_file([self castedGObject], [cancellable castedGObject], &err), GFileInfo, GFileInfo);
 
 	if(err != NULL) {
 		OGErrorException* exception = [OGErrorException exceptionWithGError:err];

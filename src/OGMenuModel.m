@@ -13,7 +13,7 @@
 
 - (GMenuModel*)castedGObject
 {
-	return G_MENU_MODEL([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMenuModel, GMenuModel);
 }
 
 - (GVariant*)itemAttributeValueWithItemIndex:(gint)itemIndex attribute:(OFString*)attribute expectedType:(const GVariantType*)expectedType
@@ -25,7 +25,7 @@
 
 - (OGMenuModel*)itemLinkWithItemIndex:(gint)itemIndex link:(OFString*)link
 {
-	GMenuModel* gobjectValue = G_MENU_MODEL(g_menu_model_get_item_link([self castedGObject], itemIndex, [link UTF8String]));
+	GMenuModel* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_model_get_item_link([self castedGObject], itemIndex, [link UTF8String]), GMenuModel, GMenuModel);
 
 	OGMenuModel* returnValue = [OGMenuModel withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -54,7 +54,7 @@
 
 - (OGMenuAttributeIter*)iterateItemAttributes:(gint)itemIndex
 {
-	GMenuAttributeIter* gobjectValue = G_MENU_ATTRIBUTE_ITER(g_menu_model_iterate_item_attributes([self castedGObject], itemIndex));
+	GMenuAttributeIter* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_model_iterate_item_attributes([self castedGObject], itemIndex), GMenuAttributeIter, GMenuAttributeIter);
 
 	OGMenuAttributeIter* returnValue = [OGMenuAttributeIter withGObject:gobjectValue];
 	g_object_unref(gobjectValue);
@@ -64,7 +64,7 @@
 
 - (OGMenuLinkIter*)iterateItemLinks:(gint)itemIndex
 {
-	GMenuLinkIter* gobjectValue = G_MENU_LINK_ITER(g_menu_model_iterate_item_links([self castedGObject], itemIndex));
+	GMenuLinkIter* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_model_iterate_item_links([self castedGObject], itemIndex), GMenuLinkIter, GMenuLinkIter);
 
 	OGMenuLinkIter* returnValue = [OGMenuLinkIter withGObject:gobjectValue];
 	g_object_unref(gobjectValue);

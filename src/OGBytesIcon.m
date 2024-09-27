@@ -10,7 +10,7 @@
 
 - (instancetype)init:(GBytes*)bytes
 {
-	GBytesIcon* gobjectValue = G_BYTES_ICON(g_bytes_icon_new(bytes));
+	GBytesIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_bytes_icon_new(bytes), GBytesIcon, GBytesIcon);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (GBytesIcon*)castedGObject
 {
-	return G_BYTES_ICON([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GBytesIcon, GBytesIcon);
 }
 
 - (GBytes*)bytes

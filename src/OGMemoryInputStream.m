@@ -10,7 +10,7 @@
 
 - (instancetype)init
 {
-	GMemoryInputStream* gobjectValue = G_MEMORY_INPUT_STREAM(g_memory_input_stream_new());
+	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new(), GMemoryInputStream, GMemoryInputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (instancetype)initFromBytes:(GBytes*)bytes
 {
-	GMemoryInputStream* gobjectValue = G_MEMORY_INPUT_STREAM(g_memory_input_stream_new_from_bytes(bytes));
+	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new_from_bytes(bytes), GMemoryInputStream, GMemoryInputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -42,7 +42,7 @@
 
 - (instancetype)initFromDataWithData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy
 {
-	GMemoryInputStream* gobjectValue = G_MEMORY_INPUT_STREAM(g_memory_input_stream_new_from_data(data, len, destroy));
+	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new_from_data(data, len, destroy), GMemoryInputStream, GMemoryInputStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -58,7 +58,7 @@
 
 - (GMemoryInputStream*)castedGObject
 {
-	return G_MEMORY_INPUT_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMemoryInputStream, GMemoryInputStream);
 }
 
 - (void)addBytes:(GBytes*)bytes

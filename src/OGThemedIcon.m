@@ -10,7 +10,7 @@
 
 - (instancetype)init:(OFString*)iconname
 {
-	GThemedIcon* gobjectValue = G_THEMED_ICON(g_themed_icon_new([iconname UTF8String]));
+	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new([iconname UTF8String]), GThemedIcon, GThemedIcon);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (instancetype)initFromNamesWithIconnames:(char**)iconnames len:(int)len
 {
-	GThemedIcon* gobjectValue = G_THEMED_ICON(g_themed_icon_new_from_names(iconnames, len));
+	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_from_names(iconnames, len), GThemedIcon, GThemedIcon);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -42,7 +42,7 @@
 
 - (instancetype)initWithDefaultFallbacks:(OFString*)iconname
 {
-	GThemedIcon* gobjectValue = G_THEMED_ICON(g_themed_icon_new_with_default_fallbacks([iconname UTF8String]));
+	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_with_default_fallbacks([iconname UTF8String]), GThemedIcon, GThemedIcon);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -58,7 +58,7 @@
 
 - (GThemedIcon*)castedGObject
 {
-	return G_THEMED_ICON([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GThemedIcon, GThemedIcon);
 }
 
 - (void)appendName:(OFString*)iconname

@@ -13,7 +13,7 @@
 
 - (instancetype)initWithInputStream:(OGInputStream*)inputStream outputStream:(OGOutputStream*)outputStream
 {
-	GSimpleIOStream* gobjectValue = G_SIMPLE_IO_STREAM(g_simple_io_stream_new([inputStream castedGObject], [outputStream castedGObject]));
+	GSimpleIOStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_io_stream_new([inputStream castedGObject], [outputStream castedGObject]), GSimpleIOStream, GSimpleIOStream);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -29,7 +29,7 @@
 
 - (GSimpleIOStream*)castedGObject
 {
-	return G_SIMPLE_IO_STREAM([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleIOStream, GSimpleIOStream);
 }
 
 

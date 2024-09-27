@@ -10,7 +10,7 @@
 
 - (instancetype)initAny:(GSocketFamily)family
 {
-	GInetAddress* gobjectValue = G_INET_ADDRESS(g_inet_address_new_any(family));
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_any(family), GInetAddress, GInetAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -26,7 +26,7 @@
 
 - (instancetype)initFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family
 {
-	GInetAddress* gobjectValue = G_INET_ADDRESS(g_inet_address_new_from_bytes(bytes, family));
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_bytes(bytes, family), GInetAddress, GInetAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -42,7 +42,7 @@
 
 - (instancetype)initFromString:(OFString*)string
 {
-	GInetAddress* gobjectValue = G_INET_ADDRESS(g_inet_address_new_from_string([string UTF8String]));
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_string([string UTF8String]), GInetAddress, GInetAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -58,7 +58,7 @@
 
 - (instancetype)initLoopback:(GSocketFamily)family
 {
-	GInetAddress* gobjectValue = G_INET_ADDRESS(g_inet_address_new_loopback(family));
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_loopback(family), GInetAddress, GInetAddress);
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -74,7 +74,7 @@
 
 - (GInetAddress*)castedGObject
 {
-	return G_INET_ADDRESS([self gObject]);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GInetAddress, GInetAddress);
 }
 
 - (bool)equal:(OGInetAddress*)otherAddress
