@@ -1,15 +1,25 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGFileEnumerator.h"
 
-#import "OGFileInfo.h"
 #import "OGCancellable.h"
+#import "OGFileInfo.h"
 
 @implementation OGFileEnumerator
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_FILE_ENUMERATOR;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (GFileEnumerator*)castedGObject
 {
@@ -20,13 +30,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_file_enumerator_close([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_file_enumerator_close([self castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -40,41 +46,37 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_file_enumerator_close_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_file_enumerator_close_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
 
 - (GFile*)child:(OGFileInfo*)info
 {
-	GFile* returnValue = g_file_enumerator_get_child([self castedGObject], [info castedGObject]);
+	GFile* returnValue = (GFile*)g_file_enumerator_get_child([self castedGObject], [info castedGObject]);
 
 	return returnValue;
 }
 
 - (GFile*)container
 {
-	GFile* returnValue = g_file_enumerator_get_container([self castedGObject]);
+	GFile* returnValue = (GFile*)g_file_enumerator_get_container([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)hasPending
 {
-	bool returnValue = g_file_enumerator_has_pending([self castedGObject]);
+	bool returnValue = (bool)g_file_enumerator_has_pending([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isClosed
 {
-	bool returnValue = g_file_enumerator_is_closed([self castedGObject]);
+	bool returnValue = (bool)g_file_enumerator_is_closed([self castedGObject]);
 
 	return returnValue;
 }
@@ -83,13 +85,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_file_enumerator_iterate([self castedGObject], outInfo, outChild, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_file_enumerator_iterate([self castedGObject], outInfo, outChild, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -98,17 +96,11 @@
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_enumerator_next_file([self castedGObject], [cancellable castedGObject], &err), GFileInfo, GFileInfo);
+	GFileInfo* gobjectValue = g_file_enumerator_next_file([self castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
+	OGFileInfo* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -123,13 +115,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_file_enumerator_next_files_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_file_enumerator_next_files_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

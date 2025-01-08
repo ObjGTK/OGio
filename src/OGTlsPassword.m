@@ -1,12 +1,22 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGTlsPassword.h"
 
 @implementation OGTlsPassword
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_TLS_PASSWORD;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)initWithFlags:(GTlsPasswordFlags)flags description:(OFString*)description
 {
@@ -39,14 +49,14 @@
 
 - (GTlsPasswordFlags)flags
 {
-	GTlsPasswordFlags returnValue = g_tls_password_get_flags([self castedGObject]);
+	GTlsPasswordFlags returnValue = (GTlsPasswordFlags)g_tls_password_get_flags([self castedGObject]);
 
 	return returnValue;
 }
 
 - (const guchar*)value:(gsize*)length
 {
-	const guchar* returnValue = g_tls_password_get_value([self castedGObject], length);
+	const guchar* returnValue = (const guchar*)g_tls_password_get_value([self castedGObject], length);
 
 	return returnValue;
 }

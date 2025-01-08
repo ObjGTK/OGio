@@ -1,28 +1,38 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGApplication.h"
 
 #import "OGCancellable.h"
-#import "OGNotification.h"
 #import "OGDBusConnection.h"
+#import "OGNotification.h"
 
 @implementation OGApplication
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_APPLICATION;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (OGApplication*)default
 {
-	GApplication* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_get_default(), GApplication, GApplication);
+	GApplication* gobjectValue = g_application_get_default();
 
-	OGApplication* returnValue = [OGApplication withGObject:gobjectValue];
+	OGApplication* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 + (bool)idIsValid:(OFString*)applicationId
 {
-	bool returnValue = g_application_id_is_valid([applicationId UTF8String]);
+	bool returnValue = (bool)g_application_id_is_valid([applicationId UTF8String]);
 
 	return returnValue;
 }
@@ -83,9 +93,9 @@
 
 - (OGDBusConnection*)dbusConnection
 {
-	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_get_dbus_connection([self castedGObject]), GDBusConnection, GDBusConnection);
+	GDBusConnection* gobjectValue = g_application_get_dbus_connection([self castedGObject]);
 
-	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
+	OGDBusConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
@@ -99,35 +109,35 @@
 
 - (GApplicationFlags)flags
 {
-	GApplicationFlags returnValue = g_application_get_flags([self castedGObject]);
+	GApplicationFlags returnValue = (GApplicationFlags)g_application_get_flags([self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint)inactivityTimeout
 {
-	guint returnValue = g_application_get_inactivity_timeout([self castedGObject]);
+	guint returnValue = (guint)g_application_get_inactivity_timeout([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isBusy
 {
-	bool returnValue = g_application_get_is_busy([self castedGObject]);
+	bool returnValue = (bool)g_application_get_is_busy([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isRegistered
 {
-	bool returnValue = g_application_get_is_registered([self castedGObject]);
+	bool returnValue = (bool)g_application_get_is_registered([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isRemote
 {
-	bool returnValue = g_application_get_is_remote([self castedGObject]);
+	bool returnValue = (bool)g_application_get_is_remote([self castedGObject]);
 
 	return returnValue;
 }
@@ -172,13 +182,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_application_register([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_application_register([self castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -190,14 +196,14 @@
 
 - (int)runWithArgc:(int)argc argv:(char**)argv
 {
-	int returnValue = g_application_run([self castedGObject], argc, argv);
+	int returnValue = (int)g_application_run([self castedGObject], argc, argv);
 
 	return returnValue;
 }
 
-- (void)sendNotificationWithId:(OFString*)id notification:(OGNotification*)notification
+- (void)sendNotificationWithIdentifier:(OFString*)identifier notification:(OGNotification*)notification
 {
-	g_application_send_notification([self castedGObject], [id UTF8String], [notification castedGObject]);
+	g_application_send_notification([self castedGObject], [identifier UTF8String], [notification castedGObject]);
 }
 
 - (void)setActionGroup:(GActionGroup*)actionGroup
@@ -260,9 +266,9 @@
 	g_application_unmark_busy([self castedGObject]);
 }
 
-- (void)withdrawNotification:(OFString*)id
+- (void)withdrawNotification:(OFString*)identifier
 {
-	g_application_withdraw_notification([self castedGObject], [id UTF8String]);
+	g_application_withdraw_notification([self castedGObject], [identifier UTF8String]);
 }
 
 

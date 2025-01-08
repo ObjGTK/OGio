@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,12 +8,22 @@
 
 @implementation OGTestDBus
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_TEST_DBUS;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (void)unset
 {
 	g_test_dbus_unset();
 }
 
-- (instancetype)init:(GTestDBusFlags)flags
+- (instancetype)initWithFlags:(GTestDBusFlags)flags
 {
 	GTestDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_test_dbus_new(flags), GTestDBus, GTestDBus);
 
@@ -54,7 +64,7 @@
 
 - (GTestDBusFlags)flags
 {
-	GTestDBusFlags returnValue = g_test_dbus_get_flags([self castedGObject]);
+	GTestDBusFlags returnValue = (GTestDBusFlags)g_test_dbus_get_flags([self castedGObject]);
 
 	return returnValue;
 }

@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,11 +10,21 @@
 
 @implementation OGDBusActionGroup
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DBUS_ACTION_GROUP;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (OGDBusActionGroup*)getWithConnection:(OGDBusConnection*)connection busName:(OFString*)busName objectPath:(OFString*)objectPath
 {
-	GDBusActionGroup* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_action_group_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]), GDBusActionGroup, GDBusActionGroup);
+	GDBusActionGroup* gobjectValue = g_dbus_action_group_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]);
 
-	OGDBusActionGroup* returnValue = [OGDBusActionGroup withGObject:gobjectValue];
+	OGDBusActionGroup* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;

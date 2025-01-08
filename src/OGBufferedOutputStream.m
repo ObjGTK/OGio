@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,7 +10,17 @@
 
 @implementation OGBufferedOutputStream
 
-- (instancetype)init:(OGOutputStream*)baseStream
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_BUFFERED_OUTPUT_STREAM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
+- (instancetype)initWithBaseStream:(OGOutputStream*)baseStream
 {
 	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new([baseStream castedGObject]), GBufferedOutputStream, GBufferedOutputStream);
 
@@ -49,14 +59,14 @@
 
 - (bool)autoGrow
 {
-	bool returnValue = g_buffered_output_stream_get_auto_grow([self castedGObject]);
+	bool returnValue = (bool)g_buffered_output_stream_get_auto_grow([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)bufferSize
 {
-	gsize returnValue = g_buffered_output_stream_get_buffer_size([self castedGObject]);
+	gsize returnValue = (gsize)g_buffered_output_stream_get_buffer_size([self castedGObject]);
 
 	return returnValue;
 }

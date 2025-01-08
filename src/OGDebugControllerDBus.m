@@ -1,15 +1,25 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGDebugControllerDBus.h"
 
-#import "OGDBusConnection.h"
 #import "OGCancellable.h"
+#import "OGDBusConnection.h"
 
 @implementation OGDebugControllerDBus
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DEBUG_CONTROLLER_DBUS;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)initWithConnection:(OGDBusConnection*)connection cancellable:(OGCancellable*)cancellable
 {
@@ -17,13 +27,7 @@
 
 	GDebugControllerDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_debug_controller_dbus_new([connection castedGObject], [cancellable castedGObject], &err), GDebugControllerDBus, GDebugControllerDBus);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
 	@try {
 		self = [super initWithGObject:gobjectValue];

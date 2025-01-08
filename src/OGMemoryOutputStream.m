@@ -1,12 +1,22 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGMemoryOutputStream.h"
 
 @implementation OGMemoryOutputStream
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_MEMORY_OUTPUT_STREAM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)initWithData:(gpointer)data size:(gsize)size reallocFunction:(GReallocFunc)reallocFunction destroyFunction:(GDestroyNotify)destroyFunction
 {
@@ -47,35 +57,35 @@
 
 - (gpointer)data
 {
-	gpointer returnValue = g_memory_output_stream_get_data([self castedGObject]);
+	gpointer returnValue = (gpointer)g_memory_output_stream_get_data([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)dataSize
 {
-	gsize returnValue = g_memory_output_stream_get_data_size([self castedGObject]);
+	gsize returnValue = (gsize)g_memory_output_stream_get_data_size([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)size
 {
-	gsize returnValue = g_memory_output_stream_get_size([self castedGObject]);
+	gsize returnValue = (gsize)g_memory_output_stream_get_size([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GBytes*)stealAsBytes
 {
-	GBytes* returnValue = g_memory_output_stream_steal_as_bytes([self castedGObject]);
+	GBytes* returnValue = (GBytes*)g_memory_output_stream_steal_as_bytes([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gpointer)stealData
 {
-	gpointer returnValue = g_memory_output_stream_steal_data([self castedGObject]);
+	gpointer returnValue = (gpointer)g_memory_output_stream_steal_data([self castedGObject]);
 
 	return returnValue;
 }

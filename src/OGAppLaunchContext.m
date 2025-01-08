@@ -1,12 +1,22 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGAppLaunchContext.h"
 
 @implementation OGAppLaunchContext
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_APP_LAUNCH_CONTEXT;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)init
 {
@@ -39,7 +49,7 @@
 
 - (char**)environment
 {
-	char** returnValue = g_app_launch_context_get_environment([self castedGObject]);
+	char** returnValue = (char**)g_app_launch_context_get_environment([self castedGObject]);
 
 	return returnValue;
 }

@@ -1,22 +1,22 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gunixfdmessage.h>
 
 #import <OGObject/OGObject.h>
 
 @class OGCancellable;
-@class OGNotification;
 @class OGDBusConnection;
+@class OGNotification;
 
 /**
  * `GApplication` is the core class for application support.
@@ -152,6 +152,8 @@
 /**
  * Functions
  */
++ (void)load;
+
 
 /**
  * Returns the default #GApplication instance for this process.
@@ -718,10 +720,10 @@
  * It is an error to call this function if @application has no
  * application ID.
  *
- * @param id id of the notification, or %NULL
+ * @param identifier id of the notification, or %NULL
  * @param notification the #GNotification to send
  */
-- (void)sendNotificationWithId:(OFString*)id notification:(OGNotification*)notification;
+- (void)sendNotificationWithIdentifier:(OFString*)identifier notification:(OGNotification*)notification;
 
 /**
  * This used to be how actions were associated with a #GApplication.
@@ -901,8 +903,8 @@
  * of the buttons in a notification or triggers its default action, so
  * there is no need to explicitly withdraw the notification in that case.
  *
- * @param id id of a previously sent notification
+ * @param identifier id of a previously sent notification
  */
-- (void)withdrawNotification:(OFString*)id;
+- (void)withdrawNotification:(OFString*)identifier;
 
 @end

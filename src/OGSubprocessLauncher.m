@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,7 +10,17 @@
 
 @implementation OGSubprocessLauncher
 
-- (instancetype)init:(GSubprocessFlags)flags
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_SUBPROCESS_LAUNCHER;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
+- (instancetype)initWithFlags:(GSubprocessFlags)flags
 {
 	GSubprocessLauncher* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_launcher_new(flags), GSubprocessLauncher, GSubprocessLauncher);
 
@@ -88,17 +98,11 @@
 {
 	GError* err = NULL;
 
-	GSubprocess* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_launcher_spawnv([self castedGObject], argv, &err), GSubprocess, GSubprocess);
+	GSubprocess* gobjectValue = g_subprocess_launcher_spawnv([self castedGObject], argv, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSubprocess* returnValue = [OGSubprocess withGObject:gobjectValue];
+	OGSubprocess* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;

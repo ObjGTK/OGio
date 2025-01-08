@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -9,6 +9,16 @@
 #import "OGMenuModel.h"
 
 @implementation OGMenuItem
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_MENU_ITEM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)initWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction
 {
@@ -81,16 +91,16 @@
 
 - (GVariant*)attributeValueWithAttribute:(OFString*)attribute expectedType:(const GVariantType*)expectedType
 {
-	GVariant* returnValue = g_menu_item_get_attribute_value([self castedGObject], [attribute UTF8String], expectedType);
+	GVariant* returnValue = (GVariant*)g_menu_item_get_attribute_value([self castedGObject], [attribute UTF8String], expectedType);
 
 	return returnValue;
 }
 
 - (OGMenuModel*)link:(OFString*)link
 {
-	GMenuModel* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_get_link([self castedGObject], [link UTF8String]), GMenuModel, GMenuModel);
+	GMenuModel* gobjectValue = g_menu_item_get_link([self castedGObject], [link UTF8String]);
 
-	OGMenuModel* returnValue = [OGMenuModel withGObject:gobjectValue];
+	OGMenuModel* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;

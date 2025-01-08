@@ -1,28 +1,34 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGIOStream.h"
 
 #import "OGCancellable.h"
-#import "OGOutputStream.h"
 #import "OGInputStream.h"
+#import "OGOutputStream.h"
 
 @implementation OGIOStream
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_IO_STREAM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 + (bool)spliceFinish:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = g_io_stream_splice_finish(result, &err);
+	bool returnValue = (bool)g_io_stream_splice_finish(result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -41,13 +47,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_io_stream_close([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_io_stream_close([self castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -61,43 +63,39 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_io_stream_close_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_io_stream_close_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
 
 - (OGInputStream*)inputStream
 {
-	GInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_io_stream_get_input_stream([self castedGObject]), GInputStream, GInputStream);
+	GInputStream* gobjectValue = g_io_stream_get_input_stream([self castedGObject]);
 
-	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
+	OGInputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (OGOutputStream*)outputStream
 {
-	GOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_io_stream_get_output_stream([self castedGObject]), GOutputStream, GOutputStream);
+	GOutputStream* gobjectValue = g_io_stream_get_output_stream([self castedGObject]);
 
-	OGOutputStream* returnValue = [OGOutputStream withGObject:gobjectValue];
+	OGOutputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (bool)hasPending
 {
-	bool returnValue = g_io_stream_has_pending([self castedGObject]);
+	bool returnValue = (bool)g_io_stream_has_pending([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isClosed
 {
-	bool returnValue = g_io_stream_is_closed([self castedGObject]);
+	bool returnValue = (bool)g_io_stream_is_closed([self castedGObject]);
 
 	return returnValue;
 }
@@ -106,13 +104,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_io_stream_set_pending([self castedGObject], &err);
+	bool returnValue = (bool)g_io_stream_set_pending([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

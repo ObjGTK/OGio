@@ -1,14 +1,14 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGIOStream.h"
 
 @class OGCancellable;
-@class OGSocketAddress;
 @class OGSocket;
+@class OGSocketAddress;
 
 /**
  * `GSocketConnection` is a [class@Gio.IOStream] for a connected socket. They
@@ -37,6 +37,8 @@
 /**
  * Functions
  */
++ (void)load;
+
 
 /**
  * Looks up the #GType to be used when creating socket connections on

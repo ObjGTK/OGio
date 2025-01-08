@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,16 +10,26 @@
 
 @implementation OGDesktopAppInfo
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DESKTOP_APP_INFO;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (GList*)implementations:(OFString*)interface
 {
-	GList* returnValue = g_desktop_app_info_get_implementations([interface UTF8String]);
+	GList* returnValue = (GList*)g_desktop_app_info_get_implementations([interface UTF8String]);
 
 	return returnValue;
 }
 
 + (gchar***)search:(OFString*)searchString
 {
-	gchar*** returnValue = g_desktop_app_info_search([searchString UTF8String]);
+	gchar*** returnValue = (gchar***)g_desktop_app_info_search([searchString UTF8String]);
 
 	return returnValue;
 }
@@ -29,7 +39,7 @@
 	g_desktop_app_info_set_desktop_env([desktopEnv UTF8String]);
 }
 
-- (instancetype)init:(OFString*)desktopId
+- (instancetype)initWithDesktopId:(OFString*)desktopId
 {
 	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new([desktopId UTF8String]), GDesktopAppInfo, GDesktopAppInfo);
 
@@ -45,7 +55,7 @@
 	return self;
 }
 
-- (instancetype)initFromFilename:(OFString*)filename
+- (instancetype)initWithFilenameFromFilename:(OFString*)filename
 {
 	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_filename([filename UTF8String]), GDesktopAppInfo, GDesktopAppInfo);
 
@@ -61,7 +71,7 @@
 	return self;
 }
 
-- (instancetype)initFromKeyfile:(GKeyFile*)keyFile
+- (instancetype)initWithKeyFileFromKeyfile:(GKeyFile*)keyFile
 {
 	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_keyfile(keyFile), GDesktopAppInfo, GDesktopAppInfo);
 
@@ -92,7 +102,7 @@
 
 - (bool)boolean:(OFString*)key
 {
-	bool returnValue = g_desktop_app_info_get_boolean([self castedGObject], [key UTF8String]);
+	bool returnValue = (bool)g_desktop_app_info_get_boolean([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
@@ -123,14 +133,14 @@
 
 - (bool)isHidden
 {
-	bool returnValue = g_desktop_app_info_get_is_hidden([self castedGObject]);
+	bool returnValue = (bool)g_desktop_app_info_get_is_hidden([self castedGObject]);
 
 	return returnValue;
 }
 
 - (const char* const*)keywords
 {
-	const char* const* returnValue = g_desktop_app_info_get_keywords([self castedGObject]);
+	const char* const* returnValue = (const char* const*)g_desktop_app_info_get_keywords([self castedGObject]);
 
 	return returnValue;
 }
@@ -145,14 +155,14 @@
 
 - (bool)nodisplay
 {
-	bool returnValue = g_desktop_app_info_get_nodisplay([self castedGObject]);
+	bool returnValue = (bool)g_desktop_app_info_get_nodisplay([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)showIn:(OFString*)desktopEnv
 {
-	bool returnValue = g_desktop_app_info_get_show_in([self castedGObject], [desktopEnv UTF8String]);
+	bool returnValue = (bool)g_desktop_app_info_get_show_in([self castedGObject], [desktopEnv UTF8String]);
 
 	return returnValue;
 }
@@ -175,14 +185,14 @@
 
 - (gchar**)stringListWithKey:(OFString*)key length:(gsize*)length
 {
-	gchar** returnValue = g_desktop_app_info_get_string_list([self castedGObject], [key UTF8String], length);
+	gchar** returnValue = (gchar**)g_desktop_app_info_get_string_list([self castedGObject], [key UTF8String], length);
 
 	return returnValue;
 }
 
 - (bool)hasKey:(OFString*)key
 {
-	bool returnValue = g_desktop_app_info_has_key([self castedGObject], [key UTF8String]);
+	bool returnValue = (bool)g_desktop_app_info_has_key([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
@@ -196,13 +206,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_desktop_app_info_launch_uris_as_manager([self castedGObject], uris, [launchContext castedGObject], spawnFlags, userSetup, userSetupData, pidCallback, pidCallbackData, &err);
+	bool returnValue = (bool)g_desktop_app_info_launch_uris_as_manager([self castedGObject], uris, [launchContext castedGObject], spawnFlags, userSetup, userSetupData, pidCallback, pidCallbackData, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -211,20 +217,16 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_desktop_app_info_launch_uris_as_manager_with_fds([self castedGObject], uris, [launchContext castedGObject], spawnFlags, userSetup, userSetupData, pidCallback, pidCallbackData, stdinFd, stdoutFd, stderrFd, &err);
+	bool returnValue = (bool)g_desktop_app_info_launch_uris_as_manager_with_fds([self castedGObject], uris, [launchContext castedGObject], spawnFlags, userSetup, userSetupData, pidCallback, pidCallbackData, stdinFd, stdoutFd, stderrFd, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
 
 - (const gchar* const*)listActions
 {
-	const gchar* const* returnValue = g_desktop_app_info_list_actions([self castedGObject]);
+	const gchar* const* returnValue = (const gchar* const*)g_desktop_app_info_list_actions([self castedGObject]);
 
 	return returnValue;
 }

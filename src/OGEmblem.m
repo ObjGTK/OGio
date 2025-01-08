@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,7 +8,17 @@
 
 @implementation OGEmblem
 
-- (instancetype)init:(GIcon*)icon
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_EMBLEM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
+- (instancetype)initWithIcon:(GIcon*)icon
 {
 	GEmblem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblem_new(icon), GEmblem, GEmblem);
 
@@ -47,14 +57,14 @@
 
 - (GIcon*)icon
 {
-	GIcon* returnValue = g_emblem_get_icon([self castedGObject]);
+	GIcon* returnValue = (GIcon*)g_emblem_get_icon([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GEmblemOrigin)origin
 {
-	GEmblemOrigin returnValue = g_emblem_get_origin([self castedGObject]);
+	GEmblemOrigin returnValue = (GEmblemOrigin)g_emblem_get_origin([self castedGObject]);
 
 	return returnValue;
 }

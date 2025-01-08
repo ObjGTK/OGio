@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -9,6 +9,16 @@
 #import "OGUnixFDList.h"
 
 @implementation OGUnixFDMessage
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_UNIX_FD_MESSAGE;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)init
 {
@@ -51,28 +61,24 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_unix_fd_message_append_fd([self castedGObject], fd, &err);
+	bool returnValue = (bool)g_unix_fd_message_append_fd([self castedGObject], fd, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
 
 - (OGUnixFDList*)fdList
 {
-	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_message_get_fd_list([self castedGObject]), GUnixFDList, GUnixFDList);
+	GUnixFDList* gobjectValue = g_unix_fd_message_get_fd_list([self castedGObject]);
 
-	OGUnixFDList* returnValue = [OGUnixFDList withGObject:gobjectValue];
+	OGUnixFDList* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (gint*)stealFds:(gint*)length
 {
-	gint* returnValue = g_unix_fd_message_steal_fds([self castedGObject], length);
+	gint* returnValue = (gint*)g_unix_fd_message_steal_fds([self castedGObject], length);
 
 	return returnValue;
 }

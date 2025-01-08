@@ -1,15 +1,25 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGDBusAuthObserver.h"
 
-#import "OGIOStream.h"
 #import "OGCredentials.h"
+#import "OGIOStream.h"
 
 @implementation OGDBusAuthObserver
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DBUS_AUTH_OBSERVER;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)init
 {
@@ -34,14 +44,14 @@
 
 - (bool)allowMechanism:(OFString*)mechanism
 {
-	bool returnValue = g_dbus_auth_observer_allow_mechanism([self castedGObject], [mechanism UTF8String]);
+	bool returnValue = (bool)g_dbus_auth_observer_allow_mechanism([self castedGObject], [mechanism UTF8String]);
 
 	return returnValue;
 }
 
 - (bool)authorizeAuthenticatedPeerWithStream:(OGIOStream*)stream credentials:(OGCredentials*)credentials
 {
-	bool returnValue = g_dbus_auth_observer_authorize_authenticated_peer([self castedGObject], [stream castedGObject], [credentials castedGObject]);
+	bool returnValue = (bool)g_dbus_auth_observer_authorize_authenticated_peer([self castedGObject], [stream castedGObject], [credentials castedGObject]);
 
 	return returnValue;
 }

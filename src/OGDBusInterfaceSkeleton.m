@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -9,6 +9,16 @@
 #import "OGDBusConnection.h"
 
 @implementation OGDBusInterfaceSkeleton
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DBUS_INTERFACE_SKELETON;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (GDBusInterfaceSkeleton*)castedGObject
 {
@@ -19,13 +29,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_dbus_interface_skeleton_export([self castedGObject], [connection castedGObject], [objectPath UTF8String], &err);
+	bool returnValue = (bool)g_dbus_interface_skeleton_export([self castedGObject], [connection castedGObject], [objectPath UTF8String], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -37,29 +43,29 @@
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_interface_skeleton_get_connection([self castedGObject]), GDBusConnection, GDBusConnection);
+	GDBusConnection* gobjectValue = g_dbus_interface_skeleton_get_connection([self castedGObject]);
 
-	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
+	OGDBusConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (GList*)connections
 {
-	GList* returnValue = g_dbus_interface_skeleton_get_connections([self castedGObject]);
+	GList* returnValue = (GList*)g_dbus_interface_skeleton_get_connections([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusInterfaceSkeletonFlags)flags
 {
-	GDBusInterfaceSkeletonFlags returnValue = g_dbus_interface_skeleton_get_flags([self castedGObject]);
+	GDBusInterfaceSkeletonFlags returnValue = (GDBusInterfaceSkeletonFlags)g_dbus_interface_skeleton_get_flags([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusInterfaceInfo*)info
 {
-	GDBusInterfaceInfo* returnValue = g_dbus_interface_skeleton_get_info([self castedGObject]);
+	GDBusInterfaceInfo* returnValue = (GDBusInterfaceInfo*)g_dbus_interface_skeleton_get_info([self castedGObject]);
 
 	return returnValue;
 }
@@ -74,21 +80,21 @@
 
 - (GVariant*)properties
 {
-	GVariant* returnValue = g_dbus_interface_skeleton_get_properties([self castedGObject]);
+	GVariant* returnValue = (GVariant*)g_dbus_interface_skeleton_get_properties([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusInterfaceVTable*)vtable
 {
-	GDBusInterfaceVTable* returnValue = g_dbus_interface_skeleton_get_vtable([self castedGObject]);
+	GDBusInterfaceVTable* returnValue = (GDBusInterfaceVTable*)g_dbus_interface_skeleton_get_vtable([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)hasConnection:(OGDBusConnection*)connection
 {
-	bool returnValue = g_dbus_interface_skeleton_has_connection([self castedGObject], [connection castedGObject]);
+	bool returnValue = (bool)g_dbus_interface_skeleton_has_connection([self castedGObject], [connection castedGObject]);
 
 	return returnValue;
 }

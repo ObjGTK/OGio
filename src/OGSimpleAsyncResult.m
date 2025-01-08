@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,9 +10,19 @@
 
 @implementation OGSimpleAsyncResult
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_SIMPLE_ASYNC_RESULT;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (bool)isValidWithResult:(GAsyncResult*)result source:(GObject*)source sourceTag:(gpointer)sourceTag
 {
-	bool returnValue = g_simple_async_result_is_valid(result, source, sourceTag);
+	bool returnValue = (bool)g_simple_async_result_is_valid(result, source, sourceTag);
 
 	return returnValue;
 }
@@ -82,28 +92,28 @@
 
 - (bool)opResGboolean
 {
-	bool returnValue = g_simple_async_result_get_op_res_gboolean([self castedGObject]);
+	bool returnValue = (bool)g_simple_async_result_get_op_res_gboolean([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gpointer)opResGpointer
 {
-	gpointer returnValue = g_simple_async_result_get_op_res_gpointer([self castedGObject]);
+	gpointer returnValue = (gpointer)g_simple_async_result_get_op_res_gpointer([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gssize)opResGssize
 {
-	gssize returnValue = g_simple_async_result_get_op_res_gssize([self castedGObject]);
+	gssize returnValue = (gssize)g_simple_async_result_get_op_res_gssize([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gpointer)sourceTag
 {
-	gpointer returnValue = g_simple_async_result_get_source_tag([self castedGObject]);
+	gpointer returnValue = (gpointer)g_simple_async_result_get_source_tag([self castedGObject]);
 
 	return returnValue;
 }
@@ -112,13 +122,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_simple_async_result_propagate_error([self castedGObject], &err);
+	bool returnValue = (bool)g_simple_async_result_propagate_error([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

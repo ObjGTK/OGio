@@ -1,15 +1,25 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGResolver.h"
 
-#import "OGInetAddress.h"
 #import "OGCancellable.h"
+#import "OGInetAddress.h"
 
 @implementation OGResolver
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_RESOLVER;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 + (void)freeAddresses:(GList*)addresses
 {
@@ -23,9 +33,9 @@
 
 + (OGResolver*)default
 {
-	GResolver* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_resolver_get_default(), GResolver, GResolver);
+	GResolver* gobjectValue = g_resolver_get_default();
 
-	OGResolver* returnValue = [OGResolver withGObject:gobjectValue];
+	OGResolver* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -38,7 +48,7 @@
 
 - (unsigned)timeout
 {
-	unsigned returnValue = g_resolver_get_timeout([self castedGObject]);
+	unsigned returnValue = (unsigned)g_resolver_get_timeout([self castedGObject]);
 
 	return returnValue;
 }
@@ -49,11 +59,7 @@
 
 	gchar* gobjectValue = g_resolver_lookup_by_address([self castedGObject], [address castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -70,11 +76,7 @@
 
 	gchar* gobjectValue = g_resolver_lookup_by_address_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -84,13 +86,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_resolver_lookup_by_name([self castedGObject], [hostname UTF8String], [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_resolver_lookup_by_name([self castedGObject], [hostname UTF8String], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -104,13 +102,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_resolver_lookup_by_name_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_resolver_lookup_by_name_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -119,13 +113,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_resolver_lookup_by_name_with_flags([self castedGObject], [hostname UTF8String], flags, [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_resolver_lookup_by_name_with_flags([self castedGObject], [hostname UTF8String], flags, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -139,13 +129,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_resolver_lookup_by_name_with_flags_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_resolver_lookup_by_name_with_flags_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -154,13 +140,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_resolver_lookup_records([self castedGObject], [rrname UTF8String], recordType, [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_resolver_lookup_records([self castedGObject], [rrname UTF8String], recordType, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -174,13 +156,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_resolver_lookup_records_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_resolver_lookup_records_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -189,13 +167,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_resolver_lookup_service([self castedGObject], [service UTF8String], [protocol UTF8String], [domain UTF8String], [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_resolver_lookup_service([self castedGObject], [service UTF8String], [protocol UTF8String], [domain UTF8String], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -209,13 +183,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_resolver_lookup_service_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_resolver_lookup_service_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,19 +8,23 @@
 
 @implementation OGCharsetConverter
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_CHARSET_CONVERTER;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 - (instancetype)initWithToCharset:(OFString*)toCharset fromCharset:(OFString*)fromCharset
 {
 	GError* err = NULL;
 
 	GCharsetConverter* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_charset_converter_new([toCharset UTF8String], [fromCharset UTF8String], &err), GCharsetConverter, GCharsetConverter);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -41,14 +45,14 @@
 
 - (guint)numFallbacks
 {
-	guint returnValue = g_charset_converter_get_num_fallbacks([self castedGObject]);
+	guint returnValue = (guint)g_charset_converter_get_num_fallbacks([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)useFallback
 {
-	bool returnValue = g_charset_converter_get_use_fallback([self castedGObject]);
+	bool returnValue = (bool)g_charset_converter_get_use_fallback([self castedGObject]);
 
 	return returnValue;
 }

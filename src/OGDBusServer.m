@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -11,19 +11,23 @@
 
 @implementation OGDBusServer
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DBUS_SERVER;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 - (instancetype)initSyncWithAddress:(OFString*)address flags:(GDBusServerFlags)flags guid:(OFString*)guid observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
 	GDBusServer* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_server_new_sync([address UTF8String], flags, [guid UTF8String], [observer castedGObject], [cancellable castedGObject], &err), GDBusServer, GDBusServer);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -52,7 +56,7 @@
 
 - (GDBusServerFlags)flags
 {
-	GDBusServerFlags returnValue = g_dbus_server_get_flags([self castedGObject]);
+	GDBusServerFlags returnValue = (GDBusServerFlags)g_dbus_server_get_flags([self castedGObject]);
 
 	return returnValue;
 }
@@ -67,7 +71,7 @@
 
 - (bool)isActive
 {
-	bool returnValue = g_dbus_server_is_active([self castedGObject]);
+	bool returnValue = (bool)g_dbus_server_is_active([self castedGObject]);
 
 	return returnValue;
 }

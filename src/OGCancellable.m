@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,11 +8,21 @@
 
 @implementation OGCancellable
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_CANCELLABLE;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (OGCancellable*)current
 {
-	GCancellable* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_cancellable_get_current(), GCancellable, GCancellable);
+	GCancellable* gobjectValue = g_cancellable_get_current();
 
-	OGCancellable* returnValue = [OGCancellable withGObject:gobjectValue];
+	OGCancellable* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
@@ -44,7 +54,7 @@
 
 - (gulong)connectWithCallback:(GCallback)callback data:(gpointer)data dataDestroyFunc:(GDestroyNotify)dataDestroyFunc
 {
-	gulong returnValue = g_cancellable_connect([self castedGObject], callback, data, dataDestroyFunc);
+	gulong returnValue = (gulong)g_cancellable_connect([self castedGObject], callback, data, dataDestroyFunc);
 
 	return returnValue;
 }
@@ -56,21 +66,21 @@
 
 - (int)fd
 {
-	int returnValue = g_cancellable_get_fd([self castedGObject]);
+	int returnValue = (int)g_cancellable_get_fd([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isCancelled
 {
-	bool returnValue = g_cancellable_is_cancelled([self castedGObject]);
+	bool returnValue = (bool)g_cancellable_is_cancelled([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)makePollfd:(GPollFD*)pollfd
 {
-	bool returnValue = g_cancellable_make_pollfd([self castedGObject], pollfd);
+	bool returnValue = (bool)g_cancellable_make_pollfd([self castedGObject], pollfd);
 
 	return returnValue;
 }
@@ -99,20 +109,16 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_cancellable_set_error_if_cancelled([self castedGObject], &err);
+	bool returnValue = (bool)g_cancellable_set_error_if_cancelled([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
 
 - (GSource*)sourceNew
 {
-	GSource* returnValue = g_cancellable_source_new([self castedGObject]);
+	GSource* returnValue = (GSource*)g_cancellable_source_new([self castedGObject]);
 
 	return returnValue;
 }

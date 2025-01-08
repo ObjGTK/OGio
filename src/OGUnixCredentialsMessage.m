@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,9 +10,19 @@
 
 @implementation OGUnixCredentialsMessage
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_UNIX_CREDENTIALS_MESSAGE;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (bool)isSupported
 {
-	bool returnValue = g_unix_credentials_message_is_supported();
+	bool returnValue = (bool)g_unix_credentials_message_is_supported();
 
 	return returnValue;
 }
@@ -56,9 +66,9 @@
 
 - (OGCredentials*)credentials
 {
-	GCredentials* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_get_credentials([self castedGObject]), GCredentials, GCredentials);
+	GCredentials* gobjectValue = g_unix_credentials_message_get_credentials([self castedGObject]);
 
-	OGCredentials* returnValue = [OGCredentials withGObject:gobjectValue];
+	OGCredentials* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 

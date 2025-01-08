@@ -1,12 +1,22 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGFilenameCompleter.h"
 
 @implementation OGFilenameCompleter
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_FILENAME_COMPLETER;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)init
 {
@@ -39,7 +49,7 @@
 
 - (char**)completions:(OFString*)initialText
 {
-	char** returnValue = g_filename_completer_get_completions([self castedGObject], [initialText UTF8String]);
+	char** returnValue = (char**)g_filename_completer_get_completions([self castedGObject], [initialText UTF8String]);
 
 	return returnValue;
 }

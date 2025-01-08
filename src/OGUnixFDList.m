@@ -1,12 +1,22 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGUnixFDList.h"
 
 @implementation OGUnixFDList
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_UNIX_FD_LIST;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)init
 {
@@ -49,13 +59,9 @@
 {
 	GError* err = NULL;
 
-	gint returnValue = g_unix_fd_list_append([self castedGObject], fd, &err);
+	gint returnValue = (gint)g_unix_fd_list_append([self castedGObject], fd, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -64,34 +70,30 @@
 {
 	GError* err = NULL;
 
-	gint returnValue = g_unix_fd_list_get([self castedGObject], index, &err);
+	gint returnValue = (gint)g_unix_fd_list_get([self castedGObject], index, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
 
 - (gint)length
 {
-	gint returnValue = g_unix_fd_list_get_length([self castedGObject]);
+	gint returnValue = (gint)g_unix_fd_list_get_length([self castedGObject]);
 
 	return returnValue;
 }
 
 - (const gint*)peekFds:(gint*)length
 {
-	const gint* returnValue = g_unix_fd_list_peek_fds([self castedGObject], length);
+	const gint* returnValue = (const gint*)g_unix_fd_list_peek_fds([self castedGObject], length);
 
 	return returnValue;
 }
 
 - (gint*)stealFds:(gint*)length
 {
-	gint* returnValue = g_unix_fd_list_steal_fds([self castedGObject], length);
+	gint* returnValue = (gint*)g_unix_fd_list_steal_fds([self castedGObject], length);
 
 	return returnValue;
 }

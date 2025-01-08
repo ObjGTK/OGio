@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,17 +8,23 @@
 
 @implementation OGNetworkAddress
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_NETWORK_ADDRESS;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (GSocketConnectable*)parseWithHostAndPort:(OFString*)hostAndPort defaultPort:(guint16)defaultPort
 {
 	GError* err = NULL;
 
-	GSocketConnectable* returnValue = g_network_address_parse([hostAndPort UTF8String], defaultPort, &err);
+	GSocketConnectable* returnValue = (GSocketConnectable*)g_network_address_parse([hostAndPort UTF8String], defaultPort, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -27,13 +33,9 @@
 {
 	GError* err = NULL;
 
-	GSocketConnectable* returnValue = g_network_address_parse_uri([uri UTF8String], defaultPort, &err);
+	GSocketConnectable* returnValue = (GSocketConnectable*)g_network_address_parse_uri([uri UTF8String], defaultPort, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -54,7 +56,7 @@
 	return self;
 }
 
-- (instancetype)initLoopback:(guint16)port
+- (instancetype)initWithPortLoopback:(guint16)port
 {
 	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new_loopback(port), GNetworkAddress, GNetworkAddress);
 
@@ -85,7 +87,7 @@
 
 - (guint16)port
 {
-	guint16 returnValue = g_network_address_get_port([self castedGObject]);
+	guint16 returnValue = (guint16)g_network_address_get_port([self castedGObject]);
 
 	return returnValue;
 }

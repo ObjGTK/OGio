@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -12,19 +12,23 @@
 
 @implementation OGSubprocess
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_SUBPROCESS;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 - (instancetype)initvWithArgv:(const gchar* const*)argv flags:(GSubprocessFlags)flags
 {
 	GError* err = NULL;
 
 	GSubprocess* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_newv(argv, flags, &err), GSubprocess, GSubprocess);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -47,13 +51,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_subprocess_communicate([self castedGObject], stdinBuf, [cancellable castedGObject], stdoutBuf, stderrBuf, &err);
+	bool returnValue = (bool)g_subprocess_communicate([self castedGObject], stdinBuf, [cancellable castedGObject], stdoutBuf, stderrBuf, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -67,13 +67,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_subprocess_communicate_finish([self castedGObject], result, stdoutBuf, stderrBuf, &err);
+	bool returnValue = (bool)g_subprocess_communicate_finish([self castedGObject], result, stdoutBuf, stderrBuf, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -82,13 +78,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_subprocess_communicate_utf8([self castedGObject], [stdinBuf UTF8String], [cancellable castedGObject], stdoutBuf, stderrBuf, &err);
+	bool returnValue = (bool)g_subprocess_communicate_utf8([self castedGObject], [stdinBuf UTF8String], [cancellable castedGObject], stdoutBuf, stderrBuf, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -102,13 +94,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_subprocess_communicate_utf8_finish([self castedGObject], result, stdoutBuf, stderrBuf, &err);
+	bool returnValue = (bool)g_subprocess_communicate_utf8_finish([self castedGObject], result, stdoutBuf, stderrBuf, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -120,7 +108,7 @@
 
 - (gint)exitStatus
 {
-	gint returnValue = g_subprocess_get_exit_status([self castedGObject]);
+	gint returnValue = (gint)g_subprocess_get_exit_status([self castedGObject]);
 
 	return returnValue;
 }
@@ -135,59 +123,59 @@
 
 - (bool)ifExited
 {
-	bool returnValue = g_subprocess_get_if_exited([self castedGObject]);
+	bool returnValue = (bool)g_subprocess_get_if_exited([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)ifSignaled
 {
-	bool returnValue = g_subprocess_get_if_signaled([self castedGObject]);
+	bool returnValue = (bool)g_subprocess_get_if_signaled([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gint)status
 {
-	gint returnValue = g_subprocess_get_status([self castedGObject]);
+	gint returnValue = (gint)g_subprocess_get_status([self castedGObject]);
 
 	return returnValue;
 }
 
 - (OGInputStream*)stderrPipe
 {
-	GInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_get_stderr_pipe([self castedGObject]), GInputStream, GInputStream);
+	GInputStream* gobjectValue = g_subprocess_get_stderr_pipe([self castedGObject]);
 
-	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
+	OGInputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (OGOutputStream*)stdinPipe
 {
-	GOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_get_stdin_pipe([self castedGObject]), GOutputStream, GOutputStream);
+	GOutputStream* gobjectValue = g_subprocess_get_stdin_pipe([self castedGObject]);
 
-	OGOutputStream* returnValue = [OGOutputStream withGObject:gobjectValue];
+	OGOutputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (OGInputStream*)stdoutPipe
 {
-	GInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_get_stdout_pipe([self castedGObject]), GInputStream, GInputStream);
+	GInputStream* gobjectValue = g_subprocess_get_stdout_pipe([self castedGObject]);
 
-	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
+	OGInputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (bool)successful
 {
-	bool returnValue = g_subprocess_get_successful([self castedGObject]);
+	bool returnValue = (bool)g_subprocess_get_successful([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gint)termSig
 {
-	gint returnValue = g_subprocess_get_term_sig([self castedGObject]);
+	gint returnValue = (gint)g_subprocess_get_term_sig([self castedGObject]);
 
 	return returnValue;
 }
@@ -201,13 +189,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_subprocess_wait([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_subprocess_wait([self castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -221,13 +205,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_subprocess_wait_check([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_subprocess_wait_check([self castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -241,13 +221,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_subprocess_wait_check_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_subprocess_wait_check_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -256,13 +232,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_subprocess_wait_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_subprocess_wait_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

@@ -1,20 +1,18 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gunixfdmessage.h>
 
 #import <OGObject/OGObject.h>
-
-@class OGSettingsBackend;
 
 /**
  * The `GSettings` class provides a convenient API for storing and retrieving
@@ -316,6 +314,8 @@
 /**
  * Functions
  */
++ (void)load;
+
 
 /**
  * Deprecated.
@@ -365,10 +365,10 @@
 /**
  * Constructors
  */
-- (instancetype)init:(OFString*)schemaId;
-- (instancetype)initFullWithSchema:(GSettingsSchema*)schema backend:(OGSettingsBackend*)backend path:(OFString*)path;
-- (instancetype)initWithBackendWithSchemaId:(OFString*)schemaId backend:(OGSettingsBackend*)backend;
-- (instancetype)initWithBackendAndPathWithSchemaId:(OFString*)schemaId backend:(OGSettingsBackend*)backend path:(OFString*)path;
+- (instancetype)initWithSchemaId:(OFString*)schemaId;
+- (instancetype)initFullWithSchema:(GSettingsSchema*)schema backend:(GSettingsBackend*)backend path:(OFString*)path;
+- (instancetype)initWithBackendWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend;
+- (instancetype)initWithBackendAndPathWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend path:(OFString*)path;
 - (instancetype)initWithPathWithSchemaId:(OFString*)schemaId path:(OFString*)path;
 
 /**

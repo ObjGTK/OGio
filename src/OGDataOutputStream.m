@@ -1,17 +1,27 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGDataOutputStream.h"
 
-#import "OGOutputStream.h"
 #import "OGCancellable.h"
+#import "OGOutputStream.h"
 
 @implementation OGDataOutputStream
 
-- (instancetype)init:(OGOutputStream*)baseStream
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DATA_OUTPUT_STREAM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
+- (instancetype)initWithBaseStream:(OGOutputStream*)baseStream
 {
 	GDataOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_data_output_stream_new([baseStream castedGObject]), GDataOutputStream, GDataOutputStream);
 
@@ -34,7 +44,7 @@
 
 - (GDataStreamByteOrder)byteOrder
 {
-	GDataStreamByteOrder returnValue = g_data_output_stream_get_byte_order([self castedGObject]);
+	GDataStreamByteOrder returnValue = (GDataStreamByteOrder)g_data_output_stream_get_byte_order([self castedGObject]);
 
 	return returnValue;
 }
@@ -43,13 +53,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_data_output_stream_put_byte([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_byte([self castedGObject], data, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -58,13 +64,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_data_output_stream_put_int16([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_int16([self castedGObject], data, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -73,13 +75,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_data_output_stream_put_int32([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_int32([self castedGObject], data, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -88,13 +86,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_data_output_stream_put_int64([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_int64([self castedGObject], data, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -103,13 +97,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_data_output_stream_put_string([self castedGObject], [str UTF8String], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_string([self castedGObject], [str UTF8String], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -118,13 +108,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_data_output_stream_put_uint16([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_uint16([self castedGObject], data, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -133,13 +119,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_data_output_stream_put_uint32([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_uint32([self castedGObject], data, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -148,13 +130,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_data_output_stream_put_uint64([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_uint64([self castedGObject], data, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

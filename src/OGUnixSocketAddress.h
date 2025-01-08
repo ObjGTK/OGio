@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -36,6 +36,8 @@
 /**
  * Functions
  */
++ (void)load;
+
 
 /**
  * Checks if abstract UNIX domain socket names are supported.
@@ -47,7 +49,7 @@
 /**
  * Constructors
  */
-- (instancetype)init:(OFString*)path;
+- (instancetype)initWithPath:(OFString*)path;
 - (instancetype)initAbstractWithPath:(OFString*)path pathLen:(gint)pathLen;
 - (instancetype)initWithTypeWithPath:(OFString*)path pathLen:(gint)pathLen type:(GUnixSocketAddressType)type;
 

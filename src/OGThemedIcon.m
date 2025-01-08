@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,7 +8,17 @@
 
 @implementation OGThemedIcon
 
-- (instancetype)init:(OFString*)iconname
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_THEMED_ICON;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
+- (instancetype)initWithIconname:(OFString*)iconname
 {
 	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new([iconname UTF8String]), GThemedIcon, GThemedIcon);
 
@@ -40,7 +50,7 @@
 	return self;
 }
 
-- (instancetype)initWithDefaultFallbacks:(OFString*)iconname
+- (instancetype)initWithIconnameWithDefaultFallbacks:(OFString*)iconname
 {
 	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_with_default_fallbacks([iconname UTF8String]), GThemedIcon, GThemedIcon);
 
@@ -68,7 +78,7 @@
 
 - (const gchar* const*)names
 {
-	const gchar* const* returnValue = g_themed_icon_get_names([self castedGObject]);
+	const gchar* const* returnValue = (const gchar* const*)g_themed_icon_get_names([self castedGObject]);
 
 	return returnValue;
 }

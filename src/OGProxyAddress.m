@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,6 +10,16 @@
 #import "OGSocketAddress.h"
 
 @implementation OGProxyAddress
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_PROXY_ADDRESS;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)initWithInetaddr:(OGInetAddress*)inetaddr port:(guint16)port protocol:(OFString*)protocol destHostname:(OFString*)destHostname destPort:(guint16)destPort username:(OFString*)username password:(OFString*)password
 {
@@ -42,7 +52,7 @@
 
 - (guint16)destinationPort
 {
-	guint16 returnValue = g_proxy_address_get_destination_port([self castedGObject]);
+	guint16 returnValue = (guint16)g_proxy_address_get_destination_port([self castedGObject]);
 
 	return returnValue;
 }

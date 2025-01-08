@@ -1,12 +1,22 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGSimpleActionGroup.h"
 
 @implementation OGSimpleActionGroup
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_SIMPLE_ACTION_GROUP;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)init
 {
@@ -41,7 +51,7 @@
 
 - (GAction*)lookup:(OFString*)actionName
 {
-	GAction* returnValue = g_simple_action_group_lookup([self castedGObject], [actionName UTF8String]);
+	GAction* returnValue = (GAction*)g_simple_action_group_lookup([self castedGObject], [actionName UTF8String]);
 
 	return returnValue;
 }

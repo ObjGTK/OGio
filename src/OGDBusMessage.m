@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,17 +10,23 @@
 
 @implementation OGDBusMessage
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DBUS_MESSAGE;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (gssize)bytesNeededWithBlob:(guchar*)blob blobLen:(gsize)blobLen
 {
 	GError* err = NULL;
 
-	gssize returnValue = g_dbus_message_bytes_needed(blob, blobLen, &err);
+	gssize returnValue = (gssize)g_dbus_message_bytes_needed(blob, blobLen, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -47,13 +53,7 @@
 
 	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_from_blob(blob, blobLen, capabilities, &err), GDBusMessage, GDBusMessage);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
 	@try {
 		self = [super initWithGObject:gobjectValue];
@@ -108,17 +108,11 @@
 {
 	GError* err = NULL;
 
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_copy([self castedGObject], &err), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = g_dbus_message_copy([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
+	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -142,14 +136,14 @@
 
 - (GVariant*)body
 {
-	GVariant* returnValue = g_dbus_message_get_body([self castedGObject]);
+	GVariant* returnValue = (GVariant*)g_dbus_message_get_body([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusMessageByteOrder)byteOrder
 {
-	GDBusMessageByteOrder returnValue = g_dbus_message_get_byte_order([self castedGObject]);
+	GDBusMessageByteOrder returnValue = (GDBusMessageByteOrder)g_dbus_message_get_byte_order([self castedGObject]);
 
 	return returnValue;
 }
@@ -172,21 +166,21 @@
 
 - (GDBusMessageFlags)flags
 {
-	GDBusMessageFlags returnValue = g_dbus_message_get_flags([self castedGObject]);
+	GDBusMessageFlags returnValue = (GDBusMessageFlags)g_dbus_message_get_flags([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GVariant*)header:(GDBusMessageHeaderField)headerField
 {
-	GVariant* returnValue = g_dbus_message_get_header([self castedGObject], headerField);
+	GVariant* returnValue = (GVariant*)g_dbus_message_get_header([self castedGObject], headerField);
 
 	return returnValue;
 }
 
 - (guchar*)headerFields
 {
-	guchar* returnValue = g_dbus_message_get_header_fields([self castedGObject]);
+	guchar* returnValue = (guchar*)g_dbus_message_get_header_fields([self castedGObject]);
 
 	return returnValue;
 }
@@ -201,7 +195,7 @@
 
 - (bool)locked
 {
-	bool returnValue = g_dbus_message_get_locked([self castedGObject]);
+	bool returnValue = (bool)g_dbus_message_get_locked([self castedGObject]);
 
 	return returnValue;
 }
@@ -216,14 +210,14 @@
 
 - (GDBusMessageType)messageType
 {
-	GDBusMessageType returnValue = g_dbus_message_get_message_type([self castedGObject]);
+	GDBusMessageType returnValue = (GDBusMessageType)g_dbus_message_get_message_type([self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint32)numUnixFds
 {
-	guint32 returnValue = g_dbus_message_get_num_unix_fds([self castedGObject]);
+	guint32 returnValue = (guint32)g_dbus_message_get_num_unix_fds([self castedGObject]);
 
 	return returnValue;
 }
@@ -238,7 +232,7 @@
 
 - (guint32)replySerial
 {
-	guint32 returnValue = g_dbus_message_get_reply_serial([self castedGObject]);
+	guint32 returnValue = (guint32)g_dbus_message_get_reply_serial([self castedGObject]);
 
 	return returnValue;
 }
@@ -253,7 +247,7 @@
 
 - (guint32)serial
 {
-	guint32 returnValue = g_dbus_message_get_serial([self castedGObject]);
+	guint32 returnValue = (guint32)g_dbus_message_get_serial([self castedGObject]);
 
 	return returnValue;
 }
@@ -268,9 +262,9 @@
 
 - (OGUnixFDList*)unixFdList
 {
-	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_get_unix_fd_list([self castedGObject]), GUnixFDList, GUnixFDList);
+	GUnixFDList* gobjectValue = g_dbus_message_get_unix_fd_list([self castedGObject]);
 
-	OGUnixFDList* returnValue = [OGUnixFDList withGObject:gobjectValue];
+	OGUnixFDList* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
@@ -281,9 +275,9 @@
 
 - (OGDBusMessage*)newMethodErrorLiteralWithErrorName:(OFString*)errorName errorMessage:(OFString*)errorMessage
 {
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_error_literal([self castedGObject], [errorName UTF8String], [errorMessage UTF8String]), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = g_dbus_message_new_method_error_literal([self castedGObject], [errorName UTF8String], [errorMessage UTF8String]);
 
-	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
+	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -291,9 +285,9 @@
 
 - (OGDBusMessage*)newMethodErrorValistWithErrorName:(OFString*)errorName errorMessageFormat:(OFString*)errorMessageFormat varArgs:(va_list)varArgs
 {
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_error_valist([self castedGObject], [errorName UTF8String], [errorMessageFormat UTF8String], varArgs), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = g_dbus_message_new_method_error_valist([self castedGObject], [errorName UTF8String], [errorMessageFormat UTF8String], varArgs);
 
-	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
+	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -301,9 +295,9 @@
 
 - (OGDBusMessage*)newMethodReply
 {
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_reply([self castedGObject]), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = g_dbus_message_new_method_reply([self castedGObject]);
 
-	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
+	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -401,13 +395,9 @@
 {
 	GError* err = NULL;
 
-	guchar* returnValue = g_dbus_message_to_blob([self castedGObject], outSize, capabilities, &err);
+	guchar* returnValue = (guchar*)g_dbus_message_to_blob([self castedGObject], outSize, capabilities, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -416,13 +406,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_dbus_message_to_gerror([self castedGObject], &err);
+	bool returnValue = (bool)g_dbus_message_to_gerror([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

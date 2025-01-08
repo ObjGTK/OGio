@@ -1,12 +1,22 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGUnixInputStream.h"
 
 @implementation OGUnixInputStream
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_UNIX_INPUT_STREAM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (instancetype)initWithFd:(gint)fd closeFd:(bool)closeFd
 {
@@ -31,14 +41,14 @@
 
 - (bool)closeFd
 {
-	bool returnValue = g_unix_input_stream_get_close_fd([self castedGObject]);
+	bool returnValue = (bool)g_unix_input_stream_get_close_fd([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gint)fd
 {
-	gint returnValue = g_unix_input_stream_get_fd([self castedGObject]);
+	gint returnValue = (gint)g_unix_input_stream_get_fd([self castedGObject]);
 
 	return returnValue;
 }
