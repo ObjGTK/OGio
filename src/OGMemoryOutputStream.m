@@ -18,36 +18,44 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithData:(gpointer)data size:(gsize)size reallocFunction:(GReallocFunc)reallocFunction destroyFunction:(GDestroyNotify)destroyFunction
++ (instancetype)memoryOutputStreamWithData:(gpointer)data size:(gsize)size reallocFunction:(GReallocFunc)reallocFunction destroyFunction:(GDestroyNotify)destroyFunction
 {
 	GMemoryOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_output_stream_new(data, size, reallocFunction, destroyFunction), GMemoryOutputStream, GMemoryOutputStream);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGMemoryOutputStream* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGMemoryOutputStream alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initResizable
++ (instancetype)memoryOutputStreamResizable
 {
 	GMemoryOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_output_stream_new_resizable(), GMemoryOutputStream, GMemoryOutputStream);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGMemoryOutputStream* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGMemoryOutputStream alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GMemoryOutputStream*)castedGObject

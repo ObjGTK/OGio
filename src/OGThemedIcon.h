@@ -35,9 +35,9 @@
 /**
  * Constructors
  */
-- (instancetype)initWithIconname:(OFString*)iconname;
-- (instancetype)initFromNamesWithIconnames:(char**)iconnames len:(int)len;
-- (instancetype)initWithIconnameWithDefaultFallbacks:(OFString*)iconname;
++ (instancetype)themedIcon:(OFString*)iconname;
++ (instancetype)themedIconFromNamesWithIconnames:(char**)iconnames len:(int)len;
++ (instancetype)themedIconWithDefaultFallbacks:(OFString*)iconname;
 
 /**
  * Methods

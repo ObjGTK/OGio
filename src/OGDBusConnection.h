@@ -156,10 +156,10 @@
 /**
  * Constructors
  */
-- (instancetype)initWithResFinish:(GAsyncResult*)res;
-- (instancetype)initWithResForAddressFinish:(GAsyncResult*)res;
-- (instancetype)initForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
-- (instancetype)initSyncWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusConnectionFinish:(GAsyncResult*)res;
++ (instancetype)dBusConnectionForAddressFinish:(GAsyncResult*)res;
++ (instancetype)dBusConnectionForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusConnectionSyncWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
 
 /**
  * Methods

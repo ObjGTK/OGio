@@ -27,7 +27,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithFd:(gint)fd closeFd:(bool)closeFd;
++ (instancetype)unixInputStreamWithFd:(gint)fd closeFd:(bool)closeFd;
 
 /**
  * Methods

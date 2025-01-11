@@ -103,8 +103,8 @@
 /**
  * Constructors
  */
-- (instancetype)initWithFamily:(GSocketFamily)family type:(GSocketType)type protocol:(GSocketProtocol)protocol;
-- (instancetype)initWithFdFromFd:(gint)fd;
++ (instancetype)socketWithFamily:(GSocketFamily)family type:(GSocketType)type protocol:(GSocketProtocol)protocol;
++ (instancetype)socketFromFd:(gint)fd;
 
 /**
  * Methods

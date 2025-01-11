@@ -20,36 +20,44 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithBaseStream:(OGOutputStream*)baseStream
++ (instancetype)bufferedOutputStream:(OGOutputStream*)baseStream
 {
 	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new([baseStream castedGObject]), GBufferedOutputStream, GBufferedOutputStream);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGBufferedOutputStream* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGBufferedOutputStream alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initSizedWithBaseStream:(OGOutputStream*)baseStream size:(gsize)size
++ (instancetype)bufferedOutputStreamSizedWithBaseStream:(OGOutputStream*)baseStream size:(gsize)size
 {
 	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new_sized([baseStream castedGObject], size), GBufferedOutputStream, GBufferedOutputStream);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGBufferedOutputStream* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGBufferedOutputStream alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GBufferedOutputStream*)castedGObject

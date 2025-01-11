@@ -25,8 +25,8 @@
 /**
  * Constructors
  */
-- (instancetype)initWithAddress:(OGInetAddress*)address port:(guint16)port;
-- (instancetype)initFromStringWithAddress:(OFString*)address port:(guint)port;
++ (instancetype)inetSocketAddressWithAddress:(OGInetAddress*)address port:(guint16)port;
++ (instancetype)inetSocketAddressFromStringWithAddress:(OFString*)address port:(guint)port;
 
 /**
  * Methods

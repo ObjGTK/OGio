@@ -32,8 +32,8 @@
 /**
  * Constructors
  */
-- (instancetype)initWithIcon:(GIcon*)icon;
-- (instancetype)initWithOriginWithIcon:(GIcon*)icon origin:(GEmblemOrigin)origin;
++ (instancetype)emblem:(GIcon*)icon;
++ (instancetype)emblemWithOriginWithIcon:(GIcon*)icon origin:(GEmblemOrigin)origin;
 
 /**
  * Methods

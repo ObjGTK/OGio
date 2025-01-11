@@ -20,36 +20,44 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithAddress:(OGInetAddress*)address port:(guint16)port
++ (instancetype)inetSocketAddressWithAddress:(OGInetAddress*)address port:(guint16)port
 {
 	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new([address castedGObject], port), GInetSocketAddress, GInetSocketAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetSocketAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetSocketAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromStringWithAddress:(OFString*)address port:(guint)port
++ (instancetype)inetSocketAddressFromStringWithAddress:(OFString*)address port:(guint)port
 {
 	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new_from_string([address UTF8String], port), GInetSocketAddress, GInetSocketAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetSocketAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetSocketAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GInetSocketAddress*)castedGObject

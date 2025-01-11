@@ -587,7 +587,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithSourceObject:(gpointer)sourceObject cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback callbackData:(gpointer)callbackData;
++ (instancetype)taskWithSourceObject:(gpointer)sourceObject cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback callbackData:(gpointer)callbackData;
 
 /**
  * Methods

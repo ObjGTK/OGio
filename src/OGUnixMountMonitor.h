@@ -47,7 +47,7 @@
 /**
  * Constructors
  */
-- (instancetype)init;
++ (instancetype)unixMountMonitor;
 
 /**
  * Methods

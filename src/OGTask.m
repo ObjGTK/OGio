@@ -32,20 +32,24 @@
 	g_task_report_error(sourceObject, callback, callbackData, sourceTag, error);
 }
 
-- (instancetype)initWithSourceObject:(gpointer)sourceObject cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback callbackData:(gpointer)callbackData
++ (instancetype)taskWithSourceObject:(gpointer)sourceObject cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback callbackData:(gpointer)callbackData
 {
 	GTask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_task_new(sourceObject, [cancellable castedGObject], callback, callbackData), GTask, GTask);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGTask* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTask alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GTask*)castedGObject

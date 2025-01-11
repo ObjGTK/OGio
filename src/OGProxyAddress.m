@@ -21,20 +21,24 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithInetaddr:(OGInetAddress*)inetaddr port:(guint16)port protocol:(OFString*)protocol destHostname:(OFString*)destHostname destPort:(guint16)destPort username:(OFString*)username password:(OFString*)password
++ (instancetype)proxyAddressWithInetaddr:(OGInetAddress*)inetaddr port:(guint16)port protocol:(OFString*)protocol destHostname:(OFString*)destHostname destPort:(guint16)destPort username:(OFString*)username password:(OFString*)password
 {
 	GProxyAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_proxy_address_new([inetaddr castedGObject], port, [protocol UTF8String], [destHostname UTF8String], destPort, [username UTF8String], [password UTF8String]), GProxyAddress, GProxyAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGProxyAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGProxyAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GProxyAddress*)castedGObject

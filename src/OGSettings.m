@@ -42,84 +42,104 @@
 	g_settings_unbind(object, [property UTF8String]);
 }
 
-- (instancetype)initWithSchemaId:(OFString*)schemaId
++ (instancetype)settings:(OFString*)schemaId
 {
 	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new([schemaId UTF8String]), GSettings, GSettings);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSettings* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSettings alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFullWithSchema:(GSettingsSchema*)schema backend:(GSettingsBackend*)backend path:(OFString*)path
++ (instancetype)settingsFullWithSchema:(GSettingsSchema*)schema backend:(GSettingsBackend*)backend path:(OFString*)path
 {
 	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_full(schema, backend, [path UTF8String]), GSettings, GSettings);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSettings* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSettings alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithBackendWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend
++ (instancetype)settingsWithBackendWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend
 {
 	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_backend([schemaId UTF8String], backend), GSettings, GSettings);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSettings* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSettings alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithBackendAndPathWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend path:(OFString*)path
++ (instancetype)settingsWithBackendAndPathWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend path:(OFString*)path
 {
 	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_backend_and_path([schemaId UTF8String], backend, [path UTF8String]), GSettings, GSettings);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSettings* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSettings alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithPathWithSchemaId:(OFString*)schemaId path:(OFString*)path
++ (instancetype)settingsWithPathWithSchemaId:(OFString*)schemaId path:(OFString*)path
 {
 	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_path([schemaId UTF8String], [path UTF8String]), GSettings, GSettings);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSettings* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSettings alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GSettings*)castedGObject

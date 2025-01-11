@@ -22,20 +22,24 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithBaseIoStream:(OGIOStream*)baseIoStream socket:(OGSocket*)socket
++ (instancetype)tcpWrapperConnectionWithBaseIoStream:(OGIOStream*)baseIoStream socket:(OGSocket*)socket
 {
 	GTcpWrapperConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tcp_wrapper_connection_new([baseIoStream castedGObject], [socket castedGObject]), GTcpWrapperConnection, GTcpWrapperConnection);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGTcpWrapperConnection* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTcpWrapperConnection alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GTcpWrapperConnection*)castedGObject

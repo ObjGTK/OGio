@@ -18,52 +18,64 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithIconname:(OFString*)iconname
++ (instancetype)themedIcon:(OFString*)iconname
 {
 	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new([iconname UTF8String]), GThemedIcon, GThemedIcon);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGThemedIcon* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGThemedIcon alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromNamesWithIconnames:(char**)iconnames len:(int)len
++ (instancetype)themedIconFromNamesWithIconnames:(char**)iconnames len:(int)len
 {
 	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_from_names(iconnames, len), GThemedIcon, GThemedIcon);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGThemedIcon* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGThemedIcon alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithIconnameWithDefaultFallbacks:(OFString*)iconname
++ (instancetype)themedIconWithDefaultFallbacks:(OFString*)iconname
 {
 	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_with_default_fallbacks([iconname UTF8String]), GThemedIcon, GThemedIcon);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGThemedIcon* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGThemedIcon alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GThemedIcon*)castedGObject

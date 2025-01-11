@@ -23,9 +23,9 @@
 /**
  * Constructors
  */
-- (instancetype)init;
-- (instancetype)initWithBytesFromBytes:(GBytes*)bytes;
-- (instancetype)initFromDataWithData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy;
++ (instancetype)memoryInputStream;
++ (instancetype)memoryInputStreamFromBytes:(GBytes*)bytes;
++ (instancetype)memoryInputStreamFromDataWithData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy;
 
 /**
  * Methods

@@ -20,20 +20,24 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithObjectPath:(OFString*)objectPath
++ (instancetype)dBusObjectSkeleton:(OFString*)objectPath
 {
 	GDBusObjectSkeleton* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_skeleton_new([objectPath UTF8String]), GDBusObjectSkeleton, GDBusObjectSkeleton);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGDBusObjectSkeleton* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusObjectSkeleton alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GDBusObjectSkeleton*)castedGObject

@@ -27,36 +27,44 @@
 	return returnValue;
 }
 
-- (instancetype)init
++ (instancetype)unixCredentialsMessage
 {
 	GUnixCredentialsMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_new(), GUnixCredentialsMessage, GUnixCredentialsMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixCredentialsMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixCredentialsMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithCredentials:(OGCredentials*)credentials
++ (instancetype)unixCredentialsMessageWithCredentials:(OGCredentials*)credentials
 {
 	GUnixCredentialsMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_new_with_credentials([credentials castedGObject]), GUnixCredentialsMessage, GUnixCredentialsMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixCredentialsMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixCredentialsMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GUnixCredentialsMessage*)castedGObject

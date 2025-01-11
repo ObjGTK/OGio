@@ -28,7 +28,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithFlags:(GTlsPasswordFlags)flags description:(OFString*)description;
++ (instancetype)tlsPasswordWithFlags:(GTlsPasswordFlags)flags description:(OFString*)description;
 
 /**
  * Methods

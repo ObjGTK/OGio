@@ -23,8 +23,8 @@
 /**
  * Constructors
  */
-- (instancetype)initWithData:(gpointer)data size:(gsize)size reallocFunction:(GReallocFunc)reallocFunction destroyFunction:(GDestroyNotify)destroyFunction;
-- (instancetype)initResizable;
++ (instancetype)memoryOutputStreamWithData:(gpointer)data size:(gsize)size reallocFunction:(GReallocFunc)reallocFunction destroyFunction:(GDestroyNotify)destroyFunction;
++ (instancetype)memoryOutputStreamResizable;
 
 /**
  * Methods

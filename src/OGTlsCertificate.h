@@ -50,12 +50,12 @@
 /**
  * Constructors
  */
-- (instancetype)initWithFileFromFile:(OFString*)file;
-- (instancetype)initFromFileWithPasswordWithFile:(OFString*)file password:(OFString*)password;
-- (instancetype)initFromFilesWithCertFile:(OFString*)certFile keyFile:(OFString*)keyFile;
-- (instancetype)initFromPemWithData:(OFString*)data length:(gssize)length;
-- (instancetype)initFromPkcs11UrisWithPkcs11Uri:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri;
-- (instancetype)initFromPkcs12WithData:(const guint8*)data length:(gsize)length password:(OFString*)password;
++ (instancetype)tlsCertificateFromFile:(OFString*)file;
++ (instancetype)tlsCertificateFromFileWithPasswordWithFile:(OFString*)file password:(OFString*)password;
++ (instancetype)tlsCertificateFromFilesWithCertFile:(OFString*)certFile keyFile:(OFString*)keyFile;
++ (instancetype)tlsCertificateFromPemWithData:(OFString*)data length:(gssize)length;
++ (instancetype)tlsCertificateFromPkcs11UrisWithPkcs11Uri:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri;
++ (instancetype)tlsCertificateFromPkcs12WithData:(const guint8*)data length:(gsize)length password:(OFString*)password;
 
 /**
  * Methods

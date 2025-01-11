@@ -18,68 +18,84 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithFamilyAny:(GSocketFamily)family
++ (instancetype)inetAddressAny:(GSocketFamily)family
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_any(family), GInetAddress, GInetAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family
++ (instancetype)inetAddressFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_bytes(bytes, family), GInetAddress, GInetAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithStringFromString:(OFString*)string
++ (instancetype)inetAddressFromString:(OFString*)string
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_string([string UTF8String]), GInetAddress, GInetAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithFamilyLoopback:(GSocketFamily)family
++ (instancetype)inetAddressLoopback:(GSocketFamily)family
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_loopback(family), GInetAddress, GInetAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GInetAddress*)castedGObject

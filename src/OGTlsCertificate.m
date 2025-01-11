@@ -29,124 +29,148 @@
 	return returnValue;
 }
 
-- (instancetype)initWithFileFromFile:(OFString*)file
++ (instancetype)tlsCertificateFromFile:(OFString*)file
 {
 	GError* err = NULL;
 
 	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_file([file UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGTlsCertificate* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTlsCertificate alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromFileWithPasswordWithFile:(OFString*)file password:(OFString*)password
++ (instancetype)tlsCertificateFromFileWithPasswordWithFile:(OFString*)file password:(OFString*)password
 {
 	GError* err = NULL;
 
 	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_file_with_password([file UTF8String], [password UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGTlsCertificate* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTlsCertificate alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromFilesWithCertFile:(OFString*)certFile keyFile:(OFString*)keyFile
++ (instancetype)tlsCertificateFromFilesWithCertFile:(OFString*)certFile keyFile:(OFString*)keyFile
 {
 	GError* err = NULL;
 
 	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_files([certFile UTF8String], [keyFile UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGTlsCertificate* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTlsCertificate alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromPemWithData:(OFString*)data length:(gssize)length
++ (instancetype)tlsCertificateFromPemWithData:(OFString*)data length:(gssize)length
 {
 	GError* err = NULL;
 
 	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pem([data UTF8String], length, &err), GTlsCertificate, GTlsCertificate);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGTlsCertificate* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTlsCertificate alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromPkcs11UrisWithPkcs11Uri:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri
++ (instancetype)tlsCertificateFromPkcs11UrisWithPkcs11Uri:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri
 {
 	GError* err = NULL;
 
 	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pkcs11_uris([pkcs11Uri UTF8String], [privateKeyPkcs11Uri UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGTlsCertificate* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTlsCertificate alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromPkcs12WithData:(const guint8*)data length:(gsize)length password:(OFString*)password
++ (instancetype)tlsCertificateFromPkcs12WithData:(const guint8*)data length:(gsize)length password:(OFString*)password
 {
 	GError* err = NULL;
 
 	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pkcs12(data, length, [password UTF8String], &err), GTlsCertificate, GTlsCertificate);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGTlsCertificate* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTlsCertificate alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GTlsCertificate*)castedGObject

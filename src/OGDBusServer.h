@@ -49,7 +49,7 @@
 /**
  * Constructors
  */
-- (instancetype)initSyncWithAddress:(OFString*)address flags:(GDBusServerFlags)flags guid:(OFString*)guid observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusServerSyncWithAddress:(OFString*)address flags:(GDBusServerFlags)flags guid:(OFString*)guid observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
 
 /**
  * Methods

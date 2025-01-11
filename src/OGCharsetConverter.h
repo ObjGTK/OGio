@@ -28,7 +28,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithToCharset:(OFString*)toCharset fromCharset:(OFString*)fromCharset;
++ (instancetype)charsetConverterWithToCharset:(OFString*)toCharset fromCharset:(OFString*)fromCharset;
 
 /**
  * Methods

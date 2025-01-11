@@ -49,9 +49,9 @@
 /**
  * Constructors
  */
-- (instancetype)initWithPath:(OFString*)path;
-- (instancetype)initAbstractWithPath:(OFString*)path pathLen:(gint)pathLen;
-- (instancetype)initWithTypeWithPath:(OFString*)path pathLen:(gint)pathLen type:(GUnixSocketAddressType)type;
++ (instancetype)unixSocketAddress:(OFString*)path;
++ (instancetype)unixSocketAddressAbstractWithPath:(OFString*)path pathLen:(gint)pathLen;
++ (instancetype)unixSocketAddressWithTypeWithPath:(OFString*)path pathLen:(gint)pathLen type:(GUnixSocketAddressType)type;
 
 /**
  * Methods

@@ -40,36 +40,44 @@
 	return returnValue;
 }
 
-- (instancetype)initWithHostname:(OFString*)hostname port:(guint16)port
++ (instancetype)networkAddressWithHostname:(OFString*)hostname port:(guint16)port
 {
 	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new([hostname UTF8String], port), GNetworkAddress, GNetworkAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGNetworkAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGNetworkAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithPortLoopback:(guint16)port
++ (instancetype)networkAddressLoopback:(guint16)port
 {
 	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new_loopback(port), GNetworkAddress, GNetworkAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGNetworkAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGNetworkAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GNetworkAddress*)castedGObject

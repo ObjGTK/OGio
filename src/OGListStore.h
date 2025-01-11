@@ -31,7 +31,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithItemType:(GType)itemType;
++ (instancetype)listStore:(GType)itemType;
 
 /**
  * Methods

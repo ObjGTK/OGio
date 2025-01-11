@@ -32,7 +32,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithConnection:(OGDBusConnection*)connection objectPath:(OFString*)objectPath;
++ (instancetype)dBusObjectProxyWithConnection:(OGDBusConnection*)connection objectPath:(OFString*)objectPath;
 
 /**
  * Methods

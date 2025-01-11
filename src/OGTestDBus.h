@@ -121,7 +121,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithFlags:(GTestDBusFlags)flags;
++ (instancetype)testDBus:(GTestDBusFlags)flags;
 
 /**
  * Methods

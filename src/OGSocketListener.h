@@ -46,7 +46,7 @@
 /**
  * Constructors
  */
-- (instancetype)init;
++ (instancetype)socketListener;
 
 /**
  * Methods

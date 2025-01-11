@@ -18,36 +18,44 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithName:(OFString*)name parameterType:(const GVariantType*)parameterType
++ (instancetype)simpleActionWithName:(OFString*)name parameterType:(const GVariantType*)parameterType
 {
 	GSimpleAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_new([name UTF8String], parameterType), GSimpleAction, GSimpleAction);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSimpleAction* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSimpleAction alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initStatefulWithName:(OFString*)name parameterType:(const GVariantType*)parameterType state:(GVariant*)state
++ (instancetype)simpleActionStatefulWithName:(OFString*)name parameterType:(const GVariantType*)parameterType state:(GVariant*)state
 {
 	GSimpleAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_new_stateful([name UTF8String], parameterType, state), GSimpleAction, GSimpleAction);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSimpleAction* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSimpleAction alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GSimpleAction*)castedGObject

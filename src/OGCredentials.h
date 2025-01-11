@@ -61,7 +61,7 @@
 /**
  * Constructors
  */
-- (instancetype)init;
++ (instancetype)credentials;
 
 /**
  * Methods

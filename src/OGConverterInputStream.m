@@ -20,20 +20,24 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithBaseStream:(OGInputStream*)baseStream converter:(GConverter*)converter
++ (instancetype)converterInputStreamWithBaseStream:(OGInputStream*)baseStream converter:(GConverter*)converter
 {
 	GConverterInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_converter_input_stream_new([baseStream castedGObject], converter), GConverterInputStream, GConverterInputStream);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGConverterInputStream* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGConverterInputStream alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GConverterInputStream*)castedGObject

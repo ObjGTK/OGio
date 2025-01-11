@@ -62,7 +62,7 @@
 /**
  * Constructors
  */
-- (instancetype)init;
++ (instancetype)fileInfo;
 
 /**
  * Methods

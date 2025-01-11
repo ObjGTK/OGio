@@ -25,52 +25,64 @@
 	return returnValue;
 }
 
-- (instancetype)initWithPath:(OFString*)path
++ (instancetype)unixSocketAddress:(OFString*)path
 {
 	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new([path UTF8String]), GUnixSocketAddress, GUnixSocketAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixSocketAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixSocketAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initAbstractWithPath:(OFString*)path pathLen:(gint)pathLen
++ (instancetype)unixSocketAddressAbstractWithPath:(OFString*)path pathLen:(gint)pathLen
 {
 	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new_abstract([path UTF8String], pathLen), GUnixSocketAddress, GUnixSocketAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixSocketAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixSocketAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithTypeWithPath:(OFString*)path pathLen:(gint)pathLen type:(GUnixSocketAddressType)type
++ (instancetype)unixSocketAddressWithTypeWithPath:(OFString*)path pathLen:(gint)pathLen type:(GUnixSocketAddressType)type
 {
 	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new_with_type([path UTF8String], pathLen, type), GUnixSocketAddress, GUnixSocketAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixSocketAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixSocketAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GUnixSocketAddress*)castedGObject

@@ -23,20 +23,24 @@
 	g_test_dbus_unset();
 }
 
-- (instancetype)initWithFlags:(GTestDBusFlags)flags
++ (instancetype)testDBus:(GTestDBusFlags)flags
 {
 	GTestDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_test_dbus_new(flags), GTestDBus, GTestDBus);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGTestDBus* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTestDBus alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GTestDBus*)castedGObject

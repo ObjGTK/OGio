@@ -28,7 +28,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithBaseIoStream:(OGIOStream*)baseIoStream socket:(OGSocket*)socket;
++ (instancetype)tcpWrapperConnectionWithBaseIoStream:(OGIOStream*)baseIoStream socket:(OGSocket*)socket;
 
 /**
  * Methods

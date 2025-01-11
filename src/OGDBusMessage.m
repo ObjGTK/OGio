@@ -31,72 +31,88 @@
 	return returnValue;
 }
 
-- (instancetype)init
++ (instancetype)dBusMessage
 {
 	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new(), GDBusMessage, GDBusMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGDBusMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromBlobWithBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities
++ (instancetype)dBusMessageFromBlobWithBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities
 {
 	GError* err = NULL;
 
 	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_from_blob(blob, blobLen, capabilities, &err), GDBusMessage, GDBusMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGDBusMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initMethodCallWithName:(OFString*)name path:(OFString*)path interface:(OFString*)interface method:(OFString*)method
++ (instancetype)dBusMessageMethodCallWithName:(OFString*)name path:(OFString*)path interface:(OFString*)interface method:(OFString*)method
 {
 	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_call([name UTF8String], [path UTF8String], [interface UTF8String], [method UTF8String]), GDBusMessage, GDBusMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGDBusMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initSignalWithPath:(OFString*)path interface:(OFString*)interface signal:(OFString*)signal
++ (instancetype)dBusMessageSignalWithPath:(OFString*)path interface:(OFString*)interface signal:(OFString*)signal
 {
 	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_signal([path UTF8String], [interface UTF8String], [signal UTF8String]), GDBusMessage, GDBusMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGDBusMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GDBusMessage*)castedGObject

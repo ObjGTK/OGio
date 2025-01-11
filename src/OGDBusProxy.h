@@ -139,10 +139,10 @@
 /**
  * Constructors
  */
-- (instancetype)initWithResFinish:(GAsyncResult*)res;
-- (instancetype)initWithResForBusFinish:(GAsyncResult*)res;
-- (instancetype)initForBusSyncWithBusType:(GBusType)busType flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
-- (instancetype)initSyncWithConnection:(OGDBusConnection*)connection flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusProxyFinish:(GAsyncResult*)res;
++ (instancetype)dBusProxyForBusFinish:(GAsyncResult*)res;
++ (instancetype)dBusProxyForBusSyncWithBusType:(GBusType)busType flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusProxySyncWithConnection:(OGDBusConnection*)connection flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
 
 /**
  * Methods

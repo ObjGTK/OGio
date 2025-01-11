@@ -40,8 +40,8 @@
 /**
  * Constructors
  */
-- (instancetype)init;
-- (instancetype)initFromArrayWithFds:(const gint*)fds nfds:(gint)nfds;
++ (instancetype)unixFDList;
++ (instancetype)unixFDListFromArrayWithFds:(const gint*)fds nfds:(gint)nfds;
 
 /**
  * Methods

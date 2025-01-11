@@ -23,7 +23,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithBaseStream:(OGInputStream*)baseStream;
++ (instancetype)dataInputStream:(OGInputStream*)baseStream;
 
 /**
  * Methods

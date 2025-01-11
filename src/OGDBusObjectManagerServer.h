@@ -50,7 +50,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithObjectPath:(OFString*)objectPath;
++ (instancetype)dBusObjectManagerServer:(OFString*)objectPath;
 
 /**
  * Methods

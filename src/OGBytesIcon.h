@@ -28,7 +28,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithBytes:(GBytes*)bytes;
++ (instancetype)bytesIcon:(GBytes*)bytes;
 
 /**
  * Methods

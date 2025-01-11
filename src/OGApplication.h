@@ -223,7 +223,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithApplicationId:(OFString*)applicationId flags:(GApplicationFlags)flags;
++ (instancetype)applicationWithApplicationId:(OFString*)applicationId flags:(GApplicationFlags)flags;
 
 /**
  * Methods

@@ -31,7 +31,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithInputStream:(OGInputStream*)inputStream outputStream:(OGOutputStream*)outputStream;
++ (instancetype)simpleIOStreamWithInputStream:(OGInputStream*)inputStream outputStream:(OGOutputStream*)outputStream;
 
 /**
  * Methods

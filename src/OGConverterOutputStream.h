@@ -25,7 +25,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithBaseStream:(OGOutputStream*)baseStream converter:(GConverter*)converter;
++ (instancetype)converterOutputStreamWithBaseStream:(OGOutputStream*)baseStream converter:(GConverter*)converter;
 
 /**
  * Methods

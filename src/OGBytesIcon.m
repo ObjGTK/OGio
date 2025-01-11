@@ -18,20 +18,24 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithBytes:(GBytes*)bytes
++ (instancetype)bytesIcon:(GBytes*)bytes
 {
 	GBytesIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_bytes_icon_new(bytes), GBytesIcon, GBytesIcon);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGBytesIcon* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGBytesIcon alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GBytesIcon*)castedGObject

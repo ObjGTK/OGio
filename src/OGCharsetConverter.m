@@ -18,24 +18,28 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithToCharset:(OFString*)toCharset fromCharset:(OFString*)fromCharset
++ (instancetype)charsetConverterWithToCharset:(OFString*)toCharset fromCharset:(OFString*)fromCharset
 {
 	GError* err = NULL;
 
 	GCharsetConverter* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_charset_converter_new([toCharset UTF8String], [fromCharset UTF8String], &err), GCharsetConverter, GCharsetConverter);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGCharsetConverter* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGCharsetConverter alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GCharsetConverter*)castedGObject

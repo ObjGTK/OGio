@@ -34,7 +34,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithMaxThreads:(int)maxThreads;
++ (instancetype)threadedSocketService:(int)maxThreads;
 
 /**
  * Methods

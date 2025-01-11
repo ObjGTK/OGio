@@ -33,7 +33,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithObjectPath:(OFString*)objectPath;
++ (instancetype)dBusObjectSkeleton:(OFString*)objectPath;
 
 /**
  * Methods

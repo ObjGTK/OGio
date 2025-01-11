@@ -88,9 +88,9 @@
 /**
  * Constructors
  */
-- (instancetype)initWithDesktopId:(OFString*)desktopId;
-- (instancetype)initWithFilenameFromFilename:(OFString*)filename;
-- (instancetype)initWithKeyFileFromKeyfile:(GKeyFile*)keyFile;
++ (instancetype)desktopAppInfo:(OFString*)desktopId;
++ (instancetype)desktopAppInfoFromFilename:(OFString*)filename;
++ (instancetype)desktopAppInfoFromKeyfile:(GKeyFile*)keyFile;
 
 /**
  * Methods

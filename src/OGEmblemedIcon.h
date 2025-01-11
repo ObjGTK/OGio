@@ -34,7 +34,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithIcon:(GIcon*)icon emblem:(OGEmblem*)emblem;
++ (instancetype)emblemedIconWithIcon:(GIcon*)icon emblem:(OGEmblem*)emblem;
 
 /**
  * Methods

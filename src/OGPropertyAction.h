@@ -78,7 +78,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithName:(OFString*)name object:(gpointer)object propertyName:(OFString*)propertyName;
++ (instancetype)propertyActionWithName:(OFString*)name object:(gpointer)object propertyName:(OFString*)propertyName;
 
 /**
  * Methods

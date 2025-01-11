@@ -20,20 +20,24 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithFormat:(GZlibCompressorFormat)format level:(int)level
++ (instancetype)zlibCompressorWithFormat:(GZlibCompressorFormat)format level:(int)level
 {
 	GZlibCompressor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_zlib_compressor_new(format, level), GZlibCompressor, GZlibCompressor);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGZlibCompressor* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGZlibCompressor alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GZlibCompressor*)castedGObject

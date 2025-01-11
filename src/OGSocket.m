@@ -25,44 +25,52 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithFamily:(GSocketFamily)family type:(GSocketType)type protocol:(GSocketProtocol)protocol
++ (instancetype)socketWithFamily:(GSocketFamily)family type:(GSocketType)type protocol:(GSocketProtocol)protocol
 {
 	GError* err = NULL;
 
 	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_new(family, type, protocol, &err), GSocket, GSocket);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGSocket* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSocket alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithFdFromFd:(gint)fd
++ (instancetype)socketFromFd:(gint)fd
 {
 	GError* err = NULL;
 
 	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_new_from_fd(fd, &err), GSocket, GSocket);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGSocket* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSocket alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GSocket*)castedGObject

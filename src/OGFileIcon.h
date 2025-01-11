@@ -30,7 +30,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithFile:(GFile*)file;
++ (instancetype)fileIcon:(GFile*)file;
 
 /**
  * Methods

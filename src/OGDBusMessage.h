@@ -47,10 +47,10 @@
 /**
  * Constructors
  */
-- (instancetype)init;
-- (instancetype)initFromBlobWithBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities;
-- (instancetype)initMethodCallWithName:(OFString*)name path:(OFString*)path interface:(OFString*)interface method:(OFString*)method;
-- (instancetype)initSignalWithPath:(OFString*)path interface:(OFString*)interface signal:(OFString*)signal;
++ (instancetype)dBusMessage;
++ (instancetype)dBusMessageFromBlobWithBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities;
++ (instancetype)dBusMessageMethodCallWithName:(OFString*)name path:(OFString*)path interface:(OFString*)interface method:(OFString*)method;
++ (instancetype)dBusMessageSignalWithPath:(OFString*)path interface:(OFString*)interface signal:(OFString*)signal;
 
 /**
  * Methods

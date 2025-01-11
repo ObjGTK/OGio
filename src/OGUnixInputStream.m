@@ -18,20 +18,24 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithFd:(gint)fd closeFd:(bool)closeFd
++ (instancetype)unixInputStreamWithFd:(gint)fd closeFd:(bool)closeFd
 {
 	GUnixInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_input_stream_new(fd, closeFd), GUnixInputStream, GUnixInputStream);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixInputStream* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixInputStream alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GUnixInputStream*)castedGObject

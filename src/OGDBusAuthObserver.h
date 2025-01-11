@@ -92,7 +92,7 @@
 /**
  * Constructors
  */
-- (instancetype)init;
++ (instancetype)dBusAuthObserver;
 
 /**
  * Methods

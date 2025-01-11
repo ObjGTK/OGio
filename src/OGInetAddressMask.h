@@ -32,8 +32,8 @@
 /**
  * Constructors
  */
-- (instancetype)initWithAddr:(OGInetAddress*)addr length:(guint)length;
-- (instancetype)initWithMaskStringFromString:(OFString*)maskString;
++ (instancetype)inetAddressMaskWithAddr:(OGInetAddress*)addr length:(guint)length;
++ (instancetype)inetAddressMaskFromString:(OFString*)maskString;
 
 /**
  * Methods

@@ -71,7 +71,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithTitle:(OFString*)title;
++ (instancetype)notification:(OFString*)title;
 
 /**
  * Methods

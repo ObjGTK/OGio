@@ -18,20 +18,24 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithName:(OFString*)name object:(gpointer)object propertyName:(OFString*)propertyName
++ (instancetype)propertyActionWithName:(OFString*)name object:(gpointer)object propertyName:(OFString*)propertyName
 {
 	GPropertyAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_property_action_new([name UTF8String], object, [propertyName UTF8String]), GPropertyAction, GPropertyAction);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGPropertyAction* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGPropertyAction alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GPropertyAction*)castedGObject

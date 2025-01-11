@@ -22,7 +22,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithNative:(gpointer)native len:(gsize)len;
++ (instancetype)nativeSocketAddressWithNative:(gpointer)native len:(gsize)len;
 
 /**
  * Methods

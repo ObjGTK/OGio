@@ -36,7 +36,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithFlags:(GSubprocessFlags)flags;
++ (instancetype)subprocessLauncher:(GSubprocessFlags)flags;
 
 /**
  * Methods

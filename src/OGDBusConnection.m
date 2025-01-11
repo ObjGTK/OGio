@@ -36,84 +36,100 @@
 	g_dbus_connection_new_for_address([address UTF8String], flags, [observer castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (instancetype)initWithResFinish:(GAsyncResult*)res
++ (instancetype)dBusConnectionFinish:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
 	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_finish(res, &err), GDBusConnection, GDBusConnection);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGDBusConnection* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusConnection alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithResForAddressFinish:(GAsyncResult*)res
++ (instancetype)dBusConnectionForAddressFinish:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
 	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_for_address_finish(res, &err), GDBusConnection, GDBusConnection);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGDBusConnection* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusConnection alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
++ (instancetype)dBusConnectionForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
 	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_for_address_sync([address UTF8String], flags, [observer castedGObject], [cancellable castedGObject], &err), GDBusConnection, GDBusConnection);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGDBusConnection* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusConnection alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initSyncWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
++ (instancetype)dBusConnectionSyncWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
 	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_sync([stream castedGObject], [guid UTF8String], flags, [observer castedGObject], [cancellable castedGObject], &err), GDBusConnection, GDBusConnection);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGDBusConnection* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusConnection alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GDBusConnection*)castedGObject

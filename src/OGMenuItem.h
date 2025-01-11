@@ -30,10 +30,10 @@
 /**
  * Constructors
  */
-- (instancetype)initWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction;
-- (instancetype)initFromModelWithModel:(OGMenuModel*)model itemIndex:(gint)itemIndex;
-- (instancetype)initSectionWithLabel:(OFString*)label section:(OGMenuModel*)section;
-- (instancetype)initSubmenuWithLabel:(OFString*)label submenu:(OGMenuModel*)submenu;
++ (instancetype)menuItemWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction;
++ (instancetype)menuItemFromModelWithModel:(OGMenuModel*)model itemIndex:(gint)itemIndex;
++ (instancetype)menuItemSectionWithLabel:(OFString*)label section:(OGMenuModel*)section;
++ (instancetype)menuItemSubmenuWithLabel:(OFString*)label submenu:(OGMenuModel*)submenu;
 
 /**
  * Methods

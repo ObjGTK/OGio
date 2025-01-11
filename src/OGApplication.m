@@ -37,20 +37,24 @@
 	return returnValue;
 }
 
-- (instancetype)initWithApplicationId:(OFString*)applicationId flags:(GApplicationFlags)flags
++ (instancetype)applicationWithApplicationId:(OFString*)applicationId flags:(GApplicationFlags)flags
 {
 	GApplication* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_new([applicationId UTF8String], flags), GApplication, GApplication);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGApplication* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGApplication alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GApplication*)castedGObject

@@ -20,36 +20,44 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)init
++ (instancetype)unixFDMessage
 {
 	GUnixFDMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_message_new(), GUnixFDMessage, GUnixFDMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixFDMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixFDMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithFdList:(OGUnixFDList*)fdList
++ (instancetype)unixFDMessageWithFdList:(OGUnixFDList*)fdList
 {
 	GUnixFDMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_message_new_with_fd_list([fdList castedGObject]), GUnixFDMessage, GUnixFDMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixFDMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixFDMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GUnixFDMessage*)castedGObject

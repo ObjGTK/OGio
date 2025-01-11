@@ -51,8 +51,8 @@
 /**
  * Constructors
  */
-- (instancetype)init;
-- (instancetype)initWithCredentials:(OGCredentials*)credentials;
++ (instancetype)unixCredentialsMessage;
++ (instancetype)unixCredentialsMessageWithCredentials:(OGCredentials*)credentials;
 
 /**
  * Methods

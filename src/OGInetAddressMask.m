@@ -20,44 +20,52 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithAddr:(OGInetAddress*)addr length:(guint)length
++ (instancetype)inetAddressMaskWithAddr:(OGInetAddress*)addr length:(guint)length
 {
 	GError* err = NULL;
 
 	GInetAddressMask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_mask_new([addr castedGObject], length, &err), GInetAddressMask, GInetAddressMask);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGInetAddressMask* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddressMask alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithMaskStringFromString:(OFString*)maskString
++ (instancetype)inetAddressMaskFromString:(OFString*)maskString
 {
 	GError* err = NULL;
 
 	GInetAddressMask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_mask_new_from_string([maskString UTF8String], &err), GInetAddressMask, GInetAddressMask);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGInetAddressMask* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddressMask alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GInetAddressMask*)castedGObject

@@ -86,8 +86,8 @@
 /**
  * Constructors
  */
-- (instancetype)initWithHostname:(OFString*)hostname port:(guint16)port;
-- (instancetype)initWithPortLoopback:(guint16)port;
++ (instancetype)networkAddressWithHostname:(OFString*)hostname port:(guint16)port;
++ (instancetype)networkAddressLoopback:(guint16)port;
 
 /**
  * Methods

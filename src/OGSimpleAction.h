@@ -29,8 +29,8 @@
 /**
  * Constructors
  */
-- (instancetype)initWithName:(OFString*)name parameterType:(const GVariantType*)parameterType;
-- (instancetype)initStatefulWithName:(OFString*)name parameterType:(const GVariantType*)parameterType state:(GVariant*)state;
++ (instancetype)simpleActionWithName:(OFString*)name parameterType:(const GVariantType*)parameterType;
++ (instancetype)simpleActionStatefulWithName:(OFString*)name parameterType:(const GVariantType*)parameterType state:(GVariant*)state;
 
 /**
  * Methods

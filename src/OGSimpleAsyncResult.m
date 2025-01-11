@@ -27,52 +27,64 @@
 	return returnValue;
 }
 
-- (instancetype)initWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData sourceTag:(gpointer)sourceTag
++ (instancetype)simpleAsyncResultWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData sourceTag:(gpointer)sourceTag
 {
 	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new(sourceObject, callback, userData, sourceTag), GSimpleAsyncResult, GSimpleAsyncResult);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSimpleAsyncResult* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSimpleAsyncResult alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(const GError*)error
++ (instancetype)simpleAsyncResultFromErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(const GError*)error
 {
 	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_from_error(sourceObject, callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSimpleAsyncResult* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSimpleAsyncResult alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initTakeErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(GError*)error
++ (instancetype)simpleAsyncResultTakeErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(GError*)error
 {
 	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_take_error(sourceObject, callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSimpleAsyncResult* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSimpleAsyncResult alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GSimpleAsyncResult*)castedGObject

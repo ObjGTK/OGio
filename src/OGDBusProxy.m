@@ -32,84 +32,100 @@
 	g_dbus_proxy_new_for_bus(busType, flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], callback, userData);
 }
 
-- (instancetype)initWithResFinish:(GAsyncResult*)res
++ (instancetype)dBusProxyFinish:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
 	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_finish(res, &err), GDBusProxy, GDBusProxy);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGDBusProxy* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusProxy alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithResForBusFinish:(GAsyncResult*)res
++ (instancetype)dBusProxyForBusFinish:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
 	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_for_bus_finish(res, &err), GDBusProxy, GDBusProxy);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGDBusProxy* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusProxy alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initForBusSyncWithBusType:(GBusType)busType flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable
++ (instancetype)dBusProxyForBusSyncWithBusType:(GBusType)busType flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
 	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_for_bus_sync(busType, flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err), GDBusProxy, GDBusProxy);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGDBusProxy* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusProxy alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initSyncWithConnection:(OGDBusConnection*)connection flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable
++ (instancetype)dBusProxySyncWithConnection:(OGDBusConnection*)connection flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
 	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_sync([connection castedGObject], flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err), GDBusProxy, GDBusProxy);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
+	OGDBusProxy* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusProxy alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GDBusProxy*)castedGObject

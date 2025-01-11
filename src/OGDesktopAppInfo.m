@@ -39,52 +39,64 @@
 	g_desktop_app_info_set_desktop_env([desktopEnv UTF8String]);
 }
 
-- (instancetype)initWithDesktopId:(OFString*)desktopId
++ (instancetype)desktopAppInfo:(OFString*)desktopId
 {
 	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new([desktopId UTF8String]), GDesktopAppInfo, GDesktopAppInfo);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGDesktopAppInfo* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDesktopAppInfo alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithFilenameFromFilename:(OFString*)filename
++ (instancetype)desktopAppInfoFromFilename:(OFString*)filename
 {
 	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_filename([filename UTF8String]), GDesktopAppInfo, GDesktopAppInfo);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGDesktopAppInfo* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDesktopAppInfo alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithKeyFileFromKeyfile:(GKeyFile*)keyFile
++ (instancetype)desktopAppInfoFromKeyfile:(GKeyFile*)keyFile
 {
 	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_keyfile(keyFile), GDesktopAppInfo, GDesktopAppInfo);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGDesktopAppInfo* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDesktopAppInfo alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GDesktopAppInfo*)castedGObject

@@ -18,20 +18,24 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-- (instancetype)initWithFlags:(GTlsPasswordFlags)flags description:(OFString*)description
++ (instancetype)tlsPasswordWithFlags:(GTlsPasswordFlags)flags description:(OFString*)description
 {
 	GTlsPassword* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_password_new(flags, [description UTF8String]), GTlsPassword, GTlsPassword);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGTlsPassword* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTlsPassword alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GTlsPassword*)castedGObject

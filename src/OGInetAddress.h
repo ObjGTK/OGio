@@ -36,10 +36,10 @@
 /**
  * Constructors
  */
-- (instancetype)initWithFamilyAny:(GSocketFamily)family;
-- (instancetype)initFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family;
-- (instancetype)initWithStringFromString:(OFString*)string;
-- (instancetype)initWithFamilyLoopback:(GSocketFamily)family;
++ (instancetype)inetAddressAny:(GSocketFamily)family;
++ (instancetype)inetAddressFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family;
++ (instancetype)inetAddressFromString:(OFString*)string;
++ (instancetype)inetAddressLoopback:(GSocketFamily)family;
 
 /**
  * Methods

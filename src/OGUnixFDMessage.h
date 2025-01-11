@@ -33,8 +33,8 @@
 /**
  * Constructors
  */
-- (instancetype)init;
-- (instancetype)initWithFdList:(OGUnixFDList*)fdList;
++ (instancetype)unixFDMessage;
++ (instancetype)unixFDMessageWithFdList:(OGUnixFDList*)fdList;
 
 /**
  * Methods

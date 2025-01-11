@@ -35,7 +35,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain;
++ (instancetype)networkServiceWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain;
 
 /**
  * Methods

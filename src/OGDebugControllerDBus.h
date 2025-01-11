@@ -139,7 +139,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithConnection:(OGDBusConnection*)connection cancellable:(OGCancellable*)cancellable;
++ (instancetype)debugControllerDBusWithConnection:(OGDBusConnection*)connection cancellable:(OGCancellable*)cancellable;
 
 /**
  * Methods

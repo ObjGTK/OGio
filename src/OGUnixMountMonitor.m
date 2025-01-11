@@ -28,20 +28,24 @@
 	return returnValue;
 }
 
-- (instancetype)init
++ (instancetype)unixMountMonitor
 {
 	GUnixMountMonitor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_mount_monitor_new(), GUnixMountMonitor, GUnixMountMonitor);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixMountMonitor* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixMountMonitor alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GUnixMountMonitor*)castedGObject

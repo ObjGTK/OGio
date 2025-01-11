@@ -365,11 +365,11 @@
 /**
  * Constructors
  */
-- (instancetype)initWithSchemaId:(OFString*)schemaId;
-- (instancetype)initFullWithSchema:(GSettingsSchema*)schema backend:(GSettingsBackend*)backend path:(OFString*)path;
-- (instancetype)initWithBackendWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend;
-- (instancetype)initWithBackendAndPathWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend path:(OFString*)path;
-- (instancetype)initWithPathWithSchemaId:(OFString*)schemaId path:(OFString*)path;
++ (instancetype)settings:(OFString*)schemaId;
++ (instancetype)settingsFullWithSchema:(GSettingsSchema*)schema backend:(GSettingsBackend*)backend path:(OFString*)path;
++ (instancetype)settingsWithBackendWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend;
++ (instancetype)settingsWithBackendAndPathWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend path:(OFString*)path;
++ (instancetype)settingsWithPathWithSchemaId:(OFString*)schemaId path:(OFString*)path;
 
 /**
  * Methods

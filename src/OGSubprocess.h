@@ -87,7 +87,7 @@
 /**
  * Constructors
  */
-- (instancetype)initvWithArgv:(const gchar* const*)argv flags:(GSubprocessFlags)flags;
++ (instancetype)subprocessvWithArgv:(const gchar* const*)argv flags:(GSubprocessFlags)flags;
 
 /**
  * Methods
