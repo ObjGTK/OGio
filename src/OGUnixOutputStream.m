@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGUnixOutputStream
 
-- (instancetype)initWithFd:(gint)fd closeFd:(bool)closeFd
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_UNIX_OUTPUT_STREAM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)unixOutputStreamWithFd:(gint)fd closeFd:(bool)closeFd
 {
 	GUnixOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_output_stream_new(fd, closeFd), GUnixOutputStream, GUnixOutputStream);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixOutputStream* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixOutputStream alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GUnixOutputStream*)castedGObject
@@ -31,14 +45,14 @@
 
 - (bool)closeFd
 {
-	bool returnValue = g_unix_output_stream_get_close_fd([self castedGObject]);
+	bool returnValue = (bool)g_unix_output_stream_get_close_fd([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gint)fd
 {
-	gint returnValue = g_unix_output_stream_get_fd([self castedGObject]);
+	gint returnValue = (gint)g_unix_output_stream_get_fd([self castedGObject]);
 
 	return returnValue;
 }

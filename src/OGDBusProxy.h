@@ -1,16 +1,16 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gunixfdmessage.h>
 
 #import <OGObject/OGObject.h>
 
@@ -75,6 +75,8 @@
 /**
  * Functions
  */
++ (void)load;
+
 
 /**
  * Creates a proxy for accessing @interface_name on the remote object
@@ -137,10 +139,10 @@
 /**
  * Constructors
  */
-- (instancetype)initFinish:(GAsyncResult*)res;
-- (instancetype)initForBusFinish:(GAsyncResult*)res;
-- (instancetype)initForBusSyncWithBusType:(GBusType)busType flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
-- (instancetype)initSyncWithConnection:(OGDBusConnection*)connection flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusProxyFinish:(GAsyncResult*)res;
++ (instancetype)dBusProxyForBusFinish:(GAsyncResult*)res;
++ (instancetype)dBusProxyForBusSyncWithBusType:(GBusType)busType flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusProxySyncWithConnection:(OGDBusConnection*)connection flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
 
 /**
  * Methods

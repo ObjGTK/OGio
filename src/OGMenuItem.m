@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,68 +10,94 @@
 
 @implementation OGMenuItem
 
-- (instancetype)initWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_MENU_ITEM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)menuItemWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction
 {
 	GMenuItem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_new([label UTF8String], [detailedAction UTF8String]), GMenuItem, GMenuItem);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGMenuItem* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGMenuItem alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromModelWithModel:(OGMenuModel*)model itemIndex:(gint)itemIndex
++ (instancetype)menuItemFromModelWithModel:(OGMenuModel*)model itemIndex:(gint)itemIndex
 {
 	GMenuItem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_new_from_model([model castedGObject], itemIndex), GMenuItem, GMenuItem);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGMenuItem* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGMenuItem alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initSectionWithLabel:(OFString*)label section:(OGMenuModel*)section
++ (instancetype)menuItemSectionWithLabel:(OFString*)label section:(OGMenuModel*)section
 {
 	GMenuItem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_new_section([label UTF8String], [section castedGObject]), GMenuItem, GMenuItem);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGMenuItem* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGMenuItem alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initSubmenuWithLabel:(OFString*)label submenu:(OGMenuModel*)submenu
++ (instancetype)menuItemSubmenuWithLabel:(OFString*)label submenu:(OGMenuModel*)submenu
 {
 	GMenuItem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_new_submenu([label UTF8String], [submenu castedGObject]), GMenuItem, GMenuItem);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGMenuItem* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGMenuItem alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GMenuItem*)castedGObject
@@ -81,16 +107,16 @@
 
 - (GVariant*)attributeValueWithAttribute:(OFString*)attribute expectedType:(const GVariantType*)expectedType
 {
-	GVariant* returnValue = g_menu_item_get_attribute_value([self castedGObject], [attribute UTF8String], expectedType);
+	GVariant* returnValue = (GVariant*)g_menu_item_get_attribute_value([self castedGObject], [attribute UTF8String], expectedType);
 
 	return returnValue;
 }
 
 - (OGMenuModel*)link:(OFString*)link
 {
-	GMenuModel* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_get_link([self castedGObject], [link UTF8String]), GMenuModel, GMenuModel);
+	GMenuModel* gobjectValue = g_menu_item_get_link([self castedGObject], [link UTF8String]);
 
-	OGMenuModel* returnValue = [OGMenuModel withGObject:gobjectValue];
+	OGMenuModel* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;

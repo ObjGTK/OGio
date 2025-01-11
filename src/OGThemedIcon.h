@@ -1,16 +1,16 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gunixfdmessage.h>
 
 #import <OGObject/OGObject.h>
 
@@ -35,9 +35,9 @@
 /**
  * Constructors
  */
-- (instancetype)init:(OFString*)iconname;
-- (instancetype)initFromNamesWithIconnames:(char**)iconnames len:(int)len;
-- (instancetype)initWithDefaultFallbacks:(OFString*)iconname;
++ (instancetype)themedIcon:(OFString*)iconname;
++ (instancetype)themedIconFromNamesWithIconnames:(char**)iconnames len:(int)len;
++ (instancetype)themedIconWithDefaultFallbacks:(OFString*)iconname;
 
 /**
  * Methods

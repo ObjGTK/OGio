@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGSocketAddress
 
-- (instancetype)initFromNativeWithNative:(gpointer)native len:(gsize)len
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_SOCKET_ADDRESS;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)socketAddressFromNativeWithNative:(gpointer)native len:(gsize)len
 {
 	GSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_address_new_from_native(native, len), GSocketAddress, GSocketAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSocketAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSocketAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GSocketAddress*)castedGObject
@@ -31,14 +45,14 @@
 
 - (GSocketFamily)family
 {
-	GSocketFamily returnValue = g_socket_address_get_family([self castedGObject]);
+	GSocketFamily returnValue = (GSocketFamily)g_socket_address_get_family([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gssize)nativeSize
 {
-	gssize returnValue = g_socket_address_get_native_size([self castedGObject]);
+	gssize returnValue = (gssize)g_socket_address_get_native_size([self castedGObject]);
 
 	return returnValue;
 }
@@ -47,13 +61,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_socket_address_to_native([self castedGObject], dest, destlen, &err);
+	bool returnValue = (bool)g_socket_address_to_native([self castedGObject], dest, destlen, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

@@ -1,16 +1,26 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGDBusMethodInvocation.h"
 
-#import "OGUnixFDList.h"
 #import "OGDBusConnection.h"
 #import "OGDBusMessage.h"
+#import "OGUnixFDList.h"
 
 @implementation OGDBusMethodInvocation
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DBUS_METHOD_INVOCATION;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (GDBusMethodInvocation*)castedGObject
 {
@@ -19,9 +29,9 @@
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_method_invocation_get_connection([self castedGObject]), GDBusConnection, GDBusConnection);
+	GDBusConnection* gobjectValue = g_dbus_method_invocation_get_connection([self castedGObject]);
 
-	OGDBusConnection* returnValue = [OGDBusConnection withGObject:gobjectValue];
+	OGDBusConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
@@ -35,15 +45,15 @@
 
 - (OGDBusMessage*)message
 {
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_method_invocation_get_message([self castedGObject]), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = g_dbus_method_invocation_get_message([self castedGObject]);
 
-	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
+	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (const GDBusMethodInfo*)methodInfo
 {
-	const GDBusMethodInfo* returnValue = g_dbus_method_invocation_get_method_info([self castedGObject]);
+	const GDBusMethodInfo* returnValue = (const GDBusMethodInfo*)g_dbus_method_invocation_get_method_info([self castedGObject]);
 
 	return returnValue;
 }
@@ -66,14 +76,14 @@
 
 - (GVariant*)parameters
 {
-	GVariant* returnValue = g_dbus_method_invocation_get_parameters([self castedGObject]);
+	GVariant* returnValue = (GVariant*)g_dbus_method_invocation_get_parameters([self castedGObject]);
 
 	return returnValue;
 }
 
 - (const GDBusPropertyInfo*)propertyInfo
 {
-	const GDBusPropertyInfo* returnValue = g_dbus_method_invocation_get_property_info([self castedGObject]);
+	const GDBusPropertyInfo* returnValue = (const GDBusPropertyInfo*)g_dbus_method_invocation_get_property_info([self castedGObject]);
 
 	return returnValue;
 }
@@ -88,7 +98,7 @@
 
 - (gpointer)userData
 {
-	gpointer returnValue = g_dbus_method_invocation_get_user_data([self castedGObject]);
+	gpointer returnValue = (gpointer)g_dbus_method_invocation_get_user_data([self castedGObject]);
 
 	return returnValue;
 }

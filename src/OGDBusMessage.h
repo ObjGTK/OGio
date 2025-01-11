@@ -1,16 +1,16 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gunixfdmessage.h>
 
 #import <OGObject/OGObject.h>
 
@@ -29,6 +29,8 @@
 /**
  * Functions
  */
++ (void)load;
+
 
 /**
  * Utility function to calculate how many bytes are needed to
@@ -45,10 +47,10 @@
 /**
  * Constructors
  */
-- (instancetype)init;
-- (instancetype)initFromBlobWithBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities;
-- (instancetype)initMethodCallWithName:(OFString*)name path:(OFString*)path interface:(OFString*)interface method:(OFString*)method;
-- (instancetype)initSignalWithPath:(OFString*)path interface:(OFString*)interface signal:(OFString*)signal;
++ (instancetype)dBusMessage;
++ (instancetype)dBusMessageFromBlobWithBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities;
++ (instancetype)dBusMessageMethodCallWithName:(OFString*)name path:(OFString*)path interface:(OFString*)interface method:(OFString*)method;
++ (instancetype)dBusMessageSignalWithPath:(OFString*)path interface:(OFString*)interface signal:(OFString*)signal;
 
 /**
  * Methods

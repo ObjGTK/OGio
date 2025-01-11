@@ -1,14 +1,14 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGTcpConnection.h"
 
-@class OGSocketConnection;
-@class OGSocket;
 @class OGIOStream;
+@class OGSocket;
+@class OGSocketConnection;
 
 /**
  * A `GTcpWrapperConnection` can be used to wrap a [class@Gio.IOStream] that is
@@ -28,7 +28,7 @@
 /**
  * Constructors
  */
-- (instancetype)initWithBaseIoStream:(OGIOStream*)baseIoStream socket:(OGSocket*)socket;
++ (instancetype)tcpWrapperConnectionWithBaseIoStream:(OGIOStream*)baseIoStream socket:(OGSocket*)socket;
 
 /**
  * Methods

@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,68 +8,94 @@
 
 @implementation OGInetAddress
 
-- (instancetype)initAny:(GSocketFamily)family
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_INET_ADDRESS;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)inetAddressAny:(GSocketFamily)family
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_any(family), GInetAddress, GInetAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family
++ (instancetype)inetAddressFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_bytes(bytes, family), GInetAddress, GInetAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromString:(OFString*)string
++ (instancetype)inetAddressFromString:(OFString*)string
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_string([string UTF8String]), GInetAddress, GInetAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initLoopback:(GSocketFamily)family
++ (instancetype)inetAddressLoopback:(GSocketFamily)family
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_loopback(family), GInetAddress, GInetAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GInetAddress*)castedGObject
@@ -79,98 +105,98 @@
 
 - (bool)equal:(OGInetAddress*)otherAddress
 {
-	bool returnValue = g_inet_address_equal([self castedGObject], [otherAddress castedGObject]);
+	bool returnValue = (bool)g_inet_address_equal([self castedGObject], [otherAddress castedGObject]);
 
 	return returnValue;
 }
 
 - (GSocketFamily)family
 {
-	GSocketFamily returnValue = g_inet_address_get_family([self castedGObject]);
+	GSocketFamily returnValue = (GSocketFamily)g_inet_address_get_family([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isAny
 {
-	bool returnValue = g_inet_address_get_is_any([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_any([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isLinkLocal
 {
-	bool returnValue = g_inet_address_get_is_link_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_link_local([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isLoopback
 {
-	bool returnValue = g_inet_address_get_is_loopback([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_loopback([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcGlobal
 {
-	bool returnValue = g_inet_address_get_is_mc_global([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_global([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcLinkLocal
 {
-	bool returnValue = g_inet_address_get_is_mc_link_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_link_local([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcNodeLocal
 {
-	bool returnValue = g_inet_address_get_is_mc_node_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_node_local([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcOrgLocal
 {
-	bool returnValue = g_inet_address_get_is_mc_org_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_org_local([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcSiteLocal
 {
-	bool returnValue = g_inet_address_get_is_mc_site_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_site_local([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMulticast
 {
-	bool returnValue = g_inet_address_get_is_multicast([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_multicast([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isSiteLocal
 {
-	bool returnValue = g_inet_address_get_is_site_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_site_local([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)nativeSize
 {
-	gsize returnValue = g_inet_address_get_native_size([self castedGObject]);
+	gsize returnValue = (gsize)g_inet_address_get_native_size([self castedGObject]);
 
 	return returnValue;
 }
 
 - (const guint8*)toBytes
 {
-	const guint8* returnValue = g_inet_address_to_bytes([self castedGObject]);
+	const guint8* returnValue = (const guint8*)g_inet_address_to_bytes([self castedGObject]);
 
 	return returnValue;
 }

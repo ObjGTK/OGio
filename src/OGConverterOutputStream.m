@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,20 +10,34 @@
 
 @implementation OGConverterOutputStream
 
-- (instancetype)initWithBaseStream:(OGOutputStream*)baseStream converter:(GConverter*)converter
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_CONVERTER_OUTPUT_STREAM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)converterOutputStreamWithBaseStream:(OGOutputStream*)baseStream converter:(GConverter*)converter
 {
 	GConverterOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_converter_output_stream_new([baseStream castedGObject], converter), GConverterOutputStream, GConverterOutputStream);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGConverterOutputStream* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGConverterOutputStream alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GConverterOutputStream*)castedGObject
@@ -33,7 +47,7 @@
 
 - (GConverter*)converter
 {
-	GConverter* returnValue = g_converter_output_stream_get_converter([self castedGObject]);
+	GConverter* returnValue = (GConverter*)g_converter_output_stream_get_converter([self castedGObject]);
 
 	return returnValue;
 }

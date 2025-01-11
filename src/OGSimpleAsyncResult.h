@@ -1,16 +1,16 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gunixfdmessage.h>
 
 #import <OGObject/OGObject.h>
 
@@ -193,20 +193,11 @@
 /**
  * Functions
  */
++ (void)load;
+
 
 /**
- * Ensures that the data passed to the _finish function of an async
- * operation is consistent.  Three checks are performed.
- * 
- * First, @result is checked to ensure that it is really a
- * #GSimpleAsyncResult.  Second, @source is checked to ensure that it
- * matches the source object of @result.  Third, @source_tag is
- * checked to ensure that it is equal to the @source_tag argument given
- * to g_simple_async_result_new() (which, by convention, is a pointer
- * to the _async function corresponding to the _finish function from
- * which this function is called).  (Alternatively, if either
- * @source_tag or @result's source tag is %NULL, then the source tag
- * check is skipped.)
+ * Use #GTask and g_task_is_valid() instead.
  *
  * @param result the #GAsyncResult passed to the _finish function.
  * @param source the #GObject passed to the _finish function.
@@ -218,9 +209,9 @@
 /**
  * Constructors
  */
-- (instancetype)initWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData sourceTag:(gpointer)sourceTag;
-- (instancetype)initFromErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(const GError*)error;
-- (instancetype)initTakeErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(GError*)error;
++ (instancetype)simpleAsyncResultWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData sourceTag:(gpointer)sourceTag;
++ (instancetype)simpleAsyncResultFromErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(const GError*)error;
++ (instancetype)simpleAsyncResultTakeErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(GError*)error;
 
 /**
  * Methods

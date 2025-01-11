@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGNetworkService
 
-- (instancetype)initWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_NETWORK_SERVICE;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)networkServiceWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain
 {
 	GNetworkService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_service_new([service UTF8String], [protocol UTF8String], [domain UTF8String]), GNetworkService, GNetworkService);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGNetworkService* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGNetworkService alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GNetworkService*)castedGObject

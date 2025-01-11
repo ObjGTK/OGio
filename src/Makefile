@@ -73,7 +73,6 @@ SRCS = OGAppInfoMonitor.m \
 	OGProxyAddressEnumerator.m \
 	OGResolver.m \
 	OGSettings.m \
-	OGSettingsBackend.m \
 	OGSimpleAction.m \
 	OGSimpleActionGroup.m \
 	OGSimpleAsyncResult.m \

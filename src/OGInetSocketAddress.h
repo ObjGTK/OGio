@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -25,8 +25,8 @@
 /**
  * Constructors
  */
-- (instancetype)initWithAddress:(OGInetAddress*)address port:(guint16)port;
-- (instancetype)initFromStringWithAddress:(OFString*)address port:(guint)port;
++ (instancetype)inetSocketAddressWithAddress:(OGInetAddress*)address port:(guint16)port;
++ (instancetype)inetSocketAddressFromStringWithAddress:(OFString*)address port:(guint)port;
 
 /**
  * Methods

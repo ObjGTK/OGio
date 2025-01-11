@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGTlsPassword
 
-- (instancetype)initWithFlags:(GTlsPasswordFlags)flags description:(OFString*)description
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_TLS_PASSWORD;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)tlsPasswordWithFlags:(GTlsPasswordFlags)flags description:(OFString*)description
 {
 	GTlsPassword* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_password_new(flags, [description UTF8String]), GTlsPassword, GTlsPassword);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGTlsPassword* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTlsPassword alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GTlsPassword*)castedGObject
@@ -39,14 +53,14 @@
 
 - (GTlsPasswordFlags)flags
 {
-	GTlsPasswordFlags returnValue = g_tls_password_get_flags([self castedGObject]);
+	GTlsPasswordFlags returnValue = (GTlsPasswordFlags)g_tls_password_get_flags([self castedGObject]);
 
 	return returnValue;
 }
 
 - (const guchar*)value:(gsize*)length
 {
-	const guchar* returnValue = g_tls_password_get_value([self castedGObject], length);
+	const guchar* returnValue = (const guchar*)g_tls_password_get_value([self castedGObject], length);
 
 	return returnValue;
 }

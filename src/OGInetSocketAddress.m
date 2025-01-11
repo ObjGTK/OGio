@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,36 +10,54 @@
 
 @implementation OGInetSocketAddress
 
-- (instancetype)initWithAddress:(OGInetAddress*)address port:(guint16)port
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_INET_SOCKET_ADDRESS;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)inetSocketAddressWithAddress:(OGInetAddress*)address port:(guint16)port
 {
 	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new([address castedGObject], port), GInetSocketAddress, GInetSocketAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetSocketAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetSocketAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initFromStringWithAddress:(OFString*)address port:(guint)port
++ (instancetype)inetSocketAddressFromStringWithAddress:(OFString*)address port:(guint)port
 {
 	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new_from_string([address UTF8String], port), GInetSocketAddress, GInetSocketAddress);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGInetSocketAddress* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGInetSocketAddress alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GInetSocketAddress*)castedGObject
@@ -49,29 +67,29 @@
 
 - (OGInetAddress*)address
 {
-	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_get_address([self castedGObject]), GInetAddress, GInetAddress);
+	GInetAddress* gobjectValue = g_inet_socket_address_get_address([self castedGObject]);
 
-	OGInetAddress* returnValue = [OGInetAddress withGObject:gobjectValue];
+	OGInetAddress* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (guint32)flowinfo
 {
-	guint32 returnValue = g_inet_socket_address_get_flowinfo([self castedGObject]);
+	guint32 returnValue = (guint32)g_inet_socket_address_get_flowinfo([self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint16)port
 {
-	guint16 returnValue = g_inet_socket_address_get_port([self castedGObject]);
+	guint16 returnValue = (guint16)g_inet_socket_address_get_port([self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint32)scopeId
 {
-	guint32 returnValue = g_inet_socket_address_get_scope_id([self castedGObject]);
+	guint32 returnValue = (guint32)g_inet_socket_address_get_scope_id([self castedGObject]);
 
 	return returnValue;
 }

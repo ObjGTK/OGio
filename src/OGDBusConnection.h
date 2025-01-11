@@ -1,26 +1,26 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gunixfdmessage.h>
 
 #import <OGObject/OGObject.h>
 
-@class OGDBusAuthObserver;
 @class OGCancellable;
-@class OGUnixFDList;
-@class OGDBusMessage;
 @class OGCredentials;
-@class OGMenuModel;
+@class OGDBusAuthObserver;
+@class OGDBusMessage;
 @class OGIOStream;
+@class OGMenuModel;
+@class OGUnixFDList;
 
 /**
  * The `GDBusConnection` type is used for D-Bus connections to remote
@@ -85,6 +85,8 @@
 /**
  * Functions
  */
++ (void)load;
+
 
 /**
  * Asynchronously sets up a D-Bus connection for exchanging D-Bus messages
@@ -154,10 +156,10 @@
 /**
  * Constructors
  */
-- (instancetype)initFinish:(GAsyncResult*)res;
-- (instancetype)initForAddressFinish:(GAsyncResult*)res;
-- (instancetype)initForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
-- (instancetype)initSyncWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusConnectionFinish:(GAsyncResult*)res;
++ (instancetype)dBusConnectionForAddressFinish:(GAsyncResult*)res;
++ (instancetype)dBusConnectionForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusConnectionSyncWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
 
 /**
  * Methods

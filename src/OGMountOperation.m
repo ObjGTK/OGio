@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGMountOperation
 
-- (instancetype)init
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_MOUNT_OPERATION;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)mountOperation
 {
 	GMountOperation* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_mount_operation_new(), GMountOperation, GMountOperation);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGMountOperation* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGMountOperation alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GMountOperation*)castedGObject
@@ -31,14 +45,14 @@
 
 - (bool)anonymous
 {
-	bool returnValue = g_mount_operation_get_anonymous([self castedGObject]);
+	bool returnValue = (bool)g_mount_operation_get_anonymous([self castedGObject]);
 
 	return returnValue;
 }
 
 - (int)choice
 {
-	int returnValue = g_mount_operation_get_choice([self castedGObject]);
+	int returnValue = (int)g_mount_operation_get_choice([self castedGObject]);
 
 	return returnValue;
 }
@@ -53,14 +67,14 @@
 
 - (bool)isTcryptHiddenVolume
 {
-	bool returnValue = g_mount_operation_get_is_tcrypt_hidden_volume([self castedGObject]);
+	bool returnValue = (bool)g_mount_operation_get_is_tcrypt_hidden_volume([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isTcryptSystemVolume
 {
-	bool returnValue = g_mount_operation_get_is_tcrypt_system_volume([self castedGObject]);
+	bool returnValue = (bool)g_mount_operation_get_is_tcrypt_system_volume([self castedGObject]);
 
 	return returnValue;
 }
@@ -75,14 +89,14 @@
 
 - (GPasswordSave)passwordSave
 {
-	GPasswordSave returnValue = g_mount_operation_get_password_save([self castedGObject]);
+	GPasswordSave returnValue = (GPasswordSave)g_mount_operation_get_password_save([self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint)pim
 {
-	guint returnValue = g_mount_operation_get_pim([self castedGObject]);
+	guint returnValue = (guint)g_mount_operation_get_pim([self castedGObject]);
 
 	return returnValue;
 }

@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -9,6 +9,16 @@
 #import "OGMenuModel.h"
 
 @implementation OGMenuLinkIter
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_MENU_LINK_ITER;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (GMenuLinkIter*)castedGObject
 {
@@ -25,16 +35,16 @@
 
 - (bool)nextWithOutLink:(const gchar**)outLink value:(GMenuModel**)value
 {
-	bool returnValue = g_menu_link_iter_get_next([self castedGObject], outLink, value);
+	bool returnValue = (bool)g_menu_link_iter_get_next([self castedGObject], outLink, value);
 
 	return returnValue;
 }
 
 - (OGMenuModel*)value
 {
-	GMenuModel* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_link_iter_get_value([self castedGObject]), GMenuModel, GMenuModel);
+	GMenuModel* gobjectValue = g_menu_link_iter_get_value([self castedGObject]);
 
-	OGMenuModel* returnValue = [OGMenuModel withGObject:gobjectValue];
+	OGMenuModel* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -42,7 +52,7 @@
 
 - (bool)next
 {
-	bool returnValue = g_menu_link_iter_next([self castedGObject]);
+	bool returnValue = (bool)g_menu_link_iter_next([self castedGObject]);
 
 	return returnValue;
 }

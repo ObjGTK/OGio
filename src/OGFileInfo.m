@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGFileInfo
 
-- (instancetype)init
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_FILE_INFO;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)fileInfo
 {
 	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_info_new(), GFileInfo, GFileInfo);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGFileInfo* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGFileInfo alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GFileInfo*)castedGObject
@@ -41,9 +55,9 @@
 
 - (OGFileInfo*)dup
 {
-	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_info_dup([self castedGObject]), GFileInfo, GFileInfo);
+	GFileInfo* gobjectValue = g_file_info_dup([self castedGObject]);
 
-	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
+	OGFileInfo* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -51,7 +65,7 @@
 
 - (GDateTime*)accessDateTime
 {
-	GDateTime* returnValue = g_file_info_get_access_date_time([self castedGObject]);
+	GDateTime* returnValue = (GDateTime*)g_file_info_get_access_date_time([self castedGObject]);
 
 	return returnValue;
 }
@@ -66,7 +80,7 @@
 
 - (bool)attributeBoolean:(OFString*)attribute
 {
-	bool returnValue = g_file_info_get_attribute_boolean([self castedGObject], [attribute UTF8String]);
+	bool returnValue = (bool)g_file_info_get_attribute_boolean([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
@@ -81,7 +95,7 @@
 
 - (bool)attributeDataWithAttribute:(OFString*)attribute type:(GFileAttributeType*)type valuePp:(gpointer*)valuePp status:(GFileAttributeStatus*)status
 {
-	bool returnValue = g_file_info_get_attribute_data([self castedGObject], [attribute UTF8String], type, valuePp, status);
+	bool returnValue = (bool)g_file_info_get_attribute_data([self castedGObject], [attribute UTF8String], type, valuePp, status);
 
 	return returnValue;
 }
@@ -96,28 +110,28 @@
 
 - (gint32)attributeInt32:(OFString*)attribute
 {
-	gint32 returnValue = g_file_info_get_attribute_int32([self castedGObject], [attribute UTF8String]);
+	gint32 returnValue = (gint32)g_file_info_get_attribute_int32([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
 - (gint64)attributeInt64:(OFString*)attribute
 {
-	gint64 returnValue = g_file_info_get_attribute_int64([self castedGObject], [attribute UTF8String]);
+	gint64 returnValue = (gint64)g_file_info_get_attribute_int64([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
 - (GObject*)attributeObject:(OFString*)attribute
 {
-	GObject* returnValue = g_file_info_get_attribute_object([self castedGObject], [attribute UTF8String]);
+	GObject* returnValue = (GObject*)g_file_info_get_attribute_object([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
 - (GFileAttributeStatus)attributeStatus:(OFString*)attribute
 {
-	GFileAttributeStatus returnValue = g_file_info_get_attribute_status([self castedGObject], [attribute UTF8String]);
+	GFileAttributeStatus returnValue = (GFileAttributeStatus)g_file_info_get_attribute_status([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
@@ -132,28 +146,28 @@
 
 - (char**)attributeStringv:(OFString*)attribute
 {
-	char** returnValue = g_file_info_get_attribute_stringv([self castedGObject], [attribute UTF8String]);
+	char** returnValue = (char**)g_file_info_get_attribute_stringv([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
 - (GFileAttributeType)attributeType:(OFString*)attribute
 {
-	GFileAttributeType returnValue = g_file_info_get_attribute_type([self castedGObject], [attribute UTF8String]);
+	GFileAttributeType returnValue = (GFileAttributeType)g_file_info_get_attribute_type([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
 - (guint32)attributeUint32:(OFString*)attribute
 {
-	guint32 returnValue = g_file_info_get_attribute_uint32([self castedGObject], [attribute UTF8String]);
+	guint32 returnValue = (guint32)g_file_info_get_attribute_uint32([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
 - (guint64)attributeUint64:(OFString*)attribute
 {
-	guint64 returnValue = g_file_info_get_attribute_uint64([self castedGObject], [attribute UTF8String]);
+	guint64 returnValue = (guint64)g_file_info_get_attribute_uint64([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
@@ -168,14 +182,14 @@
 
 - (GDateTime*)creationDateTime
 {
-	GDateTime* returnValue = g_file_info_get_creation_date_time([self castedGObject]);
+	GDateTime* returnValue = (GDateTime*)g_file_info_get_creation_date_time([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDateTime*)deletionDate
 {
-	GDateTime* returnValue = g_file_info_get_deletion_date([self castedGObject]);
+	GDateTime* returnValue = (GDateTime*)g_file_info_get_deletion_date([self castedGObject]);
 
 	return returnValue;
 }
@@ -206,42 +220,42 @@
 
 - (GFileType)fileType
 {
-	GFileType returnValue = g_file_info_get_file_type([self castedGObject]);
+	GFileType returnValue = (GFileType)g_file_info_get_file_type([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GIcon*)icon
 {
-	GIcon* returnValue = g_file_info_get_icon([self castedGObject]);
+	GIcon* returnValue = (GIcon*)g_file_info_get_icon([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isBackup
 {
-	bool returnValue = g_file_info_get_is_backup([self castedGObject]);
+	bool returnValue = (bool)g_file_info_get_is_backup([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isHidden
 {
-	bool returnValue = g_file_info_get_is_hidden([self castedGObject]);
+	bool returnValue = (bool)g_file_info_get_is_hidden([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isSymlink
 {
-	bool returnValue = g_file_info_get_is_symlink([self castedGObject]);
+	bool returnValue = (bool)g_file_info_get_is_symlink([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDateTime*)modificationDateTime
 {
-	GDateTime* returnValue = g_file_info_get_modification_date_time([self castedGObject]);
+	GDateTime* returnValue = (GDateTime*)g_file_info_get_modification_date_time([self castedGObject]);
 
 	return returnValue;
 }
@@ -261,21 +275,21 @@
 
 - (goffset)size
 {
-	goffset returnValue = g_file_info_get_size([self castedGObject]);
+	goffset returnValue = (goffset)g_file_info_get_size([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gint32)sortOrder
 {
-	gint32 returnValue = g_file_info_get_sort_order([self castedGObject]);
+	gint32 returnValue = (gint32)g_file_info_get_sort_order([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GIcon*)symbolicIcon
 {
-	GIcon* returnValue = g_file_info_get_symbolic_icon([self castedGObject]);
+	GIcon* returnValue = (GIcon*)g_file_info_get_symbolic_icon([self castedGObject]);
 
 	return returnValue;
 }
@@ -290,21 +304,21 @@
 
 - (bool)hasAttribute:(OFString*)attribute
 {
-	bool returnValue = g_file_info_has_attribute([self castedGObject], [attribute UTF8String]);
+	bool returnValue = (bool)g_file_info_has_attribute([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
 - (bool)hasNamespace:(OFString*)nameSpace
 {
-	bool returnValue = g_file_info_has_namespace([self castedGObject], [nameSpace UTF8String]);
+	bool returnValue = (bool)g_file_info_has_namespace([self castedGObject], [nameSpace UTF8String]);
 
 	return returnValue;
 }
 
 - (char**)listAttributes:(OFString*)nameSpace
 {
-	char** returnValue = g_file_info_list_attributes([self castedGObject], [nameSpace UTF8String]);
+	char** returnValue = (char**)g_file_info_list_attributes([self castedGObject], [nameSpace UTF8String]);
 
 	return returnValue;
 }
@@ -361,7 +375,7 @@
 
 - (bool)setAttributeStatusWithAttribute:(OFString*)attribute status:(GFileAttributeStatus)status
 {
-	bool returnValue = g_file_info_set_attribute_status([self castedGObject], [attribute UTF8String], status);
+	bool returnValue = (bool)g_file_info_set_attribute_status([self castedGObject], [attribute UTF8String], status);
 
 	return returnValue;
 }

@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,6 +10,16 @@
 
 @implementation OGApplicationCommandLine
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_APPLICATION_COMMAND_LINE;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 - (GApplicationCommandLine*)castedGObject
 {
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GApplicationCommandLine, GApplicationCommandLine);
@@ -17,7 +27,7 @@
 
 - (GFile*)createFileForArg:(OFString*)arg
 {
-	GFile* returnValue = g_application_command_line_create_file_for_arg([self castedGObject], [arg UTF8String]);
+	GFile* returnValue = (GFile*)g_application_command_line_create_file_for_arg([self castedGObject], [arg UTF8String]);
 
 	return returnValue;
 }
@@ -29,7 +39,7 @@
 
 - (gchar**)arguments:(int*)argc
 {
-	gchar** returnValue = g_application_command_line_get_arguments([self castedGObject], argc);
+	gchar** returnValue = (gchar**)g_application_command_line_get_arguments([self castedGObject], argc);
 
 	return returnValue;
 }
@@ -44,44 +54,44 @@
 
 - (const gchar* const*)environ
 {
-	const gchar* const* returnValue = g_application_command_line_get_environ([self castedGObject]);
+	const gchar* const* returnValue = (const gchar* const*)g_application_command_line_get_environ([self castedGObject]);
 
 	return returnValue;
 }
 
 - (int)exitStatus
 {
-	int returnValue = g_application_command_line_get_exit_status([self castedGObject]);
+	int returnValue = (int)g_application_command_line_get_exit_status([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isRemote
 {
-	bool returnValue = g_application_command_line_get_is_remote([self castedGObject]);
+	bool returnValue = (bool)g_application_command_line_get_is_remote([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GVariantDict*)optionsDict
 {
-	GVariantDict* returnValue = g_application_command_line_get_options_dict([self castedGObject]);
+	GVariantDict* returnValue = (GVariantDict*)g_application_command_line_get_options_dict([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GVariant*)platformData
 {
-	GVariant* returnValue = g_application_command_line_get_platform_data([self castedGObject]);
+	GVariant* returnValue = (GVariant*)g_application_command_line_get_platform_data([self castedGObject]);
 
 	return returnValue;
 }
 
 - (OGInputStream*)stdin
 {
-	GInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_command_line_get_stdin([self castedGObject]), GInputStream, GInputStream);
+	GInputStream* gobjectValue = g_application_command_line_get_stdin([self castedGObject]);
 
-	OGInputStream* returnValue = [OGInputStream withGObject:gobjectValue];
+	OGInputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;

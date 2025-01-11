@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,11 +10,21 @@
 
 @implementation OGDBusMenuModel
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DBUS_MENU_MODEL;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (OGDBusMenuModel*)getWithConnection:(OGDBusConnection*)connection busName:(OFString*)busName objectPath:(OFString*)objectPath
 {
-	GDBusMenuModel* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_menu_model_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]), GDBusMenuModel, GDBusMenuModel);
+	GDBusMenuModel* gobjectValue = g_dbus_menu_model_get([connection castedGObject], [busName UTF8String], [objectPath UTF8String]);
 
-	OGDBusMenuModel* returnValue = [OGDBusMenuModel withGObject:gobjectValue];
+	OGDBusMenuModel* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;

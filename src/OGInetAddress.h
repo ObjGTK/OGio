@@ -1,16 +1,16 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gunixfdmessage.h>
 
 #import <OGObject/OGObject.h>
 
@@ -36,10 +36,10 @@
 /**
  * Constructors
  */
-- (instancetype)initAny:(GSocketFamily)family;
-- (instancetype)initFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family;
-- (instancetype)initFromString:(OFString*)string;
-- (instancetype)initLoopback:(GSocketFamily)family;
++ (instancetype)inetAddressAny:(GSocketFamily)family;
++ (instancetype)inetAddressFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family;
++ (instancetype)inetAddressFromString:(OFString*)string;
++ (instancetype)inetAddressLoopback:(GSocketFamily)family;
 
 /**
  * Methods

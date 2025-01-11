@@ -1,16 +1,16 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gdesktopappinfo.h>
-#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gunixoutputstream.h>
 #include <gio/gio.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gunixfdmessage.h>
 
 #import <OGObject/OGObject.h>
 
@@ -30,6 +30,8 @@
 /**
  * Functions
  */
++ (void)load;
+
 
 /**
  * Creates one or more #GTlsCertificates from the PEM-encoded
@@ -48,12 +50,12 @@
 /**
  * Constructors
  */
-- (instancetype)initFromFile:(OFString*)file;
-- (instancetype)initFromFileWithPasswordWithFile:(OFString*)file password:(OFString*)password;
-- (instancetype)initFromFilesWithCertFile:(OFString*)certFile keyFile:(OFString*)keyFile;
-- (instancetype)initFromPemWithData:(OFString*)data length:(gssize)length;
-- (instancetype)initFromPkcs11UrisWithPkcs11Uri:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri;
-- (instancetype)initFromPkcs12WithData:(const guint8*)data length:(gsize)length password:(OFString*)password;
++ (instancetype)tlsCertificateFromFile:(OFString*)file;
++ (instancetype)tlsCertificateFromFileWithPasswordWithFile:(OFString*)file password:(OFString*)password;
++ (instancetype)tlsCertificateFromFilesWithCertFile:(OFString*)certFile keyFile:(OFString*)keyFile;
++ (instancetype)tlsCertificateFromPemWithData:(OFString*)data length:(gssize)length;
++ (instancetype)tlsCertificateFromPkcs11UrisWithPkcs11Uri:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri;
++ (instancetype)tlsCertificateFromPkcs12WithData:(const guint8*)data length:(gsize)length password:(OFString*)password;
 
 /**
  * Methods

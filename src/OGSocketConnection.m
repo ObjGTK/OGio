@@ -1,20 +1,30 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGSocketConnection.h"
 
 #import "OGCancellable.h"
-#import "OGSocketAddress.h"
 #import "OGSocket.h"
+#import "OGSocketAddress.h"
 
 @implementation OGSocketConnection
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_SOCKET_CONNECTION;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (GType)factoryLookupTypeWithFamily:(GSocketFamily)family type:(GSocketType)type protocolId:(gint)protocolId
 {
-	GType returnValue = g_socket_connection_factory_lookup_type(family, type, protocolId);
+	GType returnValue = (GType)g_socket_connection_factory_lookup_type(family, type, protocolId);
 
 	return returnValue;
 }
@@ -33,13 +43,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_socket_connection_connect([self castedGObject], [address castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_socket_connection_connect([self castedGObject], [address castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -53,13 +59,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_socket_connection_connect_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_socket_connection_connect_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -68,17 +70,11 @@
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_connection_get_local_address([self castedGObject], &err), GSocketAddress, GSocketAddress);
+	GSocketAddress* gobjectValue = g_socket_connection_get_local_address([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketAddress* returnValue = [OGSocketAddress withGObject:gobjectValue];
+	OGSocketAddress* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -88,17 +84,11 @@
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_connection_get_remote_address([self castedGObject], &err), GSocketAddress, GSocketAddress);
+	GSocketAddress* gobjectValue = g_socket_connection_get_remote_address([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketAddress* returnValue = [OGSocketAddress withGObject:gobjectValue];
+	OGSocketAddress* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -106,15 +96,15 @@
 
 - (OGSocket*)socket
 {
-	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_connection_get_socket([self castedGObject]), GSocket, GSocket);
+	GSocket* gobjectValue = g_socket_connection_get_socket([self castedGObject]);
 
-	OGSocket* returnValue = [OGSocket withGObject:gobjectValue];
+	OGSocket* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (bool)isConnected
 {
-	bool returnValue = g_socket_connection_is_connected([self castedGObject]);
+	bool returnValue = (bool)g_socket_connection_is_connected([self castedGObject]);
 
 	return returnValue;
 }

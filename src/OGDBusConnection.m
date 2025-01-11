@@ -1,20 +1,30 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGDBusConnection.h"
 
-#import "OGDBusAuthObserver.h"
 #import "OGCancellable.h"
-#import "OGUnixFDList.h"
-#import "OGDBusMessage.h"
 #import "OGCredentials.h"
-#import "OGMenuModel.h"
+#import "OGDBusAuthObserver.h"
+#import "OGDBusMessage.h"
 #import "OGIOStream.h"
+#import "OGMenuModel.h"
+#import "OGUnixFDList.h"
 
 @implementation OGDBusConnection
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_DBUS_CONNECTION;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 + (void)newWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
@@ -26,108 +36,100 @@
 	g_dbus_connection_new_for_address([address UTF8String], flags, [observer castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (instancetype)initFinish:(GAsyncResult*)res
++ (instancetype)dBusConnectionFinish:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
 	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_finish(res, &err), GDBusConnection, GDBusConnection);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
 
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
+
+	OGDBusConnection* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusConnection alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initForAddressFinish:(GAsyncResult*)res
++ (instancetype)dBusConnectionForAddressFinish:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
 	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_for_address_finish(res, &err), GDBusConnection, GDBusConnection);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
 
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
+
+	OGDBusConnection* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusConnection alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
++ (instancetype)dBusConnectionForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
 	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_for_address_sync([address UTF8String], flags, [observer castedGObject], [cancellable castedGObject], &err), GDBusConnection, GDBusConnection);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
 
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
+
+	OGDBusConnection* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusConnection alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initSyncWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
++ (instancetype)dBusConnectionSyncWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
 	GDBusConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_new_sync([stream castedGObject], [guid UTF8String], flags, [observer castedGObject], [cancellable castedGObject], &err), GDBusConnection, GDBusConnection);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
 
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
+
+	OGDBusConnection* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGDBusConnection alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GDBusConnection*)castedGObject
@@ -137,7 +139,7 @@
 
 - (guint)addFilterWithFilterFunction:(GDBusMessageFilterFunction)filterFunction userData:(gpointer)userData userDataFreeFunc:(GDestroyNotify)userDataFreeFunc
 {
-	guint returnValue = g_dbus_connection_add_filter([self castedGObject], filterFunction, userData, userDataFreeFunc);
+	guint returnValue = (guint)g_dbus_connection_add_filter([self castedGObject], filterFunction, userData, userDataFreeFunc);
 
 	return returnValue;
 }
@@ -151,13 +153,9 @@
 {
 	GError* err = NULL;
 
-	GVariant* returnValue = g_dbus_connection_call_finish([self castedGObject], res, &err);
+	GVariant* returnValue = (GVariant*)g_dbus_connection_call_finish([self castedGObject], res, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -166,13 +164,9 @@
 {
 	GError* err = NULL;
 
-	GVariant* returnValue = g_dbus_connection_call_sync([self castedGObject], [busName UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [methodName UTF8String], parameters, replyType, flags, timeoutMsec, [cancellable castedGObject], &err);
+	GVariant* returnValue = (GVariant*)g_dbus_connection_call_sync([self castedGObject], [busName UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [methodName UTF8String], parameters, replyType, flags, timeoutMsec, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -186,13 +180,9 @@
 {
 	GError* err = NULL;
 
-	GVariant* returnValue = g_dbus_connection_call_with_unix_fd_list_finish([self castedGObject], outFdList, res, &err);
+	GVariant* returnValue = (GVariant*)g_dbus_connection_call_with_unix_fd_list_finish([self castedGObject], outFdList, res, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -201,13 +191,9 @@
 {
 	GError* err = NULL;
 
-	GVariant* returnValue = g_dbus_connection_call_with_unix_fd_list_sync([self castedGObject], [busName UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [methodName UTF8String], parameters, replyType, flags, timeoutMsec, [fdList castedGObject], outFdList, [cancellable castedGObject], &err);
+	GVariant* returnValue = (GVariant*)g_dbus_connection_call_with_unix_fd_list_sync([self castedGObject], [busName UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [methodName UTF8String], parameters, replyType, flags, timeoutMsec, [fdList castedGObject], outFdList, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -221,13 +207,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_dbus_connection_close_finish([self castedGObject], res, &err);
+	bool returnValue = (bool)g_dbus_connection_close_finish([self castedGObject], res, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -236,13 +218,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_dbus_connection_close_sync([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_dbus_connection_close_sync([self castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -251,13 +229,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_dbus_connection_emit_signal([self castedGObject], [destinationBusName UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [signalName UTF8String], parameters, &err);
+	bool returnValue = (bool)g_dbus_connection_emit_signal([self castedGObject], [destinationBusName UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [signalName UTF8String], parameters, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -266,13 +240,9 @@
 {
 	GError* err = NULL;
 
-	guint returnValue = g_dbus_connection_export_action_group([self castedGObject], [objectPath UTF8String], actionGroup, &err);
+	guint returnValue = (guint)g_dbus_connection_export_action_group([self castedGObject], [objectPath UTF8String], actionGroup, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -281,13 +251,9 @@
 {
 	GError* err = NULL;
 
-	guint returnValue = g_dbus_connection_export_menu_model([self castedGObject], [objectPath UTF8String], [menu castedGObject], &err);
+	guint returnValue = (guint)g_dbus_connection_export_menu_model([self castedGObject], [objectPath UTF8String], [menu castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -301,13 +267,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_dbus_connection_flush_finish([self castedGObject], res, &err);
+	bool returnValue = (bool)g_dbus_connection_flush_finish([self castedGObject], res, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -316,34 +278,30 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_dbus_connection_flush_sync([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_dbus_connection_flush_sync([self castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
 
 - (GDBusCapabilityFlags)capabilities
 {
-	GDBusCapabilityFlags returnValue = g_dbus_connection_get_capabilities([self castedGObject]);
+	GDBusCapabilityFlags returnValue = (GDBusCapabilityFlags)g_dbus_connection_get_capabilities([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)exitOnClose
 {
-	bool returnValue = g_dbus_connection_get_exit_on_close([self castedGObject]);
+	bool returnValue = (bool)g_dbus_connection_get_exit_on_close([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusConnectionFlags)flags
 {
-	GDBusConnectionFlags returnValue = g_dbus_connection_get_flags([self castedGObject]);
+	GDBusConnectionFlags returnValue = (GDBusConnectionFlags)g_dbus_connection_get_flags([self castedGObject]);
 
 	return returnValue;
 }
@@ -358,24 +316,24 @@
 
 - (guint32)lastSerial
 {
-	guint32 returnValue = g_dbus_connection_get_last_serial([self castedGObject]);
+	guint32 returnValue = (guint32)g_dbus_connection_get_last_serial([self castedGObject]);
 
 	return returnValue;
 }
 
 - (OGCredentials*)peerCredentials
 {
-	GCredentials* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_get_peer_credentials([self castedGObject]), GCredentials, GCredentials);
+	GCredentials* gobjectValue = g_dbus_connection_get_peer_credentials([self castedGObject]);
 
-	OGCredentials* returnValue = [OGCredentials withGObject:gobjectValue];
+	OGCredentials* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (OGIOStream*)stream
 {
-	GIOStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_get_stream([self castedGObject]), GIOStream, GIOStream);
+	GIOStream* gobjectValue = g_dbus_connection_get_stream([self castedGObject]);
 
-	OGIOStream* returnValue = [OGIOStream withGObject:gobjectValue];
+	OGIOStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
@@ -389,7 +347,7 @@
 
 - (bool)isClosed
 {
-	bool returnValue = g_dbus_connection_is_closed([self castedGObject]);
+	bool returnValue = (bool)g_dbus_connection_is_closed([self castedGObject]);
 
 	return returnValue;
 }
@@ -398,13 +356,9 @@
 {
 	GError* err = NULL;
 
-	guint returnValue = g_dbus_connection_register_object([self castedGObject], [objectPath UTF8String], interfaceInfo, vtable, userData, userDataFreeFunc, &err);
+	guint returnValue = (guint)g_dbus_connection_register_object([self castedGObject], [objectPath UTF8String], interfaceInfo, vtable, userData, userDataFreeFunc, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -413,13 +367,9 @@
 {
 	GError* err = NULL;
 
-	guint returnValue = g_dbus_connection_register_object_with_closures([self castedGObject], [objectPath UTF8String], interfaceInfo, methodCallClosure, getPropertyClosure, setPropertyClosure, &err);
+	guint returnValue = (guint)g_dbus_connection_register_object_with_closures([self castedGObject], [objectPath UTF8String], interfaceInfo, methodCallClosure, getPropertyClosure, setPropertyClosure, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -428,13 +378,9 @@
 {
 	GError* err = NULL;
 
-	guint returnValue = g_dbus_connection_register_subtree([self castedGObject], [objectPath UTF8String], vtable, flags, userData, userDataFreeFunc, &err);
+	guint returnValue = (guint)g_dbus_connection_register_subtree([self castedGObject], [objectPath UTF8String], vtable, flags, userData, userDataFreeFunc, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -448,13 +394,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_dbus_connection_send_message([self castedGObject], [message castedGObject], flags, outSerial, &err);
+	bool returnValue = (bool)g_dbus_connection_send_message([self castedGObject], [message castedGObject], flags, outSerial, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -468,17 +410,11 @@
 {
 	GError* err = NULL;
 
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_send_message_with_reply_finish([self castedGObject], res, &err), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = g_dbus_connection_send_message_with_reply_finish([self castedGObject], res, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
+	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -488,17 +424,11 @@
 {
 	GError* err = NULL;
 
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_connection_send_message_with_reply_sync([self castedGObject], [message castedGObject], flags, timeoutMsec, outSerial, [cancellable castedGObject], &err), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = g_dbus_connection_send_message_with_reply_sync([self castedGObject], [message castedGObject], flags, timeoutMsec, outSerial, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGDBusMessage* returnValue = [OGDBusMessage withGObject:gobjectValue];
+	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -511,7 +441,7 @@
 
 - (guint)signalSubscribeWithSender:(OFString*)sender interfaceName:(OFString*)interfaceName member:(OFString*)member objectPath:(OFString*)objectPath arg0:(OFString*)arg0 flags:(GDBusSignalFlags)flags callback:(GDBusSignalCallback)callback userData:(gpointer)userData userDataFreeFunc:(GDestroyNotify)userDataFreeFunc
 {
-	guint returnValue = g_dbus_connection_signal_subscribe([self castedGObject], [sender UTF8String], [interfaceName UTF8String], [member UTF8String], [objectPath UTF8String], [arg0 UTF8String], flags, callback, userData, userDataFreeFunc);
+	guint returnValue = (guint)g_dbus_connection_signal_subscribe([self castedGObject], [sender UTF8String], [interfaceName UTF8String], [member UTF8String], [objectPath UTF8String], [arg0 UTF8String], flags, callback, userData, userDataFreeFunc);
 
 	return returnValue;
 }
@@ -538,14 +468,14 @@
 
 - (bool)unregisterObject:(guint)registrationId
 {
-	bool returnValue = g_dbus_connection_unregister_object([self castedGObject], registrationId);
+	bool returnValue = (bool)g_dbus_connection_unregister_object([self castedGObject], registrationId);
 
 	return returnValue;
 }
 
 - (bool)unregisterSubtree:(guint)registrationId
 {
-	bool returnValue = g_dbus_connection_unregister_subtree([self castedGObject], registrationId);
+	bool returnValue = (bool)g_dbus_connection_unregister_subtree([self castedGObject], registrationId);
 
 	return returnValue;
 }

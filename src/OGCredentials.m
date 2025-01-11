@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGCredentials
 
-- (instancetype)init
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_CREDENTIALS;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)credentials
 {
 	GCredentials* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_credentials_new(), GCredentials, GCredentials);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGCredentials* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGCredentials alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GCredentials*)castedGObject
@@ -31,7 +45,7 @@
 
 - (gpointer)native:(GCredentialsType)nativeType
 {
-	gpointer returnValue = g_credentials_get_native([self castedGObject], nativeType);
+	gpointer returnValue = (gpointer)g_credentials_get_native([self castedGObject], nativeType);
 
 	return returnValue;
 }
@@ -40,13 +54,9 @@
 {
 	GError* err = NULL;
 
-	pid_t returnValue = g_credentials_get_unix_pid([self castedGObject], &err);
+	pid_t returnValue = (pid_t)g_credentials_get_unix_pid([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -55,13 +65,9 @@
 {
 	GError* err = NULL;
 
-	uid_t returnValue = g_credentials_get_unix_user([self castedGObject], &err);
+	uid_t returnValue = (uid_t)g_credentials_get_unix_user([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -70,13 +76,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_credentials_is_same_user([self castedGObject], [otherCredentials castedGObject], &err);
+	bool returnValue = (bool)g_credentials_is_same_user([self castedGObject], [otherCredentials castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -90,13 +92,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_credentials_set_unix_user([self castedGObject], uid, &err);
+	bool returnValue = (bool)g_credentials_set_unix_user([self castedGObject], uid, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

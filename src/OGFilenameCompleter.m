@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGFilenameCompleter
 
-- (instancetype)init
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_FILENAME_COMPLETER;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)filenameCompleter
 {
 	GFilenameCompleter* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_filename_completer_new(), GFilenameCompleter, GFilenameCompleter);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGFilenameCompleter* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGFilenameCompleter alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GFilenameCompleter*)castedGObject
@@ -39,7 +53,7 @@
 
 - (char**)completions:(OFString*)initialText
 {
-	char** returnValue = g_filename_completer_get_completions([self castedGObject], [initialText UTF8String]);
+	char** returnValue = (char**)g_filename_completer_get_completions([self castedGObject], [initialText UTF8String]);
 
 	return returnValue;
 }

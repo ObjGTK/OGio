@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,20 +10,34 @@
 
 @implementation OGEmblemedIcon
 
-- (instancetype)initWithIcon:(GIcon*)icon emblem:(OGEmblem*)emblem
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_EMBLEMED_ICON;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)emblemedIconWithIcon:(GIcon*)icon emblem:(OGEmblem*)emblem
 {
 	GEmblemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblemed_icon_new(icon, [emblem castedGObject]), GEmblemedIcon, GEmblemedIcon);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGEmblemedIcon* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGEmblemedIcon alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GEmblemedIcon*)castedGObject
@@ -43,14 +57,14 @@
 
 - (GList*)emblems
 {
-	GList* returnValue = g_emblemed_icon_get_emblems([self castedGObject]);
+	GList* returnValue = (GList*)g_emblemed_icon_get_emblems([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GIcon*)icon
 {
-	GIcon* returnValue = g_emblemed_icon_get_icon([self castedGObject]);
+	GIcon* returnValue = (GIcon*)g_emblemed_icon_get_icon([self castedGObject]);
 
 	return returnValue;
 }

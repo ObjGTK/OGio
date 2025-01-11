@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,9 +10,19 @@
 
 @implementation OGTask
 
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_TASK;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
 + (bool)isValidWithResult:(gpointer)result sourceObject:(gpointer)sourceObject
 {
-	bool returnValue = g_task_is_valid(result, sourceObject);
+	bool returnValue = (bool)g_task_is_valid(result, sourceObject);
 
 	return returnValue;
 }
@@ -22,20 +32,24 @@
 	g_task_report_error(sourceObject, callback, callbackData, sourceTag, error);
 }
 
-- (instancetype)initWithSourceObject:(gpointer)sourceObject cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback callbackData:(gpointer)callbackData
++ (instancetype)taskWithSourceObject:(gpointer)sourceObject cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback callbackData:(gpointer)callbackData
 {
 	GTask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_task_new(sourceObject, [cancellable castedGObject], callback, callbackData), GTask, GTask);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGTask* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGTask alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GTask*)castedGObject
@@ -50,29 +64,29 @@
 
 - (OGCancellable*)cancellable
 {
-	GCancellable* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_task_get_cancellable([self castedGObject]), GCancellable, GCancellable);
+	GCancellable* gobjectValue = g_task_get_cancellable([self castedGObject]);
 
-	OGCancellable* returnValue = [OGCancellable withGObject:gobjectValue];
+	OGCancellable* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (bool)checkCancellable
 {
-	bool returnValue = g_task_get_check_cancellable([self castedGObject]);
+	bool returnValue = (bool)g_task_get_check_cancellable([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)completed
 {
-	bool returnValue = g_task_get_completed([self castedGObject]);
+	bool returnValue = (bool)g_task_get_completed([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GMainContext*)context
 {
-	GMainContext* returnValue = g_task_get_context([self castedGObject]);
+	GMainContext* returnValue = (GMainContext*)g_task_get_context([self castedGObject]);
 
 	return returnValue;
 }
@@ -87,42 +101,42 @@
 
 - (gint)priority
 {
-	gint returnValue = g_task_get_priority([self castedGObject]);
+	gint returnValue = (gint)g_task_get_priority([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)returnOnCancel
 {
-	bool returnValue = g_task_get_return_on_cancel([self castedGObject]);
+	bool returnValue = (bool)g_task_get_return_on_cancel([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gpointer)sourceObject
 {
-	gpointer returnValue = g_task_get_source_object([self castedGObject]);
+	gpointer returnValue = (gpointer)g_task_get_source_object([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gpointer)sourceTag
 {
-	gpointer returnValue = g_task_get_source_tag([self castedGObject]);
+	gpointer returnValue = (gpointer)g_task_get_source_tag([self castedGObject]);
 
 	return returnValue;
 }
 
 - (gpointer)taskData
 {
-	gpointer returnValue = g_task_get_task_data([self castedGObject]);
+	gpointer returnValue = (gpointer)g_task_get_task_data([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)hadError
 {
-	bool returnValue = g_task_had_error([self castedGObject]);
+	bool returnValue = (bool)g_task_had_error([self castedGObject]);
 
 	return returnValue;
 }
@@ -131,13 +145,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_task_propagate_boolean([self castedGObject], &err);
+	bool returnValue = (bool)g_task_propagate_boolean([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -146,13 +156,9 @@
 {
 	GError* err = NULL;
 
-	gssize returnValue = g_task_propagate_int([self castedGObject], &err);
+	gssize returnValue = (gssize)g_task_propagate_int([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -161,13 +167,9 @@
 {
 	GError* err = NULL;
 
-	gpointer returnValue = g_task_propagate_pointer([self castedGObject], &err);
+	gpointer returnValue = (gpointer)g_task_propagate_pointer([self castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -176,13 +178,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_task_propagate_value([self castedGObject], value, &err);
+	bool returnValue = (bool)g_task_propagate_value([self castedGObject], value, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -199,7 +197,7 @@
 
 - (bool)returnErrorIfCancelled
 {
-	bool returnValue = g_task_return_error_if_cancelled([self castedGObject]);
+	bool returnValue = (bool)g_task_return_error_if_cancelled([self castedGObject]);
 
 	return returnValue;
 }
@@ -251,7 +249,7 @@
 
 - (bool)setReturnOnCancel:(bool)returnOnCancel
 {
-	bool returnValue = g_task_set_return_on_cancel([self castedGObject], returnOnCancel);
+	bool returnValue = (bool)g_task_set_return_on_cancel([self castedGObject], returnOnCancel);
 
 	return returnValue;
 }

@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,36 +10,54 @@
 
 @implementation OGUnixFDMessage
 
-- (instancetype)init
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_UNIX_FD_MESSAGE;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)unixFDMessage
 {
 	GUnixFDMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_message_new(), GUnixFDMessage, GUnixFDMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixFDMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixFDMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
-- (instancetype)initWithFdList:(OGUnixFDList*)fdList
++ (instancetype)unixFDMessageWithFdList:(OGUnixFDList*)fdList
 {
 	GUnixFDMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_message_new_with_fd_list([fdList castedGObject]), GUnixFDMessage, GUnixFDMessage);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGUnixFDMessage* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGUnixFDMessage alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GUnixFDMessage*)castedGObject
@@ -51,28 +69,24 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_unix_fd_message_append_fd([self castedGObject], fd, &err);
+	bool returnValue = (bool)g_unix_fd_message_append_fd([self castedGObject], fd, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
 
 - (OGUnixFDList*)fdList
 {
-	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_message_get_fd_list([self castedGObject]), GUnixFDList, GUnixFDList);
+	GUnixFDList* gobjectValue = g_unix_fd_message_get_fd_list([self castedGObject]);
 
-	OGUnixFDList* returnValue = [OGUnixFDList withGObject:gobjectValue];
+	OGUnixFDList* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (gint*)stealFds:(gint*)length
 {
-	gint* returnValue = g_unix_fd_message_steal_fds([self castedGObject], length);
+	gint* returnValue = (gint*)g_unix_fd_message_steal_fds([self castedGObject], length);
 
 	return returnValue;
 }

@@ -1,31 +1,45 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGSocketClient.h"
 
+#import "OGCancellable.h"
 #import "OGSocketAddress.h"
 #import "OGSocketConnection.h"
-#import "OGCancellable.h"
 
 @implementation OGSocketClient
 
-- (instancetype)init
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_SOCKET_CLIENT;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)socketClient
 {
 	GSocketClient* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_new(), GSocketClient, GSocketClient);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSocketClient* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSocketClient alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GSocketClient*)castedGObject
@@ -42,17 +56,11 @@
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_connect([self castedGObject], connectable, [cancellable castedGObject], &err), GSocketConnection, GSocketConnection);
+	GSocketConnection* gobjectValue = g_socket_client_connect([self castedGObject], connectable, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
+	OGSocketConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -67,17 +75,11 @@
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_connect_finish([self castedGObject], result, &err), GSocketConnection, GSocketConnection);
+	GSocketConnection* gobjectValue = g_socket_client_connect_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
+	OGSocketConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -87,17 +89,11 @@
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_connect_to_host([self castedGObject], [hostAndPort UTF8String], defaultPort, [cancellable castedGObject], &err), GSocketConnection, GSocketConnection);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_host([self castedGObject], [hostAndPort UTF8String], defaultPort, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
+	OGSocketConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -112,17 +108,11 @@
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_connect_to_host_finish([self castedGObject], result, &err), GSocketConnection, GSocketConnection);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_host_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
+	OGSocketConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -132,17 +122,11 @@
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_connect_to_service([self castedGObject], [domain UTF8String], [service UTF8String], [cancellable castedGObject], &err), GSocketConnection, GSocketConnection);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_service([self castedGObject], [domain UTF8String], [service UTF8String], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
+	OGSocketConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -157,17 +141,11 @@
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_connect_to_service_finish([self castedGObject], result, &err), GSocketConnection, GSocketConnection);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_service_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
+	OGSocketConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -177,17 +155,11 @@
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_connect_to_uri([self castedGObject], [uri UTF8String], defaultPort, [cancellable castedGObject], &err), GSocketConnection, GSocketConnection);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_uri([self castedGObject], [uri UTF8String], defaultPort, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
+	OGSocketConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -202,17 +174,11 @@
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_connect_to_uri_finish([self castedGObject], result, &err), GSocketConnection, GSocketConnection);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_uri_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGSocketConnection* returnValue = [OGSocketConnection withGObject:gobjectValue];
+	OGSocketConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -220,64 +186,64 @@
 
 - (bool)enableProxy
 {
-	bool returnValue = g_socket_client_get_enable_proxy([self castedGObject]);
+	bool returnValue = (bool)g_socket_client_get_enable_proxy([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GSocketFamily)family
 {
-	GSocketFamily returnValue = g_socket_client_get_family([self castedGObject]);
+	GSocketFamily returnValue = (GSocketFamily)g_socket_client_get_family([self castedGObject]);
 
 	return returnValue;
 }
 
 - (OGSocketAddress*)localAddress
 {
-	GSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_get_local_address([self castedGObject]), GSocketAddress, GSocketAddress);
+	GSocketAddress* gobjectValue = g_socket_client_get_local_address([self castedGObject]);
 
-	OGSocketAddress* returnValue = [OGSocketAddress withGObject:gobjectValue];
+	OGSocketAddress* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (GSocketProtocol)protocol
 {
-	GSocketProtocol returnValue = g_socket_client_get_protocol([self castedGObject]);
+	GSocketProtocol returnValue = (GSocketProtocol)g_socket_client_get_protocol([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GProxyResolver*)proxyResolver
 {
-	GProxyResolver* returnValue = g_socket_client_get_proxy_resolver([self castedGObject]);
+	GProxyResolver* returnValue = (GProxyResolver*)g_socket_client_get_proxy_resolver([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GSocketType)socketType
 {
-	GSocketType returnValue = g_socket_client_get_socket_type([self castedGObject]);
+	GSocketType returnValue = (GSocketType)g_socket_client_get_socket_type([self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint)timeout
 {
-	guint returnValue = g_socket_client_get_timeout([self castedGObject]);
+	guint returnValue = (guint)g_socket_client_get_timeout([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)tls
 {
-	bool returnValue = g_socket_client_get_tls([self castedGObject]);
+	bool returnValue = (bool)g_socket_client_get_tls([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GTlsCertificateFlags)tlsValidationFlags
 {
-	GTlsCertificateFlags returnValue = g_socket_client_get_tls_validation_flags([self castedGObject]);
+	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_socket_client_get_tls_validation_flags([self castedGObject]);
 
 	return returnValue;
 }

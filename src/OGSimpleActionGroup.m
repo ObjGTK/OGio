@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGSimpleActionGroup
 
-- (instancetype)init
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_SIMPLE_ACTION_GROUP;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)simpleActionGroup
 {
 	GSimpleActionGroup* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_group_new(), GSimpleActionGroup, GSimpleActionGroup);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGSimpleActionGroup* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGSimpleActionGroup alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GSimpleActionGroup*)castedGObject
@@ -41,7 +55,7 @@
 
 - (GAction*)lookup:(OFString*)actionName
 {
-	GAction* returnValue = g_simple_action_group_lookup([self castedGObject], [actionName UTF8String]);
+	GAction* returnValue = (GAction*)g_simple_action_group_lookup([self castedGObject], [actionName UTF8String]);
 
 	return returnValue;
 }

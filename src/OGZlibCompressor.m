@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,20 +10,34 @@
 
 @implementation OGZlibCompressor
 
-- (instancetype)initWithFormat:(GZlibCompressorFormat)format level:(int)level
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_ZLIB_COMPRESSOR;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)zlibCompressorWithFormat:(GZlibCompressorFormat)format level:(int)level
 {
 	GZlibCompressor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_zlib_compressor_new(format, level), GZlibCompressor, GZlibCompressor);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGZlibCompressor* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGZlibCompressor alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GZlibCompressor*)castedGObject
@@ -33,9 +47,9 @@
 
 - (OGFileInfo*)fileInfo
 {
-	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_zlib_compressor_get_file_info([self castedGObject]), GFileInfo, GFileInfo);
+	GFileInfo* gobjectValue = g_zlib_compressor_get_file_info([self castedGObject]);
 
-	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
+	OGFileInfo* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 

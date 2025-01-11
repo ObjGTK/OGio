@@ -84,24 +84,24 @@ AS_IF([test x"$with_giounix" != x"no" -a x"$with_giounix" != x""], [
 ])
 
 
-PKG_CHECK_MODULES(gio, [gio-2.0 >= $(pkg-config --modversion gio-2.0)], [
+PKG_CHECK_MODULES(gio, [gio-2.0 >= 2.80)], [
 	OGIO_CPPFLAGS="$OGIO_CPPFLAGS $gio_CFLAGS"
 	OGIO_LIBS="$OGIO_LIBS $gio_LIBS"
 	CPPFLAGS="$CPPFLAGS $gio_CFLAGS"
 	LIBS="$LIBS $gio_LIBS"
 	FRAMEWORK_LIBS="$FRAMEWORK_LIBS $gio_LIBS"
 ], [
-	AC_MSG_ERROR(You need gio-2.0 >= $(pkg-config --modversion gio-2.0) installed!)
+	AC_MSG_ERROR(You need gio-2.0 >= 2.80 installed!)
 ])
 
-PKG_CHECK_MODULES(giounix, [gio-unix-2.0 >= $(pkg-config --modversion gio-unix-2.0)], [
+PKG_CHECK_MODULES(giounix, [gio-unix-2.0 >= 2.80], [
 	OGIO_CPPFLAGS="$OGIO_CPPFLAGS $giounix_CFLAGS"
 	OGIO_LIBS="$OGIO_LIBS $giounix_LIBS"
 	CPPFLAGS="$CPPFLAGS $giounix_CFLAGS"
 	LIBS="$LIBS $giounix_LIBS"
 	FRAMEWORK_LIBS="$FRAMEWORK_LIBS $giounix_LIBS"
 ], [
-	AC_MSG_ERROR(You need gio-unix-2.0 >= $(pkg-config --modversion gio-unix-2.0) installed!)
+	AC_MSG_ERROR(You need gio-unix-2.0 >= 2.80 installed!)
 ])
 
 AS_IF([test x"$GOBJC" = x"yes"], [

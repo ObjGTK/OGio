@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -8,20 +8,34 @@
 
 @implementation OGListStore
 
-- (instancetype)init:(GType)itemType
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_LIST_STORE;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (instancetype)listStore:(GType)itemType
 {
 	GListStore* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_list_store_new(itemType), GListStore, GListStore);
 
+	if OF_UNLIKELY(!gobjectValue)
+		@throw [OGObjectGObjectToWrapCreationFailedException exception];
+
+	OGListStore* wrapperObject;
 	@try {
-		self = [super initWithGObject:gobjectValue];
+		wrapperObject = [[OGListStore alloc] initWithGObject:gobjectValue];
 	} @catch (id e) {
 		g_object_unref(gobjectValue);
-		[self release];
+		[wrapperObject release];
 		@throw e;
 	}
 
 	g_object_unref(gobjectValue);
-	return self;
+	return [wrapperObject autorelease];
 }
 
 - (GListStore*)castedGObject
@@ -36,21 +50,21 @@
 
 - (bool)findWithItem:(gpointer)item position:(guint*)position
 {
-	bool returnValue = g_list_store_find([self castedGObject], item, position);
+	bool returnValue = (bool)g_list_store_find([self castedGObject], item, position);
 
 	return returnValue;
 }
 
 - (bool)findWithEqualFuncWithItem:(gpointer)item equalFunc:(GEqualFunc)equalFunc position:(guint*)position
 {
-	bool returnValue = g_list_store_find_with_equal_func([self castedGObject], item, equalFunc, position);
+	bool returnValue = (bool)g_list_store_find_with_equal_func([self castedGObject], item, equalFunc, position);
 
 	return returnValue;
 }
 
 - (bool)findWithEqualFuncFullWithItem:(gpointer)item equalFunc:(GEqualFuncFull)equalFunc userData:(gpointer)userData position:(guint*)position
 {
-	bool returnValue = g_list_store_find_with_equal_func_full([self castedGObject], item, equalFunc, userData, position);
+	bool returnValue = (bool)g_list_store_find_with_equal_func_full([self castedGObject], item, equalFunc, userData, position);
 
 	return returnValue;
 }
@@ -62,7 +76,7 @@
 
 - (guint)insertSortedWithItem:(gpointer)item compareFunc:(GCompareDataFunc)compareFunc userData:(gpointer)userData
 {
-	guint returnValue = g_list_store_insert_sorted([self castedGObject], item, compareFunc, userData);
+	guint returnValue = (guint)g_list_store_insert_sorted([self castedGObject], item, compareFunc, userData);
 
 	return returnValue;
 }

@@ -1,6 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
@@ -10,6 +10,16 @@
 #import "OGFileInfo.h"
 
 @implementation OGFileOutputStream
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_FILE_OUTPUT_STREAM;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (GFileOutputStream*)castedGObject
 {
@@ -28,17 +38,11 @@
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_output_stream_query_info([self castedGObject], [attributes UTF8String], [cancellable castedGObject], &err), GFileInfo, GFileInfo);
+	GFileInfo* gobjectValue = g_file_output_stream_query_info([self castedGObject], [attributes UTF8String], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
+	OGFileInfo* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -53,17 +57,11 @@
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_output_stream_query_info_finish([self castedGObject], result, &err), GFileInfo, GFileInfo);
+	GFileInfo* gobjectValue = g_file_output_stream_query_info_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGFileInfo* returnValue = [OGFileInfo withGObject:gobjectValue];
+	OGFileInfo* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;

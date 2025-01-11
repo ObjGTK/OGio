@@ -1,17 +1,27 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGTlsConnection.h"
 
-#import "OGTlsDatabase.h"
-#import "OGTlsCertificate.h"
 #import "OGCancellable.h"
+#import "OGTlsCertificate.h"
+#import "OGTlsDatabase.h"
 #import "OGTlsInteraction.h"
 
 @implementation OGTlsConnection
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_TLS_CONNECTION;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (GTlsConnection*)castedGObject
 {
@@ -20,16 +30,16 @@
 
 - (bool)emitAcceptCertificateWithPeerCert:(OGTlsCertificate*)peerCert errors:(GTlsCertificateFlags)errors
 {
-	bool returnValue = g_tls_connection_emit_accept_certificate([self castedGObject], [peerCert castedGObject], errors);
+	bool returnValue = (bool)g_tls_connection_emit_accept_certificate([self castedGObject], [peerCert castedGObject], errors);
 
 	return returnValue;
 }
 
 - (OGTlsCertificate*)certificate
 {
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_connection_get_certificate([self castedGObject]), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = g_tls_connection_get_certificate([self castedGObject]);
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
+	OGTlsCertificate* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
@@ -37,13 +47,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_tls_connection_get_channel_binding_data([self castedGObject], type, data, &err);
+	bool returnValue = (bool)g_tls_connection_get_channel_binding_data([self castedGObject], type, data, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -58,17 +64,17 @@
 
 - (OGTlsDatabase*)database
 {
-	GTlsDatabase* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_connection_get_database([self castedGObject]), GTlsDatabase, GTlsDatabase);
+	GTlsDatabase* gobjectValue = g_tls_connection_get_database([self castedGObject]);
 
-	OGTlsDatabase* returnValue = [OGTlsDatabase withGObject:gobjectValue];
+	OGTlsDatabase* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (OGTlsInteraction*)interaction
 {
-	GTlsInteraction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_connection_get_interaction([self castedGObject]), GTlsInteraction, GTlsInteraction);
+	GTlsInteraction* gobjectValue = g_tls_connection_get_interaction([self castedGObject]);
 
-	OGTlsInteraction* returnValue = [OGTlsInteraction withGObject:gobjectValue];
+	OGTlsInteraction* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
@@ -82,43 +88,43 @@
 
 - (OGTlsCertificate*)peerCertificate
 {
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_connection_get_peer_certificate([self castedGObject]), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = g_tls_connection_get_peer_certificate([self castedGObject]);
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
+	OGTlsCertificate* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
 - (GTlsCertificateFlags)peerCertificateErrors
 {
-	GTlsCertificateFlags returnValue = g_tls_connection_get_peer_certificate_errors([self castedGObject]);
+	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_tls_connection_get_peer_certificate_errors([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GTlsProtocolVersion)protocolVersion
 {
-	GTlsProtocolVersion returnValue = g_tls_connection_get_protocol_version([self castedGObject]);
+	GTlsProtocolVersion returnValue = (GTlsProtocolVersion)g_tls_connection_get_protocol_version([self castedGObject]);
 
 	return returnValue;
 }
 
 - (GTlsRehandshakeMode)rehandshakeMode
 {
-	GTlsRehandshakeMode returnValue = g_tls_connection_get_rehandshake_mode([self castedGObject]);
+	GTlsRehandshakeMode returnValue = (GTlsRehandshakeMode)g_tls_connection_get_rehandshake_mode([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)requireCloseNotify
 {
-	bool returnValue = g_tls_connection_get_require_close_notify([self castedGObject]);
+	bool returnValue = (bool)g_tls_connection_get_require_close_notify([self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)useSystemCertdb
 {
-	bool returnValue = g_tls_connection_get_use_system_certdb([self castedGObject]);
+	bool returnValue = (bool)g_tls_connection_get_use_system_certdb([self castedGObject]);
 
 	return returnValue;
 }
@@ -127,13 +133,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_tls_connection_handshake([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_tls_connection_handshake([self castedGObject], [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -147,13 +149,9 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = g_tls_connection_handshake_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_tls_connection_handshake_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }

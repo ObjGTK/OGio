@@ -1,16 +1,26 @@
 /*
  * SPDX-FileCopyrightText: 2015-2017 Tyler Burton <software@tylerburton.ca>
- * SPDX-FileCopyrightText: 2015-2024 The ObjGTK authors, see AUTHORS file
+ * SPDX-FileCopyrightText: 2015-2025 The ObjGTK authors, see AUTHORS file
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
 #import "OGTlsDatabase.h"
 
-#import "OGTlsInteraction.h"
-#import "OGTlsCertificate.h"
 #import "OGCancellable.h"
+#import "OGTlsCertificate.h"
+#import "OGTlsInteraction.h"
 
 @implementation OGTlsDatabase
+
++ (void)load
+{
+	GType gtypeToAssociate = G_TYPE_TLS_DATABASE;
+
+	if (gtypeToAssociate == 0)
+		return;
+
+	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
 
 - (GTlsDatabase*)castedGObject
 {
@@ -29,17 +39,11 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_database_lookup_certificate_for_handle([self castedGObject], [handle UTF8String], [interaction castedGObject], flags, [cancellable castedGObject], &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_for_handle([self castedGObject], [handle UTF8String], [interaction castedGObject], flags, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
+	OGTlsCertificate* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -54,17 +58,11 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_database_lookup_certificate_for_handle_finish([self castedGObject], result, &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_for_handle_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
+	OGTlsCertificate* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -74,17 +72,11 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_database_lookup_certificate_issuer([self castedGObject], [certificate castedGObject], [interaction castedGObject], flags, [cancellable castedGObject], &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_issuer([self castedGObject], [certificate castedGObject], [interaction castedGObject], flags, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
+	OGTlsCertificate* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -99,17 +91,11 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_database_lookup_certificate_issuer_finish([self castedGObject], result, &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_issuer_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		if(gobjectValue != NULL)
-			g_object_unref(gobjectValue);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
-	OGTlsCertificate* returnValue = [OGTlsCertificate withGObject:gobjectValue];
+	OGTlsCertificate* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
 
 	return returnValue;
@@ -119,13 +105,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_tls_database_lookup_certificates_issued_by([self castedGObject], issuerRawDn, [interaction castedGObject], flags, [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_tls_database_lookup_certificates_issued_by([self castedGObject], issuerRawDn, [interaction castedGObject], flags, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -139,13 +121,9 @@
 {
 	GError* err = NULL;
 
-	GList* returnValue = g_tls_database_lookup_certificates_issued_by_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_tls_database_lookup_certificates_issued_by_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -154,13 +132,9 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificateFlags returnValue = g_tls_database_verify_chain([self castedGObject], [chain castedGObject], [purpose UTF8String], identity, [interaction castedGObject], flags, [cancellable castedGObject], &err);
+	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_tls_database_verify_chain([self castedGObject], [chain castedGObject], [purpose UTF8String], identity, [interaction castedGObject], flags, [cancellable castedGObject], &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
@@ -174,13 +148,9 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificateFlags returnValue = g_tls_database_verify_chain_finish([self castedGObject], result, &err);
+	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_tls_database_verify_chain_finish([self castedGObject], result, &err);
 
-	if(err != NULL) {
-		OGErrorException* exception = [OGErrorException exceptionWithGError:err];
-		g_error_free(err);
-		@throw exception;
-	}
+	[OGErrorException throwForError:err];
 
 	return returnValue;
 }
