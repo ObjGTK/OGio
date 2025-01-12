@@ -371,7 +371,7 @@
 
 - (void)setAttributeObjectWithAttribute:(OFString*)attribute attrValue:(OGObject*)attrValue
 {
-	g_file_info_set_attribute_object([self castedGObject], [attribute UTF8String], attrValue);
+	g_file_info_set_attribute_object([self castedGObject], [attribute UTF8String], [attrValue castedGObject]);
 }
 
 - (bool)setAttributeStatusWithAttribute:(OFString*)attribute status:(GFileAttributeStatus)status

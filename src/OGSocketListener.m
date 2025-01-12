@@ -118,7 +118,7 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_listener_add_address([self castedGObject], [address castedGObject], type, protocol, sourceObject, effectiveAddress, &err);
+	bool returnValue = (bool)g_socket_listener_add_address([self castedGObject], [address castedGObject], type, protocol, [sourceObject castedGObject], effectiveAddress, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -129,7 +129,7 @@
 {
 	GError* err = NULL;
 
-	guint16 returnValue = (guint16)g_socket_listener_add_any_inet_port([self castedGObject], sourceObject, &err);
+	guint16 returnValue = (guint16)g_socket_listener_add_any_inet_port([self castedGObject], [sourceObject castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -140,7 +140,7 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_listener_add_inet_port([self castedGObject], port, sourceObject, &err);
+	bool returnValue = (bool)g_socket_listener_add_inet_port([self castedGObject], port, [sourceObject castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -151,7 +151,7 @@
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_listener_add_socket([self castedGObject], [socket castedGObject], sourceObject, &err);
+	bool returnValue = (bool)g_socket_listener_add_socket([self castedGObject], [socket castedGObject], [sourceObject castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
