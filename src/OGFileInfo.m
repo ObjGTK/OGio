@@ -122,10 +122,11 @@
 	return returnValue;
 }
 
-- (GObject*)attributeObject:(OFString*)attribute
+- (OGObject*)attributeObject:(OFString*)attribute
 {
-	GObject* returnValue = (GObject*)g_file_info_get_attribute_object([self castedGObject], [attribute UTF8String]);
+	GObject* gobjectValue = g_file_info_get_attribute_object([self castedGObject], [attribute UTF8String]);
 
+	OGObject* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
 }
 
@@ -368,7 +369,7 @@
 	g_file_info_set_attribute_mask([self castedGObject], mask);
 }
 
-- (void)setAttributeObjectWithAttribute:(OFString*)attribute attrValue:(GObject*)attrValue
+- (void)setAttributeObjectWithAttribute:(OFString*)attribute attrValue:(OGObject*)attrValue
 {
 	g_file_info_set_attribute_object([self castedGObject], [attribute UTF8String], attrValue);
 }

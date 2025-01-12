@@ -193,7 +193,7 @@
  * @return a #GObject associated with the given @attribute,
  * or %NULL otherwise.
  */
-- (GObject*)attributeObject:(OFString*)attribute;
+- (OGObject*)attributeObject:(OFString*)attribute;
 
 /**
  * Gets the attribute status for an attribute key.
@@ -572,7 +572,7 @@
  * @param attribute a file attribute key.
  * @param attrValue a #GObject.
  */
-- (void)setAttributeObjectWithAttribute:(OFString*)attribute attrValue:(GObject*)attrValue;
+- (void)setAttributeObjectWithAttribute:(OFString*)attribute attrValue:(OGObject*)attrValue;
 
 /**
  * Sets the attribute status for an attribute key. This is only

@@ -318,7 +318,7 @@
 
 
 /**
- * Deprecated.
+ * Use g_settings_schema_source_list_schemas() instead
  *
  * @return a list of
  *   relocatable #GSettings schemas that are available, in no defined order.
@@ -327,7 +327,10 @@
 + (const gchar* const*)listRelocatableSchemas;
 
 /**
- * Deprecated.
+ * Use g_settings_schema_source_list_schemas() instead.
+ * If you used g_settings_list_schemas() to check for the presence of
+ * a particular schema, use g_settings_schema_source_lookup() instead
+ * of your whole loop.
  *
  * @return a list of
  *   #GSettings schemas that are available, in no defined order.  The list

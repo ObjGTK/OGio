@@ -20,14 +20,14 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (bool)isValidWithResult:(GAsyncResult*)result source:(GObject*)source sourceTag:(gpointer)sourceTag
++ (bool)isValidWithResult:(GAsyncResult*)result source:(OGObject*)source sourceTag:(gpointer)sourceTag
 {
 	bool returnValue = (bool)g_simple_async_result_is_valid(result, source, sourceTag);
 
 	return returnValue;
 }
 
-+ (instancetype)simpleAsyncResultWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData sourceTag:(gpointer)sourceTag
++ (instancetype)simpleAsyncResultWithSourceObject:(OGObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData sourceTag:(gpointer)sourceTag
 {
 	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new(sourceObject, callback, userData, sourceTag), GSimpleAsyncResult, GSimpleAsyncResult);
 
@@ -47,7 +47,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)simpleAsyncResultFromErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(const GError*)error
++ (instancetype)simpleAsyncResultFromErrorWithSourceObject:(OGObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(const GError*)error
 {
 	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_from_error(sourceObject, callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
 
@@ -67,7 +67,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)simpleAsyncResultTakeErrorWithSourceObject:(GObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(GError*)error
++ (instancetype)simpleAsyncResultTakeErrorWithSourceObject:(OGObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(GError*)error
 {
 	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_take_error(sourceObject, callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
 

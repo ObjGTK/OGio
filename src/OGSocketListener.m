@@ -114,7 +114,7 @@
 	return returnValue;
 }
 
-- (bool)addAddressWithAddress:(OGSocketAddress*)address type:(GSocketType)type protocol:(GSocketProtocol)protocol sourceObject:(GObject*)sourceObject effectiveAddress:(GSocketAddress**)effectiveAddress
+- (bool)addAddressWithAddress:(OGSocketAddress*)address type:(GSocketType)type protocol:(GSocketProtocol)protocol sourceObject:(OGObject*)sourceObject effectiveAddress:(GSocketAddress**)effectiveAddress
 {
 	GError* err = NULL;
 
@@ -125,7 +125,7 @@
 	return returnValue;
 }
 
-- (guint16)addAnyInetPort:(GObject*)sourceObject
+- (guint16)addAnyInetPort:(OGObject*)sourceObject
 {
 	GError* err = NULL;
 
@@ -136,7 +136,7 @@
 	return returnValue;
 }
 
-- (bool)addInetPortWithPort:(guint16)port sourceObject:(GObject*)sourceObject
+- (bool)addInetPortWithPort:(guint16)port sourceObject:(OGObject*)sourceObject
 {
 	GError* err = NULL;
 
@@ -147,7 +147,7 @@
 	return returnValue;
 }
 
-- (bool)addSocketWithSocket:(OGSocket*)socket sourceObject:(GObject*)sourceObject
+- (bool)addSocketWithSocket:(OGSocket*)socket sourceObject:(OGObject*)sourceObject
 {
 	GError* err = NULL;
 
