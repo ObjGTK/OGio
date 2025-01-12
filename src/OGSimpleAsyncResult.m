@@ -22,14 +22,14 @@
 
 + (bool)isValidWithResult:(GAsyncResult*)result source:(OGObject*)source sourceTag:(gpointer)sourceTag
 {
-	bool returnValue = (bool)g_simple_async_result_is_valid(result, [source castedGObject], sourceTag);
+	bool returnValue = (bool)g_simple_async_result_is_valid(result, [source gObject], sourceTag);
 
 	return returnValue;
 }
 
 + (instancetype)simpleAsyncResultWithSourceObject:(OGObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData sourceTag:(gpointer)sourceTag
 {
-	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new([sourceObject castedGObject], callback, userData, sourceTag), GSimpleAsyncResult, GSimpleAsyncResult);
+	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new([sourceObject gObject], callback, userData, sourceTag), GSimpleAsyncResult, GSimpleAsyncResult);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -49,7 +49,7 @@
 
 + (instancetype)simpleAsyncResultFromErrorWithSourceObject:(OGObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(const GError*)error
 {
-	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_from_error([sourceObject castedGObject], callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
+	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_from_error([sourceObject gObject], callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -69,7 +69,7 @@
 
 + (instancetype)simpleAsyncResultTakeErrorWithSourceObject:(OGObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(GError*)error
 {
-	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_take_error([sourceObject castedGObject], callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
+	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_take_error([sourceObject gObject], callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
