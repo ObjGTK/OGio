@@ -60,7 +60,7 @@
  * @param length location to place the length of the password.
  * @return The password value (owned by the password object).
  */
-- (const guchar*)value:(gsize*)length;
+- (const guchar*)valueWithLength:(gsize*)length;
 
 /**
  * Get a user readable translated warning. Usually this warning is a
@@ -97,7 +97,7 @@
  * @param value the new password value
  * @param length the length of the password, or -1
  */
-- (void)setValueWithValue:(const guchar*)value length:(gssize)length;
+- (void)setValue:(const guchar*)value length:(gssize)length;
 
 /**
  * Provide the value for this password.
@@ -114,7 +114,7 @@
  * @param length the length of the password, or -1
  * @param destroy a function to use to free the password.
  */
-- (void)setValueFullWithValue:(guchar*)value length:(gssize)length destroy:(GDestroyNotify)destroy;
+- (void)setValueFull:(guchar*)value length:(gssize)length destroy:(GDestroyNotify)destroy;
 
 /**
  * Set a user readable translated warning. Usually this warning is a

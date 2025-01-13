@@ -40,7 +40,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)menuItemFromModelWithModel:(OGMenuModel*)model itemIndex:(gint)itemIndex
++ (instancetype)menuItemFromModel:(OGMenuModel*)model itemIndex:(gint)itemIndex
 {
 	GMenuItem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_menu_item_new_from_model([model castedGObject], itemIndex), GMenuItem, GMenuItem);
 
@@ -112,7 +112,7 @@
 	return returnValue;
 }
 
-- (OGMenuModel*)link:(OFString*)link
+- (OGMenuModel*)linkWithLink:(OFString*)link
 {
 	GMenuModel* gobjectValue = g_menu_item_get_link([self castedGObject], [link UTF8String]);
 
@@ -122,12 +122,12 @@
 	return returnValue;
 }
 
-- (void)setActionAndTargetValueWithAction:(OFString*)action targetValue:(GVariant*)targetValue
+- (void)setActionAndTargetValue:(OFString*)action targetValue:(GVariant*)targetValue
 {
 	g_menu_item_set_action_and_target_value([self castedGObject], [action UTF8String], targetValue);
 }
 
-- (void)setAttributeValueWithAttribute:(OFString*)attribute value:(GVariant*)value
+- (void)setAttributeValue:(OFString*)attribute value:(GVariant*)value
 {
 	g_menu_item_set_attribute_value([self castedGObject], [attribute UTF8String], value);
 }
@@ -147,7 +147,7 @@
 	g_menu_item_set_label([self castedGObject], [label UTF8String]);
 }
 
-- (void)setLinkWithLink:(OFString*)link model:(OGMenuModel*)model
+- (void)setLink:(OFString*)link model:(OGMenuModel*)model
 {
 	g_menu_item_set_link([self castedGObject], [link UTF8String], [model castedGObject]);
 }

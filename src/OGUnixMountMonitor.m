@@ -53,7 +53,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixMountMonitor, GUnixMountMonitor);
 }
 
-- (void)setRateLimit:(int)limitMsec
+- (void)setRateLimitWithLimitMsec:(int)limitMsec
 {
 	g_unix_mount_monitor_set_rate_limit([self castedGObject], limitMsec);
 }

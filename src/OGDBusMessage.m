@@ -51,7 +51,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)dBusMessageFromBlobWithBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities
++ (instancetype)dBusMessageFromBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities
 {
 	GError* err = NULL;
 
@@ -187,7 +187,7 @@
 	return returnValue;
 }
 
-- (GVariant*)header:(GDBusMessageHeaderField)headerField
+- (GVariant*)headerWithHeaderField:(GDBusMessageHeaderField)headerField
 {
 	GVariant* returnValue = (GVariant*)g_dbus_message_get_header([self castedGObject], headerField);
 
@@ -319,7 +319,7 @@
 	return returnValue;
 }
 
-- (OFString*)print:(guint)indent
+- (OFString*)printWithIndent:(guint)indent
 {
 	gchar* gobjectValue = g_dbus_message_print([self castedGObject], indent);
 
@@ -337,12 +337,12 @@
 	g_dbus_message_set_byte_order([self castedGObject], byteOrder);
 }
 
-- (void)setDestination:(OFString*)value
+- (void)setDestinationWithValue:(OFString*)value
 {
 	g_dbus_message_set_destination([self castedGObject], [value UTF8String]);
 }
 
-- (void)setErrorName:(OFString*)value
+- (void)setErrorNameWithValue:(OFString*)value
 {
 	g_dbus_message_set_error_name([self castedGObject], [value UTF8String]);
 }
@@ -357,12 +357,12 @@
 	g_dbus_message_set_header([self castedGObject], headerField, value);
 }
 
-- (void)setInterface:(OFString*)value
+- (void)setInterfaceWithValue:(OFString*)value
 {
 	g_dbus_message_set_interface([self castedGObject], [value UTF8String]);
 }
 
-- (void)setMember:(OFString*)value
+- (void)setMemberWithValue:(OFString*)value
 {
 	g_dbus_message_set_member([self castedGObject], [value UTF8String]);
 }
@@ -372,22 +372,22 @@
 	g_dbus_message_set_message_type([self castedGObject], type);
 }
 
-- (void)setNumUnixFds:(guint32)value
+- (void)setNumUnixFdsWithValue:(guint32)value
 {
 	g_dbus_message_set_num_unix_fds([self castedGObject], value);
 }
 
-- (void)setPath:(OFString*)value
+- (void)setPathWithValue:(OFString*)value
 {
 	g_dbus_message_set_path([self castedGObject], [value UTF8String]);
 }
 
-- (void)setReplySerial:(guint32)value
+- (void)setReplySerialWithValue:(guint32)value
 {
 	g_dbus_message_set_reply_serial([self castedGObject], value);
 }
 
-- (void)setSender:(OFString*)value
+- (void)setSenderWithValue:(OFString*)value
 {
 	g_dbus_message_set_sender([self castedGObject], [value UTF8String]);
 }
@@ -397,7 +397,7 @@
 	g_dbus_message_set_serial([self castedGObject], serial);
 }
 
-- (void)setSignature:(OFString*)value
+- (void)setSignatureWithValue:(OFString*)value
 {
 	g_dbus_message_set_signature([self castedGObject], [value UTF8String]);
 }

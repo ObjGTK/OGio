@@ -33,7 +33,7 @@
  * Constructors
  */
 + (instancetype)inetAddressMaskWithAddr:(OGInetAddress*)addr length:(guint)length;
-+ (instancetype)inetAddressMaskFromString:(OFString*)maskString;
++ (instancetype)inetAddressMaskFromStringWithMaskString:(OFString*)maskString;
 
 /**
  * Methods
@@ -47,7 +47,7 @@
  * @param mask2 another #GInetAddressMask
  * @return whether @mask and @mask2 are the same mask
  */
-- (bool)equal:(OGInetAddressMask*)mask2;
+- (bool)equalWithMask2:(OGInetAddressMask*)mask2;
 
 /**
  * Gets @mask's base address
@@ -77,7 +77,7 @@
  * @return whether @address falls within the range described by
  * @mask.
  */
-- (bool)matches:(OGInetAddress*)address;
+- (bool)matchesWithAddress:(OGInetAddress*)address;
 
 /**
  * Converts @mask back to its corresponding string form.

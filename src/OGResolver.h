@@ -108,7 +108,7 @@
  * @return a hostname (either ASCII-only, or in ASCII-encoded
  *     form), or %NULL on error.
  */
-- (OFString*)lookupByAddressWithAddress:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable;
+- (OFString*)lookupByAddress:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable;
 
 /**
  * Begins asynchronously reverse-resolving @address to determine its
@@ -120,7 +120,7 @@
  * @param callback callback to call after resolution completes
  * @param userData data for @callback
  */
-- (void)lookupByAddressAsyncWithAddress:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
+- (void)lookupByAddressAsync:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Retrieves the result of a previous call to
@@ -134,7 +134,7 @@
  * @return a hostname (either ASCII-only, or in ASCII-encoded
  * form), or %NULL on error.
  */
-- (OFString*)lookupByAddressFinish:(GAsyncResult*)result;
+- (OFString*)lookupByAddressFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Synchronously resolves @hostname to determine its associated IP
@@ -196,7 +196,7 @@
  * of #GInetAddress, or %NULL on error. See g_resolver_lookup_by_name()
  * for more details.
  */
-- (GList*)lookupByNameFinish:(GAsyncResult*)result;
+- (GList*)lookupByNameFinishWithResult:(GAsyncResult*)result;
 
 /**
  * This differs from g_resolver_lookup_by_name() in that you can modify
@@ -240,7 +240,7 @@
  * of #GInetAddress, or %NULL on error. See g_resolver_lookup_by_name()
  * for more details.
  */
-- (GList*)lookupByNameWithFlagsFinish:(GAsyncResult*)result;
+- (GList*)lookupByNameWithFlagsFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Synchronously performs a DNS record lookup for the given @rrname and returns
@@ -294,7 +294,7 @@
  * when you are done with it. (You can use g_list_free_full() with
  * g_variant_unref() to do this.)
  */
-- (GList*)lookupRecordsFinish:(GAsyncResult*)result;
+- (GList*)lookupRecordsFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Synchronously performs a DNS SRV lookup for the given @service and
@@ -328,7 +328,7 @@
  * list when you are done with it. (You can use g_resolver_free_targets() to do
  * this.)
  */
-- (GList*)lookupServiceWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain cancellable:(OGCancellable*)cancellable;
+- (GList*)lookupService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain cancellable:(OGCancellable*)cancellable;
 
 /**
  * Begins asynchronously performing a DNS SRV lookup for the given
@@ -344,7 +344,7 @@
  * @param callback callback to call after resolution completes
  * @param userData data for @callback
  */
-- (void)lookupServiceAsyncWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
+- (void)lookupServiceAsync:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Retrieves the result of a previous call to
@@ -359,7 +359,7 @@
  * #GSrvTarget, or %NULL on error. See g_resolver_lookup_service() for more
  * details.
  */
-- (GList*)lookupServiceFinish:(GAsyncResult*)result;
+- (GList*)lookupServiceFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Sets @resolver to be the application's default resolver (reffing
@@ -380,6 +380,6 @@
  *
  * @param timeoutMs timeout in milliseconds, or `0` for no timeouts
  */
-- (void)setTimeout:(unsigned)timeoutMs;
+- (void)setTimeoutWithTimeoutMs:(unsigned)timeoutMs;
 
 @end

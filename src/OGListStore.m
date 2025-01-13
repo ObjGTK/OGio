@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)listStore:(GType)itemType
++ (instancetype)listStoreWithItemType:(GType)itemType
 {
 	GListStore* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_list_store_new(itemType), GListStore, GListStore);
 
@@ -43,7 +43,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GListStore, GListStore);
 }
 
-- (void)append:(gpointer)item
+- (void)appendWithItem:(gpointer)item
 {
 	g_list_store_append([self castedGObject], item);
 }
@@ -81,7 +81,7 @@
 	return returnValue;
 }
 
-- (void)remove:(guint)position
+- (void)removeWithPosition:(guint)position
 {
 	g_list_store_remove([self castedGObject], position);
 }

@@ -151,14 +151,14 @@
  * @param callback a #GAsyncReadyCallback to call when the request is satisfied
  * @param userData the data to pass to @callback
  */
-+ (void)newForAddressWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
++ (void)newForAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Constructors
  */
-+ (instancetype)dBusConnectionFinish:(GAsyncResult*)res;
++ (instancetype)dBusConnectionFinishWithRes:(GAsyncResult*)res;
 + (instancetype)dBusConnectionForAddressFinish:(GAsyncResult*)res;
-+ (instancetype)dBusConnectionForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
++ (instancetype)dBusConnectionForAddressSync:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
 + (instancetype)dBusConnectionSyncWithStream:(OGIOStream*)stream guid:(OFString*)guid flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable;
 
 /**
@@ -279,7 +279,7 @@
  * @return %NULL if @error is set. Otherwise a non-floating
  *     #GVariant tuple with return values. Free with g_variant_unref().
  */
-- (GVariant*)callFinish:(GAsyncResult*)res;
+- (GVariant*)callFinishWithRes:(GAsyncResult*)res;
 
 /**
  * Synchronously invokes the @method_name method on the
@@ -461,7 +461,7 @@
  *     to g_dbus_connection_close()
  * @return %TRUE if the operation succeeded, %FALSE if @error is set
  */
-- (bool)closeFinish:(GAsyncResult*)res;
+- (bool)closeFinishWithRes:(GAsyncResult*)res;
 
 /**
  * Synchronously closes @connection. The calling thread is blocked
@@ -472,7 +472,7 @@
  * @param cancellable a #GCancellable or %NULL
  * @return %TRUE if the operation succeeded, %FALSE if @error is set
  */
-- (bool)closeSync:(OGCancellable*)cancellable;
+- (bool)closeSyncWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Emits a signal.
@@ -577,7 +577,7 @@
  *     to g_dbus_connection_flush()
  * @return %TRUE if the operation succeeded, %FALSE if @error is set
  */
-- (bool)flushFinish:(GAsyncResult*)res;
+- (bool)flushFinishWithRes:(GAsyncResult*)res;
 
 /**
  * Synchronously flushes @connection. The calling thread is blocked
@@ -588,7 +588,7 @@
  * @param cancellable a #GCancellable or %NULL
  * @return %TRUE if the operation succeeded, %FALSE if @error is set
  */
-- (bool)flushSync:(OGCancellable*)cancellable;
+- (bool)flushSyncWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Gets the capabilities negotiated with the remote peer
@@ -803,7 +803,7 @@
  *
  * @param filterId an identifier obtained from g_dbus_connection_add_filter()
  */
-- (void)removeFilter:(guint)filterId;
+- (void)removeFilterWithFilterId:(guint)filterId;
 
 /**
  * Asynchronously sends @message to the peer represented by @connection.
@@ -835,7 +835,7 @@
  * @return %TRUE if the message was well-formed and queued for
  *     transmission, %FALSE if @error is set
  */
-- (bool)sendMessageWithMessage:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags outSerial:(volatile guint32*)outSerial;
+- (bool)sendMessage:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags outSerial:(volatile guint32*)outSerial;
 
 /**
  * Asynchronously sends @message to the peer represented by @connection.
@@ -879,7 +879,7 @@
  *     is satisfied or %NULL if you don't care about the result
  * @param userData The data to pass to @callback
  */
-- (void)sendMessageWithReplyWithMessage:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags timeoutMsec:(gint)timeoutMsec outSerial:(volatile guint32*)outSerial cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
+- (void)sendMessageWithReply:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags timeoutMsec:(gint)timeoutMsec outSerial:(volatile guint32*)outSerial cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Finishes an operation started with g_dbus_connection_send_message_with_reply().
@@ -897,7 +897,7 @@
  *     g_dbus_connection_send_message_with_reply()
  * @return a locked #GDBusMessage or %NULL if @error is set
  */
-- (OGDBusMessage*)sendMessageWithReplyFinish:(GAsyncResult*)res;
+- (OGDBusMessage*)sendMessageWithReplyFinishWithRes:(GAsyncResult*)res;
 
 /**
  * Synchronously sends @message to the peer represented by @connection
@@ -941,7 +941,7 @@
  * @return a locked #GDBusMessage that is the reply
  *     to @message or %NULL if @error is set
  */
-- (OGDBusMessage*)sendMessageWithReplySyncWithMessage:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags timeoutMsec:(gint)timeoutMsec outSerial:(volatile guint32*)outSerial cancellable:(OGCancellable*)cancellable;
+- (OGDBusMessage*)sendMessageWithReplySync:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags timeoutMsec:(gint)timeoutMsec outSerial:(volatile guint32*)outSerial cancellable:(OGCancellable*)cancellable;
 
 /**
  * Sets whether the process should be terminated when @connection is
@@ -1048,7 +1048,7 @@
  * @param subscriptionId a subscription id obtained from
  *     g_dbus_connection_signal_subscribe()
  */
-- (void)signalUnsubscribe:(guint)subscriptionId;
+- (void)signalUnsubscribeWithSubscriptionId:(guint)subscriptionId;
 
 /**
  * If @connection was created with
@@ -1069,7 +1069,7 @@
  *
  * @param exportId the ID from g_dbus_connection_export_action_group()
  */
-- (void)unexportActionGroup:(guint)exportId;
+- (void)unexportActionGroupWithExportId:(guint)exportId;
 
 /**
  * Reverses the effect of a previous call to
@@ -1081,7 +1081,7 @@
  *
  * @param exportId the ID from g_dbus_connection_export_menu_model()
  */
-- (void)unexportMenuModel:(guint)exportId;
+- (void)unexportMenuModelWithExportId:(guint)exportId;
 
 /**
  * Unregisters an object.
@@ -1090,7 +1090,7 @@
  *     g_dbus_connection_register_object()
  * @return %TRUE if the object was unregistered, %FALSE otherwise
  */
-- (bool)unregisterObject:(guint)registrationId;
+- (bool)unregisterObjectWithRegistrationId:(guint)registrationId;
 
 /**
  * Unregisters a subtree.
@@ -1099,6 +1099,6 @@
  *     g_dbus_connection_register_subtree()
  * @return %TRUE if the subtree was unregistered, %FALSE otherwise
  */
-- (bool)unregisterSubtree:(guint)registrationId;
+- (bool)unregisterSubtreeWithRegistrationId:(guint)registrationId;
 
 @end

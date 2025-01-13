@@ -106,7 +106,7 @@
  * @param result the #GAsyncResult
  * @return %TRUE if the connection succeeded, %FALSE on error
  */
-- (bool)connectFinish:(GAsyncResult*)result;
+- (bool)connectFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Try to get the local address of a socket connection.

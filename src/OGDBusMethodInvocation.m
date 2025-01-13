@@ -123,7 +123,7 @@
 	g_dbus_method_invocation_return_gerror([self castedGObject], error);
 }
 
-- (void)returnValue:(GVariant*)parameters
+- (void)returnValueWithParameters:(GVariant*)parameters
 {
 	g_dbus_method_invocation_return_value([self castedGObject], parameters);
 }

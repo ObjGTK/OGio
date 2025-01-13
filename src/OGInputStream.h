@@ -78,7 +78,7 @@
  * @param cancellable optional #GCancellable object, %NULL to ignore.
  * @return %TRUE on success, %FALSE on failure
  */
-- (bool)close:(OGCancellable*)cancellable;
+- (bool)closeWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Requests an asynchronous closes of the stream, releasing resources related to it.
@@ -106,7 +106,7 @@
  * @param result a #GAsyncResult.
  * @return %TRUE if the stream was closed successfully.
  */
-- (bool)closeFinish:(GAsyncResult*)result;
+- (bool)closeFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Checks if an input stream has pending actions.
@@ -325,7 +325,7 @@
  * @param result a #GAsyncResult.
  * @return the newly-allocated #GBytes, or %NULL on error
  */
-- (GBytes*)readBytesFinish:(GAsyncResult*)result;
+- (GBytes*)readBytesFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Finishes an asynchronous stream read operation.
@@ -333,7 +333,7 @@
  * @param result a #GAsyncResult.
  * @return number of bytes read in, or -1 on error, or 0 on end of file.
  */
-- (gssize)readFinish:(GAsyncResult*)result;
+- (gssize)readFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Sets @stream to have actions pending. If the pending flag is
@@ -406,6 +406,6 @@
  * @param result a #GAsyncResult.
  * @return the size of the bytes skipped, or `-1` on error.
  */
-- (gssize)skipFinish:(GAsyncResult*)result;
+- (gssize)skipFinishWithResult:(GAsyncResult*)result;
 
 @end

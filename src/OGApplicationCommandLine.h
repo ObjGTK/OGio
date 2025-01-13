@@ -248,7 +248,7 @@
  * @param argc the length of the arguments array, or %NULL
  * @return the string array containing the arguments (the argv)
  */
-- (gchar**)arguments:(int*)argc;
+- (gchar**)argumentsWithArgc:(int*)argc;
 
 /**
  * Gets the working directory of the command line invocation.
@@ -367,7 +367,7 @@
  * @param name the environment variable to get
  * @return the value of the variable, or %NULL if unset or unsent
  */
-- (OFString*)env:(OFString*)name;
+- (OFString*)envWithName:(OFString*)name;
 
 /**
  * Prints a message using the stdout print handler in the invoking process.
@@ -378,7 +378,7 @@
  *
  * @param message the message
  */
-- (void)printLiteral:(OFString*)message;
+- (void)printLiteralWithMessage:(OFString*)message;
 
 /**
  * Prints a message using the stderr print handler in the invoking process.
@@ -389,7 +389,7 @@
  *
  * @param message the message
  */
-- (void)printerrLiteral:(OFString*)message;
+- (void)printerrLiteralWithMessage:(OFString*)message;
 
 /**
  * Sets the exit status that will be used when the invoking process

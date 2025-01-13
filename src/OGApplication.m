@@ -30,7 +30,7 @@
 	return returnValue;
 }
 
-+ (bool)idIsValid:(OFString*)applicationId
++ (bool)idIsValidWithApplicationId:(OFString*)applicationId
 {
 	bool returnValue = (bool)g_application_id_is_valid([applicationId UTF8String]);
 
@@ -182,7 +182,7 @@
 	g_application_quit([self castedGObject]);
 }
 
-- (bool)register:(OGCancellable*)cancellable
+- (bool)registerWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -250,7 +250,7 @@
 	g_application_set_option_context_summary([self castedGObject], [summary UTF8String]);
 }
 
-- (void)setResourceBasePath:(OFString*)resourcePath
+- (void)setResourceBasePathWithResourcePath:(OFString*)resourcePath
 {
 	g_application_set_resource_base_path([self castedGObject], [resourcePath UTF8String]);
 }
@@ -270,7 +270,7 @@
 	g_application_unmark_busy([self castedGObject]);
 }
 
-- (void)withdrawNotification:(OFString*)identifier
+- (void)withdrawNotificationWithIdentifier:(OFString*)identifier
 {
 	g_application_withdraw_notification([self castedGObject], [identifier UTF8String]);
 }

@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)emblem:(GIcon*)icon
++ (instancetype)emblemWithIcon:(GIcon*)icon
 {
 	GEmblem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblem_new(icon), GEmblem, GEmblem);
 

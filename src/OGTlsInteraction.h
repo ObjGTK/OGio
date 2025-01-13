@@ -72,7 +72,7 @@
  * @param cancellable an optional #GCancellable cancellation object
  * @return The status of the ask password interaction.
  */
-- (GTlsInteractionResult)askPasswordWithPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable;
+- (GTlsInteractionResult)askPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable;
 
 /**
  * Run asynchronous interaction to ask the user for a password. In general,
@@ -96,7 +96,7 @@
  * @param callback will be called when the interaction completes
  * @param userData data to pass to the @callback
  */
-- (void)askPasswordAsyncWithPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
+- (void)askPasswordAsync:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Complete an ask password user interaction request. This should be once
@@ -112,7 +112,7 @@
  * @param result the result passed to the callback
  * @return The status of the ask password interaction.
  */
-- (GTlsInteractionResult)askPasswordFinish:(GAsyncResult*)result;
+- (GTlsInteractionResult)askPasswordFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Invoke the interaction to ask the user for a password. It invokes this
@@ -139,7 +139,7 @@
  * @param cancellable an optional #GCancellable cancellation object
  * @return The status of the ask password interaction.
  */
-- (GTlsInteractionResult)invokeAskPasswordWithPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable;
+- (GTlsInteractionResult)invokeAskPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable;
 
 /**
  * Invoke the interaction to ask the user to choose a certificate to
@@ -228,6 +228,6 @@
  * @param result the result passed to the callback
  * @return The status of the request certificate interaction.
  */
-- (GTlsInteractionResult)requestCertificateFinish:(GAsyncResult*)result;
+- (GTlsInteractionResult)requestCertificateFinishWithResult:(GAsyncResult*)result;
 
 @end

@@ -31,12 +31,12 @@
 	g_dbus_connection_new([stream castedGObject], [guid UTF8String], flags, [observer castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-+ (void)newForAddressWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
++ (void)newForAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_dbus_connection_new_for_address([address UTF8String], flags, [observer castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-+ (instancetype)dBusConnectionFinish:(GAsyncResult*)res
++ (instancetype)dBusConnectionFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
@@ -84,7 +84,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)dBusConnectionForAddressSyncWithAddress:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
++ (instancetype)dBusConnectionForAddressSync:(OFString*)address flags:(GDBusConnectionFlags)flags observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -149,7 +149,7 @@
 	g_dbus_connection_call([self castedGObject], [busName UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [methodName UTF8String], parameters, replyType, flags, timeoutMsec, [cancellable castedGObject], callback, userData);
 }
 
-- (GVariant*)callFinish:(GAsyncResult*)res
+- (GVariant*)callFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
@@ -203,7 +203,7 @@
 	g_dbus_connection_close([self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (bool)closeFinish:(GAsyncResult*)res
+- (bool)closeFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
@@ -214,7 +214,7 @@
 	return returnValue;
 }
 
-- (bool)closeSync:(OGCancellable*)cancellable
+- (bool)closeSyncWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -263,7 +263,7 @@
 	g_dbus_connection_flush([self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (bool)flushFinish:(GAsyncResult*)res
+- (bool)flushFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
@@ -274,7 +274,7 @@
 	return returnValue;
 }
 
-- (bool)flushSync:(OGCancellable*)cancellable
+- (bool)flushSyncWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -385,12 +385,12 @@
 	return returnValue;
 }
 
-- (void)removeFilter:(guint)filterId
+- (void)removeFilterWithFilterId:(guint)filterId
 {
 	g_dbus_connection_remove_filter([self castedGObject], filterId);
 }
 
-- (bool)sendMessageWithMessage:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags outSerial:(volatile guint32*)outSerial
+- (bool)sendMessage:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags outSerial:(volatile guint32*)outSerial
 {
 	GError* err = NULL;
 
@@ -401,12 +401,12 @@
 	return returnValue;
 }
 
-- (void)sendMessageWithReplyWithMessage:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags timeoutMsec:(gint)timeoutMsec outSerial:(volatile guint32*)outSerial cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
+- (void)sendMessageWithReply:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags timeoutMsec:(gint)timeoutMsec outSerial:(volatile guint32*)outSerial cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_dbus_connection_send_message_with_reply([self castedGObject], [message castedGObject], flags, timeoutMsec, outSerial, [cancellable castedGObject], callback, userData);
 }
 
-- (OGDBusMessage*)sendMessageWithReplyFinish:(GAsyncResult*)res
+- (OGDBusMessage*)sendMessageWithReplyFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
@@ -420,7 +420,7 @@
 	return returnValue;
 }
 
-- (OGDBusMessage*)sendMessageWithReplySyncWithMessage:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags timeoutMsec:(gint)timeoutMsec outSerial:(volatile guint32*)outSerial cancellable:(OGCancellable*)cancellable
+- (OGDBusMessage*)sendMessageWithReplySync:(OGDBusMessage*)message flags:(GDBusSendMessageFlags)flags timeoutMsec:(gint)timeoutMsec outSerial:(volatile guint32*)outSerial cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -446,7 +446,7 @@
 	return returnValue;
 }
 
-- (void)signalUnsubscribe:(guint)subscriptionId
+- (void)signalUnsubscribeWithSubscriptionId:(guint)subscriptionId
 {
 	g_dbus_connection_signal_unsubscribe([self castedGObject], subscriptionId);
 }
@@ -456,24 +456,24 @@
 	g_dbus_connection_start_message_processing([self castedGObject]);
 }
 
-- (void)unexportActionGroup:(guint)exportId
+- (void)unexportActionGroupWithExportId:(guint)exportId
 {
 	g_dbus_connection_unexport_action_group([self castedGObject], exportId);
 }
 
-- (void)unexportMenuModel:(guint)exportId
+- (void)unexportMenuModelWithExportId:(guint)exportId
 {
 	g_dbus_connection_unexport_menu_model([self castedGObject], exportId);
 }
 
-- (bool)unregisterObject:(guint)registrationId
+- (bool)unregisterObjectWithRegistrationId:(guint)registrationId
 {
 	bool returnValue = (bool)g_dbus_connection_unregister_object([self castedGObject], registrationId);
 
 	return returnValue;
 }
 
-- (bool)unregisterSubtree:(guint)registrationId
+- (bool)unregisterSubtreeWithRegistrationId:(guint)registrationId
 {
 	bool returnValue = (bool)g_dbus_connection_unregister_subtree([self castedGObject], registrationId);
 

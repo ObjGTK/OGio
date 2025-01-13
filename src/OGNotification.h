@@ -71,7 +71,7 @@
 /**
  * Constructors
  */
-+ (instancetype)notification:(OFString*)title;
++ (instancetype)notificationWithTitle:(OFString*)title;
 
 /**
  * Methods
@@ -141,7 +141,7 @@
  *
  * @param detailedAction a detailed action name
  */
-- (void)setDefaultAction:(OFString*)detailedAction;
+- (void)setDefaultActionWithDetailedAction:(OFString*)detailedAction;
 
 /**
  * Sets the default action of @notification to @action. This action is
@@ -157,7 +157,7 @@
  * @param action an action name
  * @param target a #GVariant to use as @action's parameter, or %NULL
  */
-- (void)setDefaultActionAndTargetValueWithAction:(OFString*)action target:(GVariant*)target;
+- (void)setDefaultActionAndTargetValue:(OFString*)action target:(GVariant*)target;
 
 /**
  * Sets the icon of @notification to @icon.

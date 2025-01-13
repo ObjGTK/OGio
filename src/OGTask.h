@@ -611,7 +611,7 @@
  * @param source the source to attach
  * @param callback the callback to invoke when @source triggers
  */
-- (void)attachSourceWithSource:(GSource*)source callback:(GSourceFunc)callback;
+- (void)attachSource:(GSource*)source callback:(GSourceFunc)callback;
 
 /**
  * Gets @task's #GCancellable
@@ -765,7 +765,7 @@
  *
  * @param result the #gboolean result of a task function.
  */
-- (void)returnBoolean:(bool)result;
+- (void)returnBooleanWithResult:(bool)result;
 
 /**
  * Sets @task's result to @error (which @task assumes ownership of)
@@ -802,7 +802,7 @@
  *
  * @param result the integer (#gssize) result of a task function.
  */
-- (void)returnInt:(gssize)result;
+- (void)returnIntWithResult:(gssize)result;
 
 /**
  * Sets @task’s result to a new [type@GLib.Error] created from @domain, @code,
@@ -858,7 +858,7 @@
  * @param result the #GValue result of
  *                                      a task function
  */
-- (void)returnValue:(GValue*)result;
+- (void)returnValueWithResult:(GValue*)result;
 
 /**
  * Runs @task_func in another thread. When @task_func returns, @task's
@@ -883,7 +883,7 @@
  *
  * @param taskFunc a #GTaskThreadFunc
  */
-- (void)runInThread:(GTaskThreadFunc)taskFunc;
+- (void)runInThreadWithTaskFunc:(GTaskThreadFunc)taskFunc;
 
 /**
  * Runs @task_func in another thread, and waits for it to return or be
@@ -905,7 +905,7 @@
  *
  * @param taskFunc a #GTaskThreadFunc
  */
-- (void)runInThreadSync:(GTaskThreadFunc)taskFunc;
+- (void)runInThreadSyncWithTaskFunc:(GTaskThreadFunc)taskFunc;
 
 /**
  * Sets or clears @task's check-cancellable flag. If this is %TRUE
@@ -1028,6 +1028,6 @@
  * @param taskData task-specific data
  * @param taskDataDestroy #GDestroyNotify for @task_data
  */
-- (void)setTaskDataWithTaskData:(gpointer)taskData taskDataDestroy:(GDestroyNotify)taskDataDestroy;
+- (void)setTaskData:(gpointer)taskData taskDataDestroy:(GDestroyNotify)taskDataDestroy;
 
 @end

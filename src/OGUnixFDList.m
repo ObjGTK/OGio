@@ -63,7 +63,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixFDList, GUnixFDList);
 }
 
-- (gint)append:(gint)fd
+- (gint)appendWithFd:(gint)fd
 {
 	GError* err = NULL;
 
@@ -74,7 +74,7 @@
 	return returnValue;
 }
 
-- (gint)get:(gint)index
+- (gint)getWithIndex:(gint)index
 {
 	GError* err = NULL;
 
@@ -92,14 +92,14 @@
 	return returnValue;
 }
 
-- (const gint*)peekFds:(gint*)length
+- (const gint*)peekFdsWithLength:(gint*)length
 {
 	const gint* returnValue = (const gint*)g_unix_fd_list_peek_fds([self castedGObject], length);
 
 	return returnValue;
 }
 
-- (gint*)stealFds:(gint*)length
+- (gint*)stealFdsWithLength:(gint*)length
 {
 	gint* returnValue = (gint*)g_unix_fd_list_steal_fds([self castedGObject], length);
 

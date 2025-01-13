@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)socketAddressFromNativeWithNative:(gpointer)native len:(gsize)len
++ (instancetype)socketAddressFromNative:(gpointer)native len:(gsize)len
 {
 	GSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_address_new_from_native(native, len), GSocketAddress, GSocketAddress);
 

@@ -74,7 +74,7 @@
 	return returnValue;
 }
 
-- (bool)registerUriSchemeWithScheme:(OFString*)scheme uriFunc:(GVfsFileLookupFunc)uriFunc uriData:(gpointer)uriData uriDestroy:(GDestroyNotify)uriDestroy parseNameFunc:(GVfsFileLookupFunc)parseNameFunc parseNameData:(gpointer)parseNameData parseNameDestroy:(GDestroyNotify)parseNameDestroy
+- (bool)registerUriScheme:(OFString*)scheme uriFunc:(GVfsFileLookupFunc)uriFunc uriData:(gpointer)uriData uriDestroy:(GDestroyNotify)uriDestroy parseNameFunc:(GVfsFileLookupFunc)parseNameFunc parseNameData:(gpointer)parseNameData parseNameDestroy:(GDestroyNotify)parseNameDestroy
 {
 	bool returnValue = (bool)g_vfs_register_uri_scheme([self castedGObject], [scheme UTF8String], uriFunc, uriData, uriDestroy, parseNameFunc, parseNameData, parseNameDestroy);
 

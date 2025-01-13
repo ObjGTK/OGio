@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)notification:(OFString*)title
++ (instancetype)notificationWithTitle:(OFString*)title
 {
 	GNotification* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_notification_new([title UTF8String]), GNotification, GNotification);
 
@@ -63,12 +63,12 @@
 	g_notification_set_category([self castedGObject], [category UTF8String]);
 }
 
-- (void)setDefaultAction:(OFString*)detailedAction
+- (void)setDefaultActionWithDetailedAction:(OFString*)detailedAction
 {
 	g_notification_set_default_action([self castedGObject], [detailedAction UTF8String]);
 }
 
-- (void)setDefaultActionAndTargetValueWithAction:(OFString*)action target:(GVariant*)target
+- (void)setDefaultActionAndTargetValue:(OFString*)action target:(GVariant*)target
 {
 	g_notification_set_default_action_and_target_value([self castedGObject], [action UTF8String], target);
 }

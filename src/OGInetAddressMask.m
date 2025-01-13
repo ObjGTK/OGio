@@ -44,7 +44,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)inetAddressMaskFromString:(OFString*)maskString
++ (instancetype)inetAddressMaskFromStringWithMaskString:(OFString*)maskString
 {
 	GError* err = NULL;
 
@@ -73,7 +73,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GInetAddressMask, GInetAddressMask);
 }
 
-- (bool)equal:(OGInetAddressMask*)mask2
+- (bool)equalWithMask2:(OGInetAddressMask*)mask2
 {
 	bool returnValue = (bool)g_inet_address_mask_equal([self castedGObject], [mask2 castedGObject]);
 
@@ -102,7 +102,7 @@
 	return returnValue;
 }
 
-- (bool)matches:(OGInetAddress*)address
+- (bool)matchesWithAddress:(OGInetAddress*)address
 {
 	bool returnValue = (bool)g_inet_address_mask_matches([self castedGObject], [address castedGObject]);
 

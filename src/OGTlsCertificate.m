@@ -53,7 +53,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)tlsCertificateFromFileWithPasswordWithFile:(OFString*)file password:(OFString*)password
++ (instancetype)tlsCertificateFromFileWithPassword:(OFString*)file password:(OFString*)password
 {
 	GError* err = NULL;
 
@@ -125,7 +125,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)tlsCertificateFromPkcs11UrisWithPkcs11Uri:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri
++ (instancetype)tlsCertificateFromPkcs11Uris:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri
 {
 	GError* err = NULL;
 
@@ -230,7 +230,7 @@
 	return returnValue;
 }
 
-- (bool)isSame:(OGTlsCertificate*)certTwo
+- (bool)isSameWithCertTwo:(OGTlsCertificate*)certTwo
 {
 	bool returnValue = (bool)g_tls_certificate_is_same([self castedGObject], [certTwo castedGObject]);
 

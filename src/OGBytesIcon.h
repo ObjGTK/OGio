@@ -28,7 +28,7 @@
 /**
  * Constructors
  */
-+ (instancetype)bytesIcon:(GBytes*)bytes;
++ (instancetype)bytesIconWithBytes:(GBytes*)bytes;
 
 /**
  * Methods

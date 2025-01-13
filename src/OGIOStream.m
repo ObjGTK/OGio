@@ -22,7 +22,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (bool)spliceFinish:(GAsyncResult*)result
++ (bool)spliceFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -43,7 +43,7 @@
 	g_io_stream_clear_pending([self castedGObject]);
 }
 
-- (bool)close:(OGCancellable*)cancellable
+- (bool)closeWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -59,7 +59,7 @@
 	g_io_stream_close_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (bool)closeFinish:(GAsyncResult*)result
+- (bool)closeFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

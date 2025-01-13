@@ -45,7 +45,7 @@
  *     completion exists. This string is not owned by GIO, so remember to g_free()
  *     it when finished.
  */
-- (char*)completionSuffix:(OFString*)initialText;
+- (char*)completionSuffixWithInitialText:(OFString*)initialText;
 
 /**
  * Gets an array of completion strings for a given initial text.
@@ -54,7 +54,7 @@
  * @return array of strings with possible completions for @initial_text.
  * This array must be freed by g_strfreev() when finished.
  */
-- (char**)completions:(OFString*)initialText;
+- (char**)completionsWithInitialText:(OFString*)initialText;
 
 /**
  * If @dirs_only is %TRUE, @completer will only

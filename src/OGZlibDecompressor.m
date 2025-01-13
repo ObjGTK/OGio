@@ -20,7 +20,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)zlibDecompressor:(GZlibCompressorFormat)format
++ (instancetype)zlibDecompressorWithFormat:(GZlibCompressorFormat)format
 {
 	GZlibDecompressor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_zlib_decompressor_new(format), GZlibDecompressor, GZlibDecompressor);
 

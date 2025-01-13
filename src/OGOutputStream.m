@@ -31,7 +31,7 @@
 	g_output_stream_clear_pending([self castedGObject]);
 }
 
-- (bool)close:(OGCancellable*)cancellable
+- (bool)closeWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -47,7 +47,7 @@
 	g_output_stream_close_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (bool)closeFinish:(GAsyncResult*)result
+- (bool)closeFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -58,7 +58,7 @@
 	return returnValue;
 }
 
-- (bool)flush:(OGCancellable*)cancellable
+- (bool)flushWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -74,7 +74,7 @@
 	g_output_stream_flush_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (bool)flushFinish:(GAsyncResult*)result
+- (bool)flushFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -133,7 +133,7 @@
 	g_output_stream_splice_async([self castedGObject], [source castedGObject], flags, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (gssize)spliceFinish:(GAsyncResult*)result
+- (gssize)spliceFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -194,7 +194,7 @@
 	g_output_stream_write_async([self castedGObject], buffer, count, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (gssize)writeBytesWithBytes:(GBytes*)bytes cancellable:(OGCancellable*)cancellable
+- (gssize)writeBytes:(GBytes*)bytes cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -205,12 +205,12 @@
 	return returnValue;
 }
 
-- (void)writeBytesAsyncWithBytes:(GBytes*)bytes ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
+- (void)writeBytesAsync:(GBytes*)bytes ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_output_stream_write_bytes_async([self castedGObject], bytes, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (gssize)writeBytesFinish:(GAsyncResult*)result
+- (gssize)writeBytesFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -221,7 +221,7 @@
 	return returnValue;
 }
 
-- (gssize)writeFinish:(GAsyncResult*)result
+- (gssize)writeFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

@@ -53,7 +53,7 @@
 	return returnValue;
 }
 
-- (OFString*)lookupByAddressWithAddress:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable
+- (OFString*)lookupByAddress:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -65,12 +65,12 @@
 	return returnValue;
 }
 
-- (void)lookupByAddressAsyncWithAddress:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
+- (void)lookupByAddressAsync:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_resolver_lookup_by_address_async([self castedGObject], [address castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (OFString*)lookupByAddressFinish:(GAsyncResult*)result
+- (OFString*)lookupByAddressFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -98,7 +98,7 @@
 	g_resolver_lookup_by_name_async([self castedGObject], [hostname UTF8String], [cancellable castedGObject], callback, userData);
 }
 
-- (GList*)lookupByNameFinish:(GAsyncResult*)result
+- (GList*)lookupByNameFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -125,7 +125,7 @@
 	g_resolver_lookup_by_name_with_flags_async([self castedGObject], [hostname UTF8String], flags, [cancellable castedGObject], callback, userData);
 }
 
-- (GList*)lookupByNameWithFlagsFinish:(GAsyncResult*)result
+- (GList*)lookupByNameWithFlagsFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -152,7 +152,7 @@
 	g_resolver_lookup_records_async([self castedGObject], [rrname UTF8String], recordType, [cancellable castedGObject], callback, userData);
 }
 
-- (GList*)lookupRecordsFinish:(GAsyncResult*)result
+- (GList*)lookupRecordsFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -163,7 +163,7 @@
 	return returnValue;
 }
 
-- (GList*)lookupServiceWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain cancellable:(OGCancellable*)cancellable
+- (GList*)lookupService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -174,12 +174,12 @@
 	return returnValue;
 }
 
-- (void)lookupServiceAsyncWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
+- (void)lookupServiceAsync:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_resolver_lookup_service_async([self castedGObject], [service UTF8String], [protocol UTF8String], [domain UTF8String], [cancellable castedGObject], callback, userData);
 }
 
-- (GList*)lookupServiceFinish:(GAsyncResult*)result
+- (GList*)lookupServiceFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -195,7 +195,7 @@
 	g_resolver_set_default([self castedGObject]);
 }
 
-- (void)setTimeout:(unsigned)timeoutMs
+- (void)setTimeoutWithTimeoutMs:(unsigned)timeoutMs
 {
 	g_resolver_set_timeout([self castedGObject], timeoutMs);
 }

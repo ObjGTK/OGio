@@ -67,6 +67,6 @@
  * @param limitMsec a integer with the limit in milliseconds to
  *     poll for changes.
  */
-- (void)setRateLimit:(int)limitMsec;
+- (void)setRateLimitWithLimitMsec:(int)limitMsec;
 
 @end

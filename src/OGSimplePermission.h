@@ -24,7 +24,7 @@
 /**
  * Constructors
  */
-+ (instancetype)simplePermission:(bool)allowed;
++ (instancetype)simplePermissionWithAllowed:(bool)allowed;
 
 /**
  * Methods

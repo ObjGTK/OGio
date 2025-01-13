@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)fileIcon:(GFile*)file
++ (instancetype)fileIconWithFile:(GFile*)file
 {
 	GFileIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_file_icon_new(file), GFileIcon, GFileIcon);
 

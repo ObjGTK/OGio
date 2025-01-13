@@ -43,24 +43,24 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleActionGroup, GSimpleActionGroup);
 }
 
-- (void)addEntriesWithEntries:(const GActionEntry*)entries nentries:(gint)nentries userData:(gpointer)userData
+- (void)addEntries:(const GActionEntry*)entries nentries:(gint)nentries userData:(gpointer)userData
 {
 	g_simple_action_group_add_entries([self castedGObject], entries, nentries, userData);
 }
 
-- (void)insert:(GAction*)action
+- (void)insertWithAction:(GAction*)action
 {
 	g_simple_action_group_insert([self castedGObject], action);
 }
 
-- (GAction*)lookup:(OFString*)actionName
+- (GAction*)lookupWithActionName:(OFString*)actionName
 {
 	GAction* returnValue = (GAction*)g_simple_action_group_lookup([self castedGObject], [actionName UTF8String]);
 
 	return returnValue;
 }
 
-- (void)remove:(OFString*)actionName
+- (void)removeWithActionName:(OFString*)actionName
 {
 	g_simple_action_group_remove([self castedGObject], [actionName UTF8String]);
 }

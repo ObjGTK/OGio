@@ -43,7 +43,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GCredentials, GCredentials);
 }
 
-- (gpointer)native:(GCredentialsType)nativeType
+- (gpointer)nativeWithNativeType:(GCredentialsType)nativeType
 {
 	gpointer returnValue = (gpointer)g_credentials_get_native([self castedGObject], nativeType);
 
@@ -72,7 +72,7 @@
 	return returnValue;
 }
 
-- (bool)isSameUser:(OGCredentials*)otherCredentials
+- (bool)isSameUserWithOtherCredentials:(OGCredentials*)otherCredentials
 {
 	GError* err = NULL;
 
@@ -88,7 +88,7 @@
 	g_credentials_set_native([self castedGObject], nativeType, native);
 }
 
-- (bool)setUnixUser:(uid_t)uid
+- (bool)setUnixUserWithUid:(uid_t)uid
 {
 	GError* err = NULL;
 

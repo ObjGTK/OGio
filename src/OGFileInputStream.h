@@ -74,6 +74,6 @@
  * @param result a #GAsyncResult.
  * @return #GFileInfo.
  */
-- (OGFileInfo*)queryInfoFinish:(GAsyncResult*)result;
+- (OGFileInfo*)queryInfoFinishWithResult:(GAsyncResult*)result;
 
 @end

@@ -67,7 +67,7 @@
  *     error (in which case *@error will be set) or if there are no
  *     more addresses.
  */
-- (OGSocketAddress*)next:(OGCancellable*)cancellable;
+- (OGSocketAddress*)nextWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Asynchronously retrieves the next #GSocketAddress from @enumerator
@@ -94,6 +94,6 @@
  *     error (in which case *@error will be set) or if there are no
  *     more addresses.
  */
-- (OGSocketAddress*)nextFinish:(GAsyncResult*)result;
+- (OGSocketAddress*)nextFinishWithResult:(GAsyncResult*)result;
 
 @end

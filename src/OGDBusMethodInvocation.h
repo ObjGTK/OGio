@@ -227,7 +227,7 @@
  *
  * @param parameters A #GVariant tuple with out parameters for the method or %NULL if not passing any parameters.
  */
-- (void)returnValue:(GVariant*)parameters;
+- (void)returnValueWithParameters:(GVariant*)parameters;
 
 /**
  * Like g_dbus_method_invocation_return_value() but also takes a #GUnixFDList.

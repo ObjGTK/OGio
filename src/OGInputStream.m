@@ -30,7 +30,7 @@
 	g_input_stream_clear_pending([self castedGObject]);
 }
 
-- (bool)close:(OGCancellable*)cancellable
+- (bool)closeWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -46,7 +46,7 @@
 	g_input_stream_close_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (bool)closeFinish:(GAsyncResult*)result
+- (bool)closeFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -130,7 +130,7 @@
 	g_input_stream_read_bytes_async([self castedGObject], count, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (GBytes*)readBytesFinish:(GAsyncResult*)result
+- (GBytes*)readBytesFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -141,7 +141,7 @@
 	return returnValue;
 }
 
-- (gssize)readFinish:(GAsyncResult*)result
+- (gssize)readFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -179,7 +179,7 @@
 	g_input_stream_skip_async([self castedGObject], count, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (gssize)skipFinish:(GAsyncResult*)result
+- (gssize)skipFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

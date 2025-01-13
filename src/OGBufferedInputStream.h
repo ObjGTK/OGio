@@ -34,7 +34,7 @@
 /**
  * Constructors
  */
-+ (instancetype)bufferedInputStream:(OGInputStream*)baseStream;
++ (instancetype)bufferedInputStreamWithBaseStream:(OGInputStream*)baseStream;
 + (instancetype)bufferedInputStreamSizedWithBaseStream:(OGInputStream*)baseStream size:(gsize)size;
 
 /**
@@ -98,7 +98,7 @@
  * @param result a #GAsyncResult
  * @return a #gssize of the read stream, or `-1` on an error.
  */
-- (gssize)fillFinish:(GAsyncResult*)result;
+- (gssize)fillFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Gets the size of the available data within the stream.
@@ -134,7 +134,7 @@
  * @param count a #gsize to get the number of bytes available in the buffer
  * @return read-only buffer
  */
-- (void*)peekBuffer:(gsize*)count;
+- (void*)peekBufferWithCount:(gsize*)count;
 
 /**
  * Tries to read a single byte from the stream or the buffer. Will block
@@ -154,7 +154,7 @@
  * @param cancellable optional #GCancellable object, %NULL to ignore
  * @return the byte read from the @stream, or -1 on end of stream or error.
  */
-- (int)readByte:(OGCancellable*)cancellable;
+- (int)readByteWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Sets the size of the internal buffer of @stream to @size, or to the

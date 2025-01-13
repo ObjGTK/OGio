@@ -78,6 +78,6 @@
  * @param limitMsecs a non-negative integer with the limit in milliseconds
  *     to poll for changes
  */
-- (void)setRateLimit:(gint)limitMsecs;
+- (void)setRateLimitWithLimitMsecs:(gint)limitMsecs;
 
 @end

@@ -20,7 +20,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)dBusObjectSkeleton:(OFString*)objectPath
++ (instancetype)dBusObjectSkeletonWithObjectPath:(OFString*)objectPath
 {
 	GDBusObjectSkeleton* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_skeleton_new([objectPath UTF8String]), GDBusObjectSkeleton, GDBusObjectSkeleton);
 
@@ -60,7 +60,7 @@
 	g_dbus_object_skeleton_remove_interface([self castedGObject], [interface castedGObject]);
 }
 
-- (void)removeInterfaceByName:(OFString*)interfaceName
+- (void)removeInterfaceByNameWithInterfaceName:(OFString*)interfaceName
 {
 	g_dbus_object_skeleton_remove_interface_by_name([self castedGObject], [interfaceName UTF8String]);
 }

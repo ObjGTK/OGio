@@ -25,7 +25,7 @@
 	return returnValue;
 }
 
-+ (instancetype)unixSocketAddress:(OFString*)path
++ (instancetype)unixSocketAddressWithPath:(OFString*)path
 {
 	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new([path UTF8String]), GUnixSocketAddress, GUnixSocketAddress);
 

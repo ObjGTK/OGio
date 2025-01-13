@@ -350,7 +350,7 @@
  *
  * @param signalNum the signal number to send
  */
-- (void)sendSignal:(gint)signalNum;
+- (void)sendSignalWithSignalNum:(gint)signalNum;
 
 /**
  * Synchronously wait for the subprocess to terminate.
@@ -368,7 +368,7 @@
  * @param cancellable a #GCancellable
  * @return %TRUE on success, %FALSE if @cancellable was cancelled
  */
-- (bool)wait:(OGCancellable*)cancellable;
+- (bool)waitWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Wait for the subprocess to terminate.
@@ -388,7 +388,7 @@
  * @return %TRUE on success, %FALSE if process exited abnormally, or
  * @cancellable was cancelled
  */
-- (bool)waitCheck:(OGCancellable*)cancellable;
+- (bool)waitCheckWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Combines g_subprocess_wait_async() with g_spawn_check_wait_status().
@@ -408,7 +408,7 @@
  * @param result the #GAsyncResult passed to your #GAsyncReadyCallback
  * @return %TRUE if successful, or %FALSE with @error set
  */
-- (bool)waitCheckFinish:(GAsyncResult*)result;
+- (bool)waitCheckFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Collects the result of a previous call to
@@ -417,6 +417,6 @@
  * @param result the #GAsyncResult passed to your #GAsyncReadyCallback
  * @return %TRUE if successful, or %FALSE with @error set
  */
-- (bool)waitFinish:(GAsyncResult*)result;
+- (bool)waitFinishWithResult:(GAsyncResult*)result;
 
 @end

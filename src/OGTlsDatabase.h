@@ -79,7 +79,7 @@
  * @return a newly allocated
  * #GTlsCertificate, or %NULL. Use g_object_unref() to release the certificate.
  */
-- (OGTlsCertificate*)lookupCertificateForHandleWithHandle:(OFString*)handle interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable;
+- (OGTlsCertificate*)lookupCertificateForHandle:(OFString*)handle interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable;
 
 /**
  * Asynchronously look up a certificate by its handle in the database. See
@@ -92,7 +92,7 @@
  * @param callback callback to call when the operation completes
  * @param userData the data to pass to the callback function
  */
-- (void)lookupCertificateForHandleAsyncWithHandle:(OFString*)handle interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
+- (void)lookupCertificateForHandleAsync:(OFString*)handle interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Finish an asynchronous lookup of a certificate by its handle. See
@@ -105,7 +105,7 @@
  * @return a newly allocated #GTlsCertificate object.
  * Use g_object_unref() to release the certificate.
  */
-- (OGTlsCertificate*)lookupCertificateForHandleFinish:(GAsyncResult*)result;
+- (OGTlsCertificate*)lookupCertificateForHandleFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Look up the issuer of @certificate in the database. The
@@ -136,7 +136,7 @@
  * @return a newly allocated issuer #GTlsCertificate,
  * or %NULL. Use g_object_unref() to release the certificate.
  */
-- (OGTlsCertificate*)lookupCertificateIssuerWithCertificate:(OGTlsCertificate*)certificate interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable;
+- (OGTlsCertificate*)lookupCertificateIssuer:(OGTlsCertificate*)certificate interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable;
 
 /**
  * Asynchronously look up the issuer of @certificate in the database. See
@@ -149,7 +149,7 @@
  * @param callback callback to call when the operation completes
  * @param userData the data to pass to the callback function
  */
-- (void)lookupCertificateIssuerAsyncWithCertificate:(OGTlsCertificate*)certificate interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
+- (void)lookupCertificateIssuerAsync:(OGTlsCertificate*)certificate interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Finish an asynchronous lookup issuer operation. See
@@ -159,7 +159,7 @@
  * @return a newly allocated issuer #GTlsCertificate,
  * or %NULL. Use g_object_unref() to release the certificate.
  */
-- (OGTlsCertificate*)lookupCertificateIssuerFinish:(GAsyncResult*)result;
+- (OGTlsCertificate*)lookupCertificateIssuerFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Look up certificates issued by this issuer in the database.
@@ -201,7 +201,7 @@
  * @return a newly allocated list of #GTlsCertificate
  * objects. Use g_object_unref() on each certificate, and g_list_free() on the release the list.
  */
-- (GList*)lookupCertificatesIssuedByFinish:(GAsyncResult*)result;
+- (GList*)lookupCertificatesIssuedByFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Determines the validity of a certificate chain, outside the context
@@ -274,7 +274,7 @@
  * @return the appropriate #GTlsCertificateFlags which represents the
  * result of verification.
  */
-- (GTlsCertificateFlags)verifyChainWithChain:(OGTlsCertificate*)chain purpose:(OFString*)purpose identity:(GSocketConnectable*)identity interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseVerifyFlags)flags cancellable:(OGCancellable*)cancellable;
+- (GTlsCertificateFlags)verifyChain:(OGTlsCertificate*)chain purpose:(OFString*)purpose identity:(GSocketConnectable*)identity interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseVerifyFlags)flags cancellable:(OGCancellable*)cancellable;
 
 /**
  * Asynchronously determines the validity of a certificate chain after
@@ -290,7 +290,7 @@
  * @param callback callback to call when the operation completes
  * @param userData the data to pass to the callback function
  */
-- (void)verifyChainAsyncWithChain:(OGTlsCertificate*)chain purpose:(OFString*)purpose identity:(GSocketConnectable*)identity interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseVerifyFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
+- (void)verifyChainAsync:(OGTlsCertificate*)chain purpose:(OFString*)purpose identity:(GSocketConnectable*)identity interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseVerifyFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Finish an asynchronous verify chain operation. See
@@ -309,6 +309,6 @@
  * @return the appropriate #GTlsCertificateFlags which represents the
  * result of verification.
  */
-- (GTlsCertificateFlags)verifyChainFinish:(GAsyncResult*)result;
+- (GTlsCertificateFlags)verifyChainFinishWithResult:(GAsyncResult*)result;
 
 @end

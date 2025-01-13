@@ -31,7 +31,7 @@
 /**
  * Constructors
  */
-+ (instancetype)listStore:(GType)itemType;
++ (instancetype)listStoreWithItemType:(GType)itemType;
 
 /**
  * Methods
@@ -49,7 +49,7 @@
  *
  * @param item the new item
  */
-- (void)append:(gpointer)item;
+- (void)appendWithItem:(gpointer)item;
 
 /**
  * Looks up the given @item in the list store by looping over the items until
@@ -142,7 +142,7 @@
  *
  * @param position the position of the item that is to be removed
  */
-- (void)remove:(guint)position;
+- (void)removeWithPosition:(guint)position;
 
 /**
  * Removes all items from @store.

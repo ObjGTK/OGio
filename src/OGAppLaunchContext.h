@@ -86,7 +86,7 @@
  *
  * @param startupNotifyId the startup notification id that was returned by g_app_launch_context_get_startup_notify_id().
  */
-- (void)launchFailed:(OFString*)startupNotifyId;
+- (void)launchFailedWithStartupNotifyId:(OFString*)startupNotifyId;
 
 /**
  * Arranges for @variable to be set to @value in the child's
@@ -103,6 +103,6 @@
  *
  * @param variable the environment variable to remove
  */
-- (void)unsetenv:(OFString*)variable;
+- (void)unsetenvWithVariable:(OFString*)variable;
 
 @end

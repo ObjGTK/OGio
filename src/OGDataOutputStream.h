@@ -23,7 +23,7 @@
 /**
  * Constructors
  */
-+ (instancetype)dataOutputStream:(OGOutputStream*)baseStream;
++ (instancetype)dataOutputStreamWithBaseStream:(OGOutputStream*)baseStream;
 
 /**
  * Methods
@@ -81,7 +81,7 @@
  * @param cancellable optional #GCancellable object, %NULL to ignore.
  * @return %TRUE if @string was successfully added to the @stream.
  */
-- (bool)putStringWithStr:(OFString*)str cancellable:(OGCancellable*)cancellable;
+- (bool)putString:(OFString*)str cancellable:(OGCancellable*)cancellable;
 
 /**
  * Puts an unsigned 16-bit integer into the output stream.

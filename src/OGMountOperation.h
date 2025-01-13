@@ -128,7 +128,7 @@
  *
  * @param result a #GMountOperationResult
  */
-- (void)reply:(GMountOperationResult)result;
+- (void)replyWithResult:(GMountOperationResult)result;
 
 /**
  * Sets the mount operation to use an anonymous user if @anonymous is %TRUE.

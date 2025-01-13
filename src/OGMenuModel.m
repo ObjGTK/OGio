@@ -62,7 +62,7 @@
 	g_menu_model_items_changed([self castedGObject], position, removed, added);
 }
 
-- (OGMenuAttributeIter*)iterateItemAttributes:(gint)itemIndex
+- (OGMenuAttributeIter*)iterateItemAttributesWithItemIndex:(gint)itemIndex
 {
 	GMenuAttributeIter* gobjectValue = g_menu_model_iterate_item_attributes([self castedGObject], itemIndex);
 
@@ -72,7 +72,7 @@
 	return returnValue;
 }
 
-- (OGMenuLinkIter*)iterateItemLinks:(gint)itemIndex
+- (OGMenuLinkIter*)iterateItemLinksWithItemIndex:(gint)itemIndex
 {
 	GMenuLinkIter* gobjectValue = g_menu_model_iterate_item_links([self castedGObject], itemIndex);
 

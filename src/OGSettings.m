@@ -42,7 +42,7 @@
 	g_settings_unbind(object, [property UTF8String]);
 }
 
-+ (instancetype)settings:(OFString*)schemaId
++ (instancetype)settingsWithSchemaId:(OFString*)schemaId
 {
 	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new([schemaId UTF8String]), GSettings, GSettings);
 
@@ -167,7 +167,7 @@
 	g_settings_bind_writable([self castedGObject], [key UTF8String], object, [property UTF8String], inverted);
 }
 
-- (GAction*)createAction:(OFString*)key
+- (GAction*)createActionWithKey:(OFString*)key
 {
 	GAction* returnValue = (GAction*)g_settings_create_action([self castedGObject], [key UTF8String]);
 
@@ -179,14 +179,14 @@
 	g_settings_delay([self castedGObject]);
 }
 
-- (bool)boolean:(OFString*)key
+- (bool)booleanWithKey:(OFString*)key
 {
 	bool returnValue = (bool)g_settings_get_boolean([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (OGSettings*)child:(OFString*)name
+- (OGSettings*)childWithName:(OFString*)name
 {
 	GSettings* gobjectValue = g_settings_get_child([self castedGObject], [name UTF8String]);
 
@@ -196,28 +196,28 @@
 	return returnValue;
 }
 
-- (GVariant*)defaultValue:(OFString*)key
+- (GVariant*)defaultValueWithKey:(OFString*)key
 {
 	GVariant* returnValue = (GVariant*)g_settings_get_default_value([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (gdouble)double:(OFString*)key
+- (gdouble)doubleWithKey:(OFString*)key
 {
 	gdouble returnValue = (gdouble)g_settings_get_double([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (gint)enum:(OFString*)key
+- (gint)enumWithKey:(OFString*)key
 {
 	gint returnValue = (gint)g_settings_get_enum([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (guint)flags:(OFString*)key
+- (guint)flagsWithKey:(OFString*)key
 {
 	guint returnValue = (guint)g_settings_get_flags([self castedGObject], [key UTF8String]);
 
@@ -231,14 +231,14 @@
 	return returnValue;
 }
 
-- (gint)int:(OFString*)key
+- (gint)intWithKey:(OFString*)key
 {
 	gint returnValue = (gint)g_settings_get_int([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (gint64)int64:(OFString*)key
+- (gint64)int64WithKey:(OFString*)key
 {
 	gint64 returnValue = (gint64)g_settings_get_int64([self castedGObject], [key UTF8String]);
 
@@ -252,14 +252,14 @@
 	return returnValue;
 }
 
-- (GVariant*)range:(OFString*)key
+- (GVariant*)rangeWithKey:(OFString*)key
 {
 	GVariant* returnValue = (GVariant*)g_settings_get_range([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (OFString*)string:(OFString*)key
+- (OFString*)stringWithKey:(OFString*)key
 {
 	gchar* gobjectValue = g_settings_get_string([self castedGObject], [key UTF8String]);
 
@@ -267,42 +267,42 @@
 	return returnValue;
 }
 
-- (gchar**)strv:(OFString*)key
+- (gchar**)strvWithKey:(OFString*)key
 {
 	gchar** returnValue = (gchar**)g_settings_get_strv([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (guint)uint:(OFString*)key
+- (guint)uintWithKey:(OFString*)key
 {
 	guint returnValue = (guint)g_settings_get_uint([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (guint64)uint64:(OFString*)key
+- (guint64)uint64WithKey:(OFString*)key
 {
 	guint64 returnValue = (guint64)g_settings_get_uint64([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (GVariant*)userValue:(OFString*)key
+- (GVariant*)userValueWithKey:(OFString*)key
 {
 	GVariant* returnValue = (GVariant*)g_settings_get_user_value([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (GVariant*)value:(OFString*)key
+- (GVariant*)valueWithKey:(OFString*)key
 {
 	GVariant* returnValue = (GVariant*)g_settings_get_value([self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
-- (bool)isWritable:(OFString*)name
+- (bool)isWritableWithName:(OFString*)name
 {
 	bool returnValue = (bool)g_settings_is_writable([self castedGObject], [name UTF8String]);
 
@@ -330,7 +330,7 @@
 	return returnValue;
 }
 
-- (void)reset:(OFString*)key
+- (void)resetWithKey:(OFString*)key
 {
 	g_settings_reset([self castedGObject], [key UTF8String]);
 }

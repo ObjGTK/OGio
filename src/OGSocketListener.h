@@ -171,7 +171,7 @@
  * @param effectiveAddress location to store the address that was bound to, or %NULL.
  * @return %TRUE on success, %FALSE on error.
  */
-- (bool)addAddressWithAddress:(OGSocketAddress*)address type:(GSocketType)type protocol:(GSocketProtocol)protocol sourceObject:(OGObject*)sourceObject effectiveAddress:(GSocketAddress**)effectiveAddress;
+- (bool)addAddress:(OGSocketAddress*)address type:(GSocketType)type protocol:(GSocketProtocol)protocol sourceObject:(OGObject*)sourceObject effectiveAddress:(GSocketAddress**)effectiveAddress;
 
 /**
  * Listens for TCP connections on any available port number for both
@@ -188,7 +188,7 @@
  * @param sourceObject Optional #GObject identifying this source
  * @return the port number, or 0 in case of failure.
  */
-- (guint16)addAnyInetPort:(OGObject*)sourceObject;
+- (guint16)addAnyInetPortWithSourceObject:(OGObject*)sourceObject;
 
 /**
  * Helper function for g_socket_listener_add_address() that
@@ -208,7 +208,7 @@
  * @param sourceObject Optional #GObject identifying this source
  * @return %TRUE on success, %FALSE on error.
  */
-- (bool)addInetPortWithPort:(guint16)port sourceObject:(OGObject*)sourceObject;
+- (bool)addInetPort:(guint16)port sourceObject:(OGObject*)sourceObject;
 
 /**
  * Adds @socket to the set of sockets that we try to accept
@@ -229,7 +229,7 @@
  * @param sourceObject Optional #GObject identifying this source
  * @return %TRUE on success, %FALSE on error.
  */
-- (bool)addSocketWithSocket:(OGSocket*)socket sourceObject:(OGObject*)sourceObject;
+- (bool)addSocket:(OGSocket*)socket sourceObject:(OGObject*)sourceObject;
 
 /**
  * Closes all the sockets in the listener.
@@ -246,6 +246,6 @@
  *
  * @param listenBacklog an integer
  */
-- (void)setBacklog:(int)listenBacklog;
+- (void)setBacklogWithListenBacklog:(int)listenBacklog;
 
 @end

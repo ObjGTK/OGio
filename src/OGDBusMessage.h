@@ -48,7 +48,7 @@
  * Constructors
  */
 + (instancetype)dBusMessage;
-+ (instancetype)dBusMessageFromBlobWithBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities;
++ (instancetype)dBusMessageFromBlob:(guchar*)blob blobLen:(gsize)blobLen capabilities:(GDBusCapabilityFlags)capabilities;
 + (instancetype)dBusMessageMethodCallWithName:(OFString*)name path:(OFString*)path interface:(OFString*)interface method:(OFString*)method;
 + (instancetype)dBusMessageSignalWithPath:(OFString*)path interface:(OFString*)interface signal:(OFString*)signal;
 
@@ -138,7 +138,7 @@
  * @return A #GVariant with the value if the header was found, %NULL
  * otherwise. Do not free, it is owned by @message.
  */
-- (GVariant*)header:(GDBusMessageHeaderField)headerField;
+- (GVariant*)headerWithHeaderField:(GDBusMessageHeaderField)headerField;
 
 /**
  * Gets an array of all header fields on @message that are set.
@@ -308,7 +308,7 @@
  * @param indent Indentation level.
  * @return A string that should be freed with [func@GLib.free].
  */
-- (OFString*)print:(guint)indent;
+- (OFString*)printWithIndent:(guint)indent;
 
 /**
  * Sets the body @message. As a side-effect the
@@ -333,14 +333,14 @@
  *
  * @param value The value to set.
  */
-- (void)setDestination:(OFString*)value;
+- (void)setDestinationWithValue:(OFString*)value;
 
 /**
  * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_ERROR_NAME header field.
  *
  * @param value The value to set.
  */
-- (void)setErrorName:(OFString*)value;
+- (void)setErrorNameWithValue:(OFString*)value;
 
 /**
  * Sets the flags to set on @message.
@@ -365,14 +365,14 @@
  *
  * @param value The value to set.
  */
-- (void)setInterface:(OFString*)value;
+- (void)setInterfaceWithValue:(OFString*)value;
 
 /**
  * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_MEMBER header field.
  *
  * @param value The value to set.
  */
-- (void)setMember:(OFString*)value;
+- (void)setMemberWithValue:(OFString*)value;
 
 /**
  * Sets @message to be of @type.
@@ -386,28 +386,28 @@
  *
  * @param value The value to set.
  */
-- (void)setNumUnixFds:(guint32)value;
+- (void)setNumUnixFdsWithValue:(guint32)value;
 
 /**
  * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_PATH header field.
  *
  * @param value The value to set.
  */
-- (void)setPath:(OFString*)value;
+- (void)setPathWithValue:(OFString*)value;
 
 /**
  * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_REPLY_SERIAL header field.
  *
  * @param value The value to set.
  */
-- (void)setReplySerial:(guint32)value;
+- (void)setReplySerialWithValue:(guint32)value;
 
 /**
  * Convenience setter for the %G_DBUS_MESSAGE_HEADER_FIELD_SENDER header field.
  *
  * @param value The value to set.
  */
-- (void)setSender:(OFString*)value;
+- (void)setSenderWithValue:(OFString*)value;
 
 /**
  * Sets the serial for @message.
@@ -421,7 +421,7 @@
  *
  * @param value The value to set.
  */
-- (void)setSignature:(OFString*)value;
+- (void)setSignatureWithValue:(OFString*)value;
 
 /**
  * Sets the UNIX file descriptors associated with @message. As a

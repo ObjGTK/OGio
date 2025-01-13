@@ -171,7 +171,7 @@
 	g_simple_async_result_set_op_res_gboolean([self castedGObject], opRes);
 }
 
-- (void)setOpResGpointerWithOpRes:(gpointer)opRes destroyOpRes:(GDestroyNotify)destroyOpRes
+- (void)setOpResGpointer:(gpointer)opRes destroyOpRes:(GDestroyNotify)destroyOpRes
 {
 	g_simple_async_result_set_op_res_gpointer([self castedGObject], opRes, destroyOpRes);
 }

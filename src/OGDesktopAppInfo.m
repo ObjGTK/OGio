@@ -20,14 +20,14 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (GList*)implementations:(OFString*)interface
++ (GList*)implementationsWithInterface:(OFString*)interface
 {
 	GList* returnValue = (GList*)g_desktop_app_info_get_implementations([interface UTF8String]);
 
 	return returnValue;
 }
 
-+ (gchar***)search:(OFString*)searchString
++ (gchar***)searchWithSearchString:(OFString*)searchString
 {
 	gchar*** returnValue = (gchar***)g_desktop_app_info_search([searchString UTF8String]);
 
@@ -39,7 +39,7 @@
 	g_desktop_app_info_set_desktop_env([desktopEnv UTF8String]);
 }
 
-+ (instancetype)desktopAppInfo:(OFString*)desktopId
++ (instancetype)desktopAppInfoWithDesktopId:(OFString*)desktopId
 {
 	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new([desktopId UTF8String]), GDesktopAppInfo, GDesktopAppInfo);
 
@@ -112,7 +112,7 @@
 	return returnValue;
 }
 
-- (bool)boolean:(OFString*)key
+- (bool)booleanWithKey:(OFString*)key
 {
 	bool returnValue = (bool)g_desktop_app_info_get_boolean([self castedGObject], [key UTF8String]);
 
@@ -157,7 +157,7 @@
 	return returnValue;
 }
 
-- (char*)localeString:(OFString*)key
+- (char*)localeStringWithKey:(OFString*)key
 {
 	char* gobjectValue = g_desktop_app_info_get_locale_string([self castedGObject], [key UTF8String]);
 
@@ -172,7 +172,7 @@
 	return returnValue;
 }
 
-- (bool)showIn:(OFString*)desktopEnv
+- (bool)showInWithDesktopEnv:(OFString*)desktopEnv
 {
 	bool returnValue = (bool)g_desktop_app_info_get_show_in([self castedGObject], [desktopEnv UTF8String]);
 
@@ -187,7 +187,7 @@
 	return returnValue;
 }
 
-- (char*)string:(OFString*)key
+- (char*)stringWithKey:(OFString*)key
 {
 	char* gobjectValue = g_desktop_app_info_get_string([self castedGObject], [key UTF8String]);
 
@@ -214,7 +214,7 @@
 	g_desktop_app_info_launch_action([self castedGObject], [actionName UTF8String], [launchContext castedGObject]);
 }
 
-- (bool)launchUrisAsManagerWithUris:(GList*)uris launchContext:(OGAppLaunchContext*)launchContext spawnFlags:(GSpawnFlags)spawnFlags userSetup:(GSpawnChildSetupFunc)userSetup userSetupData:(gpointer)userSetupData pidCallback:(GDesktopAppLaunchCallback)pidCallback pidCallbackData:(gpointer)pidCallbackData
+- (bool)launchUrisAsManager:(GList*)uris launchContext:(OGAppLaunchContext*)launchContext spawnFlags:(GSpawnFlags)spawnFlags userSetup:(GSpawnChildSetupFunc)userSetup userSetupData:(gpointer)userSetupData pidCallback:(GDesktopAppLaunchCallback)pidCallback pidCallbackData:(gpointer)pidCallbackData
 {
 	GError* err = NULL;
 
@@ -225,7 +225,7 @@
 	return returnValue;
 }
 
-- (bool)launchUrisAsManagerWithFdsWithUris:(GList*)uris launchContext:(OGAppLaunchContext*)launchContext spawnFlags:(GSpawnFlags)spawnFlags userSetup:(GSpawnChildSetupFunc)userSetup userSetupData:(gpointer)userSetupData pidCallback:(GDesktopAppLaunchCallback)pidCallback pidCallbackData:(gpointer)pidCallbackData stdinFd:(gint)stdinFd stdoutFd:(gint)stdoutFd stderrFd:(gint)stderrFd
+- (bool)launchUrisAsManagerWithFds:(GList*)uris launchContext:(OGAppLaunchContext*)launchContext spawnFlags:(GSpawnFlags)spawnFlags userSetup:(GSpawnChildSetupFunc)userSetup userSetupData:(gpointer)userSetupData pidCallback:(GDesktopAppLaunchCallback)pidCallback pidCallbackData:(gpointer)pidCallbackData stdinFd:(gint)stdinFd stdoutFd:(gint)stdoutFd stderrFd:(gint)stderrFd
 {
 	GError* err = NULL;
 

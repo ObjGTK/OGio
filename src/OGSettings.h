@@ -318,7 +318,7 @@
 
 
 /**
- * Deprecated.
+ * Use g_settings_schema_source_list_schemas() instead
  *
  * @return a list of
  *   relocatable #GSettings schemas that are available, in no defined order.
@@ -327,10 +327,7 @@
 + (const gchar* const*)listRelocatableSchemas;
 
 /**
- * Use g_settings_schema_source_list_schemas() instead.
- * If you used g_settings_list_schemas() to check for the presence of
- * a particular schema, use g_settings_schema_source_lookup() instead
- * of your whole loop.
+ * Deprecated.
  *
  * @return a list of
  *   #GSettings schemas that are available, in no defined order.  The list
@@ -368,7 +365,7 @@
 /**
  * Constructors
  */
-+ (instancetype)settings:(OFString*)schemaId;
++ (instancetype)settingsWithSchemaId:(OFString*)schemaId;
 + (instancetype)settingsFullWithSchema:(GSettingsSchema*)schema backend:(GSettingsBackend*)backend path:(OFString*)path;
 + (instancetype)settingsWithBackendWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend;
 + (instancetype)settingsWithBackendAndPathWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend path:(OFString*)path;
@@ -488,7 +485,7 @@
  * @param key the name of a key in @settings
  * @return a new #GAction
  */
-- (GAction*)createAction:(OFString*)key;
+- (GAction*)createActionWithKey:(OFString*)key;
 
 /**
  * Changes the #GSettings object into 'delay-apply' mode. In this
@@ -509,7 +506,7 @@
  * @param key the key to get the value for
  * @return a boolean
  */
-- (bool)boolean:(OFString*)key;
+- (bool)booleanWithKey:(OFString*)key;
 
 /**
  * Creates a child settings object which has a base path of
@@ -525,7 +522,7 @@
  * @param name the name of the child schema
  * @return a 'child' settings object
  */
-- (OGSettings*)child:(OFString*)name;
+- (OGSettings*)childWithName:(OFString*)name;
 
 /**
  * Gets the "default value" of a key.
@@ -553,7 +550,7 @@
  * @param key the key to get the default value for
  * @return the default value
  */
-- (GVariant*)defaultValue:(OFString*)key;
+- (GVariant*)defaultValueWithKey:(OFString*)key;
 
 /**
  * Gets the value that is stored at @key in @settings.
@@ -566,7 +563,7 @@
  * @param key the key to get the value for
  * @return a double
  */
-- (gdouble)double:(OFString*)key;
+- (gdouble)doubleWithKey:(OFString*)key;
 
 /**
  * Gets the value that is stored in @settings for @key and converts it
@@ -585,7 +582,7 @@
  * @param key the key to get the value for
  * @return the enum value
  */
-- (gint)enum:(OFString*)key;
+- (gint)enumWithKey:(OFString*)key;
 
 /**
  * Gets the value that is stored in @settings for @key and converts it
@@ -604,7 +601,7 @@
  * @param key the key to get the value for
  * @return the flags value
  */
-- (guint)flags:(OFString*)key;
+- (guint)flagsWithKey:(OFString*)key;
 
 /**
  * Returns whether the #GSettings object has any unapplied
@@ -625,7 +622,7 @@
  * @param key the key to get the value for
  * @return an integer
  */
-- (gint)int:(OFString*)key;
+- (gint)intWithKey:(OFString*)key;
 
 /**
  * Gets the value that is stored at @key in @settings.
@@ -638,7 +635,7 @@
  * @param key the key to get the value for
  * @return a 64-bit integer
  */
-- (gint64)int64:(OFString*)key;
+- (gint64)int64WithKey:(OFString*)key;
 
 /**
  * Gets the value that is stored at @key in @settings, subject to
@@ -683,7 +680,7 @@
  * @param key the key to query the range of
  * @return
  */
-- (GVariant*)range:(OFString*)key;
+- (GVariant*)rangeWithKey:(OFString*)key;
 
 /**
  * Gets the value that is stored at @key in @settings.
@@ -696,7 +693,7 @@
  * @param key the key to get the value for
  * @return a newly-allocated string
  */
-- (OFString*)string:(OFString*)key;
+- (OFString*)stringWithKey:(OFString*)key;
 
 /**
  * A convenience variant of g_settings_get() for string arrays.
@@ -709,7 +706,7 @@
  * newly-allocated, %NULL-terminated array of strings, the value that
  * is stored at @key in @settings.
  */
-- (gchar**)strv:(OFString*)key;
+- (gchar**)strvWithKey:(OFString*)key;
 
 /**
  * Gets the value that is stored at @key in @settings.
@@ -723,7 +720,7 @@
  * @param key the key to get the value for
  * @return an unsigned integer
  */
-- (guint)uint:(OFString*)key;
+- (guint)uintWithKey:(OFString*)key;
 
 /**
  * Gets the value that is stored at @key in @settings.
@@ -737,7 +734,7 @@
  * @param key the key to get the value for
  * @return a 64-bit unsigned integer
  */
-- (guint64)uint64:(OFString*)key;
+- (guint64)uint64WithKey:(OFString*)key;
 
 /**
  * Checks the "user value" of a key, if there is one.
@@ -762,7 +759,7 @@
  * @param key the key to get the user value for
  * @return the user's value, if set
  */
-- (GVariant*)userValue:(OFString*)key;
+- (GVariant*)userValueWithKey:(OFString*)key;
 
 /**
  * Gets the value that is stored in @settings for @key.
@@ -773,7 +770,7 @@
  * @param key the key to get the value for
  * @return a new #GVariant
  */
-- (GVariant*)value:(OFString*)key;
+- (GVariant*)valueWithKey:(OFString*)key;
 
 /**
  * Finds out if a key can be written or not
@@ -781,7 +778,7 @@
  * @param name the name of a key
  * @return %TRUE if the key @name is writable
  */
-- (bool)isWritable:(OFString*)name;
+- (bool)isWritableWithName:(OFString*)name;
 
 /**
  * Gets the list of children on @settings.
@@ -835,7 +832,7 @@
  *
  * @param key the name of a key
  */
-- (void)reset:(OFString*)key;
+- (void)resetWithKey:(OFString*)key;
 
 /**
  * Reverts all non-applied changes to the settings.  This function

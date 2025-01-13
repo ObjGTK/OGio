@@ -81,13 +81,13 @@
  * @return the new
  *   #GNetworkAddress, or %NULL on error
  */
-+ (GSocketConnectable*)parseUriWithUri:(OFString*)uri defaultPort:(guint16)defaultPort;
++ (GSocketConnectable*)parseUri:(OFString*)uri defaultPort:(guint16)defaultPort;
 
 /**
  * Constructors
  */
 + (instancetype)networkAddressWithHostname:(OFString*)hostname port:(guint16)port;
-+ (instancetype)networkAddressLoopback:(guint16)port;
++ (instancetype)networkAddressLoopbackWithPort:(guint16)port;
 
 /**
  * Methods

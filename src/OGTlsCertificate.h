@@ -51,10 +51,10 @@
  * Constructors
  */
 + (instancetype)tlsCertificateFromFile:(OFString*)file;
-+ (instancetype)tlsCertificateFromFileWithPasswordWithFile:(OFString*)file password:(OFString*)password;
++ (instancetype)tlsCertificateFromFileWithPassword:(OFString*)file password:(OFString*)password;
 + (instancetype)tlsCertificateFromFilesWithCertFile:(OFString*)certFile keyFile:(OFString*)keyFile;
 + (instancetype)tlsCertificateFromPemWithData:(OFString*)data length:(gssize)length;
-+ (instancetype)tlsCertificateFromPkcs11UrisWithPkcs11Uri:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri;
++ (instancetype)tlsCertificateFromPkcs11Uris:(OFString*)pkcs11Uri privateKeyPkcs11Uri:(OFString*)privateKeyPkcs11Uri;
 + (instancetype)tlsCertificateFromPkcs12WithData:(const guint8*)data length:(gsize)length password:(OFString*)password;
 
 /**
@@ -126,7 +126,7 @@
  * @param certTwo second certificate to compare
  * @return whether the same or not
  */
-- (bool)isSame:(OGTlsCertificate*)certTwo;
+- (bool)isSameWithCertTwo:(OGTlsCertificate*)certTwo;
 
 /**
  * This verifies @cert and returns a set of #GTlsCertificateFlags

@@ -66,7 +66,7 @@
 	return returnValue;
 }
 
-- (void)launchFailed:(OFString*)startupNotifyId
+- (void)launchFailedWithStartupNotifyId:(OFString*)startupNotifyId
 {
 	g_app_launch_context_launch_failed([self castedGObject], [startupNotifyId UTF8String]);
 }
@@ -76,7 +76,7 @@
 	g_app_launch_context_setenv([self castedGObject], [variable UTF8String], [value UTF8String]);
 }
 
-- (void)unsetenv:(OFString*)variable
+- (void)unsetenvWithVariable:(OFString*)variable
 {
 	g_app_launch_context_unsetenv([self castedGObject], [variable UTF8String]);
 }

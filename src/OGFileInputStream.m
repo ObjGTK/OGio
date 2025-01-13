@@ -45,7 +45,7 @@
 	g_file_input_stream_query_info_async([self castedGObject], [attributes UTF8String], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (OGFileInfo*)queryInfoFinish:(GAsyncResult*)result
+- (OGFileInfo*)queryInfoFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

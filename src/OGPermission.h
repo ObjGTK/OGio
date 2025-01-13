@@ -66,7 +66,7 @@
  * @param cancellable a #GCancellable, or %NULL
  * @return %TRUE if the permission was successfully acquired
  */
-- (bool)acquire:(OGCancellable*)cancellable;
+- (bool)acquireWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Attempts to acquire the permission represented by @permission.
@@ -90,7 +90,7 @@
  * @param result the #GAsyncResult given to the #GAsyncReadyCallback
  * @return %TRUE if the permission was successfully acquired
  */
-- (bool)acquireFinish:(GAsyncResult*)result;
+- (bool)acquireFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Gets the value of the 'allowed' property.  This property is %TRUE if
@@ -152,7 +152,7 @@
  * @param cancellable a #GCancellable, or %NULL
  * @return %TRUE if the permission was successfully released
  */
-- (bool)decreaseCount:(OGCancellable*)cancellable;
+- (bool)decreaseCountWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Attempts to release the permission represented by @permission.
@@ -176,6 +176,6 @@
  * @param result the #GAsyncResult given to the #GAsyncReadyCallback
  * @return %TRUE if the permission was successfully released
  */
-- (bool)releaseFinish:(GAsyncResult*)result;
+- (bool)releaseFinishWithResult:(GAsyncResult*)result;
 
 @end

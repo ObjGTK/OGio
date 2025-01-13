@@ -102,6 +102,6 @@
  * @param result a #GAsyncResult.
  * @return A #GFileInfo for the finished query.
  */
-- (OGFileInfo*)queryInfoFinish:(GAsyncResult*)result;
+- (OGFileInfo*)queryInfoFinishWithResult:(GAsyncResult*)result;
 
 @end

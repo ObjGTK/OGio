@@ -32,7 +32,7 @@
 	g_dbus_proxy_new_for_bus(busType, flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], callback, userData);
 }
 
-+ (instancetype)dBusProxyFinish:(GAsyncResult*)res
++ (instancetype)dBusProxyFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
@@ -56,7 +56,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)dBusProxyForBusFinish:(GAsyncResult*)res
++ (instancetype)dBusProxyForBusFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
@@ -138,7 +138,7 @@
 	g_dbus_proxy_call([self castedGObject], [methodName UTF8String], parameters, flags, timeoutMsec, [cancellable castedGObject], callback, userData);
 }
 
-- (GVariant*)callFinish:(GAsyncResult*)res
+- (GVariant*)callFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
@@ -187,7 +187,7 @@
 	return returnValue;
 }
 
-- (GVariant*)cachedProperty:(OFString*)propertyName
+- (GVariant*)cachedPropertyWithPropertyName:(OFString*)propertyName
 {
 	GVariant* returnValue = (GVariant*)g_dbus_proxy_get_cached_property([self castedGObject], [propertyName UTF8String]);
 
@@ -267,7 +267,7 @@
 	g_dbus_proxy_set_cached_property([self castedGObject], [propertyName UTF8String], value);
 }
 
-- (void)setDefaultTimeout:(gint)timeoutMsec
+- (void)setDefaultTimeoutWithTimeoutMsec:(gint)timeoutMsec
 {
 	g_dbus_proxy_set_default_timeout([self castedGObject], timeoutMsec);
 }

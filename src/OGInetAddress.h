@@ -36,10 +36,10 @@
 /**
  * Constructors
  */
-+ (instancetype)inetAddressAny:(GSocketFamily)family;
-+ (instancetype)inetAddressFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family;
++ (instancetype)inetAddressAnyWithFamily:(GSocketFamily)family;
++ (instancetype)inetAddressFromBytes:(const guint8*)bytes family:(GSocketFamily)family;
 + (instancetype)inetAddressFromString:(OFString*)string;
-+ (instancetype)inetAddressLoopback:(GSocketFamily)family;
++ (instancetype)inetAddressLoopbackWithFamily:(GSocketFamily)family;
 
 /**
  * Methods
@@ -53,7 +53,7 @@
  * @param otherAddress Another #GInetAddress.
  * @return %TRUE if @address and @other_address are equal, %FALSE otherwise.
  */
-- (bool)equal:(OGInetAddress*)otherAddress;
+- (bool)equalWithOtherAddress:(OGInetAddress*)otherAddress;
 
 /**
  * Gets @address's family

@@ -21,7 +21,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)bufferedInputStream:(OGInputStream*)baseStream
++ (instancetype)bufferedInputStreamWithBaseStream:(OGInputStream*)baseStream
 {
 	GBufferedInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_input_stream_new([baseStream castedGObject]), GBufferedInputStream, GBufferedInputStream);
 
@@ -82,7 +82,7 @@
 	g_buffered_input_stream_fill_async([self castedGObject], count, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (gssize)fillFinish:(GAsyncResult*)result
+- (gssize)fillFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -114,14 +114,14 @@
 	return returnValue;
 }
 
-- (void*)peekBuffer:(gsize*)count
+- (void*)peekBufferWithCount:(gsize*)count
 {
 	void* returnValue = (void*)g_buffered_input_stream_peek_buffer([self castedGObject], count);
 
 	return returnValue;
 }
 
-- (int)readByte:(OGCancellable*)cancellable
+- (int)readByteWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 

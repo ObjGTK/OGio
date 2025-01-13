@@ -50,7 +50,7 @@
 /**
  * Constructors
  */
-+ (instancetype)dBusObjectManagerServer:(OFString*)objectPath;
++ (instancetype)dBusObjectManagerServerWithObjectPath:(OFString*)objectPath;
 
 /**
  * Methods
@@ -72,7 +72,7 @@
  *
  * @param object A #GDBusObjectSkeleton.
  */
-- (void)export:(OGDBusObjectSkeleton*)object;
+- (void)exportWithObject:(OGDBusObjectSkeleton*)object;
 
 /**
  * Like g_dbus_object_manager_server_export() but appends a string of
@@ -82,7 +82,7 @@
  *
  * @param object An object.
  */
-- (void)exportUniquely:(OGDBusObjectSkeleton*)object;
+- (void)exportUniquelyWithObject:(OGDBusObjectSkeleton*)object;
 
 /**
  * Gets the #GDBusConnection used by @manager.
@@ -99,7 +99,7 @@
  * @param object An object.
  * @return %TRUE if @object is exported
  */
-- (bool)isExported:(OGDBusObjectSkeleton*)object;
+- (bool)isExportedWithObject:(OGDBusObjectSkeleton*)object;
 
 /**
  * Exports all objects managed by @manager on @connection. If
@@ -119,6 +119,6 @@
  * @param objectPath An object path.
  * @return %TRUE if object at @object_path was removed, %FALSE otherwise.
  */
-- (bool)unexport:(OFString*)objectPath;
+- (bool)unexportWithObjectPath:(OFString*)objectPath;
 
 @end

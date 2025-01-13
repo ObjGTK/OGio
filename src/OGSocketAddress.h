@@ -30,7 +30,7 @@
 /**
  * Constructors
  */
-+ (instancetype)socketAddressFromNativeWithNative:(gpointer)native len:(gsize)len;
++ (instancetype)socketAddressFromNative:(gpointer)native len:(gsize)len;
 
 /**
  * Methods

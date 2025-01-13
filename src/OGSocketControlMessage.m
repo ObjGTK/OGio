@@ -54,7 +54,7 @@
 	return returnValue;
 }
 
-- (void)serialize:(gpointer)data
+- (void)serializeWithData:(gpointer)data
 {
 	g_socket_control_message_serialize([self castedGObject], data);
 }

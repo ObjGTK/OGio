@@ -139,8 +139,8 @@
 /**
  * Constructors
  */
-+ (instancetype)dBusProxyFinish:(GAsyncResult*)res;
-+ (instancetype)dBusProxyForBusFinish:(GAsyncResult*)res;
++ (instancetype)dBusProxyFinishWithRes:(GAsyncResult*)res;
++ (instancetype)dBusProxyForBusFinishWithRes:(GAsyncResult*)res;
 + (instancetype)dBusProxyForBusSyncWithBusType:(GBusType)busType flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
 + (instancetype)dBusProxySyncWithConnection:(OGDBusConnection*)connection flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable;
 
@@ -213,7 +213,7 @@
  * @return %NULL if @error is set. Otherwise a #GVariant tuple with
  * return values. Free with g_variant_unref().
  */
-- (GVariant*)callFinish:(GAsyncResult*)res;
+- (GVariant*)callFinishWithRes:(GAsyncResult*)res;
 
 /**
  * Synchronously invokes the @method_name method on @proxy.
@@ -323,7 +323,7 @@
  *    that holds the value for @property_name or %NULL if the value is not in
  *    the cache. The returned reference must be freed with g_variant_unref().
  */
-- (GVariant*)cachedProperty:(OFString*)propertyName;
+- (GVariant*)cachedPropertyWithPropertyName:(OFString*)propertyName;
 
 /**
  * Gets the names of all cached properties on @proxy.
@@ -455,7 +455,7 @@
  *
  * @param timeoutMsec Timeout in milliseconds.
  */
-- (void)setDefaultTimeout:(gint)timeoutMsec;
+- (void)setDefaultTimeoutWithTimeoutMsec:(gint)timeoutMsec;
 
 /**
  * Ensure that interactions with @proxy conform to the given

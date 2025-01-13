@@ -74,7 +74,7 @@
  *
  * @param protocol The proxy protocol
  */
-- (void)addApplicationProxy:(OFString*)protocol;
+- (void)addApplicationProxyWithProtocol:(OFString*)protocol;
 
 /**
  * Tries to resolve the @connectable and make a network connection to it.
@@ -131,7 +131,7 @@
  * @param result a #GAsyncResult.
  * @return a #GSocketConnection on success, %NULL on error.
  */
-- (OGSocketConnection*)connectFinish:(GAsyncResult*)result;
+- (OGSocketConnection*)connectFinishWithResult:(GAsyncResult*)result;
 
 /**
  * This is a helper function for g_socket_client_connect().
@@ -193,7 +193,7 @@
  * @param result a #GAsyncResult.
  * @return a #GSocketConnection on success, %NULL on error.
  */
-- (OGSocketConnection*)connectToHostFinish:(GAsyncResult*)result;
+- (OGSocketConnection*)connectToHostFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Attempts to create a TCP connection to a service.
@@ -236,7 +236,7 @@
  * @param result a #GAsyncResult.
  * @return a #GSocketConnection on success, %NULL on error.
  */
-- (OGSocketConnection*)connectToServiceFinish:(GAsyncResult*)result;
+- (OGSocketConnection*)connectToServiceFinishWithResult:(GAsyncResult*)result;
 
 /**
  * This is a helper function for g_socket_client_connect().
@@ -266,7 +266,7 @@
  * @param cancellable a #GCancellable, or %NULL
  * @return a #GSocketConnection on success, %NULL on error.
  */
-- (OGSocketConnection*)connectToUriWithUri:(OFString*)uri defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable;
+- (OGSocketConnection*)connectToUri:(OFString*)uri defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable;
 
 /**
  * This is the asynchronous version of g_socket_client_connect_to_uri().
@@ -281,7 +281,7 @@
  * @param callback a #GAsyncReadyCallback
  * @param userData user data for the callback
  */
-- (void)connectToUriAsyncWithUri:(OFString*)uri defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
+- (void)connectToUriAsync:(OFString*)uri defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Finishes an async connect operation. See g_socket_client_connect_to_uri_async()
@@ -289,7 +289,7 @@
  * @param result a #GAsyncResult.
  * @return a #GSocketConnection on success, %NULL on error.
  */
-- (OGSocketConnection*)connectToUriFinish:(GAsyncResult*)result;
+- (OGSocketConnection*)connectToUriFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Gets the proxy enable state; see g_socket_client_set_enable_proxy()

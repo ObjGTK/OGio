@@ -48,7 +48,7 @@
 	g_file_info_clear_status([self castedGObject]);
 }
 
-- (void)copyInto:(OGFileInfo*)destInfo
+- (void)copyIntoWithDestInfo:(OGFileInfo*)destInfo
 {
 	g_file_info_copy_into([self castedGObject], [destInfo castedGObject]);
 }
@@ -70,7 +70,7 @@
 	return returnValue;
 }
 
-- (char*)attributeAsString:(OFString*)attribute
+- (char*)attributeAsStringWithAttribute:(OFString*)attribute
 {
 	char* gobjectValue = g_file_info_get_attribute_as_string([self castedGObject], [attribute UTF8String]);
 
@@ -78,14 +78,14 @@
 	return returnValue;
 }
 
-- (bool)attributeBoolean:(OFString*)attribute
+- (bool)attributeBooleanWithAttribute:(OFString*)attribute
 {
 	bool returnValue = (bool)g_file_info_get_attribute_boolean([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
-- (OFString*)attributeByteString:(OFString*)attribute
+- (OFString*)attributeByteStringWithAttribute:(OFString*)attribute
 {
 	const char* gobjectValue = g_file_info_get_attribute_byte_string([self castedGObject], [attribute UTF8String]);
 
@@ -100,7 +100,7 @@
 	return returnValue;
 }
 
-- (OFString*)attributeFilePath:(OFString*)attribute
+- (OFString*)attributeFilePathWithAttribute:(OFString*)attribute
 {
 	const char* gobjectValue = g_file_info_get_attribute_file_path([self castedGObject], [attribute UTF8String]);
 
@@ -108,21 +108,21 @@
 	return returnValue;
 }
 
-- (gint32)attributeInt32:(OFString*)attribute
+- (gint32)attributeInt32WithAttribute:(OFString*)attribute
 {
 	gint32 returnValue = (gint32)g_file_info_get_attribute_int32([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
-- (gint64)attributeInt64:(OFString*)attribute
+- (gint64)attributeInt64WithAttribute:(OFString*)attribute
 {
 	gint64 returnValue = (gint64)g_file_info_get_attribute_int64([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
-- (OGObject*)attributeObject:(OFString*)attribute
+- (OGObject*)attributeObjectWithAttribute:(OFString*)attribute
 {
 	GObject* gobjectValue = g_file_info_get_attribute_object([self castedGObject], [attribute UTF8String]);
 
@@ -130,14 +130,14 @@
 	return returnValue;
 }
 
-- (GFileAttributeStatus)attributeStatus:(OFString*)attribute
+- (GFileAttributeStatus)attributeStatusWithAttribute:(OFString*)attribute
 {
 	GFileAttributeStatus returnValue = (GFileAttributeStatus)g_file_info_get_attribute_status([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
-- (OFString*)attributeString:(OFString*)attribute
+- (OFString*)attributeStringWithAttribute:(OFString*)attribute
 {
 	const char* gobjectValue = g_file_info_get_attribute_string([self castedGObject], [attribute UTF8String]);
 
@@ -145,28 +145,28 @@
 	return returnValue;
 }
 
-- (char**)attributeStringv:(OFString*)attribute
+- (char**)attributeStringvWithAttribute:(OFString*)attribute
 {
 	char** returnValue = (char**)g_file_info_get_attribute_stringv([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
-- (GFileAttributeType)attributeType:(OFString*)attribute
+- (GFileAttributeType)attributeTypeWithAttribute:(OFString*)attribute
 {
 	GFileAttributeType returnValue = (GFileAttributeType)g_file_info_get_attribute_type([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
-- (guint32)attributeUint32:(OFString*)attribute
+- (guint32)attributeUint32WithAttribute:(OFString*)attribute
 {
 	guint32 returnValue = (guint32)g_file_info_get_attribute_uint32([self castedGObject], [attribute UTF8String]);
 
 	return returnValue;
 }
 
-- (guint64)attributeUint64:(OFString*)attribute
+- (guint64)attributeUint64WithAttribute:(OFString*)attribute
 {
 	guint64 returnValue = (guint64)g_file_info_get_attribute_uint64([self castedGObject], [attribute UTF8String]);
 
@@ -261,7 +261,7 @@
 	return returnValue;
 }
 
-- (void)modificationTime:(GTimeVal*)result
+- (void)modificationTimeWithResult:(GTimeVal*)result
 {
 	g_file_info_get_modification_time([self castedGObject], result);
 }
@@ -317,7 +317,7 @@
 	return returnValue;
 }
 
-- (char**)listAttributes:(OFString*)nameSpace
+- (char**)listAttributesWithNameSpace:(OFString*)nameSpace
 {
 	char** returnValue = (char**)g_file_info_list_attributes([self castedGObject], [nameSpace UTF8String]);
 
@@ -329,37 +329,37 @@
 	g_file_info_remove_attribute([self castedGObject], [attribute UTF8String]);
 }
 
-- (void)setAccessDateTime:(GDateTime*)atime
+- (void)setAccessDateTimeWithAtime:(GDateTime*)atime
 {
 	g_file_info_set_access_date_time([self castedGObject], atime);
 }
 
-- (void)setAttributeWithAttribute:(OFString*)attribute type:(GFileAttributeType)type valueP:(gpointer)valueP
+- (void)setAttribute:(OFString*)attribute type:(GFileAttributeType)type valueP:(gpointer)valueP
 {
 	g_file_info_set_attribute([self castedGObject], [attribute UTF8String], type, valueP);
 }
 
-- (void)setAttributeBooleanWithAttribute:(OFString*)attribute attrValue:(bool)attrValue
+- (void)setAttributeBoolean:(OFString*)attribute attrValue:(bool)attrValue
 {
 	g_file_info_set_attribute_boolean([self castedGObject], [attribute UTF8String], attrValue);
 }
 
-- (void)setAttributeByteStringWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue
+- (void)setAttributeByteString:(OFString*)attribute attrValue:(OFString*)attrValue
 {
 	g_file_info_set_attribute_byte_string([self castedGObject], [attribute UTF8String], [attrValue UTF8String]);
 }
 
-- (void)setAttributeFilePathWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue
+- (void)setAttributeFilePath:(OFString*)attribute attrValue:(OFString*)attrValue
 {
 	g_file_info_set_attribute_file_path([self castedGObject], [attribute UTF8String], [attrValue UTF8String]);
 }
 
-- (void)setAttributeInt32WithAttribute:(OFString*)attribute attrValue:(gint32)attrValue
+- (void)setAttributeInt32:(OFString*)attribute attrValue:(gint32)attrValue
 {
 	g_file_info_set_attribute_int32([self castedGObject], [attribute UTF8String], attrValue);
 }
 
-- (void)setAttributeInt64WithAttribute:(OFString*)attribute attrValue:(gint64)attrValue
+- (void)setAttributeInt64:(OFString*)attribute attrValue:(gint64)attrValue
 {
 	g_file_info_set_attribute_int64([self castedGObject], [attribute UTF8String], attrValue);
 }
@@ -369,34 +369,34 @@
 	g_file_info_set_attribute_mask([self castedGObject], mask);
 }
 
-- (void)setAttributeObjectWithAttribute:(OFString*)attribute attrValue:(OGObject*)attrValue
+- (void)setAttributeObject:(OFString*)attribute attrValue:(OGObject*)attrValue
 {
 	g_file_info_set_attribute_object([self castedGObject], [attribute UTF8String], [attrValue gObject]);
 }
 
-- (bool)setAttributeStatusWithAttribute:(OFString*)attribute status:(GFileAttributeStatus)status
+- (bool)setAttributeStatus:(OFString*)attribute status:(GFileAttributeStatus)status
 {
 	bool returnValue = (bool)g_file_info_set_attribute_status([self castedGObject], [attribute UTF8String], status);
 
 	return returnValue;
 }
 
-- (void)setAttributeStringWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue
+- (void)setAttributeString:(OFString*)attribute attrValue:(OFString*)attrValue
 {
 	g_file_info_set_attribute_string([self castedGObject], [attribute UTF8String], [attrValue UTF8String]);
 }
 
-- (void)setAttributeStringvWithAttribute:(OFString*)attribute attrValue:(char**)attrValue
+- (void)setAttributeStringv:(OFString*)attribute attrValue:(char**)attrValue
 {
 	g_file_info_set_attribute_stringv([self castedGObject], [attribute UTF8String], attrValue);
 }
 
-- (void)setAttributeUint32WithAttribute:(OFString*)attribute attrValue:(guint32)attrValue
+- (void)setAttributeUint32:(OFString*)attribute attrValue:(guint32)attrValue
 {
 	g_file_info_set_attribute_uint32([self castedGObject], [attribute UTF8String], attrValue);
 }
 
-- (void)setAttributeUint64WithAttribute:(OFString*)attribute attrValue:(guint64)attrValue
+- (void)setAttributeUint64:(OFString*)attribute attrValue:(guint64)attrValue
 {
 	g_file_info_set_attribute_uint64([self castedGObject], [attribute UTF8String], attrValue);
 }
@@ -406,7 +406,7 @@
 	g_file_info_set_content_type([self castedGObject], [contentType UTF8String]);
 }
 
-- (void)setCreationDateTime:(GDateTime*)creationTime
+- (void)setCreationDateTimeWithCreationTime:(GDateTime*)creationTime
 {
 	g_file_info_set_creation_date_time([self castedGObject], creationTime);
 }
@@ -441,12 +441,12 @@
 	g_file_info_set_is_symlink([self castedGObject], isSymlink);
 }
 
-- (void)setModificationDateTime:(GDateTime*)mtime
+- (void)setModificationDateTimeWithMtime:(GDateTime*)mtime
 {
 	g_file_info_set_modification_date_time([self castedGObject], mtime);
 }
 
-- (void)setModificationTime:(GTimeVal*)mtime
+- (void)setModificationTimeWithMtime:(GTimeVal*)mtime
 {
 	g_file_info_set_modification_time([self castedGObject], mtime);
 }

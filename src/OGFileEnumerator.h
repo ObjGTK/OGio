@@ -69,7 +69,7 @@
  * @param cancellable optional #GCancellable object, %NULL to ignore.
  * @return #TRUE on success or #FALSE on error.
  */
-- (bool)close:(OGCancellable*)cancellable;
+- (bool)closeWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Asynchronously closes the file enumerator.
@@ -102,7 +102,7 @@
  * @param result a #GAsyncResult.
  * @return %TRUE if the close operation has finished successfully.
  */
-- (bool)closeFinish:(GAsyncResult*)result;
+- (bool)closeFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Return a new #GFile which refers to the file named by @info in the source
@@ -123,7 +123,7 @@
  *   or the async equivalents.
  * @return a #GFile for the #GFileInfo passed it.
  */
-- (GFile*)child:(OGFileInfo*)info;
+- (GFile*)childWithInfo:(OGFileInfo*)info;
 
 /**
  * Get the #GFile container which is being enumerated.
@@ -211,7 +211,7 @@
  *    or end of enumerator.  Free the returned object with
  *    g_object_unref() when no longer needed.
  */
-- (OGFileInfo*)nextFile:(OGCancellable*)cancellable;
+- (OGFileInfo*)nextFileWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Request information for a number of files from the enumerator asynchronously.
@@ -296,7 +296,7 @@
  *     g_list_free() and unref the infos with g_object_unref() when you're
  *     done with them.
  */
-- (GList*)nextFilesFinish:(GAsyncResult*)result;
+- (GList*)nextFilesFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Sets the file enumerator as having pending operations.

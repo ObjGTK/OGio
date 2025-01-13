@@ -33,7 +33,7 @@
 /**
  * Constructors
  */
-+ (instancetype)bufferedOutputStream:(OGOutputStream*)baseStream;
++ (instancetype)bufferedOutputStreamWithBaseStream:(OGOutputStream*)baseStream;
 + (instancetype)bufferedOutputStreamSizedWithBaseStream:(OGOutputStream*)baseStream size:(gsize)size;
 
 /**

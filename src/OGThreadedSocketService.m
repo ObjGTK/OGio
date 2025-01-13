@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)threadedSocketService:(int)maxThreads
++ (instancetype)threadedSocketServiceWithMaxThreads:(int)maxThreads
 {
 	GThreadedSocketService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_threaded_socket_service_new(maxThreads), GThreadedSocketService, GThreadedSocketService);
 

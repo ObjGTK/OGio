@@ -42,7 +42,7 @@
 	return returnValue;
 }
 
-- (void)setRateLimit:(gint)limitMsecs
+- (void)setRateLimitWithLimitMsecs:(gint)limitMsecs
 {
 	g_file_monitor_set_rate_limit([self castedGObject], limitMsecs);
 }

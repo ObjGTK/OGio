@@ -35,9 +35,9 @@
 /**
  * Constructors
  */
-+ (instancetype)themedIcon:(OFString*)iconname;
++ (instancetype)themedIconWithIconname:(OFString*)iconname;
 + (instancetype)themedIconFromNamesWithIconnames:(char**)iconnames len:(int)len;
-+ (instancetype)themedIconWithDefaultFallbacks:(OFString*)iconname;
++ (instancetype)themedIconWithDefaultFallbacksWithIconname:(OFString*)iconname;
 
 /**
  * Methods
@@ -53,7 +53,7 @@
  *
  * @param iconname name of icon to append to list of icons from within @icon.
  */
-- (void)appendName:(OFString*)iconname;
+- (void)appendNameWithIconname:(OFString*)iconname;
 
 /**
  * Gets the names of icons from within @icon.
@@ -70,6 +70,6 @@
  *
  * @param iconname name of icon to prepend to list of icons from within @icon.
  */
-- (void)prependName:(OFString*)iconname;
+- (void)prependNameWithIconname:(OFString*)iconname;
 
 @end

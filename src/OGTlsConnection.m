@@ -129,7 +129,7 @@
 	return returnValue;
 }
 
-- (bool)handshake:(OGCancellable*)cancellable
+- (bool)handshakeWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -145,7 +145,7 @@
 	g_tls_connection_handshake_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (bool)handshakeFinish:(GAsyncResult*)result
+- (bool)handshakeFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

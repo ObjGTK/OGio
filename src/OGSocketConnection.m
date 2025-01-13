@@ -55,7 +55,7 @@
 	g_socket_connection_connect_async([self castedGObject], [address castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (bool)connectFinish:(GAsyncResult*)result
+- (bool)connectFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

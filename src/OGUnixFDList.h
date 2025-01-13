@@ -67,7 +67,7 @@
  * @return the index of the appended fd in case of success, else -1
  *          (and @error is set)
  */
-- (gint)append:(gint)fd;
+- (gint)appendWithFd:(gint)fd;
 
 /**
  * Gets a file descriptor out of @list.
@@ -86,7 +86,7 @@
  * @param index the index into the list
  * @return the file descriptor, or -1 in case of error
  */
-- (gint)get:(gint)index;
+- (gint)getWithIndex:(gint)index;
 
 /**
  * Gets the length of @list (ie: the number of file descriptors
@@ -116,7 +116,7 @@
  * @return an array of file
  *     descriptors
  */
-- (const gint*)peekFds:(gint*)length;
+- (const gint*)peekFdsWithLength:(gint*)length;
 
 /**
  * Returns the array of file descriptors that is contained in this
@@ -143,6 +143,6 @@
  * @return an array of file
  *     descriptors
  */
-- (gint*)stealFds:(gint*)length;
+- (gint*)stealFdsWithLength:(gint*)length;
 
 @end

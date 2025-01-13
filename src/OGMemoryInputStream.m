@@ -58,7 +58,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)memoryInputStreamFromDataWithData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy
++ (instancetype)memoryInputStreamFromData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy
 {
 	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new_from_data(data, len, destroy), GMemoryInputStream, GMemoryInputStream);
 
@@ -88,7 +88,7 @@
 	g_memory_input_stream_add_bytes([self castedGObject], bytes);
 }
 
-- (void)addDataWithData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy
+- (void)addData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy
 {
 	g_memory_input_stream_add_data([self castedGObject], data, len, destroy);
 }

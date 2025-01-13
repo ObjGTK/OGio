@@ -65,7 +65,7 @@
  *
  * @param value the new #GVariant for the state
  */
-- (void)setState:(GVariant*)value;
+- (void)setStateWithValue:(GVariant*)value;
 
 /**
  * Sets the state hint for the action.

@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)bytesIcon:(GBytes*)bytes
++ (instancetype)bytesIconWithBytes:(GBytes*)bytes
 {
 	GBytesIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_bytes_icon_new(bytes), GBytesIcon, GBytesIcon);
 

@@ -31,7 +31,7 @@
  * Constructors
  */
 + (instancetype)menuItemWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction;
-+ (instancetype)menuItemFromModelWithModel:(OGMenuModel*)model itemIndex:(gint)itemIndex;
++ (instancetype)menuItemFromModel:(OGMenuModel*)model itemIndex:(gint)itemIndex;
 + (instancetype)menuItemSectionWithLabel:(OFString*)label section:(OGMenuModel*)section;
 + (instancetype)menuItemSubmenuWithLabel:(OFString*)label submenu:(OGMenuModel*)submenu;
 
@@ -60,7 +60,7 @@
  * @param link the link name to query
  * @return the link, or %NULL
  */
-- (OGMenuModel*)link:(OFString*)link;
+- (OGMenuModel*)linkWithLink:(OFString*)link;
 
 /**
  * Sets or unsets the "action" and "target" attributes of @menu_item.
@@ -103,7 +103,7 @@
  * @param action the name of the action for this item
  * @param targetValue a #GVariant to use as the action target
  */
-- (void)setActionAndTargetValueWithAction:(OFString*)action targetValue:(GVariant*)targetValue;
+- (void)setActionAndTargetValue:(OFString*)action targetValue:(GVariant*)targetValue;
 
 /**
  * Sets or unsets an attribute on @menu_item.
@@ -129,7 +129,7 @@
  * @param attribute the attribute to set
  * @param value a #GVariant to use as the value, or %NULL
  */
-- (void)setAttributeValueWithAttribute:(OFString*)attribute value:(GVariant*)value;
+- (void)setAttributeValue:(OFString*)attribute value:(GVariant*)value;
 
 /**
  * Sets the "action" and possibly the "target" attribute of @menu_item.
@@ -191,7 +191,7 @@
  * @param link type of link to establish or unset
  * @param model the #GMenuModel to link to (or %NULL to unset)
  */
-- (void)setLinkWithLink:(OFString*)link model:(OGMenuModel*)model;
+- (void)setLink:(OFString*)link model:(OGMenuModel*)model;
 
 /**
  * Sets or unsets the "section" link of @menu_item to @section.

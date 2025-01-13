@@ -109,7 +109,7 @@
 	return returnValue;
 }
 
-- (void)reply:(GMountOperationResult)result
+- (void)replyWithResult:(GMountOperationResult)result
 {
 	g_mount_operation_reply([self castedGObject], result);
 }

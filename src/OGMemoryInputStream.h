@@ -25,7 +25,7 @@
  */
 + (instancetype)memoryInputStream;
 + (instancetype)memoryInputStreamFromBytes:(GBytes*)bytes;
-+ (instancetype)memoryInputStreamFromDataWithData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy;
++ (instancetype)memoryInputStreamFromData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy;
 
 /**
  * Methods
@@ -47,6 +47,6 @@
  * @param len length of the data, may be -1 if @data is a nul-terminated string
  * @param destroy function that is called to free @data, or %NULL
  */
-- (void)addDataWithData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy;
+- (void)addData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy;
 
 @end

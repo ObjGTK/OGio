@@ -29,7 +29,7 @@
 	return returnValue;
 }
 
-+ (GSocketConnectable*)parseUriWithUri:(OFString*)uri defaultPort:(guint16)defaultPort
++ (GSocketConnectable*)parseUri:(OFString*)uri defaultPort:(guint16)defaultPort
 {
 	GError* err = NULL;
 
@@ -60,7 +60,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)networkAddressLoopback:(guint16)port
++ (instancetype)networkAddressLoopbackWithPort:(guint16)port
 {
 	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new_loopback(port), GNetworkAddress, GNetworkAddress);
 

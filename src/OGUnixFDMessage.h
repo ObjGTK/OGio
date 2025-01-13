@@ -90,6 +90,6 @@
  * @return an array of file
  *     descriptors
  */
-- (gint*)stealFds:(gint*)length;
+- (gint*)stealFdsWithLength:(gint*)length;
 
 @end

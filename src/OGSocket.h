@@ -128,7 +128,7 @@
  * @return a new #GSocket, or %NULL on error.
  *     Free the returned object with g_object_unref().
  */
-- (OGSocket*)accept:(OGCancellable*)cancellable;
+- (OGSocket*)acceptWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * When a socket is created it is attached to an address family, but it
@@ -227,7 +227,7 @@
  * @param condition a #GIOCondition mask to check
  * @return the @GIOCondition mask of the current state
  */
-- (GIOCondition)conditionCheck:(GIOCondition)condition;
+- (GIOCondition)conditionCheckWithCondition:(GIOCondition)condition;
 
 /**
  * Waits for up to @timeout_us microseconds for @condition to become true
@@ -561,7 +561,7 @@
  * @param iface Name of the interface to use, or %NULL
  * @return %TRUE on success, %FALSE on error.
  */
-- (bool)joinMulticastGroupWithGroup:(OGInetAddress*)group sourceSpecific:(bool)sourceSpecific iface:(OFString*)iface;
+- (bool)joinMulticastGroup:(OGInetAddress*)group sourceSpecific:(bool)sourceSpecific iface:(OFString*)iface;
 
 /**
  * Registers @socket to receive multicast messages sent to @group.
@@ -586,7 +586,7 @@
  * @param iface Name of the interface to use, or %NULL
  * @return %TRUE on success, %FALSE on error.
  */
-- (bool)joinMulticastGroupSsmWithGroup:(OGInetAddress*)group sourceSpecific:(OGInetAddress*)sourceSpecific iface:(OFString*)iface;
+- (bool)joinMulticastGroupSsm:(OGInetAddress*)group sourceSpecific:(OGInetAddress*)sourceSpecific iface:(OFString*)iface;
 
 /**
  * Removes @socket from the multicast group defined by @group, @iface,
@@ -604,7 +604,7 @@
  * @param iface Interface used
  * @return %TRUE on success, %FALSE on error.
  */
-- (bool)leaveMulticastGroupWithGroup:(OGInetAddress*)group sourceSpecific:(bool)sourceSpecific iface:(OFString*)iface;
+- (bool)leaveMulticastGroup:(OGInetAddress*)group sourceSpecific:(bool)sourceSpecific iface:(OFString*)iface;
 
 /**
  * Removes @socket from the multicast group defined by @group, @iface,
@@ -620,7 +620,7 @@
  * @param iface Name of the interface to use, or %NULL
  * @return %TRUE on success, %FALSE on error.
  */
-- (bool)leaveMulticastGroupSsmWithGroup:(OGInetAddress*)group sourceSpecific:(OGInetAddress*)sourceSpecific iface:(OFString*)iface;
+- (bool)leaveMulticastGroupSsm:(OGInetAddress*)group sourceSpecific:(OGInetAddress*)sourceSpecific iface:(OFString*)iface;
 
 /**
  * Marks the socket as a server socket, i.e. a socket that is used
@@ -874,7 +874,7 @@
  *     was larger than `UIO_MAXIOV` (1024), in which case the caller may re-try
  *     to receive the remaining messages.
  */
-- (gint)receiveMessagesWithMessages:(GInputMessage*)messages numMessages:(guint)numMessages flags:(gint)flags cancellable:(OGCancellable*)cancellable;
+- (gint)receiveMessages:(GInputMessage*)messages numMessages:(guint)numMessages flags:(gint)flags cancellable:(OGCancellable*)cancellable;
 
 /**
  * This behaves exactly the same as g_socket_receive(), except that
@@ -1045,7 +1045,7 @@
  *     non-blocking or if @num_messages was larger than UIO_MAXIOV (1024),
  *     in which case the caller may re-try to send the remaining messages.
  */
-- (gint)sendMessagesWithMessages:(GOutputMessage*)messages numMessages:(guint)numMessages flags:(gint)flags cancellable:(OGCancellable*)cancellable;
+- (gint)sendMessages:(GOutputMessage*)messages numMessages:(guint)numMessages flags:(gint)flags cancellable:(OGCancellable*)cancellable;
 
 /**
  * Tries to send @size bytes from @buffer to @address. If @address is

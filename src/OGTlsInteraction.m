@@ -27,7 +27,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTlsInteraction, GTlsInteraction);
 }
 
-- (GTlsInteractionResult)askPasswordWithPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable
+- (GTlsInteractionResult)askPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -38,12 +38,12 @@
 	return returnValue;
 }
 
-- (void)askPasswordAsyncWithPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
+- (void)askPasswordAsync:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_tls_interaction_ask_password_async([self castedGObject], [password castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (GTlsInteractionResult)askPasswordFinish:(GAsyncResult*)result
+- (GTlsInteractionResult)askPasswordFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -54,7 +54,7 @@
 	return returnValue;
 }
 
-- (GTlsInteractionResult)invokeAskPasswordWithPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable
+- (GTlsInteractionResult)invokeAskPassword:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -92,7 +92,7 @@
 	g_tls_interaction_request_certificate_async([self castedGObject], [connection castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
-- (GTlsInteractionResult)requestCertificateFinish:(GAsyncResult*)result
+- (GTlsInteractionResult)requestCertificateFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

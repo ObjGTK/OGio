@@ -23,7 +23,7 @@
 	g_test_dbus_unset();
 }
 
-+ (instancetype)testDBus:(GTestDBusFlags)flags
++ (instancetype)testDBusWithFlags:(GTestDBusFlags)flags
 {
 	GTestDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_test_dbus_new(flags), GTestDBus, GTestDBus);
 
@@ -48,7 +48,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTestDBus, GTestDBus);
 }
 
-- (void)addServiceDir:(OFString*)path
+- (void)addServiceDirWithPath:(OFString*)path
 {
 	g_test_dbus_add_service_dir([self castedGObject], [path UTF8String]);
 }

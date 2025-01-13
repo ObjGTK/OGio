@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)inetAddressAny:(GSocketFamily)family
++ (instancetype)inetAddressAnyWithFamily:(GSocketFamily)family
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_any(family), GInetAddress, GInetAddress);
 
@@ -38,7 +38,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)inetAddressFromBytesWithBytes:(const guint8*)bytes family:(GSocketFamily)family
++ (instancetype)inetAddressFromBytes:(const guint8*)bytes family:(GSocketFamily)family
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_bytes(bytes, family), GInetAddress, GInetAddress);
 
@@ -78,7 +78,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)inetAddressLoopback:(GSocketFamily)family
++ (instancetype)inetAddressLoopbackWithFamily:(GSocketFamily)family
 {
 	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_loopback(family), GInetAddress, GInetAddress);
 
@@ -103,7 +103,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GInetAddress, GInetAddress);
 }
 
-- (bool)equal:(OGInetAddress*)otherAddress
+- (bool)equalWithOtherAddress:(OGInetAddress*)otherAddress
 {
 	bool returnValue = (bool)g_inet_address_equal([self castedGObject], [otherAddress castedGObject]);
 

@@ -26,7 +26,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixConnection, GUnixConnection);
 }
 
-- (OGCredentials*)receiveCredentials:(OGCancellable*)cancellable
+- (OGCredentials*)receiveCredentialsWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -45,7 +45,7 @@
 	g_unix_connection_receive_credentials_async([self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (OGCredentials*)receiveCredentialsFinish:(GAsyncResult*)result
+- (OGCredentials*)receiveCredentialsFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -59,7 +59,7 @@
 	return returnValue;
 }
 
-- (gint)receiveFd:(OGCancellable*)cancellable
+- (gint)receiveFdWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -70,7 +70,7 @@
 	return returnValue;
 }
 
-- (bool)sendCredentials:(OGCancellable*)cancellable
+- (bool)sendCredentialsWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -86,7 +86,7 @@
 	g_unix_connection_send_credentials_async([self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (bool)sendCredentialsFinish:(GAsyncResult*)result
+- (bool)sendCredentialsFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -97,7 +97,7 @@
 	return returnValue;
 }
 
-- (bool)sendFdWithFd:(gint)fd cancellable:(OGCancellable*)cancellable
+- (bool)sendFd:(gint)fd cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 

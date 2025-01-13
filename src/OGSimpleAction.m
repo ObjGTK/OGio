@@ -68,7 +68,7 @@
 	g_simple_action_set_enabled([self castedGObject], enabled);
 }
 
-- (void)setState:(GVariant*)value
+- (void)setStateWithValue:(GVariant*)value
 {
 	g_simple_action_set_state([self castedGObject], value);
 }

@@ -21,7 +21,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)dataOutputStream:(OGOutputStream*)baseStream
++ (instancetype)dataOutputStreamWithBaseStream:(OGOutputStream*)baseStream
 {
 	GDataOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_data_output_stream_new([baseStream castedGObject]), GDataOutputStream, GDataOutputStream);
 
@@ -97,7 +97,7 @@
 	return returnValue;
 }
 
-- (bool)putStringWithStr:(OFString*)str cancellable:(OGCancellable*)cancellable
+- (bool)putString:(OFString*)str cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 

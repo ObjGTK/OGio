@@ -31,7 +31,7 @@
 	g_dbus_object_manager_client_new_for_bus(busType, flags, [name UTF8String], [objectPath UTF8String], getProxyTypeFunc, getProxyTypeUserData, getProxyTypeDestroyNotify, [cancellable castedGObject], callback, userData);
 }
 
-+ (instancetype)dBusObjectManagerClientFinish:(GAsyncResult*)res
++ (instancetype)dBusObjectManagerClientFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
@@ -55,7 +55,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)dBusObjectManagerClientForBusFinish:(GAsyncResult*)res
++ (instancetype)dBusObjectManagerClientForBusFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 

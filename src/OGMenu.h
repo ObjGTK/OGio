@@ -198,7 +198,7 @@
  *
  * @param position the position of the item to remove
  */
-- (void)remove:(gint)position;
+- (void)removeWithPosition:(gint)position;
 
 /**
  * Removes all items in the menu.

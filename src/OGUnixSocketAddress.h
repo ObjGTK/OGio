@@ -49,7 +49,7 @@
 /**
  * Constructors
  */
-+ (instancetype)unixSocketAddress:(OFString*)path;
++ (instancetype)unixSocketAddressWithPath:(OFString*)path;
 + (instancetype)unixSocketAddressAbstractWithPath:(OFString*)path pathLen:(gint)pathLen;
 + (instancetype)unixSocketAddressWithTypeWithPath:(OFString*)path pathLen:(gint)pathLen type:(GUnixSocketAddressType)type;
 

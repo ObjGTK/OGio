@@ -32,7 +32,7 @@
 /**
  * Constructors
  */
-+ (instancetype)emblem:(GIcon*)icon;
++ (instancetype)emblemWithIcon:(GIcon*)icon;
 + (instancetype)emblemWithOriginWithIcon:(GIcon*)icon origin:(GEmblemOrigin)origin;
 
 /**

@@ -114,7 +114,7 @@
 	return returnValue;
 }
 
-- (bool)addAddressWithAddress:(OGSocketAddress*)address type:(GSocketType)type protocol:(GSocketProtocol)protocol sourceObject:(OGObject*)sourceObject effectiveAddress:(GSocketAddress**)effectiveAddress
+- (bool)addAddress:(OGSocketAddress*)address type:(GSocketType)type protocol:(GSocketProtocol)protocol sourceObject:(OGObject*)sourceObject effectiveAddress:(GSocketAddress**)effectiveAddress
 {
 	GError* err = NULL;
 
@@ -125,7 +125,7 @@
 	return returnValue;
 }
 
-- (guint16)addAnyInetPort:(OGObject*)sourceObject
+- (guint16)addAnyInetPortWithSourceObject:(OGObject*)sourceObject
 {
 	GError* err = NULL;
 
@@ -136,7 +136,7 @@
 	return returnValue;
 }
 
-- (bool)addInetPortWithPort:(guint16)port sourceObject:(OGObject*)sourceObject
+- (bool)addInetPort:(guint16)port sourceObject:(OGObject*)sourceObject
 {
 	GError* err = NULL;
 
@@ -147,7 +147,7 @@
 	return returnValue;
 }
 
-- (bool)addSocketWithSocket:(OGSocket*)socket sourceObject:(OGObject*)sourceObject
+- (bool)addSocket:(OGSocket*)socket sourceObject:(OGObject*)sourceObject
 {
 	GError* err = NULL;
 
@@ -163,7 +163,7 @@
 	g_socket_listener_close([self castedGObject]);
 }
 
-- (void)setBacklog:(int)listenBacklog
+- (void)setBacklogWithListenBacklog:(int)listenBacklog
 {
 	g_socket_listener_set_backlog([self castedGObject], listenBacklog);
 }

@@ -57,7 +57,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTask, GTask);
 }
 
-- (void)attachSourceWithSource:(GSource*)source callback:(GSourceFunc)callback
+- (void)attachSource:(GSource*)source callback:(GSourceFunc)callback
 {
 	g_task_attach_source([self castedGObject], source, callback);
 }
@@ -185,7 +185,7 @@
 	return returnValue;
 }
 
-- (void)returnBoolean:(bool)result
+- (void)returnBooleanWithResult:(bool)result
 {
 	g_task_return_boolean([self castedGObject], result);
 }
@@ -202,7 +202,7 @@
 	return returnValue;
 }
 
-- (void)returnInt:(gssize)result
+- (void)returnIntWithResult:(gssize)result
 {
 	g_task_return_int([self castedGObject], result);
 }
@@ -217,17 +217,17 @@
 	g_task_return_pointer([self castedGObject], result, resultDestroy);
 }
 
-- (void)returnValue:(GValue*)result
+- (void)returnValueWithResult:(GValue*)result
 {
 	g_task_return_value([self castedGObject], result);
 }
 
-- (void)runInThread:(GTaskThreadFunc)taskFunc
+- (void)runInThreadWithTaskFunc:(GTaskThreadFunc)taskFunc
 {
 	g_task_run_in_thread([self castedGObject], taskFunc);
 }
 
-- (void)runInThreadSync:(GTaskThreadFunc)taskFunc
+- (void)runInThreadSyncWithTaskFunc:(GTaskThreadFunc)taskFunc
 {
 	g_task_run_in_thread_sync([self castedGObject], taskFunc);
 }
@@ -264,7 +264,7 @@
 	g_task_set_static_name([self castedGObject], [name UTF8String]);
 }
 
-- (void)setTaskDataWithTaskData:(gpointer)taskData taskDataDestroy:(GDestroyNotify)taskDataDestroy
+- (void)setTaskData:(gpointer)taskData taskDataDestroy:(GDestroyNotify)taskDataDestroy
 {
 	g_task_set_task_data([self castedGObject], taskData, taskDataDestroy);
 }

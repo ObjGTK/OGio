@@ -21,7 +21,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)dataInputStream:(OGInputStream*)baseStream
++ (instancetype)dataInputStreamWithBaseStream:(OGInputStream*)baseStream
 {
 	GDataInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_data_input_stream_new([baseStream castedGObject]), GDataInputStream, GDataInputStream);
 
@@ -60,7 +60,7 @@
 	return returnValue;
 }
 
-- (guchar)readByte:(OGCancellable*)cancellable
+- (guchar)readByteWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -71,7 +71,7 @@
 	return returnValue;
 }
 
-- (gint16)readInt16:(OGCancellable*)cancellable
+- (gint16)readInt16WithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -82,7 +82,7 @@
 	return returnValue;
 }
 
-- (gint32)readInt32:(OGCancellable*)cancellable
+- (gint32)readInt32WithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -93,7 +93,7 @@
 	return returnValue;
 }
 
-- (gint64)readInt64:(OGCancellable*)cancellable
+- (gint64)readInt64WithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -157,7 +157,7 @@
 	return returnValue;
 }
 
-- (guint16)readUint16:(OGCancellable*)cancellable
+- (guint16)readUint16WithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -168,7 +168,7 @@
 	return returnValue;
 }
 
-- (guint32)readUint32:(OGCancellable*)cancellable
+- (guint32)readUint32WithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -179,7 +179,7 @@
 	return returnValue;
 }
 
-- (guint64)readUint64:(OGCancellable*)cancellable
+- (guint64)readUint64WithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 

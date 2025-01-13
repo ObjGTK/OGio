@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)themedIcon:(OFString*)iconname
++ (instancetype)themedIconWithIconname:(OFString*)iconname
 {
 	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new([iconname UTF8String]), GThemedIcon, GThemedIcon);
 
@@ -58,7 +58,7 @@
 	return [wrapperObject autorelease];
 }
 
-+ (instancetype)themedIconWithDefaultFallbacks:(OFString*)iconname
++ (instancetype)themedIconWithDefaultFallbacksWithIconname:(OFString*)iconname
 {
 	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_with_default_fallbacks([iconname UTF8String]), GThemedIcon, GThemedIcon);
 
@@ -83,7 +83,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GThemedIcon, GThemedIcon);
 }
 
-- (void)appendName:(OFString*)iconname
+- (void)appendNameWithIconname:(OFString*)iconname
 {
 	g_themed_icon_append_name([self castedGObject], [iconname UTF8String]);
 }
@@ -95,7 +95,7 @@
 	return returnValue;
 }
 
-- (void)prependName:(OFString*)iconname
+- (void)prependNameWithIconname:(OFString*)iconname
 {
 	g_themed_icon_prepend_name([self castedGObject], [iconname UTF8String]);
 }

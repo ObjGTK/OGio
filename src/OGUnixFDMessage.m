@@ -84,7 +84,7 @@
 	return returnValue;
 }
 
-- (gint*)stealFds:(gint*)length
+- (gint*)stealFdsWithLength:(gint*)length
 {
 	gint* returnValue = (gint*)g_unix_fd_message_steal_fds([self castedGObject], length);
 

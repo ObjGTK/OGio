@@ -119,7 +119,7 @@
  *
  * @param handlerId Handler id of the handler to be disconnected, or `0`.
  */
-- (void)disconnect:(gulong)handlerId;
+- (void)disconnectWithHandlerId:(gulong)handlerId;
 
 /**
  * Gets the file descriptor for a cancellable job. This can be used to

@@ -210,7 +210,7 @@
  * @param cancellable a #GCancellable, or %NULL
  * @return success or failure
  */
-- (bool)handshake:(OGCancellable*)cancellable;
+- (bool)handshakeWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Asynchronously performs a TLS handshake on @conn. See
@@ -231,7 +231,7 @@
  * @return %TRUE on success, %FALSE on failure, in which
  * case @error will be set.
  */
-- (bool)handshakeFinish:(GAsyncResult*)result;
+- (bool)handshakeFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Sets the list of application-layer protocols to advertise that the

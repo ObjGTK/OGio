@@ -25,7 +25,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GPermission, GPermission);
 }
 
-- (bool)acquire:(OGCancellable*)cancellable
+- (bool)acquireWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -41,7 +41,7 @@
 	g_permission_acquire_async([self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (bool)acquireFinish:(GAsyncResult*)result
+- (bool)acquireFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -78,7 +78,7 @@
 	g_permission_impl_update([self castedGObject], allowed, canAcquire, canRelease);
 }
 
-- (bool)decreaseCount:(OGCancellable*)cancellable
+- (bool)decreaseCountWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -94,7 +94,7 @@
 	g_permission_release_async([self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (bool)releaseFinish:(GAsyncResult*)result
+- (bool)releaseFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

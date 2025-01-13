@@ -86,7 +86,7 @@
  * @param result a #GAsyncResult.
  * @return %TRUE on success, %FALSE otherwise.
  */
-+ (bool)spliceFinish:(GAsyncResult*)result;
++ (bool)spliceFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Methods
@@ -138,7 +138,7 @@
  * @param cancellable optional #GCancellable object, %NULL to ignore
  * @return %TRUE on success, %FALSE on failure
  */
-- (bool)close:(OGCancellable*)cancellable;
+- (bool)closeWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Requests an asynchronous close of the stream, releasing resources
@@ -166,7 +166,7 @@
  * @param result a #GAsyncResult
  * @return %TRUE if stream was successfully closed, %FALSE otherwise.
  */
-- (bool)closeFinish:(GAsyncResult*)result;
+- (bool)closeFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Gets the input stream for this object. This is used

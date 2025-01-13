@@ -47,7 +47,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocketClient, GSocketClient);
 }
 
-- (void)addApplicationProxy:(OFString*)protocol
+- (void)addApplicationProxyWithProtocol:(OFString*)protocol
 {
 	g_socket_client_add_application_proxy([self castedGObject], [protocol UTF8String]);
 }
@@ -71,7 +71,7 @@
 	g_socket_client_connect_async([self castedGObject], connectable, [cancellable castedGObject], callback, userData);
 }
 
-- (OGSocketConnection*)connectFinish:(GAsyncResult*)result
+- (OGSocketConnection*)connectFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -104,7 +104,7 @@
 	g_socket_client_connect_to_host_async([self castedGObject], [hostAndPort UTF8String], defaultPort, [cancellable castedGObject], callback, userData);
 }
 
-- (OGSocketConnection*)connectToHostFinish:(GAsyncResult*)result
+- (OGSocketConnection*)connectToHostFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -137,7 +137,7 @@
 	g_socket_client_connect_to_service_async([self castedGObject], [domain UTF8String], [service UTF8String], [cancellable castedGObject], callback, userData);
 }
 
-- (OGSocketConnection*)connectToServiceFinish:(GAsyncResult*)result
+- (OGSocketConnection*)connectToServiceFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -151,7 +151,7 @@
 	return returnValue;
 }
 
-- (OGSocketConnection*)connectToUriWithUri:(OFString*)uri defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable
+- (OGSocketConnection*)connectToUri:(OFString*)uri defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -165,12 +165,12 @@
 	return returnValue;
 }
 
-- (void)connectToUriAsyncWithUri:(OFString*)uri defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
+- (void)connectToUriAsync:(OFString*)uri defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_socket_client_connect_to_uri_async([self castedGObject], [uri UTF8String], defaultPort, [cancellable castedGObject], callback, userData);
 }
 
-- (OGSocketConnection*)connectToUriFinish:(GAsyncResult*)result
+- (OGSocketConnection*)connectToUriFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

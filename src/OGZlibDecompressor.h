@@ -30,7 +30,7 @@
 /**
  * Constructors
  */
-+ (instancetype)zlibDecompressor:(GZlibCompressorFormat)format;
++ (instancetype)zlibDecompressorWithFormat:(GZlibCompressorFormat)format;
 
 /**
  * Methods

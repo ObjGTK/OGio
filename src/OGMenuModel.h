@@ -230,7 +230,7 @@
  * @param itemIndex the index of the item
  * @return a new #GMenuAttributeIter
  */
-- (OGMenuAttributeIter*)iterateItemAttributes:(gint)itemIndex;
+- (OGMenuAttributeIter*)iterateItemAttributesWithItemIndex:(gint)itemIndex;
 
 /**
  * Creates a #GMenuLinkIter to iterate over the links of the item at
@@ -241,6 +241,6 @@
  * @param itemIndex the index of the item
  * @return a new #GMenuLinkIter
  */
-- (OGMenuLinkIter*)iterateItemLinks:(gint)itemIndex;
+- (OGMenuLinkIter*)iterateItemLinksWithItemIndex:(gint)itemIndex;
 
 @end

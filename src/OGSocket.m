@@ -78,7 +78,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocket, GSocket);
 }
 
-- (OGSocket*)accept:(OGCancellable*)cancellable
+- (OGSocket*)acceptWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -125,7 +125,7 @@
 	return returnValue;
 }
 
-- (GIOCondition)conditionCheck:(GIOCondition)condition
+- (GIOCondition)conditionCheckWithCondition:(GIOCondition)condition
 {
 	GIOCondition returnValue = (GIOCondition)g_socket_condition_check([self castedGObject], condition);
 
@@ -340,7 +340,7 @@
 	return returnValue;
 }
 
-- (bool)joinMulticastGroupWithGroup:(OGInetAddress*)group sourceSpecific:(bool)sourceSpecific iface:(OFString*)iface
+- (bool)joinMulticastGroup:(OGInetAddress*)group sourceSpecific:(bool)sourceSpecific iface:(OFString*)iface
 {
 	GError* err = NULL;
 
@@ -351,7 +351,7 @@
 	return returnValue;
 }
 
-- (bool)joinMulticastGroupSsmWithGroup:(OGInetAddress*)group sourceSpecific:(OGInetAddress*)sourceSpecific iface:(OFString*)iface
+- (bool)joinMulticastGroupSsm:(OGInetAddress*)group sourceSpecific:(OGInetAddress*)sourceSpecific iface:(OFString*)iface
 {
 	GError* err = NULL;
 
@@ -362,7 +362,7 @@
 	return returnValue;
 }
 
-- (bool)leaveMulticastGroupWithGroup:(OGInetAddress*)group sourceSpecific:(bool)sourceSpecific iface:(OFString*)iface
+- (bool)leaveMulticastGroup:(OGInetAddress*)group sourceSpecific:(bool)sourceSpecific iface:(OFString*)iface
 {
 	GError* err = NULL;
 
@@ -373,7 +373,7 @@
 	return returnValue;
 }
 
-- (bool)leaveMulticastGroupSsmWithGroup:(OGInetAddress*)group sourceSpecific:(OGInetAddress*)sourceSpecific iface:(OFString*)iface
+- (bool)leaveMulticastGroupSsm:(OGInetAddress*)group sourceSpecific:(OGInetAddress*)sourceSpecific iface:(OFString*)iface
 {
 	GError* err = NULL;
 
@@ -450,7 +450,7 @@
 	return returnValue;
 }
 
-- (gint)receiveMessagesWithMessages:(GInputMessage*)messages numMessages:(guint)numMessages flags:(gint)flags cancellable:(OGCancellable*)cancellable
+- (gint)receiveMessages:(GInputMessage*)messages numMessages:(guint)numMessages flags:(gint)flags cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -505,7 +505,7 @@
 	return returnValue;
 }
 
-- (gint)sendMessagesWithMessages:(GOutputMessage*)messages numMessages:(guint)numMessages flags:(gint)flags cancellable:(OGCancellable*)cancellable
+- (gint)sendMessages:(GOutputMessage*)messages numMessages:(guint)numMessages flags:(gint)flags cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 

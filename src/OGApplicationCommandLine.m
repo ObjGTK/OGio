@@ -37,7 +37,7 @@
 	g_application_command_line_done([self castedGObject]);
 }
 
-- (gchar**)arguments:(int*)argc
+- (gchar**)argumentsWithArgc:(int*)argc
 {
 	gchar** returnValue = (gchar**)g_application_command_line_get_arguments([self castedGObject], argc);
 
@@ -97,7 +97,7 @@
 	return returnValue;
 }
 
-- (OFString*)env:(OFString*)name
+- (OFString*)envWithName:(OFString*)name
 {
 	const gchar* gobjectValue = g_application_command_line_getenv([self castedGObject], [name UTF8String]);
 
@@ -105,12 +105,12 @@
 	return returnValue;
 }
 
-- (void)printLiteral:(OFString*)message
+- (void)printLiteralWithMessage:(OFString*)message
 {
 	g_application_command_line_print_literal([self castedGObject], [message UTF8String]);
 }
 
-- (void)printerrLiteral:(OFString*)message
+- (void)printerrLiteralWithMessage:(OFString*)message
 {
 	g_application_command_line_printerr_literal([self castedGObject], [message UTF8String]);
 }

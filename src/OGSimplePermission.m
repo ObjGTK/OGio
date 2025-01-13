@@ -18,7 +18,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)simplePermission:(bool)allowed
++ (instancetype)simplePermissionWithAllowed:(bool)allowed
 {
 	GSimplePermission* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_permission_new(allowed), GSimplePermission, GSimplePermission);
 

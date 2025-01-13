@@ -83,7 +83,7 @@
  *     isn't supported by the OS. Do not free the returned data, it is owned
  *     by @credentials.
  */
-- (gpointer)native:(GCredentialsType)nativeType;
+- (gpointer)nativeWithNativeType:(GCredentialsType)nativeType;
 
 /**
  * Tries to get the UNIX process identifier from @credentials. This
@@ -119,7 +119,7 @@
  * @return %TRUE if @credentials and @other_credentials has the same
  * user, %FALSE otherwise or if @error is set.
  */
-- (bool)isSameUser:(OGCredentials*)otherCredentials;
+- (bool)isSameUserWithOtherCredentials:(OGCredentials*)otherCredentials;
 
 /**
  * Copies the native credentials of type @native_type from @native
@@ -146,7 +146,7 @@
  * @param uid The UNIX user identifier to set.
  * @return %TRUE if @uid was set, %FALSE if error is set.
  */
-- (bool)setUnixUser:(uid_t)uid;
+- (bool)setUnixUserWithUid:(uid_t)uid;
 
 /**
  * Creates a human-readable textual representation of @credentials

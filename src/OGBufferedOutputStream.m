@@ -20,7 +20,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)bufferedOutputStream:(OGOutputStream*)baseStream
++ (instancetype)bufferedOutputStreamWithBaseStream:(OGOutputStream*)baseStream
 {
 	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new([baseStream castedGObject]), GBufferedOutputStream, GBufferedOutputStream);
 

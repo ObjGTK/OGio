@@ -33,7 +33,7 @@
 /**
  * Constructors
  */
-+ (instancetype)dBusObjectSkeleton:(OFString*)objectPath;
++ (instancetype)dBusObjectSkeletonWithObjectPath:(OFString*)objectPath;
 
 /**
  * Methods
@@ -77,7 +77,7 @@
  *
  * @param interfaceName A D-Bus interface name.
  */
-- (void)removeInterfaceByName:(OFString*)interfaceName;
+- (void)removeInterfaceByNameWithInterfaceName:(OFString*)interfaceName;
 
 /**
  * Sets the object path for @object.

@@ -82,7 +82,7 @@
  *
  * @param destInfo destination to copy attributes to.
  */
-- (void)copyInto:(OGFileInfo*)destInfo;
+- (void)copyIntoWithDestInfo:(OGFileInfo*)destInfo;
 
 /**
  * Duplicates a file info structure.
@@ -117,7 +117,7 @@
  *    %NULL if the attribute wasn’t set.
  *    When you're done with the string it must be freed with g_free().
  */
-- (char*)attributeAsString:(OFString*)attribute;
+- (char*)attributeAsStringWithAttribute:(OFString*)attribute;
 
 /**
  * Gets the value of a boolean attribute. If the attribute does not
@@ -126,7 +126,7 @@
  * @param attribute a file attribute key.
  * @return the boolean value contained within the attribute.
  */
-- (bool)attributeBoolean:(OFString*)attribute;
+- (bool)attributeBooleanWithAttribute:(OFString*)attribute;
 
 /**
  * Gets the value of a byte string attribute. If the attribute does
@@ -136,7 +136,7 @@
  * @return the contents of the @attribute value as a byte string, or
  * %NULL otherwise.
  */
-- (OFString*)attributeByteString:(OFString*)attribute;
+- (OFString*)attributeByteStringWithAttribute:(OFString*)attribute;
 
 /**
  * Gets the attribute type, value and status for an attribute key.
@@ -163,7 +163,7 @@
  * @return the contents of the @attribute value as
  * a file path, or %NULL otherwise.
  */
-- (OFString*)attributeFilePath:(OFString*)attribute;
+- (OFString*)attributeFilePathWithAttribute:(OFString*)attribute;
 
 /**
  * Gets a signed 32-bit integer contained within the attribute. If the
@@ -173,7 +173,7 @@
  * @param attribute a file attribute key.
  * @return a signed 32-bit integer from the attribute.
  */
-- (gint32)attributeInt32:(OFString*)attribute;
+- (gint32)attributeInt32WithAttribute:(OFString*)attribute;
 
 /**
  * Gets a signed 64-bit integer contained within the attribute. If the
@@ -183,7 +183,7 @@
  * @param attribute a file attribute key.
  * @return a signed 64-bit integer from the attribute.
  */
-- (gint64)attributeInt64:(OFString*)attribute;
+- (gint64)attributeInt64WithAttribute:(OFString*)attribute;
 
 /**
  * Gets the value of a #GObject attribute. If the attribute does
@@ -193,7 +193,7 @@
  * @return a #GObject associated with the given @attribute,
  * or %NULL otherwise.
  */
-- (OGObject*)attributeObject:(OFString*)attribute;
+- (OGObject*)attributeObjectWithAttribute:(OFString*)attribute;
 
 /**
  * Gets the attribute status for an attribute key.
@@ -202,7 +202,7 @@
  * @return a #GFileAttributeStatus for the given @attribute, or
  *    %G_FILE_ATTRIBUTE_STATUS_UNSET if the key is invalid.
  */
-- (GFileAttributeStatus)attributeStatus:(OFString*)attribute;
+- (GFileAttributeStatus)attributeStatusWithAttribute:(OFString*)attribute;
 
 /**
  * Gets the value of a string attribute. If the attribute does
@@ -212,7 +212,7 @@
  * @return the contents of the @attribute value as a UTF-8 string,
  * or %NULL otherwise.
  */
-- (OFString*)attributeString:(OFString*)attribute;
+- (OFString*)attributeStringWithAttribute:(OFString*)attribute;
 
 /**
  * Gets the value of a stringv attribute. If the attribute does
@@ -222,7 +222,7 @@
  * @return the contents of the @attribute value as a stringv,
  * or %NULL otherwise. Do not free. These returned strings are UTF-8.
  */
-- (char**)attributeStringv:(OFString*)attribute;
+- (char**)attributeStringvWithAttribute:(OFString*)attribute;
 
 /**
  * Gets the attribute type for an attribute key.
@@ -231,7 +231,7 @@
  * @return a #GFileAttributeType for the given @attribute, or
  * %G_FILE_ATTRIBUTE_TYPE_INVALID if the key is not set.
  */
-- (GFileAttributeType)attributeType:(OFString*)attribute;
+- (GFileAttributeType)attributeTypeWithAttribute:(OFString*)attribute;
 
 /**
  * Gets an unsigned 32-bit integer contained within the attribute. If the
@@ -241,7 +241,7 @@
  * @param attribute a file attribute key.
  * @return an unsigned 32-bit integer from the attribute.
  */
-- (guint32)attributeUint32:(OFString*)attribute;
+- (guint32)attributeUint32WithAttribute:(OFString*)attribute;
 
 /**
  * Gets a unsigned 64-bit integer contained within the attribute. If the
@@ -251,7 +251,7 @@
  * @param attribute a file attribute key.
  * @return a unsigned 64-bit integer from the attribute.
  */
-- (guint64)attributeUint64:(OFString*)attribute;
+- (guint64)attributeUint64WithAttribute:(OFString*)attribute;
 
 /**
  * Gets the file's content type.
@@ -397,7 +397,7 @@
  *
  * @param result a #GTimeVal.
  */
-- (void)modificationTime:(GTimeVal*)result;
+- (void)modificationTimeWithResult:(GTimeVal*)result;
 
 /**
  * Gets the name for a file. This is guaranteed to always be set.
@@ -480,7 +480,7 @@
  * null-terminated array of strings of all of the possible attribute
  * types for the given @name_space, or %NULL on error.
  */
-- (char**)listAttributes:(OFString*)nameSpace;
+- (char**)listAttributesWithNameSpace:(OFString*)nameSpace;
 
 /**
  * Removes all cases of @attribute from @info if it exists.
@@ -498,7 +498,7 @@
  *
  * @param atime a #GDateTime.
  */
-- (void)setAccessDateTime:(GDateTime*)atime;
+- (void)setAccessDateTimeWithAtime:(GDateTime*)atime;
 
 /**
  * Sets the @attribute to contain the given value, if possible. To unset the
@@ -508,7 +508,7 @@
  * @param type a #GFileAttributeType
  * @param valueP pointer to the value
  */
-- (void)setAttributeWithAttribute:(OFString*)attribute type:(GFileAttributeType)type valueP:(gpointer)valueP;
+- (void)setAttribute:(OFString*)attribute type:(GFileAttributeType)type valueP:(gpointer)valueP;
 
 /**
  * Sets the @attribute to contain the given @attr_value,
@@ -517,7 +517,7 @@
  * @param attribute a file attribute key.
  * @param attrValue a boolean value.
  */
-- (void)setAttributeBooleanWithAttribute:(OFString*)attribute attrValue:(bool)attrValue;
+- (void)setAttributeBoolean:(OFString*)attribute attrValue:(bool)attrValue;
 
 /**
  * Sets the @attribute to contain the given @attr_value,
@@ -526,7 +526,7 @@
  * @param attribute a file attribute key.
  * @param attrValue a byte string.
  */
-- (void)setAttributeByteStringWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue;
+- (void)setAttributeByteString:(OFString*)attribute attrValue:(OFString*)attrValue;
 
 /**
  * Sets the @attribute to contain the given @attr_value,
@@ -538,7 +538,7 @@
  * @param attribute a file attribute key.
  * @param attrValue a file path.
  */
-- (void)setAttributeFilePathWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue;
+- (void)setAttributeFilePath:(OFString*)attribute attrValue:(OFString*)attrValue;
 
 /**
  * Sets the @attribute to contain the given @attr_value,
@@ -547,7 +547,7 @@
  * @param attribute a file attribute key.
  * @param attrValue a signed 32-bit integer
  */
-- (void)setAttributeInt32WithAttribute:(OFString*)attribute attrValue:(gint32)attrValue;
+- (void)setAttributeInt32:(OFString*)attribute attrValue:(gint32)attrValue;
 
 /**
  * Sets the @attribute to contain the given @attr_value,
@@ -556,7 +556,7 @@
  * @param attribute attribute name to set.
  * @param attrValue int64 value to set attribute to.
  */
-- (void)setAttributeInt64WithAttribute:(OFString*)attribute attrValue:(gint64)attrValue;
+- (void)setAttributeInt64:(OFString*)attribute attrValue:(gint64)attrValue;
 
 /**
  * Sets @mask on @info to match specific attribute types.
@@ -572,7 +572,7 @@
  * @param attribute a file attribute key.
  * @param attrValue a #GObject.
  */
-- (void)setAttributeObjectWithAttribute:(OFString*)attribute attrValue:(OGObject*)attrValue;
+- (void)setAttributeObject:(OFString*)attribute attrValue:(OGObject*)attrValue;
 
 /**
  * Sets the attribute status for an attribute key. This is only
@@ -586,7 +586,7 @@
  * @param status a #GFileAttributeStatus
  * @return %TRUE if the status was changed, %FALSE if the key was not set.
  */
-- (bool)setAttributeStatusWithAttribute:(OFString*)attribute status:(GFileAttributeStatus)status;
+- (bool)setAttributeStatus:(OFString*)attribute status:(GFileAttributeStatus)status;
 
 /**
  * Sets the @attribute to contain the given @attr_value,
@@ -595,7 +595,7 @@
  * @param attribute a file attribute key.
  * @param attrValue a UTF-8 string.
  */
-- (void)setAttributeStringWithAttribute:(OFString*)attribute attrValue:(OFString*)attrValue;
+- (void)setAttributeString:(OFString*)attribute attrValue:(OFString*)attrValue;
 
 /**
  * Sets the @attribute to contain the given @attr_value,
@@ -607,7 +607,7 @@
  * @param attrValue a %NULL
  *   terminated array of UTF-8 strings.
  */
-- (void)setAttributeStringvWithAttribute:(OFString*)attribute attrValue:(char**)attrValue;
+- (void)setAttributeStringv:(OFString*)attribute attrValue:(char**)attrValue;
 
 /**
  * Sets the @attribute to contain the given @attr_value,
@@ -616,7 +616,7 @@
  * @param attribute a file attribute key.
  * @param attrValue an unsigned 32-bit integer.
  */
-- (void)setAttributeUint32WithAttribute:(OFString*)attribute attrValue:(guint32)attrValue;
+- (void)setAttributeUint32:(OFString*)attribute attrValue:(guint32)attrValue;
 
 /**
  * Sets the @attribute to contain the given @attr_value,
@@ -625,7 +625,7 @@
  * @param attribute a file attribute key.
  * @param attrValue an unsigned 64-bit integer.
  */
-- (void)setAttributeUint64WithAttribute:(OFString*)attribute attrValue:(guint64)attrValue;
+- (void)setAttributeUint64:(OFString*)attribute attrValue:(guint64)attrValue;
 
 /**
  * Sets the content type attribute for a given #GFileInfo.
@@ -644,7 +644,7 @@
  *
  * @param creationTime a #GDateTime.
  */
-- (void)setCreationDateTime:(GDateTime*)creationTime;
+- (void)setCreationDateTimeWithCreationTime:(GDateTime*)creationTime;
 
 /**
  * Sets the display name for the current #GFileInfo.
@@ -703,7 +703,7 @@
  *
  * @param mtime a #GDateTime.
  */
-- (void)setModificationDateTime:(GDateTime*)mtime;
+- (void)setModificationDateTimeWithMtime:(GDateTime*)mtime;
 
 /**
  * Sets the %G_FILE_ATTRIBUTE_TIME_MODIFIED and
@@ -714,7 +714,7 @@
  *
  * @param mtime a #GTimeVal.
  */
-- (void)setModificationTime:(GTimeVal*)mtime;
+- (void)setModificationTimeWithMtime:(GTimeVal*)mtime;
 
 /**
  * Sets the name attribute for the current #GFileInfo.

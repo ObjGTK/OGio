@@ -35,7 +35,7 @@
 	return returnValue;
 }
 
-- (OGTlsCertificate*)lookupCertificateForHandleWithHandle:(OFString*)handle interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable
+- (OGTlsCertificate*)lookupCertificateForHandle:(OFString*)handle interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -49,12 +49,12 @@
 	return returnValue;
 }
 
-- (void)lookupCertificateForHandleAsyncWithHandle:(OFString*)handle interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
+- (void)lookupCertificateForHandleAsync:(OFString*)handle interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_tls_database_lookup_certificate_for_handle_async([self castedGObject], [handle UTF8String], [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
-- (OGTlsCertificate*)lookupCertificateForHandleFinish:(GAsyncResult*)result
+- (OGTlsCertificate*)lookupCertificateForHandleFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -68,7 +68,7 @@
 	return returnValue;
 }
 
-- (OGTlsCertificate*)lookupCertificateIssuerWithCertificate:(OGTlsCertificate*)certificate interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable
+- (OGTlsCertificate*)lookupCertificateIssuer:(OGTlsCertificate*)certificate interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -82,12 +82,12 @@
 	return returnValue;
 }
 
-- (void)lookupCertificateIssuerAsyncWithCertificate:(OGTlsCertificate*)certificate interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
+- (void)lookupCertificateIssuerAsync:(OGTlsCertificate*)certificate interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_tls_database_lookup_certificate_issuer_async([self castedGObject], [certificate castedGObject], [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
-- (OGTlsCertificate*)lookupCertificateIssuerFinish:(GAsyncResult*)result
+- (OGTlsCertificate*)lookupCertificateIssuerFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -117,7 +117,7 @@
 	g_tls_database_lookup_certificates_issued_by_async([self castedGObject], issuerRawDn, [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
-- (GList*)lookupCertificatesIssuedByFinish:(GAsyncResult*)result
+- (GList*)lookupCertificatesIssuedByFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -128,7 +128,7 @@
 	return returnValue;
 }
 
-- (GTlsCertificateFlags)verifyChainWithChain:(OGTlsCertificate*)chain purpose:(OFString*)purpose identity:(GSocketConnectable*)identity interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseVerifyFlags)flags cancellable:(OGCancellable*)cancellable
+- (GTlsCertificateFlags)verifyChain:(OGTlsCertificate*)chain purpose:(OFString*)purpose identity:(GSocketConnectable*)identity interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseVerifyFlags)flags cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -139,12 +139,12 @@
 	return returnValue;
 }
 
-- (void)verifyChainAsyncWithChain:(OGTlsCertificate*)chain purpose:(OFString*)purpose identity:(GSocketConnectable*)identity interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseVerifyFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
+- (void)verifyChainAsync:(OGTlsCertificate*)chain purpose:(OFString*)purpose identity:(GSocketConnectable*)identity interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseVerifyFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
 	g_tls_database_verify_chain_async([self castedGObject], [chain castedGObject], [purpose UTF8String], identity, [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
-- (GTlsCertificateFlags)verifyChainFinish:(GAsyncResult*)result
+- (GTlsCertificateFlags)verifyChainFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

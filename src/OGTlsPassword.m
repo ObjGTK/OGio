@@ -58,7 +58,7 @@
 	return returnValue;
 }
 
-- (const guchar*)value:(gsize*)length
+- (const guchar*)valueWithLength:(gsize*)length
 {
 	const guchar* returnValue = (const guchar*)g_tls_password_get_value([self castedGObject], length);
 
@@ -83,12 +83,12 @@
 	g_tls_password_set_flags([self castedGObject], flags);
 }
 
-- (void)setValueWithValue:(const guchar*)value length:(gssize)length
+- (void)setValue:(const guchar*)value length:(gssize)length
 {
 	g_tls_password_set_value([self castedGObject], value, length);
 }
 
-- (void)setValueFullWithValue:(guchar*)value length:(gssize)length destroy:(GDestroyNotify)destroy
+- (void)setValueFull:(guchar*)value length:(gssize)length destroy:(GDestroyNotify)destroy
 {
 	g_tls_password_set_value_full([self castedGObject], value, length, destroy);
 }

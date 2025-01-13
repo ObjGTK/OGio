@@ -46,7 +46,7 @@
  * @return a list of #GDesktopAppInfo
  * objects.
  */
-+ (GList*)implementations:(OFString*)interface;
++ (GList*)implementationsWithInterface:(OFString*)interface;
 
 /**
  * Searches desktop files for ones that match @search_string.
@@ -70,7 +70,7 @@
  *   list of strvs.  Free each item with g_strfreev() and free the outer
  *   list with g_free().
  */
-+ (gchar***)search:(OFString*)searchString;
++ (gchar***)searchWithSearchString:(OFString*)searchString;
 
 /**
  * Sets the name of the desktop that the application is running in.
@@ -88,7 +88,7 @@
 /**
  * Constructors
  */
-+ (instancetype)desktopAppInfo:(OFString*)desktopId;
++ (instancetype)desktopAppInfoWithDesktopId:(OFString*)desktopId;
 + (instancetype)desktopAppInfoFromFilename:(OFString*)filename;
 + (instancetype)desktopAppInfoFromKeyfile:(GKeyFile*)keyFile;
 
@@ -120,7 +120,7 @@
  * @return the boolean value, or %FALSE if the key
  *     is not found
  */
-- (bool)boolean:(OFString*)key;
+- (bool)booleanWithKey:(OFString*)key;
 
 /**
  * Gets the categories from the desktop file.
@@ -172,7 +172,7 @@
  * @return a newly allocated string, or %NULL if the key
  *     is not found
  */
-- (char*)localeString:(OFString*)key;
+- (char*)localeStringWithKey:(OFString*)key;
 
 /**
  * Gets the value of the NoDisplay key, which helps determine if the
@@ -201,7 +201,7 @@
  * `OnlyShowIn` and `NotShowIn` keys, %FALSE
  * otherwise.
  */
-- (bool)showIn:(OFString*)desktopEnv;
+- (bool)showInWithDesktopEnv:(OFString*)desktopEnv;
 
 /**
  * Retrieves the StartupWMClass field from @info. This represents the
@@ -222,7 +222,7 @@
  * @return a newly allocated string, or %NULL if the key
  *     is not found
  */
-- (char*)string:(OFString*)key;
+- (char*)stringWithKey:(OFString*)key;
 
 /**
  * Looks up a string list value in the keyfile backing @info.
@@ -295,7 +295,7 @@
  * @param pidCallbackData User data for @callback
  * @return %TRUE on successful launch, %FALSE otherwise.
  */
-- (bool)launchUrisAsManagerWithUris:(GList*)uris launchContext:(OGAppLaunchContext*)launchContext spawnFlags:(GSpawnFlags)spawnFlags userSetup:(GSpawnChildSetupFunc)userSetup userSetupData:(gpointer)userSetupData pidCallback:(GDesktopAppLaunchCallback)pidCallback pidCallbackData:(gpointer)pidCallbackData;
+- (bool)launchUrisAsManager:(GList*)uris launchContext:(OGAppLaunchContext*)launchContext spawnFlags:(GSpawnFlags)spawnFlags userSetup:(GSpawnChildSetupFunc)userSetup userSetupData:(gpointer)userSetupData pidCallback:(GDesktopAppLaunchCallback)pidCallback pidCallbackData:(gpointer)pidCallbackData;
 
 /**
  * Equivalent to g_desktop_app_info_launch_uris_as_manager() but allows
@@ -318,7 +318,7 @@
  * @param stderrFd file descriptor to use for child's stderr, or -1
  * @return %TRUE on successful launch, %FALSE otherwise.
  */
-- (bool)launchUrisAsManagerWithFdsWithUris:(GList*)uris launchContext:(OGAppLaunchContext*)launchContext spawnFlags:(GSpawnFlags)spawnFlags userSetup:(GSpawnChildSetupFunc)userSetup userSetupData:(gpointer)userSetupData pidCallback:(GDesktopAppLaunchCallback)pidCallback pidCallbackData:(gpointer)pidCallbackData stdinFd:(gint)stdinFd stdoutFd:(gint)stdoutFd stderrFd:(gint)stderrFd;
+- (bool)launchUrisAsManagerWithFds:(GList*)uris launchContext:(OGAppLaunchContext*)launchContext spawnFlags:(GSpawnFlags)spawnFlags userSetup:(GSpawnChildSetupFunc)userSetup userSetupData:(gpointer)userSetupData pidCallback:(GDesktopAppLaunchCallback)pidCallback pidCallbackData:(gpointer)pidCallbackData stdinFd:(gint)stdinFd stdoutFd:(gint)stdoutFd stderrFd:(gint)stderrFd;
 
 /**
  * Returns the list of "additional application actions" supported on the

@@ -36,7 +36,7 @@
 /**
  * Constructors
  */
-+ (instancetype)subprocessLauncher:(GSubprocessFlags)flags;
++ (instancetype)subprocessLauncherWithFlags:(GSubprocessFlags)flags;
 
 /**
  * Methods
@@ -70,7 +70,7 @@
  * @return the value of the environment variable,
  *     %NULL if unset
  */
-- (OFString*)env:(OFString*)variable;
+- (OFString*)envWithVariable:(OFString*)variable;
 
 /**
  * Sets up a child setup function.
@@ -91,7 +91,7 @@
  * @param userData user data for @child_setup
  * @param destroyNotify a #GDestroyNotify for @user_data
  */
-- (void)setChildSetupWithChildSetup:(GSpawnChildSetupFunc)childSetup userData:(gpointer)userData destroyNotify:(GDestroyNotify)destroyNotify;
+- (void)setChildSetup:(GSpawnChildSetupFunc)childSetup userData:(gpointer)userData destroyNotify:(GDestroyNotify)destroyNotify;
 
 /**
  * Sets the current working directory that processes will be launched
@@ -221,7 +221,7 @@
  * @param argv Command line arguments
  * @return A new #GSubprocess, or %NULL on error (and @error will be set)
  */
-- (OGSubprocess*)spawnv:(const gchar* const*)argv;
+- (OGSubprocess*)spawnvWithArgv:(const gchar* const*)argv;
 
 /**
  * Transfer an arbitrary file descriptor from parent process to the
@@ -321,6 +321,6 @@
  * @param variable the environment variable to unset,
  *     must not contain '='
  */
-- (void)unsetenv:(OFString*)variable;
+- (void)unsetenvWithVariable:(OFString*)variable;
 
 @end

@@ -159,8 +159,8 @@
 /**
  * Constructors
  */
-+ (instancetype)dBusObjectManagerClientFinish:(GAsyncResult*)res;
-+ (instancetype)dBusObjectManagerClientForBusFinish:(GAsyncResult*)res;
++ (instancetype)dBusObjectManagerClientFinishWithRes:(GAsyncResult*)res;
++ (instancetype)dBusObjectManagerClientForBusFinishWithRes:(GAsyncResult*)res;
 + (instancetype)dBusObjectManagerClientForBusSyncWithBusType:(GBusType)busType flags:(GDBusObjectManagerClientFlags)flags name:(OFString*)name objectPath:(OFString*)objectPath getProxyTypeFunc:(GDBusProxyTypeFunc)getProxyTypeFunc getProxyTypeUserData:(gpointer)getProxyTypeUserData getProxyTypeDestroyNotify:(GDestroyNotify)getProxyTypeDestroyNotify cancellable:(OGCancellable*)cancellable;
 + (instancetype)dBusObjectManagerClientSyncWithConnection:(OGDBusConnection*)connection flags:(GDBusObjectManagerClientFlags)flags name:(OFString*)name objectPath:(OFString*)objectPath getProxyTypeFunc:(GDBusProxyTypeFunc)getProxyTypeFunc getProxyTypeUserData:(gpointer)getProxyTypeUserData getProxyTypeDestroyNotify:(GDestroyNotify)getProxyTypeDestroyNotify cancellable:(OGCancellable*)cancellable;
 

@@ -63,7 +63,7 @@
 	return returnValue;
 }
 
-- (void)disconnect:(gulong)handlerId
+- (void)disconnectWithHandlerId:(gulong)handlerId
 {
 	g_cancellable_disconnect([self castedGObject], handlerId);
 }

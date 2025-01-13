@@ -110,7 +110,7 @@
 	g_menu_prepend_submenu([self castedGObject], [label UTF8String], [submenu castedGObject]);
 }
 
-- (void)remove:(gint)position
+- (void)removeWithPosition:(gint)position
 {
 	g_menu_remove([self castedGObject], position);
 }

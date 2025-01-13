@@ -46,7 +46,7 @@
  * @param nentries the length of @entries, or -1
  * @param userData the user data for signal connections
  */
-- (void)addEntriesWithEntries:(const GActionEntry*)entries nentries:(gint)nentries userData:(gpointer)userData;
+- (void)addEntries:(const GActionEntry*)entries nentries:(gint)nentries userData:(gpointer)userData;
 
 /**
  * Adds an action to the action group.
@@ -58,7 +58,7 @@
  *
  * @param action a #GAction
  */
-- (void)insert:(GAction*)action;
+- (void)insertWithAction:(GAction*)action;
 
 /**
  * Looks up the action with the name @action_name in the group.
@@ -68,7 +68,7 @@
  * @param actionName the name of an action
  * @return a #GAction, or %NULL
  */
-- (GAction*)lookup:(OFString*)actionName;
+- (GAction*)lookupWithActionName:(OFString*)actionName;
 
 /**
  * Removes the named action from the action group.
@@ -77,6 +77,6 @@
  *
  * @param actionName the name of the action
  */
-- (void)remove:(OFString*)actionName;
+- (void)removeWithActionName:(OFString*)actionName;
 
 @end

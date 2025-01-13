@@ -105,6 +105,6 @@
  *
  * @param data A buffer to write data to
  */
-- (void)serialize:(gpointer)data;
+- (void)serializeWithData:(gpointer)data;
 
 @end

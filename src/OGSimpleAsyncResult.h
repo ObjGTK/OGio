@@ -361,7 +361,7 @@
  * @param opRes a pointer result from an asynchronous function.
  * @param destroyOpRes a #GDestroyNotify function.
  */
-- (void)setOpResGpointerWithOpRes:(gpointer)opRes destroyOpRes:(GDestroyNotify)destroyOpRes;
+- (void)setOpResGpointer:(gpointer)opRes destroyOpRes:(GDestroyNotify)destroyOpRes;
 
 /**
  * Sets the operation result within the asynchronous result to

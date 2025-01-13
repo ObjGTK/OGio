@@ -26,7 +26,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileEnumerator, GFileEnumerator);
 }
 
-- (bool)close:(OGCancellable*)cancellable
+- (bool)closeWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -42,7 +42,7 @@
 	g_file_enumerator_close_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (bool)closeFinish:(GAsyncResult*)result
+- (bool)closeFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -53,7 +53,7 @@
 	return returnValue;
 }
 
-- (GFile*)child:(OGFileInfo*)info
+- (GFile*)childWithInfo:(OGFileInfo*)info
 {
 	GFile* returnValue = (GFile*)g_file_enumerator_get_child([self castedGObject], [info castedGObject]);
 
@@ -92,7 +92,7 @@
 	return returnValue;
 }
 
-- (OGFileInfo*)nextFile:(OGCancellable*)cancellable
+- (OGFileInfo*)nextFileWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -111,7 +111,7 @@
 	g_file_enumerator_next_files_async([self castedGObject], numFiles, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (GList*)nextFilesFinish:(GAsyncResult*)result
+- (GList*)nextFilesFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

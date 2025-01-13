@@ -121,7 +121,7 @@
 /**
  * Constructors
  */
-+ (instancetype)testDBus:(GTestDBusFlags)flags;
++ (instancetype)testDBusWithFlags:(GTestDBusFlags)flags;
 
 /**
  * Methods
@@ -135,7 +135,7 @@
  *
  * @param path path to a directory containing .service files
  */
-- (void)addServiceDir:(OFString*)path;
+- (void)addServiceDirWithPath:(OFString*)path;
 
 /**
  * Stop the session bus started by g_test_dbus_up().

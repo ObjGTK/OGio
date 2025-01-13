@@ -20,7 +20,7 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
-+ (instancetype)subprocessLauncher:(GSubprocessFlags)flags
++ (instancetype)subprocessLauncherWithFlags:(GSubprocessFlags)flags
 {
 	GSubprocessLauncher* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_launcher_new(flags), GSubprocessLauncher, GSubprocessLauncher);
 
@@ -50,7 +50,7 @@
 	g_subprocess_launcher_close([self castedGObject]);
 }
 
-- (OFString*)env:(OFString*)variable
+- (OFString*)envWithVariable:(OFString*)variable
 {
 	const gchar* gobjectValue = g_subprocess_launcher_getenv([self castedGObject], [variable UTF8String]);
 
@@ -58,7 +58,7 @@
 	return returnValue;
 }
 
-- (void)setChildSetupWithChildSetup:(GSpawnChildSetupFunc)childSetup userData:(gpointer)userData destroyNotify:(GDestroyNotify)destroyNotify
+- (void)setChildSetup:(GSpawnChildSetupFunc)childSetup userData:(gpointer)userData destroyNotify:(GDestroyNotify)destroyNotify
 {
 	g_subprocess_launcher_set_child_setup([self castedGObject], childSetup, userData, destroyNotify);
 }
@@ -98,7 +98,7 @@
 	g_subprocess_launcher_setenv([self castedGObject], [variable UTF8String], [value UTF8String], overwrite);
 }
 
-- (OGSubprocess*)spawnv:(const gchar* const*)argv
+- (OGSubprocess*)spawnvWithArgv:(const gchar* const*)argv
 {
 	GError* err = NULL;
 
@@ -132,7 +132,7 @@
 	g_subprocess_launcher_take_stdout_fd([self castedGObject], fd);
 }
 
-- (void)unsetenv:(OFString*)variable
+- (void)unsetenvWithVariable:(OFString*)variable
 {
 	g_subprocess_launcher_unsetenv([self castedGObject], [variable UTF8String]);
 }

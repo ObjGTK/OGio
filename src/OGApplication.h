@@ -218,7 +218,7 @@
  * @param applicationId a potential application identifier
  * @return %TRUE if @application_id is valid
  */
-+ (bool)idIsValid:(OFString*)applicationId;
++ (bool)idIsValidWithApplicationId:(OFString*)applicationId;
 
 /**
  * Constructors
@@ -593,7 +593,7 @@
  * @param cancellable a #GCancellable, or %NULL
  * @return %TRUE if registration succeeded
  */
-- (bool)register:(OGCancellable*)cancellable;
+- (bool)registerWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Decrease the use count of @application.
@@ -853,7 +853,7 @@
  *
  * @param resourcePath the resource path to use
  */
-- (void)setResourceBasePath:(OFString*)resourcePath;
+- (void)setResourceBasePathWithResourcePath:(OFString*)resourcePath;
 
 /**
  * Sets the version number of @application. This will be used to implement
@@ -905,6 +905,6 @@
  *
  * @param identifier id of a previously sent notification
  */
-- (void)withdrawNotification:(OFString*)identifier;
+- (void)withdrawNotificationWithIdentifier:(OFString*)identifier;
 
 @end

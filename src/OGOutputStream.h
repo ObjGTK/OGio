@@ -89,7 +89,7 @@
  * @param cancellable optional cancellable object
  * @return %TRUE on success, %FALSE on failure
  */
-- (bool)close:(OGCancellable*)cancellable;
+- (bool)closeWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Requests an asynchronous close of the stream, releasing resources
@@ -117,7 +117,7 @@
  * @param result a #GAsyncResult.
  * @return %TRUE if stream was successfully closed, %FALSE otherwise.
  */
-- (bool)closeFinish:(GAsyncResult*)result;
+- (bool)closeFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Forces a write of all user-space buffered data for the given
@@ -133,7 +133,7 @@
  * @param cancellable optional cancellable object
  * @return %TRUE on success, %FALSE on error
  */
-- (bool)flush:(OGCancellable*)cancellable;
+- (bool)flushWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Forces an asynchronous write of all user-space buffered data for
@@ -158,7 +158,7 @@
  * @param result a GAsyncResult.
  * @return %TRUE if flush operation succeeded, %FALSE otherwise.
  */
-- (bool)flushFinish:(GAsyncResult*)result;
+- (bool)flushFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Checks if an output stream has pending actions.
@@ -235,7 +235,7 @@
  *     will be returned, and there is no way to determine the actual
  *     number of bytes spliced.
  */
-- (gssize)spliceFinish:(GAsyncResult*)result;
+- (gssize)spliceFinishWithResult:(GAsyncResult*)result;
 
 /**
  * This is a utility function around g_output_stream_write_all(). It
@@ -429,7 +429,7 @@
  * @param cancellable optional cancellable object
  * @return Number of bytes written, or -1 on error
  */
-- (gssize)writeBytesWithBytes:(GBytes*)bytes cancellable:(OGCancellable*)cancellable;
+- (gssize)writeBytes:(GBytes*)bytes cancellable:(OGCancellable*)cancellable;
 
 /**
  * This function is similar to g_output_stream_write_async(), but
@@ -453,7 +453,7 @@
  *   to call when the request is satisfied
  * @param userData the data to pass to callback function
  */
-- (void)writeBytesAsyncWithBytes:(GBytes*)bytes ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
+- (void)writeBytesAsync:(GBytes*)bytes ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData;
 
 /**
  * Finishes a stream write-from-#GBytes operation.
@@ -461,7 +461,7 @@
  * @param result a #GAsyncResult.
  * @return a #gssize containing the number of bytes written to the stream.
  */
-- (gssize)writeBytesFinish:(GAsyncResult*)result;
+- (gssize)writeBytesFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Finishes a stream write operation.
@@ -469,7 +469,7 @@
  * @param result a #GAsyncResult.
  * @return a #gssize containing the number of bytes written to the stream.
  */
-- (gssize)writeFinish:(GAsyncResult*)result;
+- (gssize)writeFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Tries to write the bytes contained in the @n_vectors @vectors into the

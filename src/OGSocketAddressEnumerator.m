@@ -26,7 +26,7 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocketAddressEnumerator, GSocketAddressEnumerator);
 }
 
-- (OGSocketAddress*)next:(OGCancellable*)cancellable
+- (OGSocketAddress*)nextWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -45,7 +45,7 @@
 	g_socket_address_enumerator_next_async([self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (OGSocketAddress*)nextFinish:(GAsyncResult*)result
+- (OGSocketAddress*)nextFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

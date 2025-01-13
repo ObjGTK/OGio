@@ -60,7 +60,7 @@
  * @return Received credentials on success (free with
  * g_object_unref()), %NULL if @error is set.
  */
-- (OGCredentials*)receiveCredentials:(OGCancellable*)cancellable;
+- (OGCredentials*)receiveCredentialsWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Asynchronously receive credentials.
@@ -86,7 +86,7 @@
  * @return a #GCredentials, or %NULL on error.
  *     Free the returned object with g_object_unref().
  */
-- (OGCredentials*)receiveCredentialsFinish:(GAsyncResult*)result;
+- (OGCredentials*)receiveCredentialsFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Receives a file descriptor from the sending end of the connection.
@@ -100,7 +100,7 @@
  * @param cancellable optional #GCancellable object, %NULL to ignore
  * @return a file descriptor on success, -1 on error.
  */
-- (gint)receiveFd:(OGCancellable*)cancellable;
+- (gint)receiveFdWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Passes the credentials of the current user the receiving side
@@ -126,7 +126,7 @@
  * @param cancellable A #GCancellable or %NULL.
  * @return %TRUE on success, %FALSE if @error is set.
  */
-- (bool)sendCredentials:(OGCancellable*)cancellable;
+- (bool)sendCredentialsWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Asynchronously send credentials.
@@ -151,7 +151,7 @@
  * @param result a #GAsyncResult.
  * @return %TRUE if the operation was successful, otherwise %FALSE.
  */
-- (bool)sendCredentialsFinish:(GAsyncResult*)result;
+- (bool)sendCredentialsFinishWithResult:(GAsyncResult*)result;
 
 /**
  * Passes a file descriptor to the receiving side of the
@@ -166,6 +166,6 @@
  * @param cancellable optional #GCancellable object, %NULL to ignore.
  * @return a %TRUE on success, %NULL on error.
  */
-- (bool)sendFdWithFd:(gint)fd cancellable:(OGCancellable*)cancellable;
+- (bool)sendFd:(gint)fd cancellable:(OGCancellable*)cancellable;
 
 @end

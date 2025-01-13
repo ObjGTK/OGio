@@ -184,12 +184,12 @@
 	return returnValue;
 }
 
-- (void)sendSignal:(gint)signalNum
+- (void)sendSignalWithSignalNum:(gint)signalNum
 {
 	g_subprocess_send_signal([self castedGObject], signalNum);
 }
 
-- (bool)wait:(OGCancellable*)cancellable
+- (bool)waitWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -205,7 +205,7 @@
 	g_subprocess_wait_async([self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (bool)waitCheck:(OGCancellable*)cancellable
+- (bool)waitCheckWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -221,7 +221,7 @@
 	g_subprocess_wait_check_async([self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
-- (bool)waitCheckFinish:(GAsyncResult*)result
+- (bool)waitCheckFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
@@ -232,7 +232,7 @@
 	return returnValue;
 }
 
-- (bool)waitFinish:(GAsyncResult*)result
+- (bool)waitFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 

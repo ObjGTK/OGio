@@ -23,7 +23,7 @@
 /**
  * Constructors
  */
-+ (instancetype)dataInputStream:(OGInputStream*)baseStream;
++ (instancetype)dataInputStreamWithBaseStream:(OGInputStream*)baseStream;
 
 /**
  * Methods
@@ -52,7 +52,7 @@
  * @return an unsigned 8-bit/1-byte value read from the @stream or `0`
  * if an error occurred.
  */
-- (guchar)readByte:(OGCancellable*)cancellable;
+- (guchar)readByteWithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Reads a 16-bit/2-byte value from @stream.
@@ -64,7 +64,7 @@
  * @return a signed 16-bit/2-byte value read from @stream or `0` if
  * an error occurred.
  */
-- (gint16)readInt16:(OGCancellable*)cancellable;
+- (gint16)readInt16WithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Reads a signed 32-bit/4-byte value from @stream.
@@ -80,7 +80,7 @@
  * @return a signed 32-bit/4-byte value read from the @stream or `0` if
  * an error occurred.
  */
-- (gint32)readInt32:(OGCancellable*)cancellable;
+- (gint32)readInt32WithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Reads a 64-bit/8-byte value from @stream.
@@ -96,7 +96,7 @@
  * @return a signed 64-bit/8-byte value read from @stream or `0` if
  * an error occurred.
  */
-- (gint64)readInt64:(OGCancellable*)cancellable;
+- (gint64)readInt64WithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Reads a line from the data input stream.  Note that no encoding
@@ -192,7 +192,7 @@
  * @return an unsigned 16-bit/2-byte value read from the @stream or `0` if
  * an error occurred.
  */
-- (guint16)readUint16:(OGCancellable*)cancellable;
+- (guint16)readUint16WithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Reads an unsigned 32-bit/4-byte value from @stream.
@@ -208,7 +208,7 @@
  * @return an unsigned 32-bit/4-byte value read from the @stream or `0` if
  * an error occurred.
  */
-- (guint32)readUint32:(OGCancellable*)cancellable;
+- (guint32)readUint32WithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Reads an unsigned 64-bit/8-byte value from @stream.
@@ -224,7 +224,7 @@
  * @return an unsigned 64-bit/8-byte read from @stream or `0` if
  * an error occurred.
  */
-- (guint64)readUint64:(OGCancellable*)cancellable;
+- (guint64)readUint64WithCancellable:(OGCancellable*)cancellable;
 
 /**
  * Reads a string from the data input stream, up to the first
