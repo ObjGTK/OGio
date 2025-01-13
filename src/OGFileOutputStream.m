@@ -26,11 +26,11 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileOutputStream, GFileOutputStream);
 }
 
-- (char*)etag
+- (OFString*)etag
 {
 	char* gobjectValue = g_file_output_stream_get_etag([self castedGObject]);
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 

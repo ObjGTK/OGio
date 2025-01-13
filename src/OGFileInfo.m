@@ -70,11 +70,11 @@
 	return returnValue;
 }
 
-- (char*)attributeAsStringWithAttribute:(OFString*)attribute
+- (OFString*)attributeAsStringWithAttribute:(OFString*)attribute
 {
 	char* gobjectValue = g_file_info_get_attribute_as_string([self castedGObject], [attribute UTF8String]);
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 

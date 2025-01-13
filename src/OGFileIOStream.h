@@ -50,7 +50,7 @@
  *
  * @return the entity tag for the stream.
  */
-- (char*)etag;
+- (OFString*)etag;
 
 /**
  * Queries a file io stream for the given @attributes.

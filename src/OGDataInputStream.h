@@ -115,7 +115,7 @@
  *  will be set. If there's no content to read, it will still return
  *  %NULL, but @error won't be set.
  */
-- (char*)readLineWithLength:(gsize*)length cancellable:(OGCancellable*)cancellable;
+- (OFString*)readLineWithLength:(gsize*)length cancellable:(OGCancellable*)cancellable;
 
 /**
  * The asynchronous version of g_data_input_stream_read_line().  It is
@@ -146,7 +146,7 @@
  *  will be set. If there's no content to read, it will still return
  *  %NULL, but @error won't be set.
  */
-- (char*)readLineFinishWithResult:(GAsyncResult*)result length:(gsize*)length;
+- (OFString*)readLineFinishWithResult:(GAsyncResult*)result length:(gsize*)length;
 
 /**
  * Finish an asynchronous call started by
@@ -161,7 +161,7 @@
  *  error domain is %G_CONVERT_ERROR.  If there's no content to read,
  *  it will still return %NULL, but @error won't be set.
  */
-- (char*)readLineFinishUtf8WithResult:(GAsyncResult*)result length:(gsize*)length;
+- (OFString*)readLineFinishUtf8WithResult:(GAsyncResult*)result length:(gsize*)length;
 
 /**
  * Reads a UTF-8 encoded line from the data input stream.
@@ -180,7 +180,7 @@
  *  there's no content to read, it will still return %NULL, but @error
  *  won't be set.
  */
-- (char*)readLineUtf8WithLength:(gsize*)length cancellable:(OGCancellable*)cancellable;
+- (OFString*)readLineUtf8WithLength:(gsize*)length cancellable:(OGCancellable*)cancellable;
 
 /**
  * Reads an unsigned 16-bit/2-byte value from @stream.
@@ -247,7 +247,7 @@
  *     a #gsize to get the length of the string. This function will
  *     return %NULL on an error.
  */
-- (char*)readUntilWithStopChars:(OFString*)stopChars length:(gsize*)length cancellable:(OGCancellable*)cancellable;
+- (OFString*)readUntilWithStopChars:(OFString*)stopChars length:(gsize*)length cancellable:(OGCancellable*)cancellable;
 
 /**
  * The asynchronous version of g_data_input_stream_read_until().
@@ -285,7 +285,7 @@
  *     a #gsize to get the length of the string. This function will
  *     return %NULL on an error.
  */
-- (char*)readUntilFinishWithResult:(GAsyncResult*)result length:(gsize*)length;
+- (OFString*)readUntilFinishWithResult:(GAsyncResult*)result length:(gsize*)length;
 
 /**
  * Reads a string from the data input stream, up to the first
@@ -311,7 +311,7 @@
  *     a #gsize to get the length of the string. This function will
  *     return %NULL on an error
  */
-- (char*)readUptoWithStopChars:(OFString*)stopChars stopCharsLen:(gssize)stopCharsLen length:(gsize*)length cancellable:(OGCancellable*)cancellable;
+- (OFString*)readUptoWithStopChars:(OFString*)stopChars stopCharsLen:(gssize)stopCharsLen length:(gsize*)length cancellable:(OGCancellable*)cancellable;
 
 /**
  * The asynchronous version of g_data_input_stream_read_upto().
@@ -356,7 +356,7 @@
  *     a #gsize to get the length of the string. This function will
  *     return %NULL on an error.
  */
-- (char*)readUptoFinishWithResult:(GAsyncResult*)result length:(gsize*)length;
+- (OFString*)readUptoFinishWithResult:(GAsyncResult*)result length:(gsize*)length;
 
 /**
  * This function sets the byte order for the given @stream. All subsequent

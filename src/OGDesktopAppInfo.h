@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixfdmessage.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gio.h>
+#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
-#include <gio/gio.h>
 #include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
@@ -172,7 +172,7 @@
  * @return a newly allocated string, or %NULL if the key
  *     is not found
  */
-- (char*)localeStringWithKey:(OFString*)key;
+- (OFString*)localeStringWithKey:(OFString*)key;
 
 /**
  * Gets the value of the NoDisplay key, which helps determine if the
@@ -222,7 +222,7 @@
  * @return a newly allocated string, or %NULL if the key
  *     is not found
  */
-- (char*)stringWithKey:(OFString*)key;
+- (OFString*)stringWithKey:(OFString*)key;
 
 /**
  * Looks up a string list value in the keyfile backing @info.

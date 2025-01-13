@@ -104,7 +104,7 @@
 	return returnValue;
 }
 
-- (char*)readLineWithLength:(gsize*)length cancellable:(OGCancellable*)cancellable
+- (OFString*)readLineWithLength:(gsize*)length cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -112,7 +112,7 @@
 
 	[OGErrorException throwForError:err];
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
@@ -121,7 +121,7 @@
 	g_data_input_stream_read_line_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (char*)readLineFinishWithResult:(GAsyncResult*)result length:(gsize*)length
+- (OFString*)readLineFinishWithResult:(GAsyncResult*)result length:(gsize*)length
 {
 	GError* err = NULL;
 
@@ -129,11 +129,11 @@
 
 	[OGErrorException throwForError:err];
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
-- (char*)readLineFinishUtf8WithResult:(GAsyncResult*)result length:(gsize*)length
+- (OFString*)readLineFinishUtf8WithResult:(GAsyncResult*)result length:(gsize*)length
 {
 	GError* err = NULL;
 
@@ -141,11 +141,11 @@
 
 	[OGErrorException throwForError:err];
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
-- (char*)readLineUtf8WithLength:(gsize*)length cancellable:(OGCancellable*)cancellable
+- (OFString*)readLineUtf8WithLength:(gsize*)length cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -153,7 +153,7 @@
 
 	[OGErrorException throwForError:err];
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
@@ -190,7 +190,7 @@
 	return returnValue;
 }
 
-- (char*)readUntilWithStopChars:(OFString*)stopChars length:(gsize*)length cancellable:(OGCancellable*)cancellable
+- (OFString*)readUntilWithStopChars:(OFString*)stopChars length:(gsize*)length cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -198,7 +198,7 @@
 
 	[OGErrorException throwForError:err];
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
@@ -207,7 +207,7 @@
 	g_data_input_stream_read_until_async([self castedGObject], [stopChars UTF8String], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (char*)readUntilFinishWithResult:(GAsyncResult*)result length:(gsize*)length
+- (OFString*)readUntilFinishWithResult:(GAsyncResult*)result length:(gsize*)length
 {
 	GError* err = NULL;
 
@@ -215,11 +215,11 @@
 
 	[OGErrorException throwForError:err];
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
-- (char*)readUptoWithStopChars:(OFString*)stopChars stopCharsLen:(gssize)stopCharsLen length:(gsize*)length cancellable:(OGCancellable*)cancellable
+- (OFString*)readUptoWithStopChars:(OFString*)stopChars stopCharsLen:(gssize)stopCharsLen length:(gsize*)length cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
@@ -227,7 +227,7 @@
 
 	[OGErrorException throwForError:err];
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
@@ -236,7 +236,7 @@
 	g_data_input_stream_read_upto_async([self castedGObject], [stopChars UTF8String], stopCharsLen, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
-- (char*)readUptoFinishWithResult:(GAsyncResult*)result length:(gsize*)length
+- (OFString*)readUptoFinishWithResult:(GAsyncResult*)result length:(gsize*)length
 {
 	GError* err = NULL;
 
@@ -244,7 +244,7 @@
 
 	[OGErrorException throwForError:err];
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 

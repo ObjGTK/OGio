@@ -157,11 +157,11 @@
 	return returnValue;
 }
 
-- (char*)localeStringWithKey:(OFString*)key
+- (OFString*)localeStringWithKey:(OFString*)key
 {
 	char* gobjectValue = g_desktop_app_info_get_locale_string([self castedGObject], [key UTF8String]);
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
@@ -187,11 +187,11 @@
 	return returnValue;
 }
 
-- (char*)stringWithKey:(OFString*)key
+- (OFString*)stringWithKey:(OFString*)key
 {
 	char* gobjectValue = g_desktop_app_info_get_string([self castedGObject], [key UTF8String]);
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 

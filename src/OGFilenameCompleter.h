@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixfdmessage.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gio.h>
+#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
-#include <gio/gio.h>
 #include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
@@ -45,7 +45,7 @@
  *     completion exists. This string is not owned by GIO, so remember to g_free()
  *     it when finished.
  */
-- (char*)completionSuffixWithInitialText:(OFString*)initialText;
+- (OFString*)completionSuffixWithInitialText:(OFString*)initialText;
 
 /**
  * Gets an array of completion strings for a given initial text.

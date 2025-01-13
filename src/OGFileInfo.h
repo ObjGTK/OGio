@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixfdmessage.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gio.h>
+#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
-#include <gio/gio.h>
 #include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
@@ -117,7 +117,7 @@
  *    %NULL if the attribute wasn’t set.
  *    When you're done with the string it must be freed with g_free().
  */
-- (char*)attributeAsStringWithAttribute:(OFString*)attribute;
+- (OFString*)attributeAsStringWithAttribute:(OFString*)attribute;
 
 /**
  * Gets the value of a boolean attribute. If the attribute does not

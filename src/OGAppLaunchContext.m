@@ -43,11 +43,11 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GAppLaunchContext, GAppLaunchContext);
 }
 
-- (char*)displayWithInfo:(GAppInfo*)info files:(GList*)files
+- (OFString*)displayWithInfo:(GAppInfo*)info files:(GList*)files
 {
 	char* gobjectValue = g_app_launch_context_get_display([self castedGObject], info, files);
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
@@ -58,11 +58,11 @@
 	return returnValue;
 }
 
-- (char*)startupNotifyIdWithInfo:(GAppInfo*)info files:(GList*)files
+- (OFString*)startupNotifyIdWithInfo:(GAppInfo*)info files:(GList*)files
 {
 	char* gobjectValue = g_app_launch_context_get_startup_notify_id([self castedGObject], info, files);
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 

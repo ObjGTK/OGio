@@ -45,7 +45,7 @@
  *
  * @return the entity tag for the stream.
  */
-- (char*)etag;
+- (OFString*)etag;
 
 /**
  * Queries a file output stream for the given @attributes.

@@ -4,12 +4,12 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 
-#include <gio/gunixfdmessage.h>
+#include <gio/gdesktopappinfo.h>
 #include <gio/gfiledescriptorbased.h>
+#include <gio/gio.h>
+#include <gio/gunixfdmessage.h>
 #include <gio/gunixinputstream.h>
 #include <gio/gunixmounts.h>
-#include <gio/gdesktopappinfo.h>
-#include <gio/gio.h>
 #include <gio/gunixoutputstream.h>
 
 #import <OGObject/OGObject.h>
@@ -46,7 +46,7 @@
  * @param files a #GList of #GFile objects
  * @return a display string for the display.
  */
-- (char*)displayWithInfo:(GAppInfo*)info files:(GList*)files;
+- (OFString*)displayWithInfo:(GAppInfo*)info files:(GList*)files;
 
 /**
  * Gets the complete environment variable list to be passed to
@@ -78,7 +78,7 @@
  * @return a startup notification ID for the application, or %NULL if
  *     not supported.
  */
-- (char*)startupNotifyIdWithInfo:(GAppInfo*)info files:(GList*)files;
+- (OFString*)startupNotifyIdWithInfo:(GAppInfo*)info files:(GList*)files;
 
 /**
  * Called when an application has failed to launch, so that it can cancel

@@ -43,11 +43,11 @@
 	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFilenameCompleter, GFilenameCompleter);
 }
 
-- (char*)completionSuffixWithInitialText:(OFString*)initialText
+- (OFString*)completionSuffixWithInitialText:(OFString*)initialText
 {
 	char* gobjectValue = g_filename_completer_get_completion_suffix([self castedGObject], [initialText UTF8String]);
 
-	char* returnValue = gobjectValue;
+	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
 }
 
