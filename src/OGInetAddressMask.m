@@ -86,14 +86,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)equalWithMask2:(OGInetAddressMask*)mask2
 {
-	bool returnValue = (bool)g_inet_address_mask_equal([self castedGObject], [mask2 castedGObject]);
+	bool returnValue = (bool)g_inet_address_mask_equal((GInetAddressMask*)[self castedGObject], [mask2 castedGObject]);
 
 	return returnValue;
 }
 
 - (OGInetAddress*)address
 {
-	GInetAddress* gobjectValue = g_inet_address_mask_get_address([self castedGObject]);
+	GInetAddress* gobjectValue = g_inet_address_mask_get_address((GInetAddressMask*)[self castedGObject]);
 
 	OGInetAddress* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -101,28 +101,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GSocketFamily)family
 {
-	GSocketFamily returnValue = (GSocketFamily)g_inet_address_mask_get_family([self castedGObject]);
+	GSocketFamily returnValue = (GSocketFamily)g_inet_address_mask_get_family((GInetAddressMask*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint)length
 {
-	guint returnValue = (guint)g_inet_address_mask_get_length([self castedGObject]);
+	guint returnValue = (guint)g_inet_address_mask_get_length((GInetAddressMask*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)matchesWithAddress:(OGInetAddress*)address
 {
-	bool returnValue = (bool)g_inet_address_mask_matches([self castedGObject], [address castedGObject]);
+	bool returnValue = (bool)g_inet_address_mask_matches((GInetAddressMask*)[self castedGObject], [address castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)toString
 {
-	gchar* gobjectValue = g_inet_address_mask_to_string([self castedGObject]);
+	gchar* gobjectValue = g_inet_address_mask_to_string((GInetAddressMask*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;

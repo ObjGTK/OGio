@@ -60,21 +60,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (guint)numFallbacks
 {
-	guint returnValue = (guint)g_charset_converter_get_num_fallbacks([self castedGObject]);
+	guint returnValue = (guint)g_charset_converter_get_num_fallbacks((GCharsetConverter*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)useFallback
 {
-	bool returnValue = (bool)g_charset_converter_get_use_fallback([self castedGObject]);
+	bool returnValue = (bool)g_charset_converter_get_use_fallback((GCharsetConverter*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)setUseFallback:(bool)useFallback
 {
-	g_charset_converter_set_use_fallback([self castedGObject], useFallback);
+	g_charset_converter_set_use_fallback((GCharsetConverter*)[self castedGObject], useFallback);
 }
 
 

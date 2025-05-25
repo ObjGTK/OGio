@@ -76,17 +76,17 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setEnabled:(bool)enabled
 {
-	g_simple_action_set_enabled([self castedGObject], enabled);
+	g_simple_action_set_enabled((GSimpleAction*)[self castedGObject], enabled);
 }
 
 - (void)setStateWithValue:(GVariant*)value
 {
-	g_simple_action_set_state([self castedGObject], value);
+	g_simple_action_set_state((GSimpleAction*)[self castedGObject], value);
 }
 
 - (void)setStateHint:(GVariant*)stateHint
 {
-	g_simple_action_set_state_hint([self castedGObject], stateHint);
+	g_simple_action_set_state_hint((GSimpleAction*)[self castedGObject], stateHint);
 }
 
 

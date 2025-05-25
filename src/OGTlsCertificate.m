@@ -191,21 +191,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GPtrArray*)dnsNames
 {
-	GPtrArray* returnValue = (GPtrArray*)g_tls_certificate_get_dns_names([self castedGObject]);
+	GPtrArray* returnValue = (GPtrArray*)g_tls_certificate_get_dns_names((GTlsCertificate*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GPtrArray*)ipAddresses
 {
-	GPtrArray* returnValue = (GPtrArray*)g_tls_certificate_get_ip_addresses([self castedGObject]);
+	GPtrArray* returnValue = (GPtrArray*)g_tls_certificate_get_ip_addresses((GTlsCertificate*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OGTlsCertificate*)issuer
 {
-	GTlsCertificate* gobjectValue = g_tls_certificate_get_issuer([self castedGObject]);
+	GTlsCertificate* gobjectValue = g_tls_certificate_get_issuer((GTlsCertificate*)[self castedGObject]);
 
 	OGTlsCertificate* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -213,7 +213,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)issuerName
 {
-	gchar* gobjectValue = g_tls_certificate_get_issuer_name([self castedGObject]);
+	gchar* gobjectValue = g_tls_certificate_get_issuer_name((GTlsCertificate*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -221,21 +221,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GDateTime*)notValidAfter
 {
-	GDateTime* returnValue = (GDateTime*)g_tls_certificate_get_not_valid_after([self castedGObject]);
+	GDateTime* returnValue = (GDateTime*)g_tls_certificate_get_not_valid_after((GTlsCertificate*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDateTime*)notValidBefore
 {
-	GDateTime* returnValue = (GDateTime*)g_tls_certificate_get_not_valid_before([self castedGObject]);
+	GDateTime* returnValue = (GDateTime*)g_tls_certificate_get_not_valid_before((GTlsCertificate*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)subjectName
 {
-	gchar* gobjectValue = g_tls_certificate_get_subject_name([self castedGObject]);
+	gchar* gobjectValue = g_tls_certificate_get_subject_name((GTlsCertificate*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -243,14 +243,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)isSameWithCertTwo:(OGTlsCertificate*)certTwo
 {
-	bool returnValue = (bool)g_tls_certificate_is_same([self castedGObject], [certTwo castedGObject]);
+	bool returnValue = (bool)g_tls_certificate_is_same((GTlsCertificate*)[self castedGObject], [certTwo castedGObject]);
 
 	return returnValue;
 }
 
 - (GTlsCertificateFlags)verifyWithIdentity:(GSocketConnectable*)identity trustedCa:(OGTlsCertificate*)trustedCa
 {
-	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_tls_certificate_verify([self castedGObject], identity, [trustedCa castedGObject]);
+	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_tls_certificate_verify((GTlsCertificate*)[self castedGObject], identity, [trustedCa castedGObject]);
 
 	return returnValue;
 }

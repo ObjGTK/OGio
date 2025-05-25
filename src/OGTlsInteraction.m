@@ -42,7 +42,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_ask_password([self castedGObject], [password castedGObject], [cancellable castedGObject], &err);
+	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_ask_password((GTlsInteraction*)[self castedGObject], [password castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -51,14 +51,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)askPasswordAsync:(OGTlsPassword*)password cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_tls_interaction_ask_password_async([self castedGObject], [password castedGObject], [cancellable castedGObject], callback, userData);
+	g_tls_interaction_ask_password_async((GTlsInteraction*)[self castedGObject], [password castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (GTlsInteractionResult)askPasswordFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_ask_password_finish([self castedGObject], result, &err);
+	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_ask_password_finish((GTlsInteraction*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -69,7 +69,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_invoke_ask_password([self castedGObject], [password castedGObject], [cancellable castedGObject], &err);
+	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_invoke_ask_password((GTlsInteraction*)[self castedGObject], [password castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -80,7 +80,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_invoke_request_certificate([self castedGObject], [connection castedGObject], flags, [cancellable castedGObject], &err);
+	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_invoke_request_certificate((GTlsInteraction*)[self castedGObject], [connection castedGObject], flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -91,7 +91,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_request_certificate([self castedGObject], [connection castedGObject], flags, [cancellable castedGObject], &err);
+	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_request_certificate((GTlsInteraction*)[self castedGObject], [connection castedGObject], flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -100,14 +100,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)requestCertificateAsyncWithConnection:(OGTlsConnection*)connection flags:(GTlsCertificateRequestFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_tls_interaction_request_certificate_async([self castedGObject], [connection castedGObject], flags, [cancellable castedGObject], callback, userData);
+	g_tls_interaction_request_certificate_async((GTlsInteraction*)[self castedGObject], [connection castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
 - (GTlsInteractionResult)requestCertificateFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_request_certificate_finish([self castedGObject], result, &err);
+	GTlsInteractionResult returnValue = (GTlsInteractionResult)g_tls_interaction_request_certificate_finish((GTlsInteraction*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 

@@ -58,12 +58,12 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)close
 {
-	g_subprocess_launcher_close([self castedGObject]);
+	g_subprocess_launcher_close((GSubprocessLauncher*)[self castedGObject]);
 }
 
 - (OFString*)envWithVariable:(OFString*)variable
 {
-	const gchar* gobjectValue = g_subprocess_launcher_getenv([self castedGObject], [variable UTF8String]);
+	const gchar* gobjectValue = g_subprocess_launcher_getenv((GSubprocessLauncher*)[self castedGObject], [variable UTF8String]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -71,49 +71,49 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setChildSetup:(GSpawnChildSetupFunc)childSetup userData:(gpointer)userData destroyNotify:(GDestroyNotify)destroyNotify
 {
-	g_subprocess_launcher_set_child_setup([self castedGObject], childSetup, userData, destroyNotify);
+	g_subprocess_launcher_set_child_setup((GSubprocessLauncher*)[self castedGObject], childSetup, userData, destroyNotify);
 }
 
 - (void)setCwd:(OFString*)cwd
 {
-	g_subprocess_launcher_set_cwd([self castedGObject], [cwd UTF8String]);
+	g_subprocess_launcher_set_cwd((GSubprocessLauncher*)[self castedGObject], [cwd UTF8String]);
 }
 
 - (void)setEnviron:(gchar**)env
 {
-	g_subprocess_launcher_set_environ([self castedGObject], env);
+	g_subprocess_launcher_set_environ((GSubprocessLauncher*)[self castedGObject], env);
 }
 
 - (void)setFlags:(GSubprocessFlags)flags
 {
-	g_subprocess_launcher_set_flags([self castedGObject], flags);
+	g_subprocess_launcher_set_flags((GSubprocessLauncher*)[self castedGObject], flags);
 }
 
 - (void)setStderrFilePath:(OFString*)path
 {
-	g_subprocess_launcher_set_stderr_file_path([self castedGObject], [path UTF8String]);
+	g_subprocess_launcher_set_stderr_file_path((GSubprocessLauncher*)[self castedGObject], [path UTF8String]);
 }
 
 - (void)setStdinFilePath:(OFString*)path
 {
-	g_subprocess_launcher_set_stdin_file_path([self castedGObject], [path UTF8String]);
+	g_subprocess_launcher_set_stdin_file_path((GSubprocessLauncher*)[self castedGObject], [path UTF8String]);
 }
 
 - (void)setStdoutFilePath:(OFString*)path
 {
-	g_subprocess_launcher_set_stdout_file_path([self castedGObject], [path UTF8String]);
+	g_subprocess_launcher_set_stdout_file_path((GSubprocessLauncher*)[self castedGObject], [path UTF8String]);
 }
 
 - (void)setenvWithVariable:(OFString*)variable value:(OFString*)value overwrite:(bool)overwrite
 {
-	g_subprocess_launcher_setenv([self castedGObject], [variable UTF8String], [value UTF8String], overwrite);
+	g_subprocess_launcher_setenv((GSubprocessLauncher*)[self castedGObject], [variable UTF8String], [value UTF8String], overwrite);
 }
 
 - (OGSubprocess*)spawnvWithArgv:(const gchar* const*)argv
 {
 	GError* err = NULL;
 
-	GSubprocess* gobjectValue = g_subprocess_launcher_spawnv([self castedGObject], argv, &err);
+	GSubprocess* gobjectValue = g_subprocess_launcher_spawnv((GSubprocessLauncher*)[self castedGObject], argv, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -125,27 +125,27 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)takeFdWithSourceFd:(gint)sourceFd targetFd:(gint)targetFd
 {
-	g_subprocess_launcher_take_fd([self castedGObject], sourceFd, targetFd);
+	g_subprocess_launcher_take_fd((GSubprocessLauncher*)[self castedGObject], sourceFd, targetFd);
 }
 
 - (void)takeStderrFd:(gint)fd
 {
-	g_subprocess_launcher_take_stderr_fd([self castedGObject], fd);
+	g_subprocess_launcher_take_stderr_fd((GSubprocessLauncher*)[self castedGObject], fd);
 }
 
 - (void)takeStdinFd:(gint)fd
 {
-	g_subprocess_launcher_take_stdin_fd([self castedGObject], fd);
+	g_subprocess_launcher_take_stdin_fd((GSubprocessLauncher*)[self castedGObject], fd);
 }
 
 - (void)takeStdoutFd:(gint)fd
 {
-	g_subprocess_launcher_take_stdout_fd([self castedGObject], fd);
+	g_subprocess_launcher_take_stdout_fd((GSubprocessLauncher*)[self castedGObject], fd);
 }
 
 - (void)unsetenvWithVariable:(OFString*)variable
 {
-	g_subprocess_launcher_unsetenv([self castedGObject], [variable UTF8String]);
+	g_subprocess_launcher_unsetenv((GSubprocessLauncher*)[self castedGObject], [variable UTF8String]);
 }
 
 

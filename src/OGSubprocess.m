@@ -66,7 +66,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_subprocess_communicate([self castedGObject], stdinBuf, [cancellable castedGObject], stdoutBuf, stderrBuf, &err);
+	bool returnValue = (bool)g_subprocess_communicate((GSubprocess*)[self castedGObject], stdinBuf, [cancellable castedGObject], stdoutBuf, stderrBuf, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -75,14 +75,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)communicateAsyncWithStdinBuf:(GBytes*)stdinBuf cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_subprocess_communicate_async([self castedGObject], stdinBuf, [cancellable castedGObject], callback, userData);
+	g_subprocess_communicate_async((GSubprocess*)[self castedGObject], stdinBuf, [cancellable castedGObject], callback, userData);
 }
 
 - (bool)communicateFinishWithResult:(GAsyncResult*)result stdoutBuf:(GBytes**)stdoutBuf stderrBuf:(GBytes**)stderrBuf
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_subprocess_communicate_finish([self castedGObject], result, stdoutBuf, stderrBuf, &err);
+	bool returnValue = (bool)g_subprocess_communicate_finish((GSubprocess*)[self castedGObject], result, stdoutBuf, stderrBuf, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -93,7 +93,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_subprocess_communicate_utf8([self castedGObject], [stdinBuf UTF8String], [cancellable castedGObject], stdoutBuf, stderrBuf, &err);
+	bool returnValue = (bool)g_subprocess_communicate_utf8((GSubprocess*)[self castedGObject], [stdinBuf UTF8String], [cancellable castedGObject], stdoutBuf, stderrBuf, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -102,14 +102,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)communicateUtf8AsyncWithStdinBuf:(OFString*)stdinBuf cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_subprocess_communicate_utf8_async([self castedGObject], [stdinBuf UTF8String], [cancellable castedGObject], callback, userData);
+	g_subprocess_communicate_utf8_async((GSubprocess*)[self castedGObject], [stdinBuf UTF8String], [cancellable castedGObject], callback, userData);
 }
 
 - (bool)communicateUtf8FinishWithResult:(GAsyncResult*)result stdoutBuf:(char**)stdoutBuf stderrBuf:(char**)stderrBuf
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_subprocess_communicate_utf8_finish([self castedGObject], result, stdoutBuf, stderrBuf, &err);
+	bool returnValue = (bool)g_subprocess_communicate_utf8_finish((GSubprocess*)[self castedGObject], result, stdoutBuf, stderrBuf, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -118,19 +118,19 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)forceExit
 {
-	g_subprocess_force_exit([self castedGObject]);
+	g_subprocess_force_exit((GSubprocess*)[self castedGObject]);
 }
 
 - (gint)exitStatus
 {
-	gint returnValue = (gint)g_subprocess_get_exit_status([self castedGObject]);
+	gint returnValue = (gint)g_subprocess_get_exit_status((GSubprocess*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)identifier
 {
-	const gchar* gobjectValue = g_subprocess_get_identifier([self castedGObject]);
+	const gchar* gobjectValue = g_subprocess_get_identifier((GSubprocess*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -138,28 +138,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)ifExited
 {
-	bool returnValue = (bool)g_subprocess_get_if_exited([self castedGObject]);
+	bool returnValue = (bool)g_subprocess_get_if_exited((GSubprocess*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)ifSignaled
 {
-	bool returnValue = (bool)g_subprocess_get_if_signaled([self castedGObject]);
+	bool returnValue = (bool)g_subprocess_get_if_signaled((GSubprocess*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gint)status
 {
-	gint returnValue = (gint)g_subprocess_get_status([self castedGObject]);
+	gint returnValue = (gint)g_subprocess_get_status((GSubprocess*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OGInputStream*)stderrPipe
 {
-	GInputStream* gobjectValue = g_subprocess_get_stderr_pipe([self castedGObject]);
+	GInputStream* gobjectValue = g_subprocess_get_stderr_pipe((GSubprocess*)[self castedGObject]);
 
 	OGInputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -167,7 +167,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGOutputStream*)stdinPipe
 {
-	GOutputStream* gobjectValue = g_subprocess_get_stdin_pipe([self castedGObject]);
+	GOutputStream* gobjectValue = g_subprocess_get_stdin_pipe((GSubprocess*)[self castedGObject]);
 
 	OGOutputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -175,7 +175,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGInputStream*)stdoutPipe
 {
-	GInputStream* gobjectValue = g_subprocess_get_stdout_pipe([self castedGObject]);
+	GInputStream* gobjectValue = g_subprocess_get_stdout_pipe((GSubprocess*)[self castedGObject]);
 
 	OGInputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -183,28 +183,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)successful
 {
-	bool returnValue = (bool)g_subprocess_get_successful([self castedGObject]);
+	bool returnValue = (bool)g_subprocess_get_successful((GSubprocess*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gint)termSig
 {
-	gint returnValue = (gint)g_subprocess_get_term_sig([self castedGObject]);
+	gint returnValue = (gint)g_subprocess_get_term_sig((GSubprocess*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)sendSignalWithSignalNum:(gint)signalNum
 {
-	g_subprocess_send_signal([self castedGObject], signalNum);
+	g_subprocess_send_signal((GSubprocess*)[self castedGObject], signalNum);
 }
 
 - (bool)waitWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_subprocess_wait([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_subprocess_wait((GSubprocess*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -213,14 +213,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)waitAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_subprocess_wait_async([self castedGObject], [cancellable castedGObject], callback, userData);
+	g_subprocess_wait_async((GSubprocess*)[self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (bool)waitCheckWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_subprocess_wait_check([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_subprocess_wait_check((GSubprocess*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -229,14 +229,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)waitCheckAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_subprocess_wait_check_async([self castedGObject], [cancellable castedGObject], callback, userData);
+	g_subprocess_wait_check_async((GSubprocess*)[self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (bool)waitCheckFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_subprocess_wait_check_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_subprocess_wait_check_finish((GSubprocess*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -247,7 +247,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_subprocess_wait_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_subprocess_wait_finish((GSubprocess*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 

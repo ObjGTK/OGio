@@ -56,52 +56,52 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)addButtonWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction
 {
-	g_notification_add_button([self castedGObject], [label UTF8String], [detailedAction UTF8String]);
+	g_notification_add_button((GNotification*)[self castedGObject], [label UTF8String], [detailedAction UTF8String]);
 }
 
 - (void)addButtonWithTargetValueWithLabel:(OFString*)label action:(OFString*)action target:(GVariant*)target
 {
-	g_notification_add_button_with_target_value([self castedGObject], [label UTF8String], [action UTF8String], target);
+	g_notification_add_button_with_target_value((GNotification*)[self castedGObject], [label UTF8String], [action UTF8String], target);
 }
 
 - (void)setBody:(OFString*)body
 {
-	g_notification_set_body([self castedGObject], [body UTF8String]);
+	g_notification_set_body((GNotification*)[self castedGObject], [body UTF8String]);
 }
 
 - (void)setCategory:(OFString*)category
 {
-	g_notification_set_category([self castedGObject], [category UTF8String]);
+	g_notification_set_category((GNotification*)[self castedGObject], [category UTF8String]);
 }
 
 - (void)setDefaultActionWithDetailedAction:(OFString*)detailedAction
 {
-	g_notification_set_default_action([self castedGObject], [detailedAction UTF8String]);
+	g_notification_set_default_action((GNotification*)[self castedGObject], [detailedAction UTF8String]);
 }
 
 - (void)setDefaultActionAndTargetValue:(OFString*)action target:(GVariant*)target
 {
-	g_notification_set_default_action_and_target_value([self castedGObject], [action UTF8String], target);
+	g_notification_set_default_action_and_target_value((GNotification*)[self castedGObject], [action UTF8String], target);
 }
 
 - (void)setIcon:(GIcon*)icon
 {
-	g_notification_set_icon([self castedGObject], icon);
+	g_notification_set_icon((GNotification*)[self castedGObject], icon);
 }
 
 - (void)setPriority:(GNotificationPriority)priority
 {
-	g_notification_set_priority([self castedGObject], priority);
+	g_notification_set_priority((GNotification*)[self castedGObject], priority);
 }
 
 - (void)setTitle:(OFString*)title
 {
-	g_notification_set_title([self castedGObject], [title UTF8String]);
+	g_notification_set_title((GNotification*)[self castedGObject], [title UTF8String]);
 }
 
 - (void)setUrgent:(bool)urgent
 {
-	g_notification_set_urgent([self castedGObject], urgent);
+	g_notification_set_urgent((GNotification*)[self castedGObject], urgent);
 }
 
 

@@ -36,26 +36,26 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)cancel
 {
-	bool returnValue = (bool)g_file_monitor_cancel([self castedGObject]);
+	bool returnValue = (bool)g_file_monitor_cancel((GFileMonitor*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)emitEventWithChild:(GFile*)child otherFile:(GFile*)otherFile eventType:(GFileMonitorEvent)eventType
 {
-	g_file_monitor_emit_event([self castedGObject], child, otherFile, eventType);
+	g_file_monitor_emit_event((GFileMonitor*)[self castedGObject], child, otherFile, eventType);
 }
 
 - (bool)isCancelled
 {
-	bool returnValue = (bool)g_file_monitor_is_cancelled([self castedGObject]);
+	bool returnValue = (bool)g_file_monitor_is_cancelled((GFileMonitor*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)setRateLimitWithLimitMsecs:(gint)limitMsecs
 {
-	g_file_monitor_set_rate_limit([self castedGObject], limitMsecs);
+	g_file_monitor_set_rate_limit((GFileMonitor*)[self castedGObject], limitMsecs);
 }
 
 

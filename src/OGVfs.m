@@ -52,49 +52,49 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GFile*)fileForPath:(OFString*)path
 {
-	GFile* returnValue = (GFile*)g_vfs_get_file_for_path([self castedGObject], [path UTF8String]);
+	GFile* returnValue = (GFile*)g_vfs_get_file_for_path((GVfs*)[self castedGObject], [path UTF8String]);
 
 	return returnValue;
 }
 
 - (GFile*)fileForUri:(OFString*)uri
 {
-	GFile* returnValue = (GFile*)g_vfs_get_file_for_uri([self castedGObject], [uri UTF8String]);
+	GFile* returnValue = (GFile*)g_vfs_get_file_for_uri((GVfs*)[self castedGObject], [uri UTF8String]);
 
 	return returnValue;
 }
 
 - (const gchar* const*)supportedUriSchemes
 {
-	const gchar* const* returnValue = (const gchar* const*)g_vfs_get_supported_uri_schemes([self castedGObject]);
+	const gchar* const* returnValue = (const gchar* const*)g_vfs_get_supported_uri_schemes((GVfs*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isActive
 {
-	bool returnValue = (bool)g_vfs_is_active([self castedGObject]);
+	bool returnValue = (bool)g_vfs_is_active((GVfs*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GFile*)parseName:(OFString*)parseName
 {
-	GFile* returnValue = (GFile*)g_vfs_parse_name([self castedGObject], [parseName UTF8String]);
+	GFile* returnValue = (GFile*)g_vfs_parse_name((GVfs*)[self castedGObject], [parseName UTF8String]);
 
 	return returnValue;
 }
 
 - (bool)registerUriScheme:(OFString*)scheme uriFunc:(GVfsFileLookupFunc)uriFunc uriData:(gpointer)uriData uriDestroy:(GDestroyNotify)uriDestroy parseNameFunc:(GVfsFileLookupFunc)parseNameFunc parseNameData:(gpointer)parseNameData parseNameDestroy:(GDestroyNotify)parseNameDestroy
 {
-	bool returnValue = (bool)g_vfs_register_uri_scheme([self castedGObject], [scheme UTF8String], uriFunc, uriData, uriDestroy, parseNameFunc, parseNameData, parseNameDestroy);
+	bool returnValue = (bool)g_vfs_register_uri_scheme((GVfs*)[self castedGObject], [scheme UTF8String], uriFunc, uriData, uriDestroy, parseNameFunc, parseNameData, parseNameDestroy);
 
 	return returnValue;
 }
 
 - (bool)unregisterUriScheme:(OFString*)scheme
 {
-	bool returnValue = (bool)g_vfs_unregister_uri_scheme([self castedGObject], [scheme UTF8String]);
+	bool returnValue = (bool)g_vfs_unregister_uri_scheme((GVfs*)[self castedGObject], [scheme UTF8String]);
 
 	return returnValue;
 }

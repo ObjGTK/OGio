@@ -43,17 +43,17 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setDefaultProxy:(OFString*)defaultProxy
 {
-	g_simple_proxy_resolver_set_default_proxy([self castedGObject], [defaultProxy UTF8String]);
+	g_simple_proxy_resolver_set_default_proxy((GSimpleProxyResolver*)[self castedGObject], [defaultProxy UTF8String]);
 }
 
 - (void)setIgnoreHosts:(gchar**)ignoreHosts
 {
-	g_simple_proxy_resolver_set_ignore_hosts([self castedGObject], ignoreHosts);
+	g_simple_proxy_resolver_set_ignore_hosts((GSimpleProxyResolver*)[self castedGObject], ignoreHosts);
 }
 
 - (void)setUriProxyWithUriScheme:(OFString*)uriScheme proxy:(OFString*)proxy
 {
-	g_simple_proxy_resolver_set_uri_proxy([self castedGObject], [uriScheme UTF8String], [proxy UTF8String]);
+	g_simple_proxy_resolver_set_uri_proxy((GSimpleProxyResolver*)[self castedGObject], [uriScheme UTF8String], [proxy UTF8String]);
 }
 
 

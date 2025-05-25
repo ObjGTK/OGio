@@ -56,19 +56,19 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)isActive
 {
-	bool returnValue = (bool)g_socket_service_is_active([self castedGObject]);
+	bool returnValue = (bool)g_socket_service_is_active((GSocketService*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)start
 {
-	g_socket_service_start([self castedGObject]);
+	g_socket_service_start((GSocketService*)[self castedGObject]);
 }
 
 - (void)stop
 {
-	g_socket_service_stop([self castedGObject]);
+	g_socket_service_stop((GSocketService*)[self castedGObject]);
 }
 
 

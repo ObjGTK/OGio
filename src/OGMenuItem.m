@@ -118,14 +118,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GVariant*)attributeValueWithAttribute:(OFString*)attribute expectedType:(const GVariantType*)expectedType
 {
-	GVariant* returnValue = (GVariant*)g_menu_item_get_attribute_value([self castedGObject], [attribute UTF8String], expectedType);
+	GVariant* returnValue = (GVariant*)g_menu_item_get_attribute_value((GMenuItem*)[self castedGObject], [attribute UTF8String], expectedType);
 
 	return returnValue;
 }
 
 - (OGMenuModel*)linkWithLink:(OFString*)link
 {
-	GMenuModel* gobjectValue = g_menu_item_get_link([self castedGObject], [link UTF8String]);
+	GMenuModel* gobjectValue = g_menu_item_get_link((GMenuItem*)[self castedGObject], [link UTF8String]);
 
 	OGMenuModel* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -135,42 +135,42 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setActionAndTargetValue:(OFString*)action targetValue:(GVariant*)targetValue
 {
-	g_menu_item_set_action_and_target_value([self castedGObject], [action UTF8String], targetValue);
+	g_menu_item_set_action_and_target_value((GMenuItem*)[self castedGObject], [action UTF8String], targetValue);
 }
 
 - (void)setAttributeValue:(OFString*)attribute value:(GVariant*)value
 {
-	g_menu_item_set_attribute_value([self castedGObject], [attribute UTF8String], value);
+	g_menu_item_set_attribute_value((GMenuItem*)[self castedGObject], [attribute UTF8String], value);
 }
 
 - (void)setDetailedAction:(OFString*)detailedAction
 {
-	g_menu_item_set_detailed_action([self castedGObject], [detailedAction UTF8String]);
+	g_menu_item_set_detailed_action((GMenuItem*)[self castedGObject], [detailedAction UTF8String]);
 }
 
 - (void)setIcon:(GIcon*)icon
 {
-	g_menu_item_set_icon([self castedGObject], icon);
+	g_menu_item_set_icon((GMenuItem*)[self castedGObject], icon);
 }
 
 - (void)setLabel:(OFString*)label
 {
-	g_menu_item_set_label([self castedGObject], [label UTF8String]);
+	g_menu_item_set_label((GMenuItem*)[self castedGObject], [label UTF8String]);
 }
 
 - (void)setLink:(OFString*)link model:(OGMenuModel*)model
 {
-	g_menu_item_set_link([self castedGObject], [link UTF8String], [model castedGObject]);
+	g_menu_item_set_link((GMenuItem*)[self castedGObject], [link UTF8String], [model castedGObject]);
 }
 
 - (void)setSection:(OGMenuModel*)section
 {
-	g_menu_item_set_section([self castedGObject], [section castedGObject]);
+	g_menu_item_set_section((GMenuItem*)[self castedGObject], [section castedGObject]);
 }
 
 - (void)setSubmenu:(OGMenuModel*)submenu
 {
-	g_menu_item_set_submenu([self castedGObject], [submenu castedGObject]);
+	g_menu_item_set_submenu((GMenuItem*)[self castedGObject], [submenu castedGObject]);
 }
 
 

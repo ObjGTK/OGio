@@ -39,7 +39,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)etag
 {
-	char* gobjectValue = g_file_io_stream_get_etag([self castedGObject]);
+	char* gobjectValue = g_file_io_stream_get_etag((GFileIOStream*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -49,7 +49,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = g_file_io_stream_query_info([self castedGObject], [attributes UTF8String], [cancellable castedGObject], &err);
+	GFileInfo* gobjectValue = g_file_io_stream_query_info((GFileIOStream*)[self castedGObject], [attributes UTF8String], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -61,14 +61,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)queryInfoAsyncWithAttributes:(OFString*)attributes ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_file_io_stream_query_info_async([self castedGObject], [attributes UTF8String], ioPriority, [cancellable castedGObject], callback, userData);
+	g_file_io_stream_query_info_async((GFileIOStream*)[self castedGObject], [attributes UTF8String], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (OGFileInfo*)queryInfoFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = g_file_io_stream_query_info_finish([self castedGObject], result, &err);
+	GFileInfo* gobjectValue = g_file_io_stream_query_info_finish((GFileIOStream*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 

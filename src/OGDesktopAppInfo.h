@@ -74,8 +74,13 @@
 + (gchar***)searchWithSearchString:(OFString*)searchString;
 
 /**
- * do not use this API.  Since 2.42 the value of the
- * `XDG_CURRENT_DESKTOP` environment variable will be used.
+ * Sets the name of the desktop that the application is running in.
+ * This is used by g_app_info_should_show() and
+ * g_desktop_app_info_get_show_in() to evaluate the
+ * `OnlyShowIn` and `NotShowIn`
+ * desktop entry fields.
+ * 
+ * Should be called only once; subsequent calls are ignored.
  *
  * @param desktopEnv a string specifying what desktop this is
  */

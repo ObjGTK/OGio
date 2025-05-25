@@ -80,7 +80,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_unix_fd_message_append_fd([self castedGObject], fd, &err);
+	bool returnValue = (bool)g_unix_fd_message_append_fd((GUnixFDMessage*)[self castedGObject], fd, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -89,7 +89,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGUnixFDList*)fdList
 {
-	GUnixFDList* gobjectValue = g_unix_fd_message_get_fd_list([self castedGObject]);
+	GUnixFDList* gobjectValue = g_unix_fd_message_get_fd_list((GUnixFDMessage*)[self castedGObject]);
 
 	OGUnixFDList* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -97,7 +97,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (gint*)stealFdsWithLength:(gint*)length
 {
-	gint* returnValue = (gint*)g_unix_fd_message_steal_fds([self castedGObject], length);
+	gint* returnValue = (gint*)g_unix_fd_message_steal_fds((GUnixFDMessage*)[self castedGObject], length);
 
 	return returnValue;
 }

@@ -36,7 +36,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGInputStream*)baseStream
 {
-	GInputStream* gobjectValue = g_filter_input_stream_get_base_stream([self castedGObject]);
+	GInputStream* gobjectValue = g_filter_input_stream_get_base_stream((GFilterInputStream*)[self castedGObject]);
 
 	OGInputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -44,14 +44,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)closeBaseStream
 {
-	bool returnValue = (bool)g_filter_input_stream_get_close_base_stream([self castedGObject]);
+	bool returnValue = (bool)g_filter_input_stream_get_close_base_stream((GFilterInputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)setCloseBaseStream:(bool)closeBase
 {
-	g_filter_input_stream_set_close_base_stream([self castedGObject], closeBase);
+	g_filter_input_stream_set_close_base_stream((GFilterInputStream*)[self castedGObject], closeBase);
 }
 
 

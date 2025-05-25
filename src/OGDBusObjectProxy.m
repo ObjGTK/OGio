@@ -58,7 +58,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = g_dbus_object_proxy_get_connection([self castedGObject]);
+	GDBusConnection* gobjectValue = g_dbus_object_proxy_get_connection((GDBusObjectProxy*)[self castedGObject]);
 
 	OGDBusConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;

@@ -41,7 +41,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = g_socket_address_enumerator_next([self castedGObject], [cancellable castedGObject], &err);
+	GSocketAddress* gobjectValue = g_socket_address_enumerator_next((GSocketAddressEnumerator*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -53,14 +53,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)nextAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_socket_address_enumerator_next_async([self castedGObject], [cancellable castedGObject], callback, userData);
+	g_socket_address_enumerator_next_async((GSocketAddressEnumerator*)[self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (OGSocketAddress*)nextFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = g_socket_address_enumerator_next_finish([self castedGObject], result, &err);
+	GSocketAddress* gobjectValue = g_socket_address_enumerator_next_finish((GSocketAddressEnumerator*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 

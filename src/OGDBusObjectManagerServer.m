@@ -59,17 +59,17 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)exportWithObject:(OGDBusObjectSkeleton*)object
 {
-	g_dbus_object_manager_server_export([self castedGObject], [object castedGObject]);
+	g_dbus_object_manager_server_export((GDBusObjectManagerServer*)[self castedGObject], [object castedGObject]);
 }
 
 - (void)exportUniquelyWithObject:(OGDBusObjectSkeleton*)object
 {
-	g_dbus_object_manager_server_export_uniquely([self castedGObject], [object castedGObject]);
+	g_dbus_object_manager_server_export_uniquely((GDBusObjectManagerServer*)[self castedGObject], [object castedGObject]);
 }
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = g_dbus_object_manager_server_get_connection([self castedGObject]);
+	GDBusConnection* gobjectValue = g_dbus_object_manager_server_get_connection((GDBusObjectManagerServer*)[self castedGObject]);
 
 	OGDBusConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -79,19 +79,19 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)isExportedWithObject:(OGDBusObjectSkeleton*)object
 {
-	bool returnValue = (bool)g_dbus_object_manager_server_is_exported([self castedGObject], [object castedGObject]);
+	bool returnValue = (bool)g_dbus_object_manager_server_is_exported((GDBusObjectManagerServer*)[self castedGObject], [object castedGObject]);
 
 	return returnValue;
 }
 
 - (void)setConnection:(OGDBusConnection*)connection
 {
-	g_dbus_object_manager_server_set_connection([self castedGObject], [connection castedGObject]);
+	g_dbus_object_manager_server_set_connection((GDBusObjectManagerServer*)[self castedGObject], [connection castedGObject]);
 }
 
 - (bool)unexportWithObjectPath:(OFString*)objectPath
 {
-	bool returnValue = (bool)g_dbus_object_manager_server_unexport([self castedGObject], [objectPath UTF8String]);
+	bool returnValue = (bool)g_dbus_object_manager_server_unexport((GDBusObjectManagerServer*)[self castedGObject], [objectPath UTF8String]);
 
 	return returnValue;
 }

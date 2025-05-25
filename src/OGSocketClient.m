@@ -60,14 +60,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)addApplicationProxyWithProtocol:(OFString*)protocol
 {
-	g_socket_client_add_application_proxy([self castedGObject], [protocol UTF8String]);
+	g_socket_client_add_application_proxy((GSocketClient*)[self castedGObject], [protocol UTF8String]);
 }
 
 - (OGSocketConnection*)connectWithConnectable:(GSocketConnectable*)connectable cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_client_connect([self castedGObject], connectable, [cancellable castedGObject], &err);
+	GSocketConnection* gobjectValue = g_socket_client_connect((GSocketClient*)[self castedGObject], connectable, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -79,14 +79,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)connectAsyncWithConnectable:(GSocketConnectable*)connectable cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_socket_client_connect_async([self castedGObject], connectable, [cancellable castedGObject], callback, userData);
+	g_socket_client_connect_async((GSocketClient*)[self castedGObject], connectable, [cancellable castedGObject], callback, userData);
 }
 
 - (OGSocketConnection*)connectFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_client_connect_finish([self castedGObject], result, &err);
+	GSocketConnection* gobjectValue = g_socket_client_connect_finish((GSocketClient*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -100,7 +100,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_client_connect_to_host([self castedGObject], [hostAndPort UTF8String], defaultPort, [cancellable castedGObject], &err);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_host((GSocketClient*)[self castedGObject], [hostAndPort UTF8String], defaultPort, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -112,14 +112,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)connectToHostAsyncWithHostAndPort:(OFString*)hostAndPort defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_socket_client_connect_to_host_async([self castedGObject], [hostAndPort UTF8String], defaultPort, [cancellable castedGObject], callback, userData);
+	g_socket_client_connect_to_host_async((GSocketClient*)[self castedGObject], [hostAndPort UTF8String], defaultPort, [cancellable castedGObject], callback, userData);
 }
 
 - (OGSocketConnection*)connectToHostFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_client_connect_to_host_finish([self castedGObject], result, &err);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_host_finish((GSocketClient*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -133,7 +133,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_client_connect_to_service([self castedGObject], [domain UTF8String], [service UTF8String], [cancellable castedGObject], &err);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_service((GSocketClient*)[self castedGObject], [domain UTF8String], [service UTF8String], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -145,14 +145,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)connectToServiceAsyncWithDomain:(OFString*)domain service:(OFString*)service cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_socket_client_connect_to_service_async([self castedGObject], [domain UTF8String], [service UTF8String], [cancellable castedGObject], callback, userData);
+	g_socket_client_connect_to_service_async((GSocketClient*)[self castedGObject], [domain UTF8String], [service UTF8String], [cancellable castedGObject], callback, userData);
 }
 
 - (OGSocketConnection*)connectToServiceFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_client_connect_to_service_finish([self castedGObject], result, &err);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_service_finish((GSocketClient*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -166,7 +166,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_client_connect_to_uri([self castedGObject], [uri UTF8String], defaultPort, [cancellable castedGObject], &err);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_uri((GSocketClient*)[self castedGObject], [uri UTF8String], defaultPort, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -178,14 +178,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)connectToUriAsync:(OFString*)uri defaultPort:(guint16)defaultPort cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_socket_client_connect_to_uri_async([self castedGObject], [uri UTF8String], defaultPort, [cancellable castedGObject], callback, userData);
+	g_socket_client_connect_to_uri_async((GSocketClient*)[self castedGObject], [uri UTF8String], defaultPort, [cancellable castedGObject], callback, userData);
 }
 
 - (OGSocketConnection*)connectToUriFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_client_connect_to_uri_finish([self castedGObject], result, &err);
+	GSocketConnection* gobjectValue = g_socket_client_connect_to_uri_finish((GSocketClient*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -197,21 +197,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)enableProxy
 {
-	bool returnValue = (bool)g_socket_client_get_enable_proxy([self castedGObject]);
+	bool returnValue = (bool)g_socket_client_get_enable_proxy((GSocketClient*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GSocketFamily)family
 {
-	GSocketFamily returnValue = (GSocketFamily)g_socket_client_get_family([self castedGObject]);
+	GSocketFamily returnValue = (GSocketFamily)g_socket_client_get_family((GSocketClient*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OGSocketAddress*)localAddress
 {
-	GSocketAddress* gobjectValue = g_socket_client_get_local_address([self castedGObject]);
+	GSocketAddress* gobjectValue = g_socket_client_get_local_address((GSocketClient*)[self castedGObject]);
 
 	OGSocketAddress* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -219,89 +219,89 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GSocketProtocol)protocol
 {
-	GSocketProtocol returnValue = (GSocketProtocol)g_socket_client_get_protocol([self castedGObject]);
+	GSocketProtocol returnValue = (GSocketProtocol)g_socket_client_get_protocol((GSocketClient*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GProxyResolver*)proxyResolver
 {
-	GProxyResolver* returnValue = (GProxyResolver*)g_socket_client_get_proxy_resolver([self castedGObject]);
+	GProxyResolver* returnValue = (GProxyResolver*)g_socket_client_get_proxy_resolver((GSocketClient*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GSocketType)socketType
 {
-	GSocketType returnValue = (GSocketType)g_socket_client_get_socket_type([self castedGObject]);
+	GSocketType returnValue = (GSocketType)g_socket_client_get_socket_type((GSocketClient*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint)timeout
 {
-	guint returnValue = (guint)g_socket_client_get_timeout([self castedGObject]);
+	guint returnValue = (guint)g_socket_client_get_timeout((GSocketClient*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)tls
 {
-	bool returnValue = (bool)g_socket_client_get_tls([self castedGObject]);
+	bool returnValue = (bool)g_socket_client_get_tls((GSocketClient*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GTlsCertificateFlags)tlsValidationFlags
 {
-	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_socket_client_get_tls_validation_flags([self castedGObject]);
+	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_socket_client_get_tls_validation_flags((GSocketClient*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)setEnableProxy:(bool)enable
 {
-	g_socket_client_set_enable_proxy([self castedGObject], enable);
+	g_socket_client_set_enable_proxy((GSocketClient*)[self castedGObject], enable);
 }
 
 - (void)setFamily:(GSocketFamily)family
 {
-	g_socket_client_set_family([self castedGObject], family);
+	g_socket_client_set_family((GSocketClient*)[self castedGObject], family);
 }
 
 - (void)setLocalAddress:(OGSocketAddress*)address
 {
-	g_socket_client_set_local_address([self castedGObject], [address castedGObject]);
+	g_socket_client_set_local_address((GSocketClient*)[self castedGObject], [address castedGObject]);
 }
 
 - (void)setProtocol:(GSocketProtocol)protocol
 {
-	g_socket_client_set_protocol([self castedGObject], protocol);
+	g_socket_client_set_protocol((GSocketClient*)[self castedGObject], protocol);
 }
 
 - (void)setProxyResolver:(GProxyResolver*)proxyResolver
 {
-	g_socket_client_set_proxy_resolver([self castedGObject], proxyResolver);
+	g_socket_client_set_proxy_resolver((GSocketClient*)[self castedGObject], proxyResolver);
 }
 
 - (void)setSocketType:(GSocketType)type
 {
-	g_socket_client_set_socket_type([self castedGObject], type);
+	g_socket_client_set_socket_type((GSocketClient*)[self castedGObject], type);
 }
 
 - (void)setTimeout:(guint)timeout
 {
-	g_socket_client_set_timeout([self castedGObject], timeout);
+	g_socket_client_set_timeout((GSocketClient*)[self castedGObject], timeout);
 }
 
 - (void)setTls:(bool)tls
 {
-	g_socket_client_set_tls([self castedGObject], tls);
+	g_socket_client_set_tls((GSocketClient*)[self castedGObject], tls);
 }
 
 - (void)setTlsValidationFlags:(GTlsCertificateFlags)flags
 {
-	g_socket_client_set_tls_validation_flags([self castedGObject], flags);
+	g_socket_client_set_tls_validation_flags((GSocketClient*)[self castedGObject], flags);
 }
 
 

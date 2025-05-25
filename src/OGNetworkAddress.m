@@ -98,7 +98,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)hostname
 {
-	const gchar* gobjectValue = g_network_address_get_hostname([self castedGObject]);
+	const gchar* gobjectValue = g_network_address_get_hostname((GNetworkAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -106,14 +106,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (guint16)port
 {
-	guint16 returnValue = (guint16)g_network_address_get_port([self castedGObject]);
+	guint16 returnValue = (guint16)g_network_address_get_port((GNetworkAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)scheme
 {
-	const gchar* gobjectValue = g_network_address_get_scheme([self castedGObject]);
+	const gchar* gobjectValue = g_network_address_get_scheme((GNetworkAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;

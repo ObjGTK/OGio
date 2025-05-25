@@ -105,38 +105,38 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)complete
 {
-	g_simple_async_result_complete([self castedGObject]);
+	g_simple_async_result_complete((GSimpleAsyncResult*)[self castedGObject]);
 }
 
 - (void)completeInIdle
 {
-	g_simple_async_result_complete_in_idle([self castedGObject]);
+	g_simple_async_result_complete_in_idle((GSimpleAsyncResult*)[self castedGObject]);
 }
 
 - (bool)opResGboolean
 {
-	bool returnValue = (bool)g_simple_async_result_get_op_res_gboolean([self castedGObject]);
+	bool returnValue = (bool)g_simple_async_result_get_op_res_gboolean((GSimpleAsyncResult*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gpointer)opResGpointer
 {
-	gpointer returnValue = (gpointer)g_simple_async_result_get_op_res_gpointer([self castedGObject]);
+	gpointer returnValue = (gpointer)g_simple_async_result_get_op_res_gpointer((GSimpleAsyncResult*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gssize)opResGssize
 {
-	gssize returnValue = (gssize)g_simple_async_result_get_op_res_gssize([self castedGObject]);
+	gssize returnValue = (gssize)g_simple_async_result_get_op_res_gssize((GSimpleAsyncResult*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gpointer)sourceTag
 {
-	gpointer returnValue = (gpointer)g_simple_async_result_get_source_tag([self castedGObject]);
+	gpointer returnValue = (gpointer)g_simple_async_result_get_source_tag((GSimpleAsyncResult*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -145,7 +145,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_simple_async_result_propagate_error([self castedGObject], &err);
+	bool returnValue = (bool)g_simple_async_result_propagate_error((GSimpleAsyncResult*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -154,47 +154,47 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)runInThreadWithFunc:(GSimpleAsyncThreadFunc)func ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable
 {
-	g_simple_async_result_run_in_thread([self castedGObject], func, ioPriority, [cancellable castedGObject]);
+	g_simple_async_result_run_in_thread((GSimpleAsyncResult*)[self castedGObject], func, ioPriority, [cancellable castedGObject]);
 }
 
 - (void)setCheckCancellable:(OGCancellable*)checkCancellable
 {
-	g_simple_async_result_set_check_cancellable([self castedGObject], [checkCancellable castedGObject]);
+	g_simple_async_result_set_check_cancellable((GSimpleAsyncResult*)[self castedGObject], [checkCancellable castedGObject]);
 }
 
 - (void)setErrorVaWithDomain:(GQuark)domain code:(gint)code format:(OFString*)format args:(va_list)args
 {
-	g_simple_async_result_set_error_va([self castedGObject], domain, code, [format UTF8String], args);
+	g_simple_async_result_set_error_va((GSimpleAsyncResult*)[self castedGObject], domain, code, [format UTF8String], args);
 }
 
 - (void)setFromError:(const GError*)error
 {
-	g_simple_async_result_set_from_error([self castedGObject], error);
+	g_simple_async_result_set_from_error((GSimpleAsyncResult*)[self castedGObject], error);
 }
 
 - (void)setHandleCancellation:(bool)handleCancellation
 {
-	g_simple_async_result_set_handle_cancellation([self castedGObject], handleCancellation);
+	g_simple_async_result_set_handle_cancellation((GSimpleAsyncResult*)[self castedGObject], handleCancellation);
 }
 
 - (void)setOpResGboolean:(bool)opRes
 {
-	g_simple_async_result_set_op_res_gboolean([self castedGObject], opRes);
+	g_simple_async_result_set_op_res_gboolean((GSimpleAsyncResult*)[self castedGObject], opRes);
 }
 
 - (void)setOpResGpointer:(gpointer)opRes destroyOpRes:(GDestroyNotify)destroyOpRes
 {
-	g_simple_async_result_set_op_res_gpointer([self castedGObject], opRes, destroyOpRes);
+	g_simple_async_result_set_op_res_gpointer((GSimpleAsyncResult*)[self castedGObject], opRes, destroyOpRes);
 }
 
 - (void)setOpResGssize:(gssize)opRes
 {
-	g_simple_async_result_set_op_res_gssize([self castedGObject], opRes);
+	g_simple_async_result_set_op_res_gssize((GSimpleAsyncResult*)[self castedGObject], opRes);
 }
 
 - (void)takeError:(GError*)error
 {
-	g_simple_async_result_take_error([self castedGObject], error);
+	g_simple_async_result_take_error((GSimpleAsyncResult*)[self castedGObject], error);
 }
 
 

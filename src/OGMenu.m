@@ -58,77 +58,77 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)appendWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction
 {
-	g_menu_append([self castedGObject], [label UTF8String], [detailedAction UTF8String]);
+	g_menu_append((GMenu*)[self castedGObject], [label UTF8String], [detailedAction UTF8String]);
 }
 
 - (void)appendItem:(OGMenuItem*)item
 {
-	g_menu_append_item([self castedGObject], [item castedGObject]);
+	g_menu_append_item((GMenu*)[self castedGObject], [item castedGObject]);
 }
 
 - (void)appendSectionWithLabel:(OFString*)label section:(OGMenuModel*)section
 {
-	g_menu_append_section([self castedGObject], [label UTF8String], [section castedGObject]);
+	g_menu_append_section((GMenu*)[self castedGObject], [label UTF8String], [section castedGObject]);
 }
 
 - (void)appendSubmenuWithLabel:(OFString*)label submenu:(OGMenuModel*)submenu
 {
-	g_menu_append_submenu([self castedGObject], [label UTF8String], [submenu castedGObject]);
+	g_menu_append_submenu((GMenu*)[self castedGObject], [label UTF8String], [submenu castedGObject]);
 }
 
 - (void)freeze
 {
-	g_menu_freeze([self castedGObject]);
+	g_menu_freeze((GMenu*)[self castedGObject]);
 }
 
 - (void)insertWithPosition:(gint)position label:(OFString*)label detailedAction:(OFString*)detailedAction
 {
-	g_menu_insert([self castedGObject], position, [label UTF8String], [detailedAction UTF8String]);
+	g_menu_insert((GMenu*)[self castedGObject], position, [label UTF8String], [detailedAction UTF8String]);
 }
 
 - (void)insertItemWithPosition:(gint)position item:(OGMenuItem*)item
 {
-	g_menu_insert_item([self castedGObject], position, [item castedGObject]);
+	g_menu_insert_item((GMenu*)[self castedGObject], position, [item castedGObject]);
 }
 
 - (void)insertSectionWithPosition:(gint)position label:(OFString*)label section:(OGMenuModel*)section
 {
-	g_menu_insert_section([self castedGObject], position, [label UTF8String], [section castedGObject]);
+	g_menu_insert_section((GMenu*)[self castedGObject], position, [label UTF8String], [section castedGObject]);
 }
 
 - (void)insertSubmenuWithPosition:(gint)position label:(OFString*)label submenu:(OGMenuModel*)submenu
 {
-	g_menu_insert_submenu([self castedGObject], position, [label UTF8String], [submenu castedGObject]);
+	g_menu_insert_submenu((GMenu*)[self castedGObject], position, [label UTF8String], [submenu castedGObject]);
 }
 
 - (void)prependWithLabel:(OFString*)label detailedAction:(OFString*)detailedAction
 {
-	g_menu_prepend([self castedGObject], [label UTF8String], [detailedAction UTF8String]);
+	g_menu_prepend((GMenu*)[self castedGObject], [label UTF8String], [detailedAction UTF8String]);
 }
 
 - (void)prependItem:(OGMenuItem*)item
 {
-	g_menu_prepend_item([self castedGObject], [item castedGObject]);
+	g_menu_prepend_item((GMenu*)[self castedGObject], [item castedGObject]);
 }
 
 - (void)prependSectionWithLabel:(OFString*)label section:(OGMenuModel*)section
 {
-	g_menu_prepend_section([self castedGObject], [label UTF8String], [section castedGObject]);
+	g_menu_prepend_section((GMenu*)[self castedGObject], [label UTF8String], [section castedGObject]);
 }
 
 - (void)prependSubmenuWithLabel:(OFString*)label submenu:(OGMenuModel*)submenu
 {
-	g_menu_prepend_submenu([self castedGObject], [label UTF8String], [submenu castedGObject]);
+	g_menu_prepend_submenu((GMenu*)[self castedGObject], [label UTF8String], [submenu castedGObject]);
 }
 
 - (void)removeWithPosition:(gint)position
 {
-	g_menu_remove([self castedGObject], position);
+	g_menu_remove((GMenu*)[self castedGObject], position);
 }
 
 - (void)removeAll
 {
-	g_menu_remove_all([self castedGObject]);
+	g_menu_remove_all((GMenu*)[self castedGObject]);
 }
 
 

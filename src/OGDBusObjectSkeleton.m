@@ -58,27 +58,27 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)addInterface:(OGDBusInterfaceSkeleton*)interface
 {
-	g_dbus_object_skeleton_add_interface([self castedGObject], [interface castedGObject]);
+	g_dbus_object_skeleton_add_interface((GDBusObjectSkeleton*)[self castedGObject], [interface castedGObject]);
 }
 
 - (void)flush
 {
-	g_dbus_object_skeleton_flush([self castedGObject]);
+	g_dbus_object_skeleton_flush((GDBusObjectSkeleton*)[self castedGObject]);
 }
 
 - (void)removeInterface:(OGDBusInterfaceSkeleton*)interface
 {
-	g_dbus_object_skeleton_remove_interface([self castedGObject], [interface castedGObject]);
+	g_dbus_object_skeleton_remove_interface((GDBusObjectSkeleton*)[self castedGObject], [interface castedGObject]);
 }
 
 - (void)removeInterfaceByNameWithInterfaceName:(OFString*)interfaceName
 {
-	g_dbus_object_skeleton_remove_interface_by_name([self castedGObject], [interfaceName UTF8String]);
+	g_dbus_object_skeleton_remove_interface_by_name((GDBusObjectSkeleton*)[self castedGObject], [interfaceName UTF8String]);
 }
 
 - (void)setObjectPath:(OFString*)objectPath
 {
-	g_dbus_object_skeleton_set_object_path([self castedGObject], [objectPath UTF8String]);
+	g_dbus_object_skeleton_set_object_path((GDBusObjectSkeleton*)[self castedGObject], [objectPath UTF8String]);
 }
 
 

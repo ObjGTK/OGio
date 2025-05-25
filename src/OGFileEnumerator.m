@@ -41,7 +41,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_file_enumerator_close([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_file_enumerator_close((GFileEnumerator*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -50,14 +50,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)closeAsyncWithIoPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_file_enumerator_close_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
+	g_file_enumerator_close_async((GFileEnumerator*)[self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (bool)closeFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_file_enumerator_close_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_file_enumerator_close_finish((GFileEnumerator*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -66,28 +66,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GFile*)childWithInfo:(OGFileInfo*)info
 {
-	GFile* returnValue = (GFile*)g_file_enumerator_get_child([self castedGObject], [info castedGObject]);
+	GFile* returnValue = (GFile*)g_file_enumerator_get_child((GFileEnumerator*)[self castedGObject], [info castedGObject]);
 
 	return returnValue;
 }
 
 - (GFile*)container
 {
-	GFile* returnValue = (GFile*)g_file_enumerator_get_container([self castedGObject]);
+	GFile* returnValue = (GFile*)g_file_enumerator_get_container((GFileEnumerator*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)hasPending
 {
-	bool returnValue = (bool)g_file_enumerator_has_pending([self castedGObject]);
+	bool returnValue = (bool)g_file_enumerator_has_pending((GFileEnumerator*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isClosed
 {
-	bool returnValue = (bool)g_file_enumerator_is_closed([self castedGObject]);
+	bool returnValue = (bool)g_file_enumerator_is_closed((GFileEnumerator*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -96,7 +96,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_file_enumerator_iterate([self castedGObject], outInfo, outChild, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_file_enumerator_iterate((GFileEnumerator*)[self castedGObject], outInfo, outChild, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -107,7 +107,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GFileInfo* gobjectValue = g_file_enumerator_next_file([self castedGObject], [cancellable castedGObject], &err);
+	GFileInfo* gobjectValue = g_file_enumerator_next_file((GFileEnumerator*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -119,14 +119,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)nextFilesAsyncWithNumFiles:(int)numFiles ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_file_enumerator_next_files_async([self castedGObject], numFiles, ioPriority, [cancellable castedGObject], callback, userData);
+	g_file_enumerator_next_files_async((GFileEnumerator*)[self castedGObject], numFiles, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (GList*)nextFilesFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_file_enumerator_next_files_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_file_enumerator_next_files_finish((GFileEnumerator*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -135,7 +135,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setPending:(bool)pending
 {
-	g_file_enumerator_set_pending([self castedGObject], pending);
+	g_file_enumerator_set_pending((GFileEnumerator*)[self castedGObject], pending);
 }
 
 

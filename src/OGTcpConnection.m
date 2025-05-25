@@ -36,14 +36,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)gracefulDisconnect
 {
-	bool returnValue = (bool)g_tcp_connection_get_graceful_disconnect([self castedGObject]);
+	bool returnValue = (bool)g_tcp_connection_get_graceful_disconnect((GTcpConnection*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)setGracefulDisconnect:(bool)gracefulDisconnect
 {
-	g_tcp_connection_set_graceful_disconnect([self castedGObject], gracefulDisconnect);
+	g_tcp_connection_set_graceful_disconnect((GTcpConnection*)[self castedGObject], gracefulDisconnect);
 }
 
 

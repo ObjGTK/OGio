@@ -59,7 +59,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GDataStreamByteOrder)byteOrder
 {
-	GDataStreamByteOrder returnValue = (GDataStreamByteOrder)g_data_output_stream_get_byte_order([self castedGObject]);
+	GDataStreamByteOrder returnValue = (GDataStreamByteOrder)g_data_output_stream_get_byte_order((GDataOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -68,7 +68,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_data_output_stream_put_byte([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_byte((GDataOutputStream*)[self castedGObject], data, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -79,7 +79,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_data_output_stream_put_int16([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_int16((GDataOutputStream*)[self castedGObject], data, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -90,7 +90,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_data_output_stream_put_int32([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_int32((GDataOutputStream*)[self castedGObject], data, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -101,7 +101,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_data_output_stream_put_int64([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_int64((GDataOutputStream*)[self castedGObject], data, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -112,7 +112,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_data_output_stream_put_string([self castedGObject], [str UTF8String], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_string((GDataOutputStream*)[self castedGObject], [str UTF8String], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -123,7 +123,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_data_output_stream_put_uint16([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_uint16((GDataOutputStream*)[self castedGObject], data, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -134,7 +134,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_data_output_stream_put_uint32([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_uint32((GDataOutputStream*)[self castedGObject], data, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -145,7 +145,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_data_output_stream_put_uint64([self castedGObject], data, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_data_output_stream_put_uint64((GDataOutputStream*)[self castedGObject], data, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -154,7 +154,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setByteOrder:(GDataStreamByteOrder)order
 {
-	g_data_output_stream_set_byte_order([self castedGObject], order);
+	g_data_output_stream_set_byte_order((GDataOutputStream*)[self castedGObject], order);
 }
 
 

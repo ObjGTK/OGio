@@ -85,7 +85,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGCredentials*)credentials
 {
-	GCredentials* gobjectValue = g_unix_credentials_message_get_credentials([self castedGObject]);
+	GCredentials* gobjectValue = g_unix_credentials_message_get_credentials((GUnixCredentialsMessage*)[self castedGObject]);
 
 	OGCredentials* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;

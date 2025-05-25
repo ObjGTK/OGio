@@ -135,7 +135,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GDBusMessage* gobjectValue = g_dbus_message_copy([self castedGObject], &err);
+	GDBusMessage* gobjectValue = g_dbus_message_copy((GDBusMessage*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -147,7 +147,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)arg0
 {
-	const gchar* gobjectValue = g_dbus_message_get_arg0([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_message_get_arg0((GDBusMessage*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -155,7 +155,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)arg0Path
 {
-	const gchar* gobjectValue = g_dbus_message_get_arg0_path([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_message_get_arg0_path((GDBusMessage*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -163,21 +163,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GVariant*)body
 {
-	GVariant* returnValue = (GVariant*)g_dbus_message_get_body([self castedGObject]);
+	GVariant* returnValue = (GVariant*)g_dbus_message_get_body((GDBusMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusMessageByteOrder)byteOrder
 {
-	GDBusMessageByteOrder returnValue = (GDBusMessageByteOrder)g_dbus_message_get_byte_order([self castedGObject]);
+	GDBusMessageByteOrder returnValue = (GDBusMessageByteOrder)g_dbus_message_get_byte_order((GDBusMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)destination
 {
-	const gchar* gobjectValue = g_dbus_message_get_destination([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_message_get_destination((GDBusMessage*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -185,7 +185,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)errorName
 {
-	const gchar* gobjectValue = g_dbus_message_get_error_name([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_message_get_error_name((GDBusMessage*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -193,28 +193,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GDBusMessageFlags)flags
 {
-	GDBusMessageFlags returnValue = (GDBusMessageFlags)g_dbus_message_get_flags([self castedGObject]);
+	GDBusMessageFlags returnValue = (GDBusMessageFlags)g_dbus_message_get_flags((GDBusMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GVariant*)headerWithHeaderField:(GDBusMessageHeaderField)headerField
 {
-	GVariant* returnValue = (GVariant*)g_dbus_message_get_header([self castedGObject], headerField);
+	GVariant* returnValue = (GVariant*)g_dbus_message_get_header((GDBusMessage*)[self castedGObject], headerField);
 
 	return returnValue;
 }
 
 - (guchar*)headerFields
 {
-	guchar* returnValue = (guchar*)g_dbus_message_get_header_fields([self castedGObject]);
+	guchar* returnValue = (guchar*)g_dbus_message_get_header_fields((GDBusMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)interface
 {
-	const gchar* gobjectValue = g_dbus_message_get_interface([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_message_get_interface((GDBusMessage*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -222,14 +222,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)locked
 {
-	bool returnValue = (bool)g_dbus_message_get_locked([self castedGObject]);
+	bool returnValue = (bool)g_dbus_message_get_locked((GDBusMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)member
 {
-	const gchar* gobjectValue = g_dbus_message_get_member([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_message_get_member((GDBusMessage*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -237,21 +237,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GDBusMessageType)messageType
 {
-	GDBusMessageType returnValue = (GDBusMessageType)g_dbus_message_get_message_type([self castedGObject]);
+	GDBusMessageType returnValue = (GDBusMessageType)g_dbus_message_get_message_type((GDBusMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint32)numUnixFds
 {
-	guint32 returnValue = (guint32)g_dbus_message_get_num_unix_fds([self castedGObject]);
+	guint32 returnValue = (guint32)g_dbus_message_get_num_unix_fds((GDBusMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)path
 {
-	const gchar* gobjectValue = g_dbus_message_get_path([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_message_get_path((GDBusMessage*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -259,14 +259,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (guint32)replySerial
 {
-	guint32 returnValue = (guint32)g_dbus_message_get_reply_serial([self castedGObject]);
+	guint32 returnValue = (guint32)g_dbus_message_get_reply_serial((GDBusMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)sender
 {
-	const gchar* gobjectValue = g_dbus_message_get_sender([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_message_get_sender((GDBusMessage*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -274,14 +274,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (guint32)serial
 {
-	guint32 returnValue = (guint32)g_dbus_message_get_serial([self castedGObject]);
+	guint32 returnValue = (guint32)g_dbus_message_get_serial((GDBusMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)signature
 {
-	const gchar* gobjectValue = g_dbus_message_get_signature([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_message_get_signature((GDBusMessage*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -289,7 +289,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGUnixFDList*)unixFdList
 {
-	GUnixFDList* gobjectValue = g_dbus_message_get_unix_fd_list([self castedGObject]);
+	GUnixFDList* gobjectValue = g_dbus_message_get_unix_fd_list((GDBusMessage*)[self castedGObject]);
 
 	OGUnixFDList* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -297,12 +297,12 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)lock
 {
-	g_dbus_message_lock([self castedGObject]);
+	g_dbus_message_lock((GDBusMessage*)[self castedGObject]);
 }
 
 - (OGDBusMessage*)newMethodErrorLiteralWithErrorName:(OFString*)errorName errorMessage:(OFString*)errorMessage
 {
-	GDBusMessage* gobjectValue = g_dbus_message_new_method_error_literal([self castedGObject], [errorName UTF8String], [errorMessage UTF8String]);
+	GDBusMessage* gobjectValue = g_dbus_message_new_method_error_literal((GDBusMessage*)[self castedGObject], [errorName UTF8String], [errorMessage UTF8String]);
 
 	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -312,7 +312,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGDBusMessage*)newMethodErrorValistWithErrorName:(OFString*)errorName errorMessageFormat:(OFString*)errorMessageFormat varArgs:(va_list)varArgs
 {
-	GDBusMessage* gobjectValue = g_dbus_message_new_method_error_valist([self castedGObject], [errorName UTF8String], [errorMessageFormat UTF8String], varArgs);
+	GDBusMessage* gobjectValue = g_dbus_message_new_method_error_valist((GDBusMessage*)[self castedGObject], [errorName UTF8String], [errorMessageFormat UTF8String], varArgs);
 
 	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -322,7 +322,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGDBusMessage*)newMethodReply
 {
-	GDBusMessage* gobjectValue = g_dbus_message_new_method_reply([self castedGObject]);
+	GDBusMessage* gobjectValue = g_dbus_message_new_method_reply((GDBusMessage*)[self castedGObject]);
 
 	OGDBusMessage* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -332,7 +332,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)printWithIndent:(guint)indent
 {
-	gchar* gobjectValue = g_dbus_message_print([self castedGObject], indent);
+	gchar* gobjectValue = g_dbus_message_print((GDBusMessage*)[self castedGObject], indent);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -340,89 +340,89 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setBody:(GVariant*)body
 {
-	g_dbus_message_set_body([self castedGObject], body);
+	g_dbus_message_set_body((GDBusMessage*)[self castedGObject], body);
 }
 
 - (void)setByteOrder:(GDBusMessageByteOrder)byteOrder
 {
-	g_dbus_message_set_byte_order([self castedGObject], byteOrder);
+	g_dbus_message_set_byte_order((GDBusMessage*)[self castedGObject], byteOrder);
 }
 
 - (void)setDestinationWithValue:(OFString*)value
 {
-	g_dbus_message_set_destination([self castedGObject], [value UTF8String]);
+	g_dbus_message_set_destination((GDBusMessage*)[self castedGObject], [value UTF8String]);
 }
 
 - (void)setErrorNameWithValue:(OFString*)value
 {
-	g_dbus_message_set_error_name([self castedGObject], [value UTF8String]);
+	g_dbus_message_set_error_name((GDBusMessage*)[self castedGObject], [value UTF8String]);
 }
 
 - (void)setFlags:(GDBusMessageFlags)flags
 {
-	g_dbus_message_set_flags([self castedGObject], flags);
+	g_dbus_message_set_flags((GDBusMessage*)[self castedGObject], flags);
 }
 
 - (void)setHeaderWithHeaderField:(GDBusMessageHeaderField)headerField value:(GVariant*)value
 {
-	g_dbus_message_set_header([self castedGObject], headerField, value);
+	g_dbus_message_set_header((GDBusMessage*)[self castedGObject], headerField, value);
 }
 
 - (void)setInterfaceWithValue:(OFString*)value
 {
-	g_dbus_message_set_interface([self castedGObject], [value UTF8String]);
+	g_dbus_message_set_interface((GDBusMessage*)[self castedGObject], [value UTF8String]);
 }
 
 - (void)setMemberWithValue:(OFString*)value
 {
-	g_dbus_message_set_member([self castedGObject], [value UTF8String]);
+	g_dbus_message_set_member((GDBusMessage*)[self castedGObject], [value UTF8String]);
 }
 
 - (void)setMessageType:(GDBusMessageType)type
 {
-	g_dbus_message_set_message_type([self castedGObject], type);
+	g_dbus_message_set_message_type((GDBusMessage*)[self castedGObject], type);
 }
 
 - (void)setNumUnixFdsWithValue:(guint32)value
 {
-	g_dbus_message_set_num_unix_fds([self castedGObject], value);
+	g_dbus_message_set_num_unix_fds((GDBusMessage*)[self castedGObject], value);
 }
 
 - (void)setPathWithValue:(OFString*)value
 {
-	g_dbus_message_set_path([self castedGObject], [value UTF8String]);
+	g_dbus_message_set_path((GDBusMessage*)[self castedGObject], [value UTF8String]);
 }
 
 - (void)setReplySerialWithValue:(guint32)value
 {
-	g_dbus_message_set_reply_serial([self castedGObject], value);
+	g_dbus_message_set_reply_serial((GDBusMessage*)[self castedGObject], value);
 }
 
 - (void)setSenderWithValue:(OFString*)value
 {
-	g_dbus_message_set_sender([self castedGObject], [value UTF8String]);
+	g_dbus_message_set_sender((GDBusMessage*)[self castedGObject], [value UTF8String]);
 }
 
 - (void)setSerial:(guint32)serial
 {
-	g_dbus_message_set_serial([self castedGObject], serial);
+	g_dbus_message_set_serial((GDBusMessage*)[self castedGObject], serial);
 }
 
 - (void)setSignatureWithValue:(OFString*)value
 {
-	g_dbus_message_set_signature([self castedGObject], [value UTF8String]);
+	g_dbus_message_set_signature((GDBusMessage*)[self castedGObject], [value UTF8String]);
 }
 
 - (void)setUnixFdList:(OGUnixFDList*)fdList
 {
-	g_dbus_message_set_unix_fd_list([self castedGObject], [fdList castedGObject]);
+	g_dbus_message_set_unix_fd_list((GDBusMessage*)[self castedGObject], [fdList castedGObject]);
 }
 
 - (guchar*)toBlobWithOutSize:(gsize*)outSize capabilities:(GDBusCapabilityFlags)capabilities
 {
 	GError* err = NULL;
 
-	guchar* returnValue = (guchar*)g_dbus_message_to_blob([self castedGObject], outSize, capabilities, &err);
+	guchar* returnValue = (guchar*)g_dbus_message_to_blob((GDBusMessage*)[self castedGObject], outSize, capabilities, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -433,7 +433,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_dbus_message_to_gerror([self castedGObject], &err);
+	bool returnValue = (bool)g_dbus_message_to_gerror((GDBusMessage*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 

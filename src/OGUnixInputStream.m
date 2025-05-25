@@ -56,21 +56,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)closeFd
 {
-	bool returnValue = (bool)g_unix_input_stream_get_close_fd([self castedGObject]);
+	bool returnValue = (bool)g_unix_input_stream_get_close_fd((GUnixInputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gint)fd
 {
-	gint returnValue = (gint)g_unix_input_stream_get_fd([self castedGObject]);
+	gint returnValue = (gint)g_unix_input_stream_get_fd((GUnixInputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)setCloseFd:(bool)closeFd
 {
-	g_unix_input_stream_set_close_fd([self castedGObject], closeFd);
+	g_unix_input_stream_set_close_fd((GUnixInputStream*)[self castedGObject], closeFd);
 }
 
 

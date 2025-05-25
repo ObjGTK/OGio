@@ -117,7 +117,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)actionName:(OFString*)actionName
 {
-	gchar* gobjectValue = g_desktop_app_info_get_action_name([self castedGObject], [actionName UTF8String]);
+	gchar* gobjectValue = g_desktop_app_info_get_action_name((GDesktopAppInfo*)[self castedGObject], [actionName UTF8String]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -125,14 +125,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)booleanWithKey:(OFString*)key
 {
-	bool returnValue = (bool)g_desktop_app_info_get_boolean([self castedGObject], [key UTF8String]);
+	bool returnValue = (bool)g_desktop_app_info_get_boolean((GDesktopAppInfo*)[self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
 - (OFString*)categories
 {
-	const char* gobjectValue = g_desktop_app_info_get_categories([self castedGObject]);
+	const char* gobjectValue = g_desktop_app_info_get_categories((GDesktopAppInfo*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -140,7 +140,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)filename
 {
-	const char* gobjectValue = g_desktop_app_info_get_filename([self castedGObject]);
+	const char* gobjectValue = g_desktop_app_info_get_filename((GDesktopAppInfo*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -148,7 +148,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)genericName
 {
-	const char* gobjectValue = g_desktop_app_info_get_generic_name([self castedGObject]);
+	const char* gobjectValue = g_desktop_app_info_get_generic_name((GDesktopAppInfo*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -156,21 +156,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)isHidden
 {
-	bool returnValue = (bool)g_desktop_app_info_get_is_hidden([self castedGObject]);
+	bool returnValue = (bool)g_desktop_app_info_get_is_hidden((GDesktopAppInfo*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (const char* const*)keywords
 {
-	const char* const* returnValue = (const char* const*)g_desktop_app_info_get_keywords([self castedGObject]);
+	const char* const* returnValue = (const char* const*)g_desktop_app_info_get_keywords((GDesktopAppInfo*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)localeStringWithKey:(OFString*)key
 {
-	char* gobjectValue = g_desktop_app_info_get_locale_string([self castedGObject], [key UTF8String]);
+	char* gobjectValue = g_desktop_app_info_get_locale_string((GDesktopAppInfo*)[self castedGObject], [key UTF8String]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -178,21 +178,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)nodisplay
 {
-	bool returnValue = (bool)g_desktop_app_info_get_nodisplay([self castedGObject]);
+	bool returnValue = (bool)g_desktop_app_info_get_nodisplay((GDesktopAppInfo*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)showInWithDesktopEnv:(OFString*)desktopEnv
 {
-	bool returnValue = (bool)g_desktop_app_info_get_show_in([self castedGObject], [desktopEnv UTF8String]);
+	bool returnValue = (bool)g_desktop_app_info_get_show_in((GDesktopAppInfo*)[self castedGObject], [desktopEnv UTF8String]);
 
 	return returnValue;
 }
 
 - (OFString*)startupWmClass
 {
-	const char* gobjectValue = g_desktop_app_info_get_startup_wm_class([self castedGObject]);
+	const char* gobjectValue = g_desktop_app_info_get_startup_wm_class((GDesktopAppInfo*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -200,7 +200,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)stringWithKey:(OFString*)key
 {
-	char* gobjectValue = g_desktop_app_info_get_string([self castedGObject], [key UTF8String]);
+	char* gobjectValue = g_desktop_app_info_get_string((GDesktopAppInfo*)[self castedGObject], [key UTF8String]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -208,28 +208,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (gchar**)stringListWithKey:(OFString*)key length:(gsize*)length
 {
-	gchar** returnValue = (gchar**)g_desktop_app_info_get_string_list([self castedGObject], [key UTF8String], length);
+	gchar** returnValue = (gchar**)g_desktop_app_info_get_string_list((GDesktopAppInfo*)[self castedGObject], [key UTF8String], length);
 
 	return returnValue;
 }
 
 - (bool)hasKey:(OFString*)key
 {
-	bool returnValue = (bool)g_desktop_app_info_has_key([self castedGObject], [key UTF8String]);
+	bool returnValue = (bool)g_desktop_app_info_has_key((GDesktopAppInfo*)[self castedGObject], [key UTF8String]);
 
 	return returnValue;
 }
 
 - (void)launchActionWithActionName:(OFString*)actionName launchContext:(OGAppLaunchContext*)launchContext
 {
-	g_desktop_app_info_launch_action([self castedGObject], [actionName UTF8String], [launchContext castedGObject]);
+	g_desktop_app_info_launch_action((GDesktopAppInfo*)[self castedGObject], [actionName UTF8String], [launchContext castedGObject]);
 }
 
 - (bool)launchUrisAsManager:(GList*)uris launchContext:(OGAppLaunchContext*)launchContext spawnFlags:(GSpawnFlags)spawnFlags userSetup:(GSpawnChildSetupFunc)userSetup userSetupData:(gpointer)userSetupData pidCallback:(GDesktopAppLaunchCallback)pidCallback pidCallbackData:(gpointer)pidCallbackData
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_desktop_app_info_launch_uris_as_manager([self castedGObject], uris, [launchContext castedGObject], spawnFlags, userSetup, userSetupData, pidCallback, pidCallbackData, &err);
+	bool returnValue = (bool)g_desktop_app_info_launch_uris_as_manager((GDesktopAppInfo*)[self castedGObject], uris, [launchContext castedGObject], spawnFlags, userSetup, userSetupData, pidCallback, pidCallbackData, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -240,7 +240,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_desktop_app_info_launch_uris_as_manager_with_fds([self castedGObject], uris, [launchContext castedGObject], spawnFlags, userSetup, userSetupData, pidCallback, pidCallbackData, stdinFd, stdoutFd, stderrFd, &err);
+	bool returnValue = (bool)g_desktop_app_info_launch_uris_as_manager_with_fds((GDesktopAppInfo*)[self castedGObject], uris, [launchContext castedGObject], spawnFlags, userSetup, userSetupData, pidCallback, pidCallbackData, stdinFd, stdoutFd, stderrFd, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -249,7 +249,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (const gchar* const*)listActions
 {
-	const gchar* const* returnValue = (const gchar* const*)g_desktop_app_info_list_actions([self castedGObject]);
+	const gchar* const* returnValue = (const gchar* const*)g_desktop_app_info_list_actions((GDesktopAppInfo*)[self castedGObject]);
 
 	return returnValue;
 }

@@ -54,7 +54,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_connection_connect([self castedGObject], [address castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_socket_connection_connect((GSocketConnection*)[self castedGObject], [address castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -63,14 +63,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)connectAsyncWithAddress:(OGSocketAddress*)address cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_socket_connection_connect_async([self castedGObject], [address castedGObject], [cancellable castedGObject], callback, userData);
+	g_socket_connection_connect_async((GSocketConnection*)[self castedGObject], [address castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (bool)connectFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_connection_connect_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_socket_connection_connect_finish((GSocketConnection*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -81,7 +81,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = g_socket_connection_get_local_address([self castedGObject], &err);
+	GSocketAddress* gobjectValue = g_socket_connection_get_local_address((GSocketConnection*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -95,7 +95,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = g_socket_connection_get_remote_address([self castedGObject], &err);
+	GSocketAddress* gobjectValue = g_socket_connection_get_remote_address((GSocketConnection*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -107,7 +107,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGSocket*)socket
 {
-	GSocket* gobjectValue = g_socket_connection_get_socket([self castedGObject]);
+	GSocket* gobjectValue = g_socket_connection_get_socket((GSocketConnection*)[self castedGObject]);
 
 	OGSocket* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -115,7 +115,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)isConnected
 {
-	bool returnValue = (bool)g_socket_connection_is_connected([self castedGObject]);
+	bool returnValue = (bool)g_socket_connection_is_connected((GSocketConnection*)[self castedGObject]);
 
 	return returnValue;
 }

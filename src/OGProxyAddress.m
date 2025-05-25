@@ -59,7 +59,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)destinationHostname
 {
-	const gchar* gobjectValue = g_proxy_address_get_destination_hostname([self castedGObject]);
+	const gchar* gobjectValue = g_proxy_address_get_destination_hostname((GProxyAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -67,14 +67,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (guint16)destinationPort
 {
-	guint16 returnValue = (guint16)g_proxy_address_get_destination_port([self castedGObject]);
+	guint16 returnValue = (guint16)g_proxy_address_get_destination_port((GProxyAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)destinationProtocol
 {
-	const gchar* gobjectValue = g_proxy_address_get_destination_protocol([self castedGObject]);
+	const gchar* gobjectValue = g_proxy_address_get_destination_protocol((GProxyAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -82,7 +82,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)password
 {
-	const gchar* gobjectValue = g_proxy_address_get_password([self castedGObject]);
+	const gchar* gobjectValue = g_proxy_address_get_password((GProxyAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -90,7 +90,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)protocol
 {
-	const gchar* gobjectValue = g_proxy_address_get_protocol([self castedGObject]);
+	const gchar* gobjectValue = g_proxy_address_get_protocol((GProxyAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -98,7 +98,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)uri
 {
-	const gchar* gobjectValue = g_proxy_address_get_uri([self castedGObject]);
+	const gchar* gobjectValue = g_proxy_address_get_uri((GProxyAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -106,7 +106,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)username
 {
-	const gchar* gobjectValue = g_proxy_address_get_username([self castedGObject]);
+	const gchar* gobjectValue = g_proxy_address_get_username((GProxyAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;

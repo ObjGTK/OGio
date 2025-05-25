@@ -40,7 +40,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_permission_acquire([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_permission_acquire((GPermission*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -49,14 +49,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)acquireAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_permission_acquire_async([self castedGObject], [cancellable castedGObject], callback, userData);
+	g_permission_acquire_async((GPermission*)[self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (bool)acquireFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_permission_acquire_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_permission_acquire_finish((GPermission*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -65,35 +65,35 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)allowed
 {
-	bool returnValue = (bool)g_permission_get_allowed([self castedGObject]);
+	bool returnValue = (bool)g_permission_get_allowed((GPermission*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)canAcquire
 {
-	bool returnValue = (bool)g_permission_get_can_acquire([self castedGObject]);
+	bool returnValue = (bool)g_permission_get_can_acquire((GPermission*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)canRelease
 {
-	bool returnValue = (bool)g_permission_get_can_release([self castedGObject]);
+	bool returnValue = (bool)g_permission_get_can_release((GPermission*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)implUpdateWithAllowed:(bool)allowed canAcquire:(bool)canAcquire canRelease:(bool)canRelease
 {
-	g_permission_impl_update([self castedGObject], allowed, canAcquire, canRelease);
+	g_permission_impl_update((GPermission*)[self castedGObject], allowed, canAcquire, canRelease);
 }
 
 - (bool)decreaseCountWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_permission_release([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_permission_release((GPermission*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -102,14 +102,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)releaseAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_permission_release_async([self castedGObject], [cancellable castedGObject], callback, userData);
+	g_permission_release_async((GPermission*)[self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (bool)releaseFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_permission_release_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_permission_release_finish((GPermission*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 

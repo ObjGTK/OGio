@@ -93,7 +93,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocket* gobjectValue = g_socket_accept([self castedGObject], [cancellable castedGObject], &err);
+	GSocket* gobjectValue = g_socket_accept((GSocket*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -107,7 +107,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_bind([self castedGObject], [address castedGObject], allowReuse, &err);
+	bool returnValue = (bool)g_socket_bind((GSocket*)[self castedGObject], [address castedGObject], allowReuse, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -118,7 +118,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_check_connect_result([self castedGObject], &err);
+	bool returnValue = (bool)g_socket_check_connect_result((GSocket*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -129,7 +129,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_close([self castedGObject], &err);
+	bool returnValue = (bool)g_socket_close((GSocket*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -138,7 +138,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GIOCondition)conditionCheckWithCondition:(GIOCondition)condition
 {
-	GIOCondition returnValue = (GIOCondition)g_socket_condition_check([self castedGObject], condition);
+	GIOCondition returnValue = (GIOCondition)g_socket_condition_check((GSocket*)[self castedGObject], condition);
 
 	return returnValue;
 }
@@ -147,7 +147,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_condition_timed_wait([self castedGObject], condition, timeoutUs, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_socket_condition_timed_wait((GSocket*)[self castedGObject], condition, timeoutUs, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -158,7 +158,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_condition_wait([self castedGObject], condition, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_socket_condition_wait((GSocket*)[self castedGObject], condition, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -169,7 +169,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_connect([self castedGObject], [address castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_socket_connect((GSocket*)[self castedGObject], [address castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -178,7 +178,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGSocketConnection*)connectionFactoryCreateConnection
 {
-	GSocketConnection* gobjectValue = g_socket_connection_factory_create_connection([self castedGObject]);
+	GSocketConnection* gobjectValue = g_socket_connection_factory_create_connection((GSocket*)[self castedGObject]);
 
 	OGSocketConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -188,28 +188,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GSource*)createSourceWithCondition:(GIOCondition)condition cancellable:(OGCancellable*)cancellable
 {
-	GSource* returnValue = (GSource*)g_socket_create_source([self castedGObject], condition, [cancellable castedGObject]);
+	GSource* returnValue = (GSource*)g_socket_create_source((GSocket*)[self castedGObject], condition, [cancellable castedGObject]);
 
 	return returnValue;
 }
 
 - (gssize)availableBytes
 {
-	gssize returnValue = (gssize)g_socket_get_available_bytes([self castedGObject]);
+	gssize returnValue = (gssize)g_socket_get_available_bytes((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)blocking
 {
-	bool returnValue = (bool)g_socket_get_blocking([self castedGObject]);
+	bool returnValue = (bool)g_socket_get_blocking((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)broadcast
 {
-	bool returnValue = (bool)g_socket_get_broadcast([self castedGObject]);
+	bool returnValue = (bool)g_socket_get_broadcast((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -218,7 +218,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GCredentials* gobjectValue = g_socket_get_credentials([self castedGObject], &err);
+	GCredentials* gobjectValue = g_socket_get_credentials((GSocket*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -230,28 +230,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GSocketFamily)family
 {
-	GSocketFamily returnValue = (GSocketFamily)g_socket_get_family([self castedGObject]);
+	GSocketFamily returnValue = (GSocketFamily)g_socket_get_family((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (int)fd
 {
-	int returnValue = (int)g_socket_get_fd([self castedGObject]);
+	int returnValue = (int)g_socket_get_fd((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)keepalive
 {
-	bool returnValue = (bool)g_socket_get_keepalive([self castedGObject]);
+	bool returnValue = (bool)g_socket_get_keepalive((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gint)listenBacklog
 {
-	gint returnValue = (gint)g_socket_get_listen_backlog([self castedGObject]);
+	gint returnValue = (gint)g_socket_get_listen_backlog((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -260,7 +260,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = g_socket_get_local_address([self castedGObject], &err);
+	GSocketAddress* gobjectValue = g_socket_get_local_address((GSocket*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -272,14 +272,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)multicastLoopback
 {
-	bool returnValue = (bool)g_socket_get_multicast_loopback([self castedGObject]);
+	bool returnValue = (bool)g_socket_get_multicast_loopback((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint)multicastTtl
 {
-	guint returnValue = (guint)g_socket_get_multicast_ttl([self castedGObject]);
+	guint returnValue = (guint)g_socket_get_multicast_ttl((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -288,7 +288,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_get_option([self castedGObject], level, optname, value, &err);
+	bool returnValue = (bool)g_socket_get_option((GSocket*)[self castedGObject], level, optname, value, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -297,7 +297,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GSocketProtocol)protocol
 {
-	GSocketProtocol returnValue = (GSocketProtocol)g_socket_get_protocol([self castedGObject]);
+	GSocketProtocol returnValue = (GSocketProtocol)g_socket_get_protocol((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -306,7 +306,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocketAddress* gobjectValue = g_socket_get_remote_address([self castedGObject], &err);
+	GSocketAddress* gobjectValue = g_socket_get_remote_address((GSocket*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -318,35 +318,35 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GSocketType)socketType
 {
-	GSocketType returnValue = (GSocketType)g_socket_get_socket_type([self castedGObject]);
+	GSocketType returnValue = (GSocketType)g_socket_get_socket_type((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint)timeout
 {
-	guint returnValue = (guint)g_socket_get_timeout([self castedGObject]);
+	guint returnValue = (guint)g_socket_get_timeout((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint)ttl
 {
-	guint returnValue = (guint)g_socket_get_ttl([self castedGObject]);
+	guint returnValue = (guint)g_socket_get_ttl((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isClosed
 {
-	bool returnValue = (bool)g_socket_is_closed([self castedGObject]);
+	bool returnValue = (bool)g_socket_is_closed((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isConnected
 {
-	bool returnValue = (bool)g_socket_is_connected([self castedGObject]);
+	bool returnValue = (bool)g_socket_is_connected((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -355,7 +355,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_join_multicast_group([self castedGObject], [group castedGObject], sourceSpecific, [iface UTF8String], &err);
+	bool returnValue = (bool)g_socket_join_multicast_group((GSocket*)[self castedGObject], [group castedGObject], sourceSpecific, [iface UTF8String], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -366,7 +366,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_join_multicast_group_ssm([self castedGObject], [group castedGObject], [sourceSpecific castedGObject], [iface UTF8String], &err);
+	bool returnValue = (bool)g_socket_join_multicast_group_ssm((GSocket*)[self castedGObject], [group castedGObject], [sourceSpecific castedGObject], [iface UTF8String], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -377,7 +377,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_leave_multicast_group([self castedGObject], [group castedGObject], sourceSpecific, [iface UTF8String], &err);
+	bool returnValue = (bool)g_socket_leave_multicast_group((GSocket*)[self castedGObject], [group castedGObject], sourceSpecific, [iface UTF8String], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -388,7 +388,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_leave_multicast_group_ssm([self castedGObject], [group castedGObject], [sourceSpecific castedGObject], [iface UTF8String], &err);
+	bool returnValue = (bool)g_socket_leave_multicast_group_ssm((GSocket*)[self castedGObject], [group castedGObject], [sourceSpecific castedGObject], [iface UTF8String], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -399,7 +399,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_listen([self castedGObject], &err);
+	bool returnValue = (bool)g_socket_listen((GSocket*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -410,7 +410,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_socket_receive([self castedGObject], g_strdup([buffer UTF8String]), size, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_socket_receive((GSocket*)[self castedGObject], g_strdup([buffer UTF8String]), size, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -421,7 +421,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GBytes* returnValue = (GBytes*)g_socket_receive_bytes([self castedGObject], size, timeoutUs, [cancellable castedGObject], &err);
+	GBytes* returnValue = (GBytes*)g_socket_receive_bytes((GSocket*)[self castedGObject], size, timeoutUs, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -432,7 +432,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GBytes* returnValue = (GBytes*)g_socket_receive_bytes_from([self castedGObject], address, size, timeoutUs, [cancellable castedGObject], &err);
+	GBytes* returnValue = (GBytes*)g_socket_receive_bytes_from((GSocket*)[self castedGObject], address, size, timeoutUs, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -443,7 +443,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_socket_receive_from([self castedGObject], address, g_strdup([buffer UTF8String]), size, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_socket_receive_from((GSocket*)[self castedGObject], address, g_strdup([buffer UTF8String]), size, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -454,7 +454,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_socket_receive_message([self castedGObject], address, vectors, numVectors, messages, numMessages, flags, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_socket_receive_message((GSocket*)[self castedGObject], address, vectors, numVectors, messages, numMessages, flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -465,7 +465,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gint returnValue = (gint)g_socket_receive_messages([self castedGObject], messages, numMessages, flags, [cancellable castedGObject], &err);
+	gint returnValue = (gint)g_socket_receive_messages((GSocket*)[self castedGObject], messages, numMessages, flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -476,7 +476,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_socket_receive_with_blocking([self castedGObject], g_strdup([buffer UTF8String]), size, blocking, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_socket_receive_with_blocking((GSocket*)[self castedGObject], g_strdup([buffer UTF8String]), size, blocking, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -487,7 +487,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_socket_send([self castedGObject], [buffer UTF8String], size, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_socket_send((GSocket*)[self castedGObject], [buffer UTF8String], size, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -498,7 +498,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_socket_send_message([self castedGObject], [address castedGObject], vectors, numVectors, messages, numMessages, flags, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_socket_send_message((GSocket*)[self castedGObject], [address castedGObject], vectors, numVectors, messages, numMessages, flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -509,7 +509,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GPollableReturn returnValue = (GPollableReturn)g_socket_send_message_with_timeout([self castedGObject], [address castedGObject], vectors, numVectors, messages, numMessages, flags, timeoutUs, bytesWritten, [cancellable castedGObject], &err);
+	GPollableReturn returnValue = (GPollableReturn)g_socket_send_message_with_timeout((GSocket*)[self castedGObject], [address castedGObject], vectors, numVectors, messages, numMessages, flags, timeoutUs, bytesWritten, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -520,7 +520,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gint returnValue = (gint)g_socket_send_messages([self castedGObject], messages, numMessages, flags, [cancellable castedGObject], &err);
+	gint returnValue = (gint)g_socket_send_messages((GSocket*)[self castedGObject], messages, numMessages, flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -531,7 +531,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_socket_send_to([self castedGObject], [address castedGObject], [buffer UTF8String], size, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_socket_send_to((GSocket*)[self castedGObject], [address castedGObject], [buffer UTF8String], size, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -542,7 +542,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_socket_send_with_blocking([self castedGObject], [buffer UTF8String], size, blocking, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_socket_send_with_blocking((GSocket*)[self castedGObject], [buffer UTF8String], size, blocking, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -551,39 +551,39 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setBlocking:(bool)blocking
 {
-	g_socket_set_blocking([self castedGObject], blocking);
+	g_socket_set_blocking((GSocket*)[self castedGObject], blocking);
 }
 
 - (void)setBroadcast:(bool)broadcast
 {
-	g_socket_set_broadcast([self castedGObject], broadcast);
+	g_socket_set_broadcast((GSocket*)[self castedGObject], broadcast);
 }
 
 - (void)setKeepalive:(bool)keepalive
 {
-	g_socket_set_keepalive([self castedGObject], keepalive);
+	g_socket_set_keepalive((GSocket*)[self castedGObject], keepalive);
 }
 
 - (void)setListenBacklog:(gint)backlog
 {
-	g_socket_set_listen_backlog([self castedGObject], backlog);
+	g_socket_set_listen_backlog((GSocket*)[self castedGObject], backlog);
 }
 
 - (void)setMulticastLoopback:(bool)loopback
 {
-	g_socket_set_multicast_loopback([self castedGObject], loopback);
+	g_socket_set_multicast_loopback((GSocket*)[self castedGObject], loopback);
 }
 
 - (void)setMulticastTtl:(guint)ttl
 {
-	g_socket_set_multicast_ttl([self castedGObject], ttl);
+	g_socket_set_multicast_ttl((GSocket*)[self castedGObject], ttl);
 }
 
 - (bool)setOptionWithLevel:(gint)level optname:(gint)optname value:(gint)value
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_set_option([self castedGObject], level, optname, value, &err);
+	bool returnValue = (bool)g_socket_set_option((GSocket*)[self castedGObject], level, optname, value, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -592,19 +592,19 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setTimeout:(guint)timeout
 {
-	g_socket_set_timeout([self castedGObject], timeout);
+	g_socket_set_timeout((GSocket*)[self castedGObject], timeout);
 }
 
 - (void)setTtl:(guint)ttl
 {
-	g_socket_set_ttl([self castedGObject], ttl);
+	g_socket_set_ttl((GSocket*)[self castedGObject], ttl);
 }
 
 - (bool)shutdownWithShutdownRead:(bool)shutdownRead shutdownWrite:(bool)shutdownWrite
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_shutdown([self castedGObject], shutdownRead, shutdownWrite, &err);
+	bool returnValue = (bool)g_socket_shutdown((GSocket*)[self castedGObject], shutdownRead, shutdownWrite, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -613,7 +613,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)speaksIpv4
 {
-	bool returnValue = (bool)g_socket_speaks_ipv4([self castedGObject]);
+	bool returnValue = (bool)g_socket_speaks_ipv4((GSocket*)[self castedGObject]);
 
 	return returnValue;
 }

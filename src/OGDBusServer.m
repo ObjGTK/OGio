@@ -63,7 +63,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)clientAddress
 {
-	const gchar* gobjectValue = g_dbus_server_get_client_address([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_server_get_client_address((GDBusServer*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -71,14 +71,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GDBusServerFlags)flags
 {
-	GDBusServerFlags returnValue = (GDBusServerFlags)g_dbus_server_get_flags([self castedGObject]);
+	GDBusServerFlags returnValue = (GDBusServerFlags)g_dbus_server_get_flags((GDBusServer*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)guid
 {
-	const gchar* gobjectValue = g_dbus_server_get_guid([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_server_get_guid((GDBusServer*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -86,19 +86,19 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)isActive
 {
-	bool returnValue = (bool)g_dbus_server_is_active([self castedGObject]);
+	bool returnValue = (bool)g_dbus_server_is_active((GDBusServer*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)start
 {
-	g_dbus_server_start([self castedGObject]);
+	g_dbus_server_start((GDBusServer*)[self castedGObject]);
 }
 
 - (void)stop
 {
-	g_dbus_server_stop([self castedGObject]);
+	g_dbus_server_stop((GDBusServer*)[self castedGObject]);
 }
 
 

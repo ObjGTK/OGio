@@ -56,7 +56,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GBytes*)bytes
 {
-	GBytes* returnValue = (GBytes*)g_bytes_icon_get_bytes([self castedGObject]);
+	GBytes* returnValue = (GBytes*)g_bytes_icon_get_bytes((GBytesIcon*)[self castedGObject]);
 
 	return returnValue;
 }

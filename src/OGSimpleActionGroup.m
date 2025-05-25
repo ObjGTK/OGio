@@ -56,24 +56,24 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)addEntries:(const GActionEntry*)entries nentries:(gint)nentries userData:(gpointer)userData
 {
-	g_simple_action_group_add_entries([self castedGObject], entries, nentries, userData);
+	g_simple_action_group_add_entries((GSimpleActionGroup*)[self castedGObject], entries, nentries, userData);
 }
 
 - (void)insertWithAction:(GAction*)action
 {
-	g_simple_action_group_insert([self castedGObject], action);
+	g_simple_action_group_insert((GSimpleActionGroup*)[self castedGObject], action);
 }
 
 - (GAction*)lookupWithActionName:(OFString*)actionName
 {
-	GAction* returnValue = (GAction*)g_simple_action_group_lookup([self castedGObject], [actionName UTF8String]);
+	GAction* returnValue = (GAction*)g_simple_action_group_lookup((GSimpleActionGroup*)[self castedGObject], [actionName UTF8String]);
 
 	return returnValue;
 }
 
 - (void)removeWithActionName:(OFString*)actionName
 {
-	g_simple_action_group_remove([self castedGObject], [actionName UTF8String]);
+	g_simple_action_group_remove((GSimpleActionGroup*)[self castedGObject], [actionName UTF8String]);
 }
 
 

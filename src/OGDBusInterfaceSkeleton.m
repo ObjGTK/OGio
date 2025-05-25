@@ -40,7 +40,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_dbus_interface_skeleton_export([self castedGObject], [connection castedGObject], [objectPath UTF8String], &err);
+	bool returnValue = (bool)g_dbus_interface_skeleton_export((GDBusInterfaceSkeleton*)[self castedGObject], [connection castedGObject], [objectPath UTF8String], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -49,12 +49,12 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)flush
 {
-	g_dbus_interface_skeleton_flush([self castedGObject]);
+	g_dbus_interface_skeleton_flush((GDBusInterfaceSkeleton*)[self castedGObject]);
 }
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = g_dbus_interface_skeleton_get_connection([self castedGObject]);
+	GDBusConnection* gobjectValue = g_dbus_interface_skeleton_get_connection((GDBusInterfaceSkeleton*)[self castedGObject]);
 
 	OGDBusConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -62,28 +62,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GList*)connections
 {
-	GList* returnValue = (GList*)g_dbus_interface_skeleton_get_connections([self castedGObject]);
+	GList* returnValue = (GList*)g_dbus_interface_skeleton_get_connections((GDBusInterfaceSkeleton*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusInterfaceSkeletonFlags)flags
 {
-	GDBusInterfaceSkeletonFlags returnValue = (GDBusInterfaceSkeletonFlags)g_dbus_interface_skeleton_get_flags([self castedGObject]);
+	GDBusInterfaceSkeletonFlags returnValue = (GDBusInterfaceSkeletonFlags)g_dbus_interface_skeleton_get_flags((GDBusInterfaceSkeleton*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusInterfaceInfo*)info
 {
-	GDBusInterfaceInfo* returnValue = (GDBusInterfaceInfo*)g_dbus_interface_skeleton_get_info([self castedGObject]);
+	GDBusInterfaceInfo* returnValue = (GDBusInterfaceInfo*)g_dbus_interface_skeleton_get_info((GDBusInterfaceSkeleton*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)objectPath
 {
-	const gchar* gobjectValue = g_dbus_interface_skeleton_get_object_path([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_interface_skeleton_get_object_path((GDBusInterfaceSkeleton*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -91,38 +91,38 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GVariant*)properties
 {
-	GVariant* returnValue = (GVariant*)g_dbus_interface_skeleton_get_properties([self castedGObject]);
+	GVariant* returnValue = (GVariant*)g_dbus_interface_skeleton_get_properties((GDBusInterfaceSkeleton*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusInterfaceVTable*)vtable
 {
-	GDBusInterfaceVTable* returnValue = (GDBusInterfaceVTable*)g_dbus_interface_skeleton_get_vtable([self castedGObject]);
+	GDBusInterfaceVTable* returnValue = (GDBusInterfaceVTable*)g_dbus_interface_skeleton_get_vtable((GDBusInterfaceSkeleton*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)hasConnection:(OGDBusConnection*)connection
 {
-	bool returnValue = (bool)g_dbus_interface_skeleton_has_connection([self castedGObject], [connection castedGObject]);
+	bool returnValue = (bool)g_dbus_interface_skeleton_has_connection((GDBusInterfaceSkeleton*)[self castedGObject], [connection castedGObject]);
 
 	return returnValue;
 }
 
 - (void)setFlags:(GDBusInterfaceSkeletonFlags)flags
 {
-	g_dbus_interface_skeleton_set_flags([self castedGObject], flags);
+	g_dbus_interface_skeleton_set_flags((GDBusInterfaceSkeleton*)[self castedGObject], flags);
 }
 
 - (void)unexport
 {
-	g_dbus_interface_skeleton_unexport([self castedGObject]);
+	g_dbus_interface_skeleton_unexport((GDBusInterfaceSkeleton*)[self castedGObject]);
 }
 
 - (void)unexportFromConnection:(OGDBusConnection*)connection
 {
-	g_dbus_interface_skeleton_unexport_from_connection([self castedGObject], [connection castedGObject]);
+	g_dbus_interface_skeleton_unexport_from_connection((GDBusInterfaceSkeleton*)[self castedGObject], [connection castedGObject]);
 }
 
 

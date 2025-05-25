@@ -63,7 +63,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_listener_accept([self castedGObject], sourceObject, [cancellable castedGObject], &err);
+	GSocketConnection* gobjectValue = g_socket_listener_accept((GSocketListener*)[self castedGObject], sourceObject, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -75,14 +75,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)acceptAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_socket_listener_accept_async([self castedGObject], [cancellable castedGObject], callback, userData);
+	g_socket_listener_accept_async((GSocketListener*)[self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (OGSocketConnection*)acceptFinishWithResult:(GAsyncResult*)result sourceObject:(GObject**)sourceObject
 {
 	GError* err = NULL;
 
-	GSocketConnection* gobjectValue = g_socket_listener_accept_finish([self castedGObject], result, sourceObject, &err);
+	GSocketConnection* gobjectValue = g_socket_listener_accept_finish((GSocketListener*)[self castedGObject], result, sourceObject, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -96,7 +96,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GSocket* gobjectValue = g_socket_listener_accept_socket([self castedGObject], sourceObject, [cancellable castedGObject], &err);
+	GSocket* gobjectValue = g_socket_listener_accept_socket((GSocketListener*)[self castedGObject], sourceObject, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -108,14 +108,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)acceptSocketAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_socket_listener_accept_socket_async([self castedGObject], [cancellable castedGObject], callback, userData);
+	g_socket_listener_accept_socket_async((GSocketListener*)[self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (OGSocket*)acceptSocketFinishWithResult:(GAsyncResult*)result sourceObject:(GObject**)sourceObject
 {
 	GError* err = NULL;
 
-	GSocket* gobjectValue = g_socket_listener_accept_socket_finish([self castedGObject], result, sourceObject, &err);
+	GSocket* gobjectValue = g_socket_listener_accept_socket_finish((GSocketListener*)[self castedGObject], result, sourceObject, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -129,7 +129,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_listener_add_address([self castedGObject], [address castedGObject], type, protocol, [sourceObject gObject], effectiveAddress, &err);
+	bool returnValue = (bool)g_socket_listener_add_address((GSocketListener*)[self castedGObject], [address castedGObject], type, protocol, [sourceObject gObject], effectiveAddress, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -140,7 +140,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	guint16 returnValue = (guint16)g_socket_listener_add_any_inet_port([self castedGObject], [sourceObject gObject], &err);
+	guint16 returnValue = (guint16)g_socket_listener_add_any_inet_port((GSocketListener*)[self castedGObject], [sourceObject gObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -151,7 +151,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_listener_add_inet_port([self castedGObject], port, [sourceObject gObject], &err);
+	bool returnValue = (bool)g_socket_listener_add_inet_port((GSocketListener*)[self castedGObject], port, [sourceObject gObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -162,7 +162,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_listener_add_socket([self castedGObject], [socket castedGObject], [sourceObject gObject], &err);
+	bool returnValue = (bool)g_socket_listener_add_socket((GSocketListener*)[self castedGObject], [socket castedGObject], [sourceObject gObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -171,12 +171,12 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)close
 {
-	g_socket_listener_close([self castedGObject]);
+	g_socket_listener_close((GSocketListener*)[self castedGObject]);
 }
 
 - (void)setBacklogWithListenBacklog:(int)listenBacklog
 {
-	g_socket_listener_set_backlog([self castedGObject], listenBacklog);
+	g_socket_listener_set_backlog((GSocketListener*)[self castedGObject], listenBacklog);
 }
 
 

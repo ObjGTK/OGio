@@ -59,14 +59,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)allowMechanism:(OFString*)mechanism
 {
-	bool returnValue = (bool)g_dbus_auth_observer_allow_mechanism([self castedGObject], [mechanism UTF8String]);
+	bool returnValue = (bool)g_dbus_auth_observer_allow_mechanism((GDBusAuthObserver*)[self castedGObject], [mechanism UTF8String]);
 
 	return returnValue;
 }
 
 - (bool)authorizeAuthenticatedPeerWithStream:(OGIOStream*)stream credentials:(OGCredentials*)credentials
 {
-	bool returnValue = (bool)g_dbus_auth_observer_authorize_authenticated_peer([self castedGObject], [stream castedGObject], [credentials castedGObject]);
+	bool returnValue = (bool)g_dbus_auth_observer_authorize_authenticated_peer((GDBusAuthObserver*)[self castedGObject], [stream castedGObject], [credentials castedGObject]);
 
 	return returnValue;
 }

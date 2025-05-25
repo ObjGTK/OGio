@@ -103,21 +103,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GUnixSocketAddressType)addressType
 {
-	GUnixSocketAddressType returnValue = (GUnixSocketAddressType)g_unix_socket_address_get_address_type([self castedGObject]);
+	GUnixSocketAddressType returnValue = (GUnixSocketAddressType)g_unix_socket_address_get_address_type((GUnixSocketAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isAbstract
 {
-	bool returnValue = (bool)g_unix_socket_address_get_is_abstract([self castedGObject]);
+	bool returnValue = (bool)g_unix_socket_address_get_is_abstract((GUnixSocketAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)path
 {
-	const char* gobjectValue = g_unix_socket_address_get_path([self castedGObject]);
+	const char* gobjectValue = g_unix_socket_address_get_path((GUnixSocketAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -125,7 +125,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (gsize)pathLen
 {
-	gsize returnValue = (gsize)g_unix_socket_address_get_path_len([self castedGObject]);
+	gsize returnValue = (gsize)g_unix_socket_address_get_path_len((GUnixSocketAddress*)[self castedGObject]);
 
 	return returnValue;
 }

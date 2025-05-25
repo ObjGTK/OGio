@@ -40,7 +40,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)createCertificateHandle:(OGTlsCertificate*)certificate
 {
-	gchar* gobjectValue = g_tls_database_create_certificate_handle([self castedGObject], [certificate castedGObject]);
+	gchar* gobjectValue = g_tls_database_create_certificate_handle((GTlsDatabase*)[self castedGObject], [certificate castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -50,7 +50,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_for_handle([self castedGObject], [handle UTF8String], [interaction castedGObject], flags, [cancellable castedGObject], &err);
+	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_for_handle((GTlsDatabase*)[self castedGObject], [handle UTF8String], [interaction castedGObject], flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -62,14 +62,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)lookupCertificateForHandleAsync:(OFString*)handle interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_tls_database_lookup_certificate_for_handle_async([self castedGObject], [handle UTF8String], [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
+	g_tls_database_lookup_certificate_for_handle_async((GTlsDatabase*)[self castedGObject], [handle UTF8String], [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
 - (OGTlsCertificate*)lookupCertificateForHandleFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_for_handle_finish([self castedGObject], result, &err);
+	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_for_handle_finish((GTlsDatabase*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -83,7 +83,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_issuer([self castedGObject], [certificate castedGObject], [interaction castedGObject], flags, [cancellable castedGObject], &err);
+	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_issuer((GTlsDatabase*)[self castedGObject], [certificate castedGObject], [interaction castedGObject], flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -95,14 +95,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)lookupCertificateIssuerAsync:(OGTlsCertificate*)certificate interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_tls_database_lookup_certificate_issuer_async([self castedGObject], [certificate castedGObject], [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
+	g_tls_database_lookup_certificate_issuer_async((GTlsDatabase*)[self castedGObject], [certificate castedGObject], [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
 - (OGTlsCertificate*)lookupCertificateIssuerFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_issuer_finish([self castedGObject], result, &err);
+	GTlsCertificate* gobjectValue = g_tls_database_lookup_certificate_issuer_finish((GTlsDatabase*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -116,7 +116,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_tls_database_lookup_certificates_issued_by([self castedGObject], issuerRawDn, [interaction castedGObject], flags, [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_tls_database_lookup_certificates_issued_by((GTlsDatabase*)[self castedGObject], issuerRawDn, [interaction castedGObject], flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -125,14 +125,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)lookupCertificatesIssuedByAsyncWithIssuerRawDn:(GByteArray*)issuerRawDn interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_tls_database_lookup_certificates_issued_by_async([self castedGObject], issuerRawDn, [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
+	g_tls_database_lookup_certificates_issued_by_async((GTlsDatabase*)[self castedGObject], issuerRawDn, [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
 - (GList*)lookupCertificatesIssuedByFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_tls_database_lookup_certificates_issued_by_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_tls_database_lookup_certificates_issued_by_finish((GTlsDatabase*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -143,7 +143,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_tls_database_verify_chain([self castedGObject], [chain castedGObject], [purpose UTF8String], identity, [interaction castedGObject], flags, [cancellable castedGObject], &err);
+	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_tls_database_verify_chain((GTlsDatabase*)[self castedGObject], [chain castedGObject], [purpose UTF8String], identity, [interaction castedGObject], flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -152,14 +152,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)verifyChainAsync:(OGTlsCertificate*)chain purpose:(OFString*)purpose identity:(GSocketConnectable*)identity interaction:(OGTlsInteraction*)interaction flags:(GTlsDatabaseVerifyFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_tls_database_verify_chain_async([self castedGObject], [chain castedGObject], [purpose UTF8String], identity, [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
+	g_tls_database_verify_chain_async((GTlsDatabase*)[self castedGObject], [chain castedGObject], [purpose UTF8String], identity, [interaction castedGObject], flags, [cancellable castedGObject], callback, userData);
 }
 
 - (GTlsCertificateFlags)verifyChainFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_tls_database_verify_chain_finish([self castedGObject], result, &err);
+	GTlsCertificateFlags returnValue = (GTlsCertificateFlags)g_tls_database_verify_chain_finish((GTlsDatabase*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 

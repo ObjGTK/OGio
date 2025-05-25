@@ -38,26 +38,26 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GFile*)createFileForArg:(OFString*)arg
 {
-	GFile* returnValue = (GFile*)g_application_command_line_create_file_for_arg([self castedGObject], [arg UTF8String]);
+	GFile* returnValue = (GFile*)g_application_command_line_create_file_for_arg((GApplicationCommandLine*)[self castedGObject], [arg UTF8String]);
 
 	return returnValue;
 }
 
 - (void)done
 {
-	g_application_command_line_done([self castedGObject]);
+	g_application_command_line_done((GApplicationCommandLine*)[self castedGObject]);
 }
 
 - (gchar**)argumentsWithArgc:(int*)argc
 {
-	gchar** returnValue = (gchar**)g_application_command_line_get_arguments([self castedGObject], argc);
+	gchar** returnValue = (gchar**)g_application_command_line_get_arguments((GApplicationCommandLine*)[self castedGObject], argc);
 
 	return returnValue;
 }
 
 - (OFString*)cwd
 {
-	const gchar* gobjectValue = g_application_command_line_get_cwd([self castedGObject]);
+	const gchar* gobjectValue = g_application_command_line_get_cwd((GApplicationCommandLine*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -65,42 +65,42 @@ static GTypeClass *gObjectClass = NULL;
 
 - (const gchar* const*)environ
 {
-	const gchar* const* returnValue = (const gchar* const*)g_application_command_line_get_environ([self castedGObject]);
+	const gchar* const* returnValue = (const gchar* const*)g_application_command_line_get_environ((GApplicationCommandLine*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (int)exitStatus
 {
-	int returnValue = (int)g_application_command_line_get_exit_status([self castedGObject]);
+	int returnValue = (int)g_application_command_line_get_exit_status((GApplicationCommandLine*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isRemote
 {
-	bool returnValue = (bool)g_application_command_line_get_is_remote([self castedGObject]);
+	bool returnValue = (bool)g_application_command_line_get_is_remote((GApplicationCommandLine*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GVariantDict*)optionsDict
 {
-	GVariantDict* returnValue = (GVariantDict*)g_application_command_line_get_options_dict([self castedGObject]);
+	GVariantDict* returnValue = (GVariantDict*)g_application_command_line_get_options_dict((GApplicationCommandLine*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GVariant*)platformData
 {
-	GVariant* returnValue = (GVariant*)g_application_command_line_get_platform_data([self castedGObject]);
+	GVariant* returnValue = (GVariant*)g_application_command_line_get_platform_data((GApplicationCommandLine*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OGInputStream*)stdin
 {
-	GInputStream* gobjectValue = g_application_command_line_get_stdin([self castedGObject]);
+	GInputStream* gobjectValue = g_application_command_line_get_stdin((GApplicationCommandLine*)[self castedGObject]);
 
 	OGInputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -110,7 +110,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)envWithName:(OFString*)name
 {
-	const gchar* gobjectValue = g_application_command_line_getenv([self castedGObject], [name UTF8String]);
+	const gchar* gobjectValue = g_application_command_line_getenv((GApplicationCommandLine*)[self castedGObject], [name UTF8String]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -118,17 +118,17 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)printLiteralWithMessage:(OFString*)message
 {
-	g_application_command_line_print_literal([self castedGObject], [message UTF8String]);
+	g_application_command_line_print_literal((GApplicationCommandLine*)[self castedGObject], [message UTF8String]);
 }
 
 - (void)printerrLiteralWithMessage:(OFString*)message
 {
-	g_application_command_line_printerr_literal([self castedGObject], [message UTF8String]);
+	g_application_command_line_printerr_literal((GApplicationCommandLine*)[self castedGObject], [message UTF8String]);
 }
 
 - (void)setExitStatus:(int)exitStatus
 {
-	g_application_command_line_set_exit_status([self castedGObject], exitStatus);
+	g_application_command_line_set_exit_status((GApplicationCommandLine*)[self castedGObject], exitStatus);
 }
 
 

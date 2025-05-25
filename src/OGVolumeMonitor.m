@@ -53,35 +53,35 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GList*)connectedDrives
 {
-	GList* returnValue = (GList*)g_volume_monitor_get_connected_drives([self castedGObject]);
+	GList* returnValue = (GList*)g_volume_monitor_get_connected_drives((GVolumeMonitor*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GMount*)mountForUuid:(OFString*)uuid
 {
-	GMount* returnValue = (GMount*)g_volume_monitor_get_mount_for_uuid([self castedGObject], [uuid UTF8String]);
+	GMount* returnValue = (GMount*)g_volume_monitor_get_mount_for_uuid((GVolumeMonitor*)[self castedGObject], [uuid UTF8String]);
 
 	return returnValue;
 }
 
 - (GList*)mounts
 {
-	GList* returnValue = (GList*)g_volume_monitor_get_mounts([self castedGObject]);
+	GList* returnValue = (GList*)g_volume_monitor_get_mounts((GVolumeMonitor*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GVolume*)volumeForUuid:(OFString*)uuid
 {
-	GVolume* returnValue = (GVolume*)g_volume_monitor_get_volume_for_uuid([self castedGObject], [uuid UTF8String]);
+	GVolume* returnValue = (GVolume*)g_volume_monitor_get_volume_for_uuid((GVolumeMonitor*)[self castedGObject], [uuid UTF8String]);
 
 	return returnValue;
 }
 
 - (GList*)volumes
 {
-	GList* returnValue = (GList*)g_volume_monitor_get_volumes([self castedGObject]);
+	GList* returnValue = (GList*)g_volume_monitor_get_volumes((GVolumeMonitor*)[self castedGObject]);
 
 	return returnValue;
 }

@@ -63,7 +63,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)stop
 {
-	g_debug_controller_dbus_stop([self castedGObject]);
+	g_debug_controller_dbus_stop((GDebugControllerDBus*)[self castedGObject]);
 }
 
 

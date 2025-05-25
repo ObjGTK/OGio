@@ -39,14 +39,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)clearPending
 {
-	g_output_stream_clear_pending([self castedGObject]);
+	g_output_stream_clear_pending((GOutputStream*)[self castedGObject]);
 }
 
 - (bool)closeWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_close([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_output_stream_close((GOutputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -55,14 +55,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)closeAsyncWithIoPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_output_stream_close_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
+	g_output_stream_close_async((GOutputStream*)[self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (bool)closeFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_close_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_output_stream_close_finish((GOutputStream*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -73,7 +73,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_flush([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_output_stream_flush((GOutputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -82,14 +82,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)flushAsyncWithIoPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_output_stream_flush_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
+	g_output_stream_flush_async((GOutputStream*)[self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (bool)flushFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_flush_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_output_stream_flush_finish((GOutputStream*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -98,21 +98,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)hasPending
 {
-	bool returnValue = (bool)g_output_stream_has_pending([self castedGObject]);
+	bool returnValue = (bool)g_output_stream_has_pending((GOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isClosed
 {
-	bool returnValue = (bool)g_output_stream_is_closed([self castedGObject]);
+	bool returnValue = (bool)g_output_stream_is_closed((GOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isClosing
 {
-	bool returnValue = (bool)g_output_stream_is_closing([self castedGObject]);
+	bool returnValue = (bool)g_output_stream_is_closing((GOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -121,7 +121,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_set_pending([self castedGObject], &err);
+	bool returnValue = (bool)g_output_stream_set_pending((GOutputStream*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -132,7 +132,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_output_stream_splice([self castedGObject], [source castedGObject], flags, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_output_stream_splice((GOutputStream*)[self castedGObject], [source castedGObject], flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -141,14 +141,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)spliceAsyncWithSource:(OGInputStream*)source flags:(GOutputStreamSpliceFlags)flags ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_output_stream_splice_async([self castedGObject], [source castedGObject], flags, ioPriority, [cancellable castedGObject], callback, userData);
+	g_output_stream_splice_async((GOutputStream*)[self castedGObject], [source castedGObject], flags, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (gssize)spliceFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_output_stream_splice_finish([self castedGObject], result, &err);
+	gssize returnValue = (gssize)g_output_stream_splice_finish((GOutputStream*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -157,7 +157,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)vprintfWithBytesWritten:(gsize*)bytesWritten cancellable:(OGCancellable*)cancellable error:(GError**)error format:(OFString*)format args:(va_list)args
 {
-	bool returnValue = (bool)g_output_stream_vprintf([self castedGObject], bytesWritten, [cancellable castedGObject], error, [format UTF8String], args);
+	bool returnValue = (bool)g_output_stream_vprintf((GOutputStream*)[self castedGObject], bytesWritten, [cancellable castedGObject], error, [format UTF8String], args);
 
 	return returnValue;
 }
@@ -166,7 +166,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_output_stream_write([self castedGObject], buffer, count, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_output_stream_write((GOutputStream*)[self castedGObject], buffer, count, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -177,7 +177,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_write_all([self castedGObject], buffer, count, bytesWritten, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_output_stream_write_all((GOutputStream*)[self castedGObject], buffer, count, bytesWritten, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -186,14 +186,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)writeAllAsyncWithBuffer:(void*)buffer count:(gsize)count ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_output_stream_write_all_async([self castedGObject], buffer, count, ioPriority, [cancellable castedGObject], callback, userData);
+	g_output_stream_write_all_async((GOutputStream*)[self castedGObject], buffer, count, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (bool)writeAllFinishWithResult:(GAsyncResult*)result bytesWritten:(gsize*)bytesWritten
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_write_all_finish([self castedGObject], result, bytesWritten, &err);
+	bool returnValue = (bool)g_output_stream_write_all_finish((GOutputStream*)[self castedGObject], result, bytesWritten, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -202,14 +202,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)writeAsyncWithBuffer:(void*)buffer count:(gsize)count ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_output_stream_write_async([self castedGObject], buffer, count, ioPriority, [cancellable castedGObject], callback, userData);
+	g_output_stream_write_async((GOutputStream*)[self castedGObject], buffer, count, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (gssize)writeBytes:(GBytes*)bytes cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_output_stream_write_bytes([self castedGObject], bytes, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_output_stream_write_bytes((GOutputStream*)[self castedGObject], bytes, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -218,14 +218,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)writeBytesAsync:(GBytes*)bytes ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_output_stream_write_bytes_async([self castedGObject], bytes, ioPriority, [cancellable castedGObject], callback, userData);
+	g_output_stream_write_bytes_async((GOutputStream*)[self castedGObject], bytes, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (gssize)writeBytesFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_output_stream_write_bytes_finish([self castedGObject], result, &err);
+	gssize returnValue = (gssize)g_output_stream_write_bytes_finish((GOutputStream*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -236,7 +236,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_output_stream_write_finish([self castedGObject], result, &err);
+	gssize returnValue = (gssize)g_output_stream_write_finish((GOutputStream*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -247,7 +247,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_writev([self castedGObject], vectors, nvectors, bytesWritten, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_output_stream_writev((GOutputStream*)[self castedGObject], vectors, nvectors, bytesWritten, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -258,7 +258,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_writev_all([self castedGObject], vectors, nvectors, bytesWritten, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_output_stream_writev_all((GOutputStream*)[self castedGObject], vectors, nvectors, bytesWritten, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -267,14 +267,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)writevAllAsyncWithVectors:(GOutputVector*)vectors nvectors:(gsize)nvectors ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_output_stream_writev_all_async([self castedGObject], vectors, nvectors, ioPriority, [cancellable castedGObject], callback, userData);
+	g_output_stream_writev_all_async((GOutputStream*)[self castedGObject], vectors, nvectors, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (bool)writevAllFinishWithResult:(GAsyncResult*)result bytesWritten:(gsize*)bytesWritten
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_writev_all_finish([self castedGObject], result, bytesWritten, &err);
+	bool returnValue = (bool)g_output_stream_writev_all_finish((GOutputStream*)[self castedGObject], result, bytesWritten, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -283,14 +283,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)writevAsyncWithVectors:(const GOutputVector*)vectors nvectors:(gsize)nvectors ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_output_stream_writev_async([self castedGObject], vectors, nvectors, ioPriority, [cancellable castedGObject], callback, userData);
+	g_output_stream_writev_async((GOutputStream*)[self castedGObject], vectors, nvectors, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (bool)writevFinishWithResult:(GAsyncResult*)result bytesWritten:(gsize*)bytesWritten
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_output_stream_writev_finish([self castedGObject], result, bytesWritten, &err);
+	bool returnValue = (bool)g_output_stream_writev_finish((GOutputStream*)[self castedGObject], result, bytesWritten, &err);
 
 	[OGErrorException throwForError:err];
 

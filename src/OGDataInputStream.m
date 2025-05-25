@@ -59,14 +59,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GDataStreamByteOrder)byteOrder
 {
-	GDataStreamByteOrder returnValue = (GDataStreamByteOrder)g_data_input_stream_get_byte_order([self castedGObject]);
+	GDataStreamByteOrder returnValue = (GDataStreamByteOrder)g_data_input_stream_get_byte_order((GDataInputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDataStreamNewlineType)newlineType
 {
-	GDataStreamNewlineType returnValue = (GDataStreamNewlineType)g_data_input_stream_get_newline_type([self castedGObject]);
+	GDataStreamNewlineType returnValue = (GDataStreamNewlineType)g_data_input_stream_get_newline_type((GDataInputStream*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -75,7 +75,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	guchar returnValue = (guchar)g_data_input_stream_read_byte([self castedGObject], [cancellable castedGObject], &err);
+	guchar returnValue = (guchar)g_data_input_stream_read_byte((GDataInputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -86,7 +86,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gint16 returnValue = (gint16)g_data_input_stream_read_int16([self castedGObject], [cancellable castedGObject], &err);
+	gint16 returnValue = (gint16)g_data_input_stream_read_int16((GDataInputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -97,7 +97,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gint32 returnValue = (gint32)g_data_input_stream_read_int32([self castedGObject], [cancellable castedGObject], &err);
+	gint32 returnValue = (gint32)g_data_input_stream_read_int32((GDataInputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -108,7 +108,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gint64 returnValue = (gint64)g_data_input_stream_read_int64([self castedGObject], [cancellable castedGObject], &err);
+	gint64 returnValue = (gint64)g_data_input_stream_read_int64((GDataInputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -119,7 +119,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	char* gobjectValue = g_data_input_stream_read_line([self castedGObject], length, [cancellable castedGObject], &err);
+	char* gobjectValue = g_data_input_stream_read_line((GDataInputStream*)[self castedGObject], length, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -129,14 +129,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)readLineAsyncWithIoPriority:(gint)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_data_input_stream_read_line_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
+	g_data_input_stream_read_line_async((GDataInputStream*)[self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (OFString*)readLineFinishWithResult:(GAsyncResult*)result length:(gsize*)length
 {
 	GError* err = NULL;
 
-	char* gobjectValue = g_data_input_stream_read_line_finish([self castedGObject], result, length, &err);
+	char* gobjectValue = g_data_input_stream_read_line_finish((GDataInputStream*)[self castedGObject], result, length, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -148,7 +148,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	char* gobjectValue = g_data_input_stream_read_line_finish_utf8([self castedGObject], result, length, &err);
+	char* gobjectValue = g_data_input_stream_read_line_finish_utf8((GDataInputStream*)[self castedGObject], result, length, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -160,7 +160,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	char* gobjectValue = g_data_input_stream_read_line_utf8([self castedGObject], length, [cancellable castedGObject], &err);
+	char* gobjectValue = g_data_input_stream_read_line_utf8((GDataInputStream*)[self castedGObject], length, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -172,7 +172,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	guint16 returnValue = (guint16)g_data_input_stream_read_uint16([self castedGObject], [cancellable castedGObject], &err);
+	guint16 returnValue = (guint16)g_data_input_stream_read_uint16((GDataInputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -183,7 +183,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	guint32 returnValue = (guint32)g_data_input_stream_read_uint32([self castedGObject], [cancellable castedGObject], &err);
+	guint32 returnValue = (guint32)g_data_input_stream_read_uint32((GDataInputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -194,7 +194,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	guint64 returnValue = (guint64)g_data_input_stream_read_uint64([self castedGObject], [cancellable castedGObject], &err);
+	guint64 returnValue = (guint64)g_data_input_stream_read_uint64((GDataInputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -205,7 +205,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	char* gobjectValue = g_data_input_stream_read_until([self castedGObject], [stopChars UTF8String], length, [cancellable castedGObject], &err);
+	char* gobjectValue = g_data_input_stream_read_until((GDataInputStream*)[self castedGObject], [stopChars UTF8String], length, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -215,14 +215,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)readUntilAsyncWithStopChars:(OFString*)stopChars ioPriority:(gint)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_data_input_stream_read_until_async([self castedGObject], [stopChars UTF8String], ioPriority, [cancellable castedGObject], callback, userData);
+	g_data_input_stream_read_until_async((GDataInputStream*)[self castedGObject], [stopChars UTF8String], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (OFString*)readUntilFinishWithResult:(GAsyncResult*)result length:(gsize*)length
 {
 	GError* err = NULL;
 
-	char* gobjectValue = g_data_input_stream_read_until_finish([self castedGObject], result, length, &err);
+	char* gobjectValue = g_data_input_stream_read_until_finish((GDataInputStream*)[self castedGObject], result, length, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -234,7 +234,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	char* gobjectValue = g_data_input_stream_read_upto([self castedGObject], [stopChars UTF8String], stopCharsLen, length, [cancellable castedGObject], &err);
+	char* gobjectValue = g_data_input_stream_read_upto((GDataInputStream*)[self castedGObject], [stopChars UTF8String], stopCharsLen, length, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -244,14 +244,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)readUptoAsyncWithStopChars:(OFString*)stopChars stopCharsLen:(gssize)stopCharsLen ioPriority:(gint)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_data_input_stream_read_upto_async([self castedGObject], [stopChars UTF8String], stopCharsLen, ioPriority, [cancellable castedGObject], callback, userData);
+	g_data_input_stream_read_upto_async((GDataInputStream*)[self castedGObject], [stopChars UTF8String], stopCharsLen, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (OFString*)readUptoFinishWithResult:(GAsyncResult*)result length:(gsize*)length
 {
 	GError* err = NULL;
 
-	char* gobjectValue = g_data_input_stream_read_upto_finish([self castedGObject], result, length, &err);
+	char* gobjectValue = g_data_input_stream_read_upto_finish((GDataInputStream*)[self castedGObject], result, length, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -261,12 +261,12 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setByteOrder:(GDataStreamByteOrder)order
 {
-	g_data_input_stream_set_byte_order([self castedGObject], order);
+	g_data_input_stream_set_byte_order((GDataInputStream*)[self castedGObject], order);
 }
 
 - (void)setNewlineType:(GDataStreamNewlineType)type
 {
-	g_data_input_stream_set_newline_type([self castedGObject], type);
+	g_data_input_stream_set_newline_type((GDataInputStream*)[self castedGObject], type);
 }
 
 

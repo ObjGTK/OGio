@@ -145,7 +145,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = g_dbus_object_manager_client_get_connection([self castedGObject]);
+	GDBusConnection* gobjectValue = g_dbus_object_manager_client_get_connection((GDBusObjectManagerClient*)[self castedGObject]);
 
 	OGDBusConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -153,14 +153,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GDBusObjectManagerClientFlags)flags
 {
-	GDBusObjectManagerClientFlags returnValue = (GDBusObjectManagerClientFlags)g_dbus_object_manager_client_get_flags([self castedGObject]);
+	GDBusObjectManagerClientFlags returnValue = (GDBusObjectManagerClientFlags)g_dbus_object_manager_client_get_flags((GDBusObjectManagerClient*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)name
 {
-	const gchar* gobjectValue = g_dbus_object_manager_client_get_name([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_object_manager_client_get_name((GDBusObjectManagerClient*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -168,7 +168,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)nameOwner
 {
-	gchar* gobjectValue = g_dbus_object_manager_client_get_name_owner([self castedGObject]);
+	gchar* gobjectValue = g_dbus_object_manager_client_get_name_owner((GDBusObjectManagerClient*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;

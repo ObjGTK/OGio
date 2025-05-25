@@ -36,7 +36,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)name
 {
-	const gchar* gobjectValue = g_menu_attribute_iter_get_name([self castedGObject]);
+	const gchar* gobjectValue = g_menu_attribute_iter_get_name((GMenuAttributeIter*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -44,21 +44,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)nextWithOutName:(const gchar**)outName value:(GVariant**)value
 {
-	bool returnValue = (bool)g_menu_attribute_iter_get_next([self castedGObject], outName, value);
+	bool returnValue = (bool)g_menu_attribute_iter_get_next((GMenuAttributeIter*)[self castedGObject], outName, value);
 
 	return returnValue;
 }
 
 - (GVariant*)value
 {
-	GVariant* returnValue = (GVariant*)g_menu_attribute_iter_get_value([self castedGObject]);
+	GVariant* returnValue = (GVariant*)g_menu_attribute_iter_get_value((GMenuAttributeIter*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)next
 {
-	bool returnValue = (bool)g_menu_attribute_iter_next([self castedGObject]);
+	bool returnValue = (bool)g_menu_attribute_iter_next((GMenuAttributeIter*)[self castedGObject]);
 
 	return returnValue;
 }

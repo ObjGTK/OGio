@@ -58,7 +58,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGFileInfo*)fileInfo
 {
-	GFileInfo* gobjectValue = g_zlib_decompressor_get_file_info([self castedGObject]);
+	GFileInfo* gobjectValue = g_zlib_decompressor_get_file_info((GZlibDecompressor*)[self castedGObject]);
 
 	OGFileInfo* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;

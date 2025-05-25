@@ -59,7 +59,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (unsigned)timeout
 {
-	unsigned returnValue = (unsigned)g_resolver_get_timeout([self castedGObject]);
+	unsigned returnValue = (unsigned)g_resolver_get_timeout((GResolver*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -68,7 +68,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gchar* gobjectValue = g_resolver_lookup_by_address([self castedGObject], [address castedGObject], [cancellable castedGObject], &err);
+	gchar* gobjectValue = g_resolver_lookup_by_address((GResolver*)[self castedGObject], [address castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -78,14 +78,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)lookupByAddressAsync:(OGInetAddress*)address cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_resolver_lookup_by_address_async([self castedGObject], [address castedGObject], [cancellable castedGObject], callback, userData);
+	g_resolver_lookup_by_address_async((GResolver*)[self castedGObject], [address castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (OFString*)lookupByAddressFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	gchar* gobjectValue = g_resolver_lookup_by_address_finish([self castedGObject], result, &err);
+	gchar* gobjectValue = g_resolver_lookup_by_address_finish((GResolver*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -97,7 +97,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_resolver_lookup_by_name([self castedGObject], [hostname UTF8String], [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_resolver_lookup_by_name((GResolver*)[self castedGObject], [hostname UTF8String], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -106,14 +106,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)lookupByNameAsyncWithHostname:(OFString*)hostname cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_resolver_lookup_by_name_async([self castedGObject], [hostname UTF8String], [cancellable castedGObject], callback, userData);
+	g_resolver_lookup_by_name_async((GResolver*)[self castedGObject], [hostname UTF8String], [cancellable castedGObject], callback, userData);
 }
 
 - (GList*)lookupByNameFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_resolver_lookup_by_name_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_resolver_lookup_by_name_finish((GResolver*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -124,7 +124,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_resolver_lookup_by_name_with_flags([self castedGObject], [hostname UTF8String], flags, [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_resolver_lookup_by_name_with_flags((GResolver*)[self castedGObject], [hostname UTF8String], flags, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -133,14 +133,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)lookupByNameWithFlagsAsyncWithHostname:(OFString*)hostname flags:(GResolverNameLookupFlags)flags cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_resolver_lookup_by_name_with_flags_async([self castedGObject], [hostname UTF8String], flags, [cancellable castedGObject], callback, userData);
+	g_resolver_lookup_by_name_with_flags_async((GResolver*)[self castedGObject], [hostname UTF8String], flags, [cancellable castedGObject], callback, userData);
 }
 
 - (GList*)lookupByNameWithFlagsFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_resolver_lookup_by_name_with_flags_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_resolver_lookup_by_name_with_flags_finish((GResolver*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -151,7 +151,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_resolver_lookup_records([self castedGObject], [rrname UTF8String], recordType, [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_resolver_lookup_records((GResolver*)[self castedGObject], [rrname UTF8String], recordType, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -160,14 +160,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)lookupRecordsAsyncWithRrname:(OFString*)rrname recordType:(GResolverRecordType)recordType cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_resolver_lookup_records_async([self castedGObject], [rrname UTF8String], recordType, [cancellable castedGObject], callback, userData);
+	g_resolver_lookup_records_async((GResolver*)[self castedGObject], [rrname UTF8String], recordType, [cancellable castedGObject], callback, userData);
 }
 
 - (GList*)lookupRecordsFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_resolver_lookup_records_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_resolver_lookup_records_finish((GResolver*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -178,7 +178,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_resolver_lookup_service([self castedGObject], [service UTF8String], [protocol UTF8String], [domain UTF8String], [cancellable castedGObject], &err);
+	GList* returnValue = (GList*)g_resolver_lookup_service((GResolver*)[self castedGObject], [service UTF8String], [protocol UTF8String], [domain UTF8String], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -187,14 +187,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)lookupServiceAsync:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_resolver_lookup_service_async([self castedGObject], [service UTF8String], [protocol UTF8String], [domain UTF8String], [cancellable castedGObject], callback, userData);
+	g_resolver_lookup_service_async((GResolver*)[self castedGObject], [service UTF8String], [protocol UTF8String], [domain UTF8String], [cancellable castedGObject], callback, userData);
 }
 
 - (GList*)lookupServiceFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GList* returnValue = (GList*)g_resolver_lookup_service_finish([self castedGObject], result, &err);
+	GList* returnValue = (GList*)g_resolver_lookup_service_finish((GResolver*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -203,12 +203,12 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setDefault
 {
-	g_resolver_set_default([self castedGObject]);
+	g_resolver_set_default((GResolver*)[self castedGObject]);
 }
 
 - (void)setTimeoutWithTimeoutMs:(unsigned)timeoutMs
 {
-	g_resolver_set_timeout([self castedGObject], timeoutMs);
+	g_resolver_set_timeout((GResolver*)[self castedGObject], timeoutMs);
 }
 
 

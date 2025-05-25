@@ -76,14 +76,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GIcon*)icon
 {
-	GIcon* returnValue = (GIcon*)g_emblem_get_icon([self castedGObject]);
+	GIcon* returnValue = (GIcon*)g_emblem_get_icon((GEmblem*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GEmblemOrigin)origin
 {
-	GEmblemOrigin returnValue = (GEmblemOrigin)g_emblem_get_origin([self castedGObject]);
+	GEmblemOrigin returnValue = (GEmblemOrigin)g_emblem_get_origin((GEmblem*)[self castedGObject]);
 
 	return returnValue;
 }

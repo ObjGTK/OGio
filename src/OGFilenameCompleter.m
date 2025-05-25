@@ -56,7 +56,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)completionSuffixWithInitialText:(OFString*)initialText
 {
-	char* gobjectValue = g_filename_completer_get_completion_suffix([self castedGObject], [initialText UTF8String]);
+	char* gobjectValue = g_filename_completer_get_completion_suffix((GFilenameCompleter*)[self castedGObject], [initialText UTF8String]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -64,14 +64,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (char**)completionsWithInitialText:(OFString*)initialText
 {
-	char** returnValue = (char**)g_filename_completer_get_completions([self castedGObject], [initialText UTF8String]);
+	char** returnValue = (char**)g_filename_completer_get_completions((GFilenameCompleter*)[self castedGObject], [initialText UTF8String]);
 
 	return returnValue;
 }
 
 - (void)setDirsOnly:(bool)dirsOnly
 {
-	g_filename_completer_set_dirs_only([self castedGObject], dirsOnly);
+	g_filename_completer_set_dirs_only((GFilenameCompleter*)[self castedGObject], dirsOnly);
 }
 
 

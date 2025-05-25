@@ -39,14 +39,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GVariant*)itemAttributeValueWithItemIndex:(gint)itemIndex attribute:(OFString*)attribute expectedType:(const GVariantType*)expectedType
 {
-	GVariant* returnValue = (GVariant*)g_menu_model_get_item_attribute_value([self castedGObject], itemIndex, [attribute UTF8String], expectedType);
+	GVariant* returnValue = (GVariant*)g_menu_model_get_item_attribute_value((GMenuModel*)[self castedGObject], itemIndex, [attribute UTF8String], expectedType);
 
 	return returnValue;
 }
 
 - (OGMenuModel*)itemLinkWithItemIndex:(gint)itemIndex link:(OFString*)link
 {
-	GMenuModel* gobjectValue = g_menu_model_get_item_link([self castedGObject], itemIndex, [link UTF8String]);
+	GMenuModel* gobjectValue = g_menu_model_get_item_link((GMenuModel*)[self castedGObject], itemIndex, [link UTF8String]);
 
 	OGMenuModel* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -56,26 +56,26 @@ static GTypeClass *gObjectClass = NULL;
 
 - (gint)nitems
 {
-	gint returnValue = (gint)g_menu_model_get_n_items([self castedGObject]);
+	gint returnValue = (gint)g_menu_model_get_n_items((GMenuModel*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMutable
 {
-	bool returnValue = (bool)g_menu_model_is_mutable([self castedGObject]);
+	bool returnValue = (bool)g_menu_model_is_mutable((GMenuModel*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)itemsChangedWithPosition:(gint)position removed:(gint)removed added:(gint)added
 {
-	g_menu_model_items_changed([self castedGObject], position, removed, added);
+	g_menu_model_items_changed((GMenuModel*)[self castedGObject], position, removed, added);
 }
 
 - (OGMenuAttributeIter*)iterateItemAttributesWithItemIndex:(gint)itemIndex
 {
-	GMenuAttributeIter* gobjectValue = g_menu_model_iterate_item_attributes([self castedGObject], itemIndex);
+	GMenuAttributeIter* gobjectValue = g_menu_model_iterate_item_attributes((GMenuModel*)[self castedGObject], itemIndex);
 
 	OGMenuAttributeIter* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -85,7 +85,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGMenuLinkIter*)iterateItemLinksWithItemIndex:(gint)itemIndex
 {
-	GMenuLinkIter* gobjectValue = g_menu_model_iterate_item_links([self castedGObject], itemIndex);
+	GMenuLinkIter* gobjectValue = g_menu_model_iterate_item_links((GMenuModel*)[self castedGObject], itemIndex);
 
 	OGMenuLinkIter* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);

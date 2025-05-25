@@ -78,7 +78,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGInetAddress*)address
 {
-	GInetAddress* gobjectValue = g_inet_socket_address_get_address([self castedGObject]);
+	GInetAddress* gobjectValue = g_inet_socket_address_get_address((GInetSocketAddress*)[self castedGObject]);
 
 	OGInetAddress* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -86,21 +86,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (guint32)flowinfo
 {
-	guint32 returnValue = (guint32)g_inet_socket_address_get_flowinfo([self castedGObject]);
+	guint32 returnValue = (guint32)g_inet_socket_address_get_flowinfo((GInetSocketAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint16)port
 {
-	guint16 returnValue = (guint16)g_inet_socket_address_get_port([self castedGObject]);
+	guint16 returnValue = (guint16)g_inet_socket_address_get_port((GInetSocketAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint32)scopeId
 {
-	guint32 returnValue = (guint32)g_inet_socket_address_get_scope_id([self castedGObject]);
+	guint32 returnValue = (guint32)g_inet_socket_address_get_scope_id((GInetSocketAddress*)[self castedGObject]);
 
 	return returnValue;
 }

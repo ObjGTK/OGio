@@ -76,35 +76,35 @@ static GTypeClass *gObjectClass = NULL;
 
 - (gpointer)data
 {
-	gpointer returnValue = (gpointer)g_memory_output_stream_get_data([self castedGObject]);
+	gpointer returnValue = (gpointer)g_memory_output_stream_get_data((GMemoryOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)dataSize
 {
-	gsize returnValue = (gsize)g_memory_output_stream_get_data_size([self castedGObject]);
+	gsize returnValue = (gsize)g_memory_output_stream_get_data_size((GMemoryOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)size
 {
-	gsize returnValue = (gsize)g_memory_output_stream_get_size([self castedGObject]);
+	gsize returnValue = (gsize)g_memory_output_stream_get_size((GMemoryOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GBytes*)stealAsBytes
 {
-	GBytes* returnValue = (GBytes*)g_memory_output_stream_steal_as_bytes([self castedGObject]);
+	GBytes* returnValue = (GBytes*)g_memory_output_stream_steal_as_bytes((GMemoryOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gpointer)stealData
 {
-	gpointer returnValue = (gpointer)g_memory_output_stream_steal_data([self castedGObject]);
+	gpointer returnValue = (gpointer)g_memory_output_stream_steal_data((GMemoryOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }

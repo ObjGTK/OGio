@@ -146,14 +146,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)callWithMethodName:(OFString*)methodName parameters:(GVariant*)parameters flags:(GDBusCallFlags)flags timeoutMsec:(gint)timeoutMsec cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_dbus_proxy_call([self castedGObject], [methodName UTF8String], parameters, flags, timeoutMsec, [cancellable castedGObject], callback, userData);
+	g_dbus_proxy_call((GDBusProxy*)[self castedGObject], [methodName UTF8String], parameters, flags, timeoutMsec, [cancellable castedGObject], callback, userData);
 }
 
 - (GVariant*)callFinishWithRes:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
-	GVariant* returnValue = (GVariant*)g_dbus_proxy_call_finish([self castedGObject], res, &err);
+	GVariant* returnValue = (GVariant*)g_dbus_proxy_call_finish((GDBusProxy*)[self castedGObject], res, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -164,7 +164,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GVariant* returnValue = (GVariant*)g_dbus_proxy_call_sync([self castedGObject], [methodName UTF8String], parameters, flags, timeoutMsec, [cancellable castedGObject], &err);
+	GVariant* returnValue = (GVariant*)g_dbus_proxy_call_sync((GDBusProxy*)[self castedGObject], [methodName UTF8String], parameters, flags, timeoutMsec, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -173,14 +173,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)callWithUnixFdListWithMethodName:(OFString*)methodName parameters:(GVariant*)parameters flags:(GDBusCallFlags)flags timeoutMsec:(gint)timeoutMsec fdList:(OGUnixFDList*)fdList cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_dbus_proxy_call_with_unix_fd_list([self castedGObject], [methodName UTF8String], parameters, flags, timeoutMsec, [fdList castedGObject], [cancellable castedGObject], callback, userData);
+	g_dbus_proxy_call_with_unix_fd_list((GDBusProxy*)[self castedGObject], [methodName UTF8String], parameters, flags, timeoutMsec, [fdList castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (GVariant*)callWithUnixFdListFinishWithOutFdList:(GUnixFDList**)outFdList res:(GAsyncResult*)res
 {
 	GError* err = NULL;
 
-	GVariant* returnValue = (GVariant*)g_dbus_proxy_call_with_unix_fd_list_finish([self castedGObject], outFdList, res, &err);
+	GVariant* returnValue = (GVariant*)g_dbus_proxy_call_with_unix_fd_list_finish((GDBusProxy*)[self castedGObject], outFdList, res, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -191,7 +191,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GVariant* returnValue = (GVariant*)g_dbus_proxy_call_with_unix_fd_list_sync([self castedGObject], [methodName UTF8String], parameters, flags, timeoutMsec, [fdList castedGObject], outFdList, [cancellable castedGObject], &err);
+	GVariant* returnValue = (GVariant*)g_dbus_proxy_call_with_unix_fd_list_sync((GDBusProxy*)[self castedGObject], [methodName UTF8String], parameters, flags, timeoutMsec, [fdList castedGObject], outFdList, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -200,21 +200,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GVariant*)cachedPropertyWithPropertyName:(OFString*)propertyName
 {
-	GVariant* returnValue = (GVariant*)g_dbus_proxy_get_cached_property([self castedGObject], [propertyName UTF8String]);
+	GVariant* returnValue = (GVariant*)g_dbus_proxy_get_cached_property((GDBusProxy*)[self castedGObject], [propertyName UTF8String]);
 
 	return returnValue;
 }
 
 - (gchar**)cachedPropertyNames
 {
-	gchar** returnValue = (gchar**)g_dbus_proxy_get_cached_property_names([self castedGObject]);
+	gchar** returnValue = (gchar**)g_dbus_proxy_get_cached_property_names((GDBusProxy*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OGDBusConnection*)connection
 {
-	GDBusConnection* gobjectValue = g_dbus_proxy_get_connection([self castedGObject]);
+	GDBusConnection* gobjectValue = g_dbus_proxy_get_connection((GDBusProxy*)[self castedGObject]);
 
 	OGDBusConnection* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -222,28 +222,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (gint)defaultTimeout
 {
-	gint returnValue = (gint)g_dbus_proxy_get_default_timeout([self castedGObject]);
+	gint returnValue = (gint)g_dbus_proxy_get_default_timeout((GDBusProxy*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusProxyFlags)flags
 {
-	GDBusProxyFlags returnValue = (GDBusProxyFlags)g_dbus_proxy_get_flags([self castedGObject]);
+	GDBusProxyFlags returnValue = (GDBusProxyFlags)g_dbus_proxy_get_flags((GDBusProxy*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GDBusInterfaceInfo*)interfaceInfo
 {
-	GDBusInterfaceInfo* returnValue = (GDBusInterfaceInfo*)g_dbus_proxy_get_interface_info([self castedGObject]);
+	GDBusInterfaceInfo* returnValue = (GDBusInterfaceInfo*)g_dbus_proxy_get_interface_info((GDBusProxy*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)interfaceName
 {
-	const gchar* gobjectValue = g_dbus_proxy_get_interface_name([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_proxy_get_interface_name((GDBusProxy*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -251,7 +251,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)name
 {
-	const gchar* gobjectValue = g_dbus_proxy_get_name([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_proxy_get_name((GDBusProxy*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -259,7 +259,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)nameOwner
 {
-	gchar* gobjectValue = g_dbus_proxy_get_name_owner([self castedGObject]);
+	gchar* gobjectValue = g_dbus_proxy_get_name_owner((GDBusProxy*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -267,7 +267,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)objectPath
 {
-	const gchar* gobjectValue = g_dbus_proxy_get_object_path([self castedGObject]);
+	const gchar* gobjectValue = g_dbus_proxy_get_object_path((GDBusProxy*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -275,17 +275,17 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setCachedPropertyWithPropertyName:(OFString*)propertyName value:(GVariant*)value
 {
-	g_dbus_proxy_set_cached_property([self castedGObject], [propertyName UTF8String], value);
+	g_dbus_proxy_set_cached_property((GDBusProxy*)[self castedGObject], [propertyName UTF8String], value);
 }
 
 - (void)setDefaultTimeoutWithTimeoutMsec:(gint)timeoutMsec
 {
-	g_dbus_proxy_set_default_timeout([self castedGObject], timeoutMsec);
+	g_dbus_proxy_set_default_timeout((GDBusProxy*)[self castedGObject], timeoutMsec);
 }
 
 - (void)setInterfaceInfo:(GDBusInterfaceInfo*)info
 {
-	g_dbus_proxy_set_interface_info([self castedGObject], info);
+	g_dbus_proxy_set_interface_info((GDBusProxy*)[self castedGObject], info);
 }
 
 

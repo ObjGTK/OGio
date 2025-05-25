@@ -56,14 +56,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GSocketFamily)family
 {
-	GSocketFamily returnValue = (GSocketFamily)g_socket_address_get_family([self castedGObject]);
+	GSocketFamily returnValue = (GSocketFamily)g_socket_address_get_family((GSocketAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gssize)nativeSize
 {
-	gssize returnValue = (gssize)g_socket_address_get_native_size([self castedGObject]);
+	gssize returnValue = (gssize)g_socket_address_get_native_size((GSocketAddress*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -72,7 +72,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_socket_address_to_native([self castedGObject], dest, destlen, &err);
+	bool returnValue = (bool)g_socket_address_to_native((GSocketAddress*)[self castedGObject], dest, destlen, &err);
 
 	[OGErrorException throwForError:err];
 

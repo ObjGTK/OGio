@@ -56,7 +56,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)domain
 {
-	const gchar* gobjectValue = g_network_service_get_domain([self castedGObject]);
+	const gchar* gobjectValue = g_network_service_get_domain((GNetworkService*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -64,7 +64,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)protocol
 {
-	const gchar* gobjectValue = g_network_service_get_protocol([self castedGObject]);
+	const gchar* gobjectValue = g_network_service_get_protocol((GNetworkService*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -72,7 +72,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)scheme
 {
-	const gchar* gobjectValue = g_network_service_get_scheme([self castedGObject]);
+	const gchar* gobjectValue = g_network_service_get_scheme((GNetworkService*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -80,7 +80,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)service
 {
-	const gchar* gobjectValue = g_network_service_get_service([self castedGObject]);
+	const gchar* gobjectValue = g_network_service_get_service((GNetworkService*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -88,7 +88,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setScheme:(OFString*)scheme
 {
-	g_network_service_set_scheme([self castedGObject], [scheme UTF8String]);
+	g_network_service_set_scheme((GNetworkService*)[self castedGObject], [scheme UTF8String]);
 }
 
 

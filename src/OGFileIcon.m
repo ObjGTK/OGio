@@ -56,7 +56,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GFile*)file
 {
-	GFile* returnValue = (GFile*)g_file_icon_get_file([self castedGObject]);
+	GFile* returnValue = (GFile*)g_file_icon_get_file((GFileIcon*)[self castedGObject]);
 
 	return returnValue;
 }

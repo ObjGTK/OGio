@@ -58,24 +58,24 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)addEmblem:(OGEmblem*)emblem
 {
-	g_emblemed_icon_add_emblem([self castedGObject], [emblem castedGObject]);
+	g_emblemed_icon_add_emblem((GEmblemedIcon*)[self castedGObject], [emblem castedGObject]);
 }
 
 - (void)clearEmblems
 {
-	g_emblemed_icon_clear_emblems([self castedGObject]);
+	g_emblemed_icon_clear_emblems((GEmblemedIcon*)[self castedGObject]);
 }
 
 - (GList*)emblems
 {
-	GList* returnValue = (GList*)g_emblemed_icon_get_emblems([self castedGObject]);
+	GList* returnValue = (GList*)g_emblemed_icon_get_emblems((GEmblemedIcon*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (GIcon*)icon
 {
-	GIcon* returnValue = (GIcon*)g_emblemed_icon_get_icon([self castedGObject]);
+	GIcon* returnValue = (GIcon*)g_emblemed_icon_get_icon((GEmblemedIcon*)[self castedGObject]);
 
 	return returnValue;
 }

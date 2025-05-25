@@ -41,7 +41,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	GCredentials* gobjectValue = g_unix_connection_receive_credentials([self castedGObject], [cancellable castedGObject], &err);
+	GCredentials* gobjectValue = g_unix_connection_receive_credentials((GUnixConnection*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -53,14 +53,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)receiveCredentialsAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_unix_connection_receive_credentials_async([self castedGObject], [cancellable castedGObject], callback, userData);
+	g_unix_connection_receive_credentials_async((GUnixConnection*)[self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (OGCredentials*)receiveCredentialsFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	GCredentials* gobjectValue = g_unix_connection_receive_credentials_finish([self castedGObject], result, &err);
+	GCredentials* gobjectValue = g_unix_connection_receive_credentials_finish((GUnixConnection*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err unrefGObject:gobjectValue];
 
@@ -74,7 +74,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gint returnValue = (gint)g_unix_connection_receive_fd([self castedGObject], [cancellable castedGObject], &err);
+	gint returnValue = (gint)g_unix_connection_receive_fd((GUnixConnection*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -85,7 +85,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_unix_connection_send_credentials([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_unix_connection_send_credentials((GUnixConnection*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -94,14 +94,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)sendCredentialsAsyncWithCancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_unix_connection_send_credentials_async([self castedGObject], [cancellable castedGObject], callback, userData);
+	g_unix_connection_send_credentials_async((GUnixConnection*)[self castedGObject], [cancellable castedGObject], callback, userData);
 }
 
 - (bool)sendCredentialsFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_unix_connection_send_credentials_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_unix_connection_send_credentials_finish((GUnixConnection*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -112,7 +112,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_unix_connection_send_fd([self castedGObject], fd, [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_unix_connection_send_fd((GUnixConnection*)[self castedGObject], fd, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 

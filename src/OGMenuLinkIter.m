@@ -38,7 +38,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)name
 {
-	const gchar* gobjectValue = g_menu_link_iter_get_name([self castedGObject]);
+	const gchar* gobjectValue = g_menu_link_iter_get_name((GMenuLinkIter*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -46,14 +46,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)nextWithOutLink:(const gchar**)outLink value:(GMenuModel**)value
 {
-	bool returnValue = (bool)g_menu_link_iter_get_next([self castedGObject], outLink, value);
+	bool returnValue = (bool)g_menu_link_iter_get_next((GMenuLinkIter*)[self castedGObject], outLink, value);
 
 	return returnValue;
 }
 
 - (OGMenuModel*)value
 {
-	GMenuModel* gobjectValue = g_menu_link_iter_get_value([self castedGObject]);
+	GMenuModel* gobjectValue = g_menu_link_iter_get_value((GMenuLinkIter*)[self castedGObject]);
 
 	OGMenuModel* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	g_object_unref(gobjectValue);
@@ -63,7 +63,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)next
 {
-	bool returnValue = (bool)g_menu_link_iter_next([self castedGObject]);
+	bool returnValue = (bool)g_menu_link_iter_next((GMenuLinkIter*)[self castedGObject]);
 
 	return returnValue;
 }

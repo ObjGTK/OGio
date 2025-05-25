@@ -56,7 +56,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)description
 {
-	const gchar* gobjectValue = g_tls_password_get_description([self castedGObject]);
+	const gchar* gobjectValue = g_tls_password_get_description((GTlsPassword*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -64,21 +64,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GTlsPasswordFlags)flags
 {
-	GTlsPasswordFlags returnValue = (GTlsPasswordFlags)g_tls_password_get_flags([self castedGObject]);
+	GTlsPasswordFlags returnValue = (GTlsPasswordFlags)g_tls_password_get_flags((GTlsPassword*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (const guchar*)valueWithLength:(gsize*)length
 {
-	const guchar* returnValue = (const guchar*)g_tls_password_get_value([self castedGObject], length);
+	const guchar* returnValue = (const guchar*)g_tls_password_get_value((GTlsPassword*)[self castedGObject], length);
 
 	return returnValue;
 }
 
 - (OFString*)warning
 {
-	const gchar* gobjectValue = g_tls_password_get_warning([self castedGObject]);
+	const gchar* gobjectValue = g_tls_password_get_warning((GTlsPassword*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -86,27 +86,27 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setDescription:(OFString*)description
 {
-	g_tls_password_set_description([self castedGObject], [description UTF8String]);
+	g_tls_password_set_description((GTlsPassword*)[self castedGObject], [description UTF8String]);
 }
 
 - (void)setFlags:(GTlsPasswordFlags)flags
 {
-	g_tls_password_set_flags([self castedGObject], flags);
+	g_tls_password_set_flags((GTlsPassword*)[self castedGObject], flags);
 }
 
 - (void)setValue:(const guchar*)value length:(gssize)length
 {
-	g_tls_password_set_value([self castedGObject], value, length);
+	g_tls_password_set_value((GTlsPassword*)[self castedGObject], value, length);
 }
 
 - (void)setValueFull:(guchar*)value length:(gssize)length destroy:(GDestroyNotify)destroy
 {
-	g_tls_password_set_value_full([self castedGObject], value, length, destroy);
+	g_tls_password_set_value_full((GTlsPassword*)[self castedGObject], value, length, destroy);
 }
 
 - (void)setWarning:(OFString*)warning
 {
-	g_tls_password_set_warning([self castedGObject], [warning UTF8String]);
+	g_tls_password_set_warning((GTlsPassword*)[self castedGObject], [warning UTF8String]);
 }
 
 

@@ -46,28 +46,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (int)level
 {
-	int returnValue = (int)g_socket_control_message_get_level([self castedGObject]);
+	int returnValue = (int)g_socket_control_message_get_level((GSocketControlMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (int)msgType
 {
-	int returnValue = (int)g_socket_control_message_get_msg_type([self castedGObject]);
+	int returnValue = (int)g_socket_control_message_get_msg_type((GSocketControlMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)size
 {
-	gsize returnValue = (gsize)g_socket_control_message_get_size([self castedGObject]);
+	gsize returnValue = (gsize)g_socket_control_message_get_size((GSocketControlMessage*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)serializeWithData:(gpointer)data
 {
-	g_socket_control_message_serialize([self castedGObject], data);
+	g_socket_control_message_serialize((GSocketControlMessage*)[self castedGObject], data);
 }
 
 

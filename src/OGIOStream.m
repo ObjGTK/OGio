@@ -51,14 +51,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)clearPending
 {
-	g_io_stream_clear_pending([self castedGObject]);
+	g_io_stream_clear_pending((GIOStream*)[self castedGObject]);
 }
 
 - (bool)closeWithCancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_io_stream_close([self castedGObject], [cancellable castedGObject], &err);
+	bool returnValue = (bool)g_io_stream_close((GIOStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -67,14 +67,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)closeAsyncWithIoPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_io_stream_close_async([self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
+	g_io_stream_close_async((GIOStream*)[self castedGObject], ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (bool)closeFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_io_stream_close_finish([self castedGObject], result, &err);
+	bool returnValue = (bool)g_io_stream_close_finish((GIOStream*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -83,7 +83,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGInputStream*)inputStream
 {
-	GInputStream* gobjectValue = g_io_stream_get_input_stream([self castedGObject]);
+	GInputStream* gobjectValue = g_io_stream_get_input_stream((GIOStream*)[self castedGObject]);
 
 	OGInputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -91,7 +91,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGOutputStream*)outputStream
 {
-	GOutputStream* gobjectValue = g_io_stream_get_output_stream([self castedGObject]);
+	GOutputStream* gobjectValue = g_io_stream_get_output_stream((GIOStream*)[self castedGObject]);
 
 	OGOutputStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;
@@ -99,14 +99,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)hasPending
 {
-	bool returnValue = (bool)g_io_stream_has_pending([self castedGObject]);
+	bool returnValue = (bool)g_io_stream_has_pending((GIOStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isClosed
 {
-	bool returnValue = (bool)g_io_stream_is_closed([self castedGObject]);
+	bool returnValue = (bool)g_io_stream_is_closed((GIOStream*)[self castedGObject]);
 
 	return returnValue;
 }
@@ -115,7 +115,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_io_stream_set_pending([self castedGObject], &err);
+	bool returnValue = (bool)g_io_stream_set_pending((GIOStream*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -124,7 +124,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)spliceAsyncWithStream2:(OGIOStream*)stream2 flags:(GIOStreamSpliceFlags)flags ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_io_stream_splice_async([self castedGObject], [stream2 castedGObject], flags, ioPriority, [cancellable castedGObject], callback, userData);
+	g_io_stream_splice_async((GIOStream*)[self castedGObject], [stream2 castedGObject], flags, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 

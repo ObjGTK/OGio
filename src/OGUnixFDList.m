@@ -78,7 +78,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gint returnValue = (gint)g_unix_fd_list_append([self castedGObject], fd, &err);
+	gint returnValue = (gint)g_unix_fd_list_append((GUnixFDList*)[self castedGObject], fd, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -89,7 +89,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gint returnValue = (gint)g_unix_fd_list_get([self castedGObject], index, &err);
+	gint returnValue = (gint)g_unix_fd_list_get((GUnixFDList*)[self castedGObject], index, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -98,21 +98,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (gint)length
 {
-	gint returnValue = (gint)g_unix_fd_list_get_length([self castedGObject]);
+	gint returnValue = (gint)g_unix_fd_list_get_length((GUnixFDList*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (const gint*)peekFdsWithLength:(gint*)length
 {
-	const gint* returnValue = (const gint*)g_unix_fd_list_peek_fds([self castedGObject], length);
+	const gint* returnValue = (const gint*)g_unix_fd_list_peek_fds((GUnixFDList*)[self castedGObject], length);
 
 	return returnValue;
 }
 
 - (gint*)stealFdsWithLength:(gint*)length
 {
-	gint* returnValue = (gint*)g_unix_fd_list_steal_fds([self castedGObject], length);
+	gint* returnValue = (gint*)g_unix_fd_list_steal_fds((GUnixFDList*)[self castedGObject], length);
 
 	return returnValue;
 }

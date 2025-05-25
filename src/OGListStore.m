@@ -56,60 +56,60 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)appendWithItem:(gpointer)item
 {
-	g_list_store_append([self castedGObject], item);
+	g_list_store_append((GListStore*)[self castedGObject], item);
 }
 
 - (bool)findWithItem:(gpointer)item position:(guint*)position
 {
-	bool returnValue = (bool)g_list_store_find([self castedGObject], item, position);
+	bool returnValue = (bool)g_list_store_find((GListStore*)[self castedGObject], item, position);
 
 	return returnValue;
 }
 
 - (bool)findWithEqualFuncWithItem:(gpointer)item equalFunc:(GEqualFunc)equalFunc position:(guint*)position
 {
-	bool returnValue = (bool)g_list_store_find_with_equal_func([self castedGObject], item, equalFunc, position);
+	bool returnValue = (bool)g_list_store_find_with_equal_func((GListStore*)[self castedGObject], item, equalFunc, position);
 
 	return returnValue;
 }
 
 - (bool)findWithEqualFuncFullWithItem:(gpointer)item equalFunc:(GEqualFuncFull)equalFunc userData:(gpointer)userData position:(guint*)position
 {
-	bool returnValue = (bool)g_list_store_find_with_equal_func_full([self castedGObject], item, equalFunc, userData, position);
+	bool returnValue = (bool)g_list_store_find_with_equal_func_full((GListStore*)[self castedGObject], item, equalFunc, userData, position);
 
 	return returnValue;
 }
 
 - (void)insertWithPosition:(guint)position item:(gpointer)item
 {
-	g_list_store_insert([self castedGObject], position, item);
+	g_list_store_insert((GListStore*)[self castedGObject], position, item);
 }
 
 - (guint)insertSortedWithItem:(gpointer)item compareFunc:(GCompareDataFunc)compareFunc userData:(gpointer)userData
 {
-	guint returnValue = (guint)g_list_store_insert_sorted([self castedGObject], item, compareFunc, userData);
+	guint returnValue = (guint)g_list_store_insert_sorted((GListStore*)[self castedGObject], item, compareFunc, userData);
 
 	return returnValue;
 }
 
 - (void)removeWithPosition:(guint)position
 {
-	g_list_store_remove([self castedGObject], position);
+	g_list_store_remove((GListStore*)[self castedGObject], position);
 }
 
 - (void)removeAll
 {
-	g_list_store_remove_all([self castedGObject]);
+	g_list_store_remove_all((GListStore*)[self castedGObject]);
 }
 
 - (void)sortWithCompareFunc:(GCompareDataFunc)compareFunc userData:(gpointer)userData
 {
-	g_list_store_sort([self castedGObject], compareFunc, userData);
+	g_list_store_sort((GListStore*)[self castedGObject], compareFunc, userData);
 }
 
 - (void)spliceWithPosition:(guint)position nremovals:(guint)nremovals additions:(gpointer*)additions nadditions:(guint)nadditions
 {
-	g_list_store_splice([self castedGObject], position, nremovals, additions, nadditions);
+	g_list_store_splice((GListStore*)[self castedGObject], position, nremovals, additions, nadditions);
 }
 
 

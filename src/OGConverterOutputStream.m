@@ -58,7 +58,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GConverter*)converter
 {
-	GConverter* returnValue = (GConverter*)g_converter_output_stream_get_converter([self castedGObject]);
+	GConverter* returnValue = (GConverter*)g_converter_output_stream_get_converter((GConverterOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }

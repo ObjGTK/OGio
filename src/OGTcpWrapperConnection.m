@@ -60,7 +60,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OGIOStream*)baseIoStream
 {
-	GIOStream* gobjectValue = g_tcp_wrapper_connection_get_base_io_stream([self castedGObject]);
+	GIOStream* gobjectValue = g_tcp_wrapper_connection_get_base_io_stream((GTcpWrapperConnection*)[self castedGObject]);
 
 	OGIOStream* returnValue = OGWrapperClassAndObjectForGObject(gobjectValue);
 	return returnValue;

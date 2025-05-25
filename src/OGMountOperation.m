@@ -56,21 +56,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)anonymous
 {
-	bool returnValue = (bool)g_mount_operation_get_anonymous([self castedGObject]);
+	bool returnValue = (bool)g_mount_operation_get_anonymous((GMountOperation*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (int)choice
 {
-	int returnValue = (int)g_mount_operation_get_choice([self castedGObject]);
+	int returnValue = (int)g_mount_operation_get_choice((GMountOperation*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)domain
 {
-	const char* gobjectValue = g_mount_operation_get_domain([self castedGObject]);
+	const char* gobjectValue = g_mount_operation_get_domain((GMountOperation*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -78,21 +78,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)isTcryptHiddenVolume
 {
-	bool returnValue = (bool)g_mount_operation_get_is_tcrypt_hidden_volume([self castedGObject]);
+	bool returnValue = (bool)g_mount_operation_get_is_tcrypt_hidden_volume((GMountOperation*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isTcryptSystemVolume
 {
-	bool returnValue = (bool)g_mount_operation_get_is_tcrypt_system_volume([self castedGObject]);
+	bool returnValue = (bool)g_mount_operation_get_is_tcrypt_system_volume((GMountOperation*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)password
 {
-	const char* gobjectValue = g_mount_operation_get_password([self castedGObject]);
+	const char* gobjectValue = g_mount_operation_get_password((GMountOperation*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -100,21 +100,21 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GPasswordSave)passwordSave
 {
-	GPasswordSave returnValue = (GPasswordSave)g_mount_operation_get_password_save([self castedGObject]);
+	GPasswordSave returnValue = (GPasswordSave)g_mount_operation_get_password_save((GMountOperation*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (guint)pim
 {
-	guint returnValue = (guint)g_mount_operation_get_pim([self castedGObject]);
+	guint returnValue = (guint)g_mount_operation_get_pim((GMountOperation*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)username
 {
-	const char* gobjectValue = g_mount_operation_get_username([self castedGObject]);
+	const char* gobjectValue = g_mount_operation_get_username((GMountOperation*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -122,52 +122,52 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)replyWithResult:(GMountOperationResult)result
 {
-	g_mount_operation_reply([self castedGObject], result);
+	g_mount_operation_reply((GMountOperation*)[self castedGObject], result);
 }
 
 - (void)setAnonymous:(bool)anonymous
 {
-	g_mount_operation_set_anonymous([self castedGObject], anonymous);
+	g_mount_operation_set_anonymous((GMountOperation*)[self castedGObject], anonymous);
 }
 
 - (void)setChoice:(int)choice
 {
-	g_mount_operation_set_choice([self castedGObject], choice);
+	g_mount_operation_set_choice((GMountOperation*)[self castedGObject], choice);
 }
 
 - (void)setDomain:(OFString*)domain
 {
-	g_mount_operation_set_domain([self castedGObject], [domain UTF8String]);
+	g_mount_operation_set_domain((GMountOperation*)[self castedGObject], [domain UTF8String]);
 }
 
 - (void)setIsTcryptHiddenVolume:(bool)hiddenVolume
 {
-	g_mount_operation_set_is_tcrypt_hidden_volume([self castedGObject], hiddenVolume);
+	g_mount_operation_set_is_tcrypt_hidden_volume((GMountOperation*)[self castedGObject], hiddenVolume);
 }
 
 - (void)setIsTcryptSystemVolume:(bool)systemVolume
 {
-	g_mount_operation_set_is_tcrypt_system_volume([self castedGObject], systemVolume);
+	g_mount_operation_set_is_tcrypt_system_volume((GMountOperation*)[self castedGObject], systemVolume);
 }
 
 - (void)setPassword:(OFString*)password
 {
-	g_mount_operation_set_password([self castedGObject], [password UTF8String]);
+	g_mount_operation_set_password((GMountOperation*)[self castedGObject], [password UTF8String]);
 }
 
 - (void)setPasswordSave:(GPasswordSave)save
 {
-	g_mount_operation_set_password_save([self castedGObject], save);
+	g_mount_operation_set_password_save((GMountOperation*)[self castedGObject], save);
 }
 
 - (void)setPim:(guint)pim
 {
-	g_mount_operation_set_pim([self castedGObject], pim);
+	g_mount_operation_set_pim((GMountOperation*)[self castedGObject], pim);
 }
 
 - (void)setUsername:(OFString*)username
 {
-	g_mount_operation_set_username([self castedGObject], [username UTF8String]);
+	g_mount_operation_set_username((GMountOperation*)[self castedGObject], [username UTF8String]);
 }
 
 

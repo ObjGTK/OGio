@@ -61,17 +61,17 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)addServiceDirWithPath:(OFString*)path
 {
-	g_test_dbus_add_service_dir([self castedGObject], [path UTF8String]);
+	g_test_dbus_add_service_dir((GTestDBus*)[self castedGObject], [path UTF8String]);
 }
 
 - (void)down
 {
-	g_test_dbus_down([self castedGObject]);
+	g_test_dbus_down((GTestDBus*)[self castedGObject]);
 }
 
 - (OFString*)busAddress
 {
-	const gchar* gobjectValue = g_test_dbus_get_bus_address([self castedGObject]);
+	const gchar* gobjectValue = g_test_dbus_get_bus_address((GTestDBus*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:false] : nil);
 	return returnValue;
@@ -79,19 +79,19 @@ static GTypeClass *gObjectClass = NULL;
 
 - (GTestDBusFlags)flags
 {
-	GTestDBusFlags returnValue = (GTestDBusFlags)g_test_dbus_get_flags([self castedGObject]);
+	GTestDBusFlags returnValue = (GTestDBusFlags)g_test_dbus_get_flags((GTestDBus*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)stop
 {
-	g_test_dbus_stop([self castedGObject]);
+	g_test_dbus_stop((GTestDBus*)[self castedGObject]);
 }
 
 - (void)up
 {
-	g_test_dbus_up([self castedGObject]);
+	g_test_dbus_up((GTestDBus*)[self castedGObject]);
 }
 
 

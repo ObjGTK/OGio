@@ -81,7 +81,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_buffered_input_stream_fill([self castedGObject], count, [cancellable castedGObject], &err);
+	gssize returnValue = (gssize)g_buffered_input_stream_fill((GBufferedInputStream*)[self castedGObject], count, [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -90,14 +90,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)fillAsyncWithCount:(gssize)count ioPriority:(int)ioPriority cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
 {
-	g_buffered_input_stream_fill_async([self castedGObject], count, ioPriority, [cancellable castedGObject], callback, userData);
+	g_buffered_input_stream_fill_async((GBufferedInputStream*)[self castedGObject], count, ioPriority, [cancellable castedGObject], callback, userData);
 }
 
 - (gssize)fillFinishWithResult:(GAsyncResult*)result
 {
 	GError* err = NULL;
 
-	gssize returnValue = (gssize)g_buffered_input_stream_fill_finish([self castedGObject], result, &err);
+	gssize returnValue = (gssize)g_buffered_input_stream_fill_finish((GBufferedInputStream*)[self castedGObject], result, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -106,28 +106,28 @@ static GTypeClass *gObjectClass = NULL;
 
 - (gsize)available
 {
-	gsize returnValue = (gsize)g_buffered_input_stream_get_available([self castedGObject]);
+	gsize returnValue = (gsize)g_buffered_input_stream_get_available((GBufferedInputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)bufferSize
 {
-	gsize returnValue = (gsize)g_buffered_input_stream_get_buffer_size([self castedGObject]);
+	gsize returnValue = (gsize)g_buffered_input_stream_get_buffer_size((GBufferedInputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)peekWithBuffer:(void*)buffer offset:(gsize)offset count:(gsize)count
 {
-	gsize returnValue = (gsize)g_buffered_input_stream_peek([self castedGObject], buffer, offset, count);
+	gsize returnValue = (gsize)g_buffered_input_stream_peek((GBufferedInputStream*)[self castedGObject], buffer, offset, count);
 
 	return returnValue;
 }
 
 - (void*)peekBufferWithCount:(gsize*)count
 {
-	void* returnValue = (void*)g_buffered_input_stream_peek_buffer([self castedGObject], count);
+	void* returnValue = (void*)g_buffered_input_stream_peek_buffer((GBufferedInputStream*)[self castedGObject], count);
 
 	return returnValue;
 }
@@ -136,7 +136,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	int returnValue = (int)g_buffered_input_stream_read_byte([self castedGObject], [cancellable castedGObject], &err);
+	int returnValue = (int)g_buffered_input_stream_read_byte((GBufferedInputStream*)[self castedGObject], [cancellable castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -145,7 +145,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setBufferSize:(gsize)size
 {
-	g_buffered_input_stream_set_buffer_size([self castedGObject], size);
+	g_buffered_input_stream_set_buffer_size((GBufferedInputStream*)[self castedGObject], size);
 }
 
 

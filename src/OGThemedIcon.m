@@ -96,19 +96,19 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)appendNameWithIconname:(OFString*)iconname
 {
-	g_themed_icon_append_name([self castedGObject], [iconname UTF8String]);
+	g_themed_icon_append_name((GThemedIcon*)[self castedGObject], [iconname UTF8String]);
 }
 
 - (const gchar* const*)names
 {
-	const gchar* const* returnValue = (const gchar* const*)g_themed_icon_get_names([self castedGObject]);
+	const gchar* const* returnValue = (const gchar* const*)g_themed_icon_get_names((GThemedIcon*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)prependNameWithIconname:(OFString*)iconname
 {
-	g_themed_icon_prepend_name([self castedGObject], [iconname UTF8String]);
+	g_themed_icon_prepend_name((GThemedIcon*)[self castedGObject], [iconname UTF8String]);
 }
 
 

@@ -56,7 +56,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)displayWithInfo:(GAppInfo*)info files:(GList*)files
 {
-	char* gobjectValue = g_app_launch_context_get_display([self castedGObject], info, files);
+	char* gobjectValue = g_app_launch_context_get_display((GAppLaunchContext*)[self castedGObject], info, files);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -64,14 +64,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (char**)environment
 {
-	char** returnValue = (char**)g_app_launch_context_get_environment([self castedGObject]);
+	char** returnValue = (char**)g_app_launch_context_get_environment((GAppLaunchContext*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)startupNotifyIdWithInfo:(GAppInfo*)info files:(GList*)files
 {
-	char* gobjectValue = g_app_launch_context_get_startup_notify_id([self castedGObject], info, files);
+	char* gobjectValue = g_app_launch_context_get_startup_notify_id((GAppLaunchContext*)[self castedGObject], info, files);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;
@@ -79,17 +79,17 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)launchFailedWithStartupNotifyId:(OFString*)startupNotifyId
 {
-	g_app_launch_context_launch_failed([self castedGObject], [startupNotifyId UTF8String]);
+	g_app_launch_context_launch_failed((GAppLaunchContext*)[self castedGObject], [startupNotifyId UTF8String]);
 }
 
 - (void)setenvWithVariable:(OFString*)variable value:(OFString*)value
 {
-	g_app_launch_context_setenv([self castedGObject], [variable UTF8String], [value UTF8String]);
+	g_app_launch_context_setenv((GAppLaunchContext*)[self castedGObject], [variable UTF8String], [value UTF8String]);
 }
 
 - (void)unsetenvWithVariable:(OFString*)variable
 {
-	g_app_launch_context_unsetenv([self castedGObject], [variable UTF8String]);
+	g_app_launch_context_unsetenv((GAppLaunchContext*)[self castedGObject], [variable UTF8String]);
 }
 
 

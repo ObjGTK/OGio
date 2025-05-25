@@ -56,7 +56,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (gpointer)nativeWithNativeType:(GCredentialsType)nativeType
 {
-	gpointer returnValue = (gpointer)g_credentials_get_native([self castedGObject], nativeType);
+	gpointer returnValue = (gpointer)g_credentials_get_native((GCredentials*)[self castedGObject], nativeType);
 
 	return returnValue;
 }
@@ -65,7 +65,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	pid_t returnValue = (pid_t)g_credentials_get_unix_pid([self castedGObject], &err);
+	pid_t returnValue = (pid_t)g_credentials_get_unix_pid((GCredentials*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -76,7 +76,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	uid_t returnValue = (uid_t)g_credentials_get_unix_user([self castedGObject], &err);
+	uid_t returnValue = (uid_t)g_credentials_get_unix_user((GCredentials*)[self castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -87,7 +87,7 @@ static GTypeClass *gObjectClass = NULL;
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_credentials_is_same_user([self castedGObject], [otherCredentials castedGObject], &err);
+	bool returnValue = (bool)g_credentials_is_same_user((GCredentials*)[self castedGObject], [otherCredentials castedGObject], &err);
 
 	[OGErrorException throwForError:err];
 
@@ -96,14 +96,14 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setNativeWithNativeType:(GCredentialsType)nativeType native:(gpointer)native
 {
-	g_credentials_set_native([self castedGObject], nativeType, native);
+	g_credentials_set_native((GCredentials*)[self castedGObject], nativeType, native);
 }
 
 - (bool)setUnixUserWithUid:(uid_t)uid
 {
 	GError* err = NULL;
 
-	bool returnValue = (bool)g_credentials_set_unix_user([self castedGObject], uid, &err);
+	bool returnValue = (bool)g_credentials_set_unix_user((GCredentials*)[self castedGObject], uid, &err);
 
 	[OGErrorException throwForError:err];
 
@@ -112,7 +112,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (OFString*)toString
 {
-	gchar* gobjectValue = g_credentials_to_string([self castedGObject]);
+	gchar* gobjectValue = g_credentials_to_string((GCredentials*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;

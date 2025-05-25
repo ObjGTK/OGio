@@ -96,12 +96,12 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)addBytes:(GBytes*)bytes
 {
-	g_memory_input_stream_add_bytes([self castedGObject], bytes);
+	g_memory_input_stream_add_bytes((GMemoryInputStream*)[self castedGObject], bytes);
 }
 
 - (void)addData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy
 {
-	g_memory_input_stream_add_data([self castedGObject], data, len, destroy);
+	g_memory_input_stream_add_data((GMemoryInputStream*)[self castedGObject], data, len, destroy);
 }
 
 

@@ -116,105 +116,105 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)equalWithOtherAddress:(OGInetAddress*)otherAddress
 {
-	bool returnValue = (bool)g_inet_address_equal([self castedGObject], [otherAddress castedGObject]);
+	bool returnValue = (bool)g_inet_address_equal((GInetAddress*)[self castedGObject], [otherAddress castedGObject]);
 
 	return returnValue;
 }
 
 - (GSocketFamily)family
 {
-	GSocketFamily returnValue = (GSocketFamily)g_inet_address_get_family([self castedGObject]);
+	GSocketFamily returnValue = (GSocketFamily)g_inet_address_get_family((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isAny
 {
-	bool returnValue = (bool)g_inet_address_get_is_any([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_any((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isLinkLocal
 {
-	bool returnValue = (bool)g_inet_address_get_is_link_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_link_local((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isLoopback
 {
-	bool returnValue = (bool)g_inet_address_get_is_loopback([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_loopback((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcGlobal
 {
-	bool returnValue = (bool)g_inet_address_get_is_mc_global([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_global((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcLinkLocal
 {
-	bool returnValue = (bool)g_inet_address_get_is_mc_link_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_link_local((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcNodeLocal
 {
-	bool returnValue = (bool)g_inet_address_get_is_mc_node_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_node_local((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcOrgLocal
 {
-	bool returnValue = (bool)g_inet_address_get_is_mc_org_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_org_local((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMcSiteLocal
 {
-	bool returnValue = (bool)g_inet_address_get_is_mc_site_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_mc_site_local((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isMulticast
 {
-	bool returnValue = (bool)g_inet_address_get_is_multicast([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_multicast((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (bool)isSiteLocal
 {
-	bool returnValue = (bool)g_inet_address_get_is_site_local([self castedGObject]);
+	bool returnValue = (bool)g_inet_address_get_is_site_local((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)nativeSize
 {
-	gsize returnValue = (gsize)g_inet_address_get_native_size([self castedGObject]);
+	gsize returnValue = (gsize)g_inet_address_get_native_size((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (const guint8*)toBytes
 {
-	const guint8* returnValue = (const guint8*)g_inet_address_to_bytes([self castedGObject]);
+	const guint8* returnValue = (const guint8*)g_inet_address_to_bytes((GInetAddress*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (OFString*)toString
 {
-	gchar* gobjectValue = g_inet_address_to_string([self castedGObject]);
+	gchar* gobjectValue = g_inet_address_to_string((GInetAddress*)[self castedGObject]);
 
 	OFString* returnValue = ((gobjectValue != NULL) ? [OFString stringWithUTF8StringNoCopy:(char * _Nonnull)gobjectValue freeWhenDone:true] : nil);
 	return returnValue;

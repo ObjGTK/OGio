@@ -78,26 +78,26 @@ static GTypeClass *gObjectClass = NULL;
 
 - (bool)autoGrow
 {
-	bool returnValue = (bool)g_buffered_output_stream_get_auto_grow([self castedGObject]);
+	bool returnValue = (bool)g_buffered_output_stream_get_auto_grow((GBufferedOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (gsize)bufferSize
 {
-	gsize returnValue = (gsize)g_buffered_output_stream_get_buffer_size([self castedGObject]);
+	gsize returnValue = (gsize)g_buffered_output_stream_get_buffer_size((GBufferedOutputStream*)[self castedGObject]);
 
 	return returnValue;
 }
 
 - (void)setAutoGrow:(bool)autoGrow
 {
-	g_buffered_output_stream_set_auto_grow([self castedGObject], autoGrow);
+	g_buffered_output_stream_set_auto_grow((GBufferedOutputStream*)[self castedGObject], autoGrow);
 }
 
 - (void)setBufferSize:(gsize)size
 {
-	g_buffered_output_stream_set_buffer_size([self castedGObject], size);
+	g_buffered_output_stream_set_buffer_size((GBufferedOutputStream*)[self castedGObject], size);
 }
 
 

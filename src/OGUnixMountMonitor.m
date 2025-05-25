@@ -66,7 +66,7 @@ static GTypeClass *gObjectClass = NULL;
 
 - (void)setRateLimitWithLimitMsec:(int)limitMsec
 {
-	g_unix_mount_monitor_set_rate_limit([self castedGObject], limitMsec);
+	g_unix_mount_monitor_set_rate_limit((GUnixMountMonitor*)[self castedGObject], limitMsec);
 }
 
 
