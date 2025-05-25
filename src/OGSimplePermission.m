@@ -8,6 +8,8 @@
 
 @implementation OGSimplePermission
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SIMPLE_PERMISSION;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SIMPLE_PERMISSION);
+	return gObjectClass;
+}
+
 + (instancetype)simplePermissionWithAllowed:(bool)allowed
 {
-	GSimplePermission* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_permission_new(allowed), GSimplePermission, GSimplePermission);
+	GSimplePermission* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_permission_new(allowed), G_TYPE_SIMPLE_PERMISSION, GSimplePermission);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GSimplePermission*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimplePermission, GSimplePermission);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SIMPLE_PERMISSION, GSimplePermission);
 }
 
 

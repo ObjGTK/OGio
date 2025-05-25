@@ -8,6 +8,8 @@
 
 @implementation OGMemoryInputStream
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_MEMORY_INPUT_STREAM;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_MEMORY_INPUT_STREAM);
+	return gObjectClass;
+}
+
 + (instancetype)memoryInputStream
 {
-	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new(), GMemoryInputStream, GMemoryInputStream);
+	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new(), G_TYPE_MEMORY_INPUT_STREAM, GMemoryInputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 + (instancetype)memoryInputStreamFromBytes:(GBytes*)bytes
 {
-	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new_from_bytes(bytes), GMemoryInputStream, GMemoryInputStream);
+	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new_from_bytes(bytes), G_TYPE_MEMORY_INPUT_STREAM, GMemoryInputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -60,7 +71,7 @@
 
 + (instancetype)memoryInputStreamFromData:(void*)data len:(gssize)len destroy:(GDestroyNotify)destroy
 {
-	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new_from_data(data, len, destroy), GMemoryInputStream, GMemoryInputStream);
+	GMemoryInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_input_stream_new_from_data(data, len, destroy), G_TYPE_MEMORY_INPUT_STREAM, GMemoryInputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -80,7 +91,7 @@
 
 - (GMemoryInputStream*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMemoryInputStream, GMemoryInputStream);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_MEMORY_INPUT_STREAM, GMemoryInputStream);
 }
 
 - (void)addBytes:(GBytes*)bytes

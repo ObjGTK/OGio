@@ -13,6 +13,8 @@
 
 @implementation OGSocketListener
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SOCKET_LISTENER;
@@ -23,9 +25,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SOCKET_LISTENER);
+	return gObjectClass;
+}
+
 + (instancetype)socketListener
 {
-	GSocketListener* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_listener_new(), GSocketListener, GSocketListener);
+	GSocketListener* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_listener_new(), G_TYPE_SOCKET_LISTENER, GSocketListener);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -45,7 +56,7 @@
 
 - (GSocketListener*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocketListener, GSocketListener);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SOCKET_LISTENER, GSocketListener);
 }
 
 - (OGSocketConnection*)acceptWithSourceObject:(GObject**)sourceObject cancellable:(OGCancellable*)cancellable

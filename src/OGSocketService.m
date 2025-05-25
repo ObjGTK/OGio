@@ -8,6 +8,8 @@
 
 @implementation OGSocketService
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SOCKET_SERVICE;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SOCKET_SERVICE);
+	return gObjectClass;
+}
+
 + (instancetype)socketService
 {
-	GSocketService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_service_new(), GSocketService, GSocketService);
+	GSocketService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_service_new(), G_TYPE_SOCKET_SERVICE, GSocketService);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GSocketService*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocketService, GSocketService);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SOCKET_SERVICE, GSocketService);
 }
 
 - (bool)isActive

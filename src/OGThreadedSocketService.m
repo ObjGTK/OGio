@@ -8,6 +8,8 @@
 
 @implementation OGThreadedSocketService
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_THREADED_SOCKET_SERVICE;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_THREADED_SOCKET_SERVICE);
+	return gObjectClass;
+}
+
 + (instancetype)threadedSocketServiceWithMaxThreads:(int)maxThreads
 {
-	GThreadedSocketService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_threaded_socket_service_new(maxThreads), GThreadedSocketService, GThreadedSocketService);
+	GThreadedSocketService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_threaded_socket_service_new(maxThreads), G_TYPE_THREADED_SOCKET_SERVICE, GThreadedSocketService);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GThreadedSocketService*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GThreadedSocketService, GThreadedSocketService);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_THREADED_SOCKET_SERVICE, GThreadedSocketService);
 }
 
 

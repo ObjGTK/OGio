@@ -15,6 +15,8 @@
 
 @implementation OGSocket
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SOCKET;
@@ -25,11 +27,20 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SOCKET);
+	return gObjectClass;
+}
+
 + (instancetype)socketWithFamily:(GSocketFamily)family type:(GSocketType)type protocol:(GSocketProtocol)protocol
 {
 	GError* err = NULL;
 
-	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_new(family, type, protocol, &err), GSocket, GSocket);
+	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_new(family, type, protocol, &err), G_TYPE_SOCKET, GSocket);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -53,7 +64,7 @@
 {
 	GError* err = NULL;
 
-	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_new_from_fd(fd, &err), GSocket, GSocket);
+	GSocket* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_new_from_fd(fd, &err), G_TYPE_SOCKET, GSocket);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -75,7 +86,7 @@
 
 - (GSocket*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocket, GSocket);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SOCKET, GSocket);
 }
 
 - (OGSocket*)acceptWithCancellable:(OGCancellable*)cancellable

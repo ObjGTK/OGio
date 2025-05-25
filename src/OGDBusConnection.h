@@ -83,10 +83,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Asynchronously sets up a D-Bus connection for exchanging D-Bus messages

@@ -8,6 +8,8 @@
 
 @implementation OGUnixSocketAddress
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_UNIX_SOCKET_ADDRESS;
@@ -16,6 +18,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_UNIX_SOCKET_ADDRESS);
+	return gObjectClass;
 }
 
 + (bool)abstractNamesSupported
@@ -27,7 +38,7 @@
 
 + (instancetype)unixSocketAddressWithPath:(OFString*)path
 {
-	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new([path UTF8String]), GUnixSocketAddress, GUnixSocketAddress);
+	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new([path UTF8String]), G_TYPE_UNIX_SOCKET_ADDRESS, GUnixSocketAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -47,7 +58,7 @@
 
 + (instancetype)unixSocketAddressAbstractWithPath:(OFString*)path pathLen:(gint)pathLen
 {
-	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new_abstract([path UTF8String], pathLen), GUnixSocketAddress, GUnixSocketAddress);
+	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new_abstract([path UTF8String], pathLen), G_TYPE_UNIX_SOCKET_ADDRESS, GUnixSocketAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -67,7 +78,7 @@
 
 + (instancetype)unixSocketAddressWithTypeWithPath:(OFString*)path pathLen:(gint)pathLen type:(GUnixSocketAddressType)type
 {
-	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new_with_type([path UTF8String], pathLen, type), GUnixSocketAddress, GUnixSocketAddress);
+	GUnixSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_socket_address_new_with_type([path UTF8String], pathLen, type), G_TYPE_UNIX_SOCKET_ADDRESS, GUnixSocketAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -87,7 +98,7 @@
 
 - (GUnixSocketAddress*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixSocketAddress, GUnixSocketAddress);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_UNIX_SOCKET_ADDRESS, GUnixSocketAddress);
 }
 
 - (GUnixSocketAddressType)addressType

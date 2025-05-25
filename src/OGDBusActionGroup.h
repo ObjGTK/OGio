@@ -30,10 +30,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Obtains a #GDBusActionGroup for the action group which is exported at

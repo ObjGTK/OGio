@@ -10,6 +10,8 @@
 
 @implementation OGSimpleAsyncResult
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SIMPLE_ASYNC_RESULT;
@@ -18,6 +20,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SIMPLE_ASYNC_RESULT);
+	return gObjectClass;
 }
 
 + (bool)isValidWithResult:(GAsyncResult*)result source:(OGObject*)source sourceTag:(gpointer)sourceTag
@@ -29,7 +40,7 @@
 
 + (instancetype)simpleAsyncResultWithSourceObject:(OGObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData sourceTag:(gpointer)sourceTag
 {
-	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new([sourceObject gObject], callback, userData, sourceTag), GSimpleAsyncResult, GSimpleAsyncResult);
+	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new([sourceObject gObject], callback, userData, sourceTag), G_TYPE_SIMPLE_ASYNC_RESULT, GSimpleAsyncResult);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -49,7 +60,7 @@
 
 + (instancetype)simpleAsyncResultFromErrorWithSourceObject:(OGObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(const GError*)error
 {
-	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_from_error([sourceObject gObject], callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
+	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_from_error([sourceObject gObject], callback, userData, error), G_TYPE_SIMPLE_ASYNC_RESULT, GSimpleAsyncResult);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -69,7 +80,7 @@
 
 + (instancetype)simpleAsyncResultTakeErrorWithSourceObject:(OGObject*)sourceObject callback:(GAsyncReadyCallback)callback userData:(gpointer)userData error:(GError*)error
 {
-	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_take_error([sourceObject gObject], callback, userData, error), GSimpleAsyncResult, GSimpleAsyncResult);
+	GSimpleAsyncResult* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_async_result_new_take_error([sourceObject gObject], callback, userData, error), G_TYPE_SIMPLE_ASYNC_RESULT, GSimpleAsyncResult);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -89,7 +100,7 @@
 
 - (GSimpleAsyncResult*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleAsyncResult, GSimpleAsyncResult);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SIMPLE_ASYNC_RESULT, GSimpleAsyncResult);
 }
 
 - (void)complete

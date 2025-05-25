@@ -8,6 +8,8 @@
 
 @implementation OGThemedIcon
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_THEMED_ICON;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_THEMED_ICON);
+	return gObjectClass;
+}
+
 + (instancetype)themedIconWithIconname:(OFString*)iconname
 {
-	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new([iconname UTF8String]), GThemedIcon, GThemedIcon);
+	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new([iconname UTF8String]), G_TYPE_THEMED_ICON, GThemedIcon);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 + (instancetype)themedIconFromNamesWithIconnames:(char**)iconnames len:(int)len
 {
-	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_from_names(iconnames, len), GThemedIcon, GThemedIcon);
+	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_from_names(iconnames, len), G_TYPE_THEMED_ICON, GThemedIcon);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -60,7 +71,7 @@
 
 + (instancetype)themedIconWithDefaultFallbacksWithIconname:(OFString*)iconname
 {
-	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_with_default_fallbacks([iconname UTF8String]), GThemedIcon, GThemedIcon);
+	GThemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_themed_icon_new_with_default_fallbacks([iconname UTF8String]), G_TYPE_THEMED_ICON, GThemedIcon);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -80,7 +91,7 @@
 
 - (GThemedIcon*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GThemedIcon, GThemedIcon);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_THEMED_ICON, GThemedIcon);
 }
 
 - (void)appendNameWithIconname:(OFString*)iconname

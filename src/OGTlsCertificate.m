@@ -8,6 +8,8 @@
 
 @implementation OGTlsCertificate
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_TLS_CERTIFICATE;
@@ -16,6 +18,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_TLS_CERTIFICATE);
+	return gObjectClass;
 }
 
 + (GList*)listNewFromFile:(OFString*)file
@@ -33,7 +44,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_file([file UTF8String], &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_file([file UTF8String], &err), G_TYPE_TLS_CERTIFICATE, GTlsCertificate);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -57,7 +68,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_file_with_password([file UTF8String], [password UTF8String], &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_file_with_password([file UTF8String], [password UTF8String], &err), G_TYPE_TLS_CERTIFICATE, GTlsCertificate);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -81,7 +92,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_files([certFile UTF8String], [keyFile UTF8String], &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_files([certFile UTF8String], [keyFile UTF8String], &err), G_TYPE_TLS_CERTIFICATE, GTlsCertificate);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -105,7 +116,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pem([data UTF8String], length, &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pem([data UTF8String], length, &err), G_TYPE_TLS_CERTIFICATE, GTlsCertificate);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -129,7 +140,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pkcs11_uris([pkcs11Uri UTF8String], [privateKeyPkcs11Uri UTF8String], &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pkcs11_uris([pkcs11Uri UTF8String], [privateKeyPkcs11Uri UTF8String], &err), G_TYPE_TLS_CERTIFICATE, GTlsCertificate);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -153,7 +164,7 @@
 {
 	GError* err = NULL;
 
-	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pkcs12(data, length, [password UTF8String], &err), GTlsCertificate, GTlsCertificate);
+	GTlsCertificate* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_certificate_new_from_pkcs12(data, length, [password UTF8String], &err), G_TYPE_TLS_CERTIFICATE, GTlsCertificate);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -175,7 +186,7 @@
 
 - (GTlsCertificate*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTlsCertificate, GTlsCertificate);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_TLS_CERTIFICATE, GTlsCertificate);
 }
 
 - (GPtrArray*)dnsNames

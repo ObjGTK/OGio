@@ -12,6 +12,8 @@
 
 @implementation OGSocketClient
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SOCKET_CLIENT;
@@ -22,9 +24,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SOCKET_CLIENT);
+	return gObjectClass;
+}
+
 + (instancetype)socketClient
 {
-	GSocketClient* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_new(), GSocketClient, GSocketClient);
+	GSocketClient* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_socket_client_new(), G_TYPE_SOCKET_CLIENT, GSocketClient);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -44,7 +55,7 @@
 
 - (GSocketClient*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocketClient, GSocketClient);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SOCKET_CLIENT, GSocketClient);
 }
 
 - (void)addApplicationProxyWithProtocol:(OFString*)protocol

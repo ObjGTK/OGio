@@ -28,10 +28,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Creates one or more #GTlsCertificates from the PEM-encoded

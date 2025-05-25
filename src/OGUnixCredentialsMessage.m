@@ -10,6 +10,8 @@
 
 @implementation OGUnixCredentialsMessage
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_UNIX_CREDENTIALS_MESSAGE;
@@ -18,6 +20,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_UNIX_CREDENTIALS_MESSAGE);
+	return gObjectClass;
 }
 
 + (bool)isSupported
@@ -29,7 +40,7 @@
 
 + (instancetype)unixCredentialsMessage
 {
-	GUnixCredentialsMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_new(), GUnixCredentialsMessage, GUnixCredentialsMessage);
+	GUnixCredentialsMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_new(), G_TYPE_UNIX_CREDENTIALS_MESSAGE, GUnixCredentialsMessage);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -49,7 +60,7 @@
 
 + (instancetype)unixCredentialsMessageWithCredentials:(OGCredentials*)credentials
 {
-	GUnixCredentialsMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_new_with_credentials([credentials castedGObject]), GUnixCredentialsMessage, GUnixCredentialsMessage);
+	GUnixCredentialsMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_credentials_message_new_with_credentials([credentials castedGObject]), G_TYPE_UNIX_CREDENTIALS_MESSAGE, GUnixCredentialsMessage);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -69,7 +80,7 @@
 
 - (GUnixCredentialsMessage*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixCredentialsMessage, GUnixCredentialsMessage);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_UNIX_CREDENTIALS_MESSAGE, GUnixCredentialsMessage);
 }
 
 - (OGCredentials*)credentials

@@ -20,10 +20,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Obtains a #GDBusMenuModel for the menu model which is exported

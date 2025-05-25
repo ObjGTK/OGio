@@ -547,10 +547,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Checks that @result is a #GTask, and that @source_object is its

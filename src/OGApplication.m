@@ -12,6 +12,8 @@
 
 @implementation OGApplication
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_APPLICATION;
@@ -20,6 +22,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_APPLICATION);
+	return gObjectClass;
 }
 
 + (OGApplication*)default
@@ -39,7 +50,7 @@
 
 + (instancetype)applicationWithApplicationId:(OFString*)applicationId flags:(GApplicationFlags)flags
 {
-	GApplication* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_new([applicationId UTF8String], flags), GApplication, GApplication);
+	GApplication* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_application_new([applicationId UTF8String], flags), G_TYPE_APPLICATION, GApplication);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -59,7 +70,7 @@
 
 - (GApplication*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GApplication, GApplication);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_APPLICATION, GApplication);
 }
 
 - (void)activate

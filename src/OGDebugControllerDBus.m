@@ -11,6 +11,8 @@
 
 @implementation OGDebugControllerDBus
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DEBUG_CONTROLLER_DBUS;
@@ -21,11 +23,20 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DEBUG_CONTROLLER_DBUS);
+	return gObjectClass;
+}
+
 + (instancetype)debugControllerDBusWithConnection:(OGDBusConnection*)connection cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	GDebugControllerDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_debug_controller_dbus_new([connection castedGObject], [cancellable castedGObject], &err), GDebugControllerDBus, GDebugControllerDBus);
+	GDebugControllerDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_debug_controller_dbus_new([connection castedGObject], [cancellable castedGObject], &err), G_TYPE_DEBUG_CONTROLLER_DBUS, GDebugControllerDBus);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -47,7 +58,7 @@
 
 - (GDebugControllerDBus*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDebugControllerDBus, GDebugControllerDBus);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DEBUG_CONTROLLER_DBUS, GDebugControllerDBus);
 }
 
 - (void)stop

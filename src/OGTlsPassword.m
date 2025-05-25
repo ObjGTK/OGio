@@ -8,6 +8,8 @@
 
 @implementation OGTlsPassword
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_TLS_PASSWORD;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_TLS_PASSWORD);
+	return gObjectClass;
+}
+
 + (instancetype)tlsPasswordWithFlags:(GTlsPasswordFlags)flags description:(OFString*)description
 {
-	GTlsPassword* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_password_new(flags, [description UTF8String]), GTlsPassword, GTlsPassword);
+	GTlsPassword* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_tls_password_new(flags, [description UTF8String]), G_TYPE_TLS_PASSWORD, GTlsPassword);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GTlsPassword*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTlsPassword, GTlsPassword);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_TLS_PASSWORD, GTlsPassword);
 }
 
 - (OFString*)description

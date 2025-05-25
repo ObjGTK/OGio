@@ -10,6 +10,8 @@
 
 @implementation OGBufferedOutputStream
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_BUFFERED_OUTPUT_STREAM;
@@ -20,9 +22,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_BUFFERED_OUTPUT_STREAM);
+	return gObjectClass;
+}
+
 + (instancetype)bufferedOutputStreamWithBaseStream:(OGOutputStream*)baseStream
 {
-	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new([baseStream castedGObject]), GBufferedOutputStream, GBufferedOutputStream);
+	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new([baseStream castedGObject]), G_TYPE_BUFFERED_OUTPUT_STREAM, GBufferedOutputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -42,7 +53,7 @@
 
 + (instancetype)bufferedOutputStreamSizedWithBaseStream:(OGOutputStream*)baseStream size:(gsize)size
 {
-	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new_sized([baseStream castedGObject], size), GBufferedOutputStream, GBufferedOutputStream);
+	GBufferedOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_buffered_output_stream_new_sized([baseStream castedGObject], size), G_TYPE_BUFFERED_OUTPUT_STREAM, GBufferedOutputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -62,7 +73,7 @@
 
 - (GBufferedOutputStream*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GBufferedOutputStream, GBufferedOutputStream);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_BUFFERED_OUTPUT_STREAM, GBufferedOutputStream);
 }
 
 - (bool)autoGrow

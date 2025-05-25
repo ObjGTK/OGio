@@ -10,6 +10,8 @@
 
 @implementation OGDBusObjectSkeleton
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DBUS_OBJECT_SKELETON;
@@ -20,9 +22,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DBUS_OBJECT_SKELETON);
+	return gObjectClass;
+}
+
 + (instancetype)dBusObjectSkeletonWithObjectPath:(OFString*)objectPath
 {
-	GDBusObjectSkeleton* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_skeleton_new([objectPath UTF8String]), GDBusObjectSkeleton, GDBusObjectSkeleton);
+	GDBusObjectSkeleton* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_skeleton_new([objectPath UTF8String]), G_TYPE_DBUS_OBJECT_SKELETON, GDBusObjectSkeleton);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -42,7 +53,7 @@
 
 - (GDBusObjectSkeleton*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusObjectSkeleton, GDBusObjectSkeleton);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DBUS_OBJECT_SKELETON, GDBusObjectSkeleton);
 }
 
 - (void)addInterface:(OGDBusInterfaceSkeleton*)interface

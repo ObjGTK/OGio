@@ -8,6 +8,8 @@
 
 @implementation OGMountOperation
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_MOUNT_OPERATION;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_MOUNT_OPERATION);
+	return gObjectClass;
+}
+
 + (instancetype)mountOperation
 {
-	GMountOperation* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_mount_operation_new(), GMountOperation, GMountOperation);
+	GMountOperation* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_mount_operation_new(), G_TYPE_MOUNT_OPERATION, GMountOperation);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GMountOperation*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMountOperation, GMountOperation);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_MOUNT_OPERATION, GMountOperation);
 }
 
 - (bool)anonymous

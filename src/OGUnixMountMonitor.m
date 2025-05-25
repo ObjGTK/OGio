@@ -8,6 +8,8 @@
 
 @implementation OGUnixMountMonitor
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_UNIX_MOUNT_MONITOR;
@@ -16,6 +18,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_UNIX_MOUNT_MONITOR);
+	return gObjectClass;
 }
 
 + (OGUnixMountMonitor*)get
@@ -30,7 +41,7 @@
 
 + (instancetype)unixMountMonitor
 {
-	GUnixMountMonitor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_mount_monitor_new(), GUnixMountMonitor, GUnixMountMonitor);
+	GUnixMountMonitor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_mount_monitor_new(), G_TYPE_UNIX_MOUNT_MONITOR, GUnixMountMonitor);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -50,7 +61,7 @@
 
 - (GUnixMountMonitor*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixMountMonitor, GUnixMountMonitor);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_UNIX_MOUNT_MONITOR, GUnixMountMonitor);
 }
 
 - (void)setRateLimitWithLimitMsec:(int)limitMsec

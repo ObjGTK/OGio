@@ -10,6 +10,8 @@
 
 @implementation OGApplicationCommandLine
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_APPLICATION_COMMAND_LINE;
@@ -20,9 +22,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_APPLICATION_COMMAND_LINE);
+	return gObjectClass;
+}
+
 - (GApplicationCommandLine*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GApplicationCommandLine, GApplicationCommandLine);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_APPLICATION_COMMAND_LINE, GApplicationCommandLine);
 }
 
 - (GFile*)createFileForArg:(OFString*)arg

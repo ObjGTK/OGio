@@ -10,6 +10,8 @@
 
 @implementation OGTask
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_TASK;
@@ -18,6 +20,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_TASK);
+	return gObjectClass;
 }
 
 + (bool)isValidWithResult:(gpointer)result sourceObject:(gpointer)sourceObject
@@ -34,7 +45,7 @@
 
 + (instancetype)taskWithSourceObject:(gpointer)sourceObject cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback callbackData:(gpointer)callbackData
 {
-	GTask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_task_new(sourceObject, [cancellable castedGObject], callback, callbackData), GTask, GTask);
+	GTask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_task_new(sourceObject, [cancellable castedGObject], callback, callbackData), G_TYPE_TASK, GTask);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -54,7 +65,7 @@
 
 - (GTask*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTask, GTask);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_TASK, GTask);
 }
 
 - (void)attachSource:(GSource*)source callback:(GSourceFunc)callback

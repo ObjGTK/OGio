@@ -10,6 +10,8 @@
 
 @implementation OGEmblemedIcon
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_EMBLEMED_ICON;
@@ -20,9 +22,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_EMBLEMED_ICON);
+	return gObjectClass;
+}
+
 + (instancetype)emblemedIconWithIcon:(GIcon*)icon emblem:(OGEmblem*)emblem
 {
-	GEmblemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblemed_icon_new(icon, [emblem castedGObject]), GEmblemedIcon, GEmblemedIcon);
+	GEmblemedIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblemed_icon_new(icon, [emblem castedGObject]), G_TYPE_EMBLEMED_ICON, GEmblemedIcon);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -42,7 +53,7 @@
 
 - (GEmblemedIcon*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GEmblemedIcon, GEmblemedIcon);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_EMBLEMED_ICON, GEmblemedIcon);
 }
 
 - (void)addEmblem:(OGEmblem*)emblem

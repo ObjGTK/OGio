@@ -8,6 +8,8 @@
 
 @implementation OGSimpleAction
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SIMPLE_ACTION;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SIMPLE_ACTION);
+	return gObjectClass;
+}
+
 + (instancetype)simpleActionWithName:(OFString*)name parameterType:(const GVariantType*)parameterType
 {
-	GSimpleAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_new([name UTF8String], parameterType), GSimpleAction, GSimpleAction);
+	GSimpleAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_new([name UTF8String], parameterType), G_TYPE_SIMPLE_ACTION, GSimpleAction);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 + (instancetype)simpleActionStatefulWithName:(OFString*)name parameterType:(const GVariantType*)parameterType state:(GVariant*)state
 {
-	GSimpleAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_new_stateful([name UTF8String], parameterType, state), GSimpleAction, GSimpleAction);
+	GSimpleAction* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_new_stateful([name UTF8String], parameterType, state), G_TYPE_SIMPLE_ACTION, GSimpleAction);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -60,7 +71,7 @@
 
 - (GSimpleAction*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleAction, GSimpleAction);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SIMPLE_ACTION, GSimpleAction);
 }
 
 - (void)setEnabled:(bool)enabled

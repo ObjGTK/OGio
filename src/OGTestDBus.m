@@ -8,6 +8,8 @@
 
 @implementation OGTestDBus
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_TEST_DBUS;
@@ -18,6 +20,15 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_TEST_DBUS);
+	return gObjectClass;
+}
+
 + (void)unset
 {
 	g_test_dbus_unset();
@@ -25,7 +36,7 @@
 
 + (instancetype)testDBusWithFlags:(GTestDBusFlags)flags
 {
-	GTestDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_test_dbus_new(flags), GTestDBus, GTestDBus);
+	GTestDBus* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_test_dbus_new(flags), G_TYPE_TEST_DBUS, GTestDBus);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -45,7 +56,7 @@
 
 - (GTestDBus*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GTestDBus, GTestDBus);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_TEST_DBUS, GTestDBus);
 }
 
 - (void)addServiceDirWithPath:(OFString*)path

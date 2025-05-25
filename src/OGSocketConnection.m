@@ -12,6 +12,8 @@
 
 @implementation OGSocketConnection
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SOCKET_CONNECTION;
@@ -20,6 +22,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SOCKET_CONNECTION);
+	return gObjectClass;
 }
 
 + (GType)factoryLookupTypeWithFamily:(GSocketFamily)family type:(GSocketType)type protocolId:(gint)protocolId
@@ -36,7 +47,7 @@
 
 - (GSocketConnection*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSocketConnection, GSocketConnection);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SOCKET_CONNECTION, GSocketConnection);
 }
 
 - (bool)connectWithAddress:(OGSocketAddress*)address cancellable:(OGCancellable*)cancellable

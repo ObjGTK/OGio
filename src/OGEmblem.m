@@ -8,6 +8,8 @@
 
 @implementation OGEmblem
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_EMBLEM;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_EMBLEM);
+	return gObjectClass;
+}
+
 + (instancetype)emblemWithIcon:(GIcon*)icon
 {
-	GEmblem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblem_new(icon), GEmblem, GEmblem);
+	GEmblem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblem_new(icon), G_TYPE_EMBLEM, GEmblem);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 + (instancetype)emblemWithOriginWithIcon:(GIcon*)icon origin:(GEmblemOrigin)origin
 {
-	GEmblem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblem_new_with_origin(icon, origin), GEmblem, GEmblem);
+	GEmblem* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_emblem_new_with_origin(icon, origin), G_TYPE_EMBLEM, GEmblem);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -60,7 +71,7 @@
 
 - (GEmblem*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GEmblem, GEmblem);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_EMBLEM, GEmblem);
 }
 
 - (GIcon*)icon

@@ -8,6 +8,8 @@
 
 @implementation OGSettings
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SETTINGS;
@@ -16,6 +18,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SETTINGS);
+	return gObjectClass;
 }
 
 + (const gchar* const*)listRelocatableSchemas
@@ -44,7 +55,7 @@
 
 + (instancetype)settingsWithSchemaId:(OFString*)schemaId
 {
-	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new([schemaId UTF8String]), GSettings, GSettings);
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new([schemaId UTF8String]), G_TYPE_SETTINGS, GSettings);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -64,7 +75,7 @@
 
 + (instancetype)settingsFullWithSchema:(GSettingsSchema*)schema backend:(GSettingsBackend*)backend path:(OFString*)path
 {
-	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_full(schema, backend, [path UTF8String]), GSettings, GSettings);
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_full(schema, backend, [path UTF8String]), G_TYPE_SETTINGS, GSettings);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -84,7 +95,7 @@
 
 + (instancetype)settingsWithBackendWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend
 {
-	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_backend([schemaId UTF8String], backend), GSettings, GSettings);
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_backend([schemaId UTF8String], backend), G_TYPE_SETTINGS, GSettings);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -104,7 +115,7 @@
 
 + (instancetype)settingsWithBackendAndPathWithSchemaId:(OFString*)schemaId backend:(GSettingsBackend*)backend path:(OFString*)path
 {
-	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_backend_and_path([schemaId UTF8String], backend, [path UTF8String]), GSettings, GSettings);
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_backend_and_path([schemaId UTF8String], backend, [path UTF8String]), G_TYPE_SETTINGS, GSettings);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -124,7 +135,7 @@
 
 + (instancetype)settingsWithPathWithSchemaId:(OFString*)schemaId path:(OFString*)path
 {
-	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_path([schemaId UTF8String], [path UTF8String]), GSettings, GSettings);
+	GSettings* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_settings_new_with_path([schemaId UTF8String], [path UTF8String]), G_TYPE_SETTINGS, GSettings);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -144,7 +155,7 @@
 
 - (GSettings*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSettings, GSettings);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SETTINGS, GSettings);
 }
 
 - (void)apply

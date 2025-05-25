@@ -33,10 +33,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Creates a new #GSocketConnectable for connecting to the given

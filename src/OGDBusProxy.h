@@ -73,10 +73,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Creates a proxy for accessing @interface_name on the remote object

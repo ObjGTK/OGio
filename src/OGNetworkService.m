@@ -8,6 +8,8 @@
 
 @implementation OGNetworkService
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_NETWORK_SERVICE;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_NETWORK_SERVICE);
+	return gObjectClass;
+}
+
 + (instancetype)networkServiceWithService:(OFString*)service protocol:(OFString*)protocol domain:(OFString*)domain
 {
-	GNetworkService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_service_new([service UTF8String], [protocol UTF8String], [domain UTF8String]), GNetworkService, GNetworkService);
+	GNetworkService* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_service_new([service UTF8String], [protocol UTF8String], [domain UTF8String]), G_TYPE_NETWORK_SERVICE, GNetworkService);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GNetworkService*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GNetworkService, GNetworkService);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_NETWORK_SERVICE, GNetworkService);
 }
 
 - (OFString*)domain

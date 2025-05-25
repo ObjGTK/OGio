@@ -11,6 +11,8 @@
 
 @implementation OGFileEnumerator
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_FILE_ENUMERATOR;
@@ -21,9 +23,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_FILE_ENUMERATOR);
+	return gObjectClass;
+}
+
 - (GFileEnumerator*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileEnumerator, GFileEnumerator);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_FILE_ENUMERATOR, GFileEnumerator);
 }
 
 - (bool)closeWithCancellable:(OGCancellable*)cancellable

@@ -8,6 +8,8 @@
 
 @implementation OGBytesIcon
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_BYTES_ICON;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_BYTES_ICON);
+	return gObjectClass;
+}
+
 + (instancetype)bytesIconWithBytes:(GBytes*)bytes
 {
-	GBytesIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_bytes_icon_new(bytes), GBytesIcon, GBytesIcon);
+	GBytesIcon* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_bytes_icon_new(bytes), G_TYPE_BYTES_ICON, GBytesIcon);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GBytesIcon*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GBytesIcon, GBytesIcon);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_BYTES_ICON, GBytesIcon);
 }
 
 - (GBytes*)bytes

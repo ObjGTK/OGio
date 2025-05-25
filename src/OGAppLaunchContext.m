@@ -8,6 +8,8 @@
 
 @implementation OGAppLaunchContext
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_APP_LAUNCH_CONTEXT;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_APP_LAUNCH_CONTEXT);
+	return gObjectClass;
+}
+
 + (instancetype)appLaunchContext
 {
-	GAppLaunchContext* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_app_launch_context_new(), GAppLaunchContext, GAppLaunchContext);
+	GAppLaunchContext* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_app_launch_context_new(), G_TYPE_APP_LAUNCH_CONTEXT, GAppLaunchContext);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GAppLaunchContext*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GAppLaunchContext, GAppLaunchContext);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_APP_LAUNCH_CONTEXT, GAppLaunchContext);
 }
 
 - (OFString*)displayWithInfo:(GAppInfo*)info files:(GList*)files

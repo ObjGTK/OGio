@@ -10,6 +10,8 @@
 
 @implementation OGSubprocessLauncher
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SUBPROCESS_LAUNCHER;
@@ -20,9 +22,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SUBPROCESS_LAUNCHER);
+	return gObjectClass;
+}
+
 + (instancetype)subprocessLauncherWithFlags:(GSubprocessFlags)flags
 {
-	GSubprocessLauncher* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_launcher_new(flags), GSubprocessLauncher, GSubprocessLauncher);
+	GSubprocessLauncher* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_launcher_new(flags), G_TYPE_SUBPROCESS_LAUNCHER, GSubprocessLauncher);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -42,7 +53,7 @@
 
 - (GSubprocessLauncher*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSubprocessLauncher, GSubprocessLauncher);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SUBPROCESS_LAUNCHER, GSubprocessLauncher);
 }
 
 - (void)close

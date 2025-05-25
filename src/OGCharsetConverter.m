@@ -8,6 +8,8 @@
 
 @implementation OGCharsetConverter
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_CHARSET_CONVERTER;
@@ -18,11 +20,20 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_CHARSET_CONVERTER);
+	return gObjectClass;
+}
+
 + (instancetype)charsetConverterWithToCharset:(OFString*)toCharset fromCharset:(OFString*)fromCharset
 {
 	GError* err = NULL;
 
-	GCharsetConverter* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_charset_converter_new([toCharset UTF8String], [fromCharset UTF8String], &err), GCharsetConverter, GCharsetConverter);
+	GCharsetConverter* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_charset_converter_new([toCharset UTF8String], [fromCharset UTF8String], &err), G_TYPE_CHARSET_CONVERTER, GCharsetConverter);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -44,7 +55,7 @@
 
 - (GCharsetConverter*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GCharsetConverter, GCharsetConverter);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_CHARSET_CONVERTER, GCharsetConverter);
 }
 
 - (guint)numFallbacks

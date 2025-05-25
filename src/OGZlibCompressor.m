@@ -10,6 +10,8 @@
 
 @implementation OGZlibCompressor
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_ZLIB_COMPRESSOR;
@@ -20,9 +22,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_ZLIB_COMPRESSOR);
+	return gObjectClass;
+}
+
 + (instancetype)zlibCompressorWithFormat:(GZlibCompressorFormat)format level:(int)level
 {
-	GZlibCompressor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_zlib_compressor_new(format, level), GZlibCompressor, GZlibCompressor);
+	GZlibCompressor* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_zlib_compressor_new(format, level), G_TYPE_ZLIB_COMPRESSOR, GZlibCompressor);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -42,7 +53,7 @@
 
 - (GZlibCompressor*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GZlibCompressor, GZlibCompressor);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_ZLIB_COMPRESSOR, GZlibCompressor);
 }
 
 - (OGFileInfo*)fileInfo

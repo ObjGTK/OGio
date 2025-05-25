@@ -8,6 +8,8 @@
 
 @implementation OGNetworkAddress
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_NETWORK_ADDRESS;
@@ -16,6 +18,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_NETWORK_ADDRESS);
+	return gObjectClass;
 }
 
 + (GSocketConnectable*)parseWithHostAndPort:(OFString*)hostAndPort defaultPort:(guint16)defaultPort
@@ -42,7 +53,7 @@
 
 + (instancetype)networkAddressWithHostname:(OFString*)hostname port:(guint16)port
 {
-	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new([hostname UTF8String], port), GNetworkAddress, GNetworkAddress);
+	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new([hostname UTF8String], port), G_TYPE_NETWORK_ADDRESS, GNetworkAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -62,7 +73,7 @@
 
 + (instancetype)networkAddressLoopbackWithPort:(guint16)port
 {
-	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new_loopback(port), GNetworkAddress, GNetworkAddress);
+	GNetworkAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_network_address_new_loopback(port), G_TYPE_NETWORK_ADDRESS, GNetworkAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -82,7 +93,7 @@
 
 - (GNetworkAddress*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GNetworkAddress, GNetworkAddress);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_NETWORK_ADDRESS, GNetworkAddress);
 }
 
 - (OFString*)hostname

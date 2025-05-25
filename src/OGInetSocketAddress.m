@@ -10,6 +10,8 @@
 
 @implementation OGInetSocketAddress
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_INET_SOCKET_ADDRESS;
@@ -20,9 +22,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_INET_SOCKET_ADDRESS);
+	return gObjectClass;
+}
+
 + (instancetype)inetSocketAddressWithAddress:(OGInetAddress*)address port:(guint16)port
 {
-	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new([address castedGObject], port), GInetSocketAddress, GInetSocketAddress);
+	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new([address castedGObject], port), G_TYPE_INET_SOCKET_ADDRESS, GInetSocketAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -42,7 +53,7 @@
 
 + (instancetype)inetSocketAddressFromStringWithAddress:(OFString*)address port:(guint)port
 {
-	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new_from_string([address UTF8String], port), GInetSocketAddress, GInetSocketAddress);
+	GInetSocketAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_socket_address_new_from_string([address UTF8String], port), G_TYPE_INET_SOCKET_ADDRESS, GInetSocketAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -62,7 +73,7 @@
 
 - (GInetSocketAddress*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GInetSocketAddress, GInetSocketAddress);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_INET_SOCKET_ADDRESS, GInetSocketAddress);
 }
 
 - (OGInetAddress*)address

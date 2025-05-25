@@ -11,6 +11,8 @@
 
 @implementation OGFileOutputStream
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_FILE_OUTPUT_STREAM;
@@ -21,9 +23,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_FILE_OUTPUT_STREAM);
+	return gObjectClass;
+}
+
 - (GFileOutputStream*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GFileOutputStream, GFileOutputStream);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_FILE_OUTPUT_STREAM, GFileOutputStream);
 }
 
 - (OFString*)etag

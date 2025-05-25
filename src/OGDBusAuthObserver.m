@@ -11,6 +11,8 @@
 
 @implementation OGDBusAuthObserver
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DBUS_AUTH_OBSERVER;
@@ -21,9 +23,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DBUS_AUTH_OBSERVER);
+	return gObjectClass;
+}
+
 + (instancetype)dBusAuthObserver
 {
-	GDBusAuthObserver* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_auth_observer_new(), GDBusAuthObserver, GDBusAuthObserver);
+	GDBusAuthObserver* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_auth_observer_new(), G_TYPE_DBUS_AUTH_OBSERVER, GDBusAuthObserver);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -43,7 +54,7 @@
 
 - (GDBusAuthObserver*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusAuthObserver, GDBusAuthObserver);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DBUS_AUTH_OBSERVER, GDBusAuthObserver);
 }
 
 - (bool)allowMechanism:(OFString*)mechanism

@@ -102,10 +102,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Unset DISPLAY and DBUS_SESSION_BUS_ADDRESS env variables to ensure the test

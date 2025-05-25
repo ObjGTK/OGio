@@ -12,6 +12,8 @@
 
 @implementation OGSubprocess
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SUBPROCESS;
@@ -22,11 +24,20 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SUBPROCESS);
+	return gObjectClass;
+}
+
 + (instancetype)subprocessvWithArgv:(const gchar* const*)argv flags:(GSubprocessFlags)flags
 {
 	GError* err = NULL;
 
-	GSubprocess* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_newv(argv, flags, &err), GSubprocess, GSubprocess);
+	GSubprocess* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_subprocess_newv(argv, flags, &err), G_TYPE_SUBPROCESS, GSubprocess);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -48,7 +59,7 @@
 
 - (GSubprocess*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSubprocess, GSubprocess);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SUBPROCESS, GSubprocess);
 }
 
 - (bool)communicateWithStdinBuf:(GBytes*)stdinBuf cancellable:(OGCancellable*)cancellable stdoutBuf:(GBytes**)stdoutBuf stderrBuf:(GBytes**)stderrBuf

@@ -8,6 +8,8 @@
 
 @implementation OGSimpleActionGroup
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SIMPLE_ACTION_GROUP;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SIMPLE_ACTION_GROUP);
+	return gObjectClass;
+}
+
 + (instancetype)simpleActionGroup
 {
-	GSimpleActionGroup* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_group_new(), GSimpleActionGroup, GSimpleActionGroup);
+	GSimpleActionGroup* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_action_group_new(), G_TYPE_SIMPLE_ACTION_GROUP, GSimpleActionGroup);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GSimpleActionGroup*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleActionGroup, GSimpleActionGroup);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SIMPLE_ACTION_GROUP, GSimpleActionGroup);
 }
 
 - (void)addEntries:(const GActionEntry*)entries nentries:(gint)nentries userData:(gpointer)userData

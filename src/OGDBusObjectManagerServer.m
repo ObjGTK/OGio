@@ -11,6 +11,8 @@
 
 @implementation OGDBusObjectManagerServer
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DBUS_OBJECT_MANAGER_SERVER;
@@ -21,9 +23,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DBUS_OBJECT_MANAGER_SERVER);
+	return gObjectClass;
+}
+
 + (instancetype)dBusObjectManagerServerWithObjectPath:(OFString*)objectPath
 {
-	GDBusObjectManagerServer* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_manager_server_new([objectPath UTF8String]), GDBusObjectManagerServer, GDBusObjectManagerServer);
+	GDBusObjectManagerServer* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_object_manager_server_new([objectPath UTF8String]), G_TYPE_DBUS_OBJECT_MANAGER_SERVER, GDBusObjectManagerServer);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -43,7 +54,7 @@
 
 - (GDBusObjectManagerServer*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusObjectManagerServer, GDBusObjectManagerServer);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DBUS_OBJECT_MANAGER_SERVER, GDBusObjectManagerServer);
 }
 
 - (void)exportWithObject:(OGDBusObjectSkeleton*)object

@@ -104,10 +104,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Asynchronously creates a new #GDBusObjectManagerClient object.

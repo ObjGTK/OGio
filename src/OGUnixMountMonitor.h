@@ -24,10 +24,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Gets the #GUnixMountMonitor for the current thread-default main

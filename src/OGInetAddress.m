@@ -8,6 +8,8 @@
 
 @implementation OGInetAddress
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_INET_ADDRESS;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_INET_ADDRESS);
+	return gObjectClass;
+}
+
 + (instancetype)inetAddressAnyWithFamily:(GSocketFamily)family
 {
-	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_any(family), GInetAddress, GInetAddress);
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_any(family), G_TYPE_INET_ADDRESS, GInetAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 + (instancetype)inetAddressFromBytes:(const guint8*)bytes family:(GSocketFamily)family
 {
-	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_bytes(bytes, family), GInetAddress, GInetAddress);
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_bytes(bytes, family), G_TYPE_INET_ADDRESS, GInetAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -60,7 +71,7 @@
 
 + (instancetype)inetAddressFromString:(OFString*)string
 {
-	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_string([string UTF8String]), GInetAddress, GInetAddress);
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_from_string([string UTF8String]), G_TYPE_INET_ADDRESS, GInetAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -80,7 +91,7 @@
 
 + (instancetype)inetAddressLoopbackWithFamily:(GSocketFamily)family
 {
-	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_loopback(family), GInetAddress, GInetAddress);
+	GInetAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_new_loopback(family), G_TYPE_INET_ADDRESS, GInetAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -100,7 +111,7 @@
 
 - (GInetAddress*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GInetAddress, GInetAddress);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_INET_ADDRESS, GInetAddress);
 }
 
 - (bool)equalWithOtherAddress:(OGInetAddress*)otherAddress

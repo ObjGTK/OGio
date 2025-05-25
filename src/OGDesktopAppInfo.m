@@ -10,6 +10,8 @@
 
 @implementation OGDesktopAppInfo
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DESKTOP_APP_INFO;
@@ -18,6 +20,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DESKTOP_APP_INFO);
+	return gObjectClass;
 }
 
 + (GList*)implementationsWithInterface:(OFString*)interface
@@ -41,7 +52,7 @@
 
 + (instancetype)desktopAppInfoWithDesktopId:(OFString*)desktopId
 {
-	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new([desktopId UTF8String]), GDesktopAppInfo, GDesktopAppInfo);
+	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new([desktopId UTF8String]), G_TYPE_DESKTOP_APP_INFO, GDesktopAppInfo);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -61,7 +72,7 @@
 
 + (instancetype)desktopAppInfoFromFilename:(OFString*)filename
 {
-	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_filename([filename UTF8String]), GDesktopAppInfo, GDesktopAppInfo);
+	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_filename([filename UTF8String]), G_TYPE_DESKTOP_APP_INFO, GDesktopAppInfo);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -81,7 +92,7 @@
 
 + (instancetype)desktopAppInfoFromKeyfile:(GKeyFile*)keyFile
 {
-	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_keyfile(keyFile), GDesktopAppInfo, GDesktopAppInfo);
+	GDesktopAppInfo* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_desktop_app_info_new_from_keyfile(keyFile), G_TYPE_DESKTOP_APP_INFO, GDesktopAppInfo);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -101,7 +112,7 @@
 
 - (GDesktopAppInfo*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDesktopAppInfo, GDesktopAppInfo);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DESKTOP_APP_INFO, GDesktopAppInfo);
 }
 
 - (OFString*)actionName:(OFString*)actionName

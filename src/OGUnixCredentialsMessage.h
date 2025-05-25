@@ -36,10 +36,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Checks if passing #GCredentials on a #GSocket is supported on this platform.

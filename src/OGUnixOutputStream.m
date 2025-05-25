@@ -8,6 +8,8 @@
 
 @implementation OGUnixOutputStream
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_UNIX_OUTPUT_STREAM;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_UNIX_OUTPUT_STREAM);
+	return gObjectClass;
+}
+
 + (instancetype)unixOutputStreamWithFd:(gint)fd closeFd:(bool)closeFd
 {
-	GUnixOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_output_stream_new(fd, closeFd), GUnixOutputStream, GUnixOutputStream);
+	GUnixOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_output_stream_new(fd, closeFd), G_TYPE_UNIX_OUTPUT_STREAM, GUnixOutputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 - (GUnixOutputStream*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixOutputStream, GUnixOutputStream);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_UNIX_OUTPUT_STREAM, GUnixOutputStream);
 }
 
 - (bool)closeFd

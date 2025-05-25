@@ -11,6 +11,8 @@
 
 @implementation OGSimpleIOStream
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_SIMPLE_IO_STREAM;
@@ -21,9 +23,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_SIMPLE_IO_STREAM);
+	return gObjectClass;
+}
+
 + (instancetype)simpleIOStreamWithInputStream:(OGInputStream*)inputStream outputStream:(OGOutputStream*)outputStream
 {
-	GSimpleIOStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_io_stream_new([inputStream castedGObject], [outputStream castedGObject]), GSimpleIOStream, GSimpleIOStream);
+	GSimpleIOStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_simple_io_stream_new([inputStream castedGObject], [outputStream castedGObject]), G_TYPE_SIMPLE_IO_STREAM, GSimpleIOStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -43,7 +54,7 @@
 
 - (GSimpleIOStream*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GSimpleIOStream, GSimpleIOStream);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_SIMPLE_IO_STREAM, GSimpleIOStream);
 }
 
 

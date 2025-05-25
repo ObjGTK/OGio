@@ -10,6 +10,8 @@
 
 @implementation OGInetAddressMask
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_INET_ADDRESS_MASK;
@@ -20,11 +22,20 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_INET_ADDRESS_MASK);
+	return gObjectClass;
+}
+
 + (instancetype)inetAddressMaskWithAddr:(OGInetAddress*)addr length:(guint)length
 {
 	GError* err = NULL;
 
-	GInetAddressMask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_mask_new([addr castedGObject], length, &err), GInetAddressMask, GInetAddressMask);
+	GInetAddressMask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_mask_new([addr castedGObject], length, &err), G_TYPE_INET_ADDRESS_MASK, GInetAddressMask);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -48,7 +59,7 @@
 {
 	GError* err = NULL;
 
-	GInetAddressMask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_mask_new_from_string([maskString UTF8String], &err), GInetAddressMask, GInetAddressMask);
+	GInetAddressMask* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_inet_address_mask_new_from_string([maskString UTF8String], &err), G_TYPE_INET_ADDRESS_MASK, GInetAddressMask);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -70,7 +81,7 @@
 
 - (GInetAddressMask*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GInetAddressMask, GInetAddressMask);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_INET_ADDRESS_MASK, GInetAddressMask);
 }
 
 - (bool)equalWithMask2:(OGInetAddressMask*)mask2

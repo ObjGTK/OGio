@@ -62,10 +62,11 @@
 }
 
 /**
- * Functions
+ * Functions and class methods
  */
 + (void)load;
 
++ (GTypeClass*)gObjectClass;
 
 /**
  * Gets the #GAppInfoMonitor for the current thread-default main

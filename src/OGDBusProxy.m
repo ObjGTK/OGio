@@ -12,6 +12,8 @@
 
 @implementation OGDBusProxy
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DBUS_PROXY;
@@ -20,6 +22,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DBUS_PROXY);
+	return gObjectClass;
 }
 
 + (void)newWithConnection:(OGDBusConnection*)connection flags:(GDBusProxyFlags)flags info:(GDBusInterfaceInfo*)info name:(OFString*)name objectPath:(OFString*)objectPath interfaceName:(OFString*)interfaceName cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData
@@ -36,7 +47,7 @@
 {
 	GError* err = NULL;
 
-	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_finish(res, &err), GDBusProxy, GDBusProxy);
+	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_finish(res, &err), G_TYPE_DBUS_PROXY, GDBusProxy);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -60,7 +71,7 @@
 {
 	GError* err = NULL;
 
-	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_for_bus_finish(res, &err), GDBusProxy, GDBusProxy);
+	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_for_bus_finish(res, &err), G_TYPE_DBUS_PROXY, GDBusProxy);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -84,7 +95,7 @@
 {
 	GError* err = NULL;
 
-	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_for_bus_sync(busType, flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err), GDBusProxy, GDBusProxy);
+	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_for_bus_sync(busType, flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err), G_TYPE_DBUS_PROXY, GDBusProxy);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -108,7 +119,7 @@
 {
 	GError* err = NULL;
 
-	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_sync([connection castedGObject], flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err), GDBusProxy, GDBusProxy);
+	GDBusProxy* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_proxy_new_sync([connection castedGObject], flags, info, [name UTF8String], [objectPath UTF8String], [interfaceName UTF8String], [cancellable castedGObject], &err), G_TYPE_DBUS_PROXY, GDBusProxy);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -130,7 +141,7 @@
 
 - (GDBusProxy*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusProxy, GDBusProxy);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DBUS_PROXY, GDBusProxy);
 }
 
 - (void)callWithMethodName:(OFString*)methodName parameters:(GVariant*)parameters flags:(GDBusCallFlags)flags timeoutMsec:(gint)timeoutMsec cancellable:(OGCancellable*)cancellable callback:(GAsyncReadyCallback)callback userData:(gpointer)userData

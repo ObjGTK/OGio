@@ -10,6 +10,8 @@
 
 @implementation OGConverterOutputStream
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_CONVERTER_OUTPUT_STREAM;
@@ -20,9 +22,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_CONVERTER_OUTPUT_STREAM);
+	return gObjectClass;
+}
+
 + (instancetype)converterOutputStreamWithBaseStream:(OGOutputStream*)baseStream converter:(GConverter*)converter
 {
-	GConverterOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_converter_output_stream_new([baseStream castedGObject], converter), GConverterOutputStream, GConverterOutputStream);
+	GConverterOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_converter_output_stream_new([baseStream castedGObject], converter), G_TYPE_CONVERTER_OUTPUT_STREAM, GConverterOutputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -42,7 +53,7 @@
 
 - (GConverterOutputStream*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GConverterOutputStream, GConverterOutputStream);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_CONVERTER_OUTPUT_STREAM, GConverterOutputStream);
 }
 
 - (GConverter*)converter

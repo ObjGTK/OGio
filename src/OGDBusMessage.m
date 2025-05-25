@@ -10,6 +10,8 @@
 
 @implementation OGDBusMessage
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DBUS_MESSAGE;
@@ -18,6 +20,15 @@
 		return;
 
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
+}
+
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DBUS_MESSAGE);
+	return gObjectClass;
 }
 
 + (gssize)bytesNeededWithBlob:(guchar*)blob blobLen:(gsize)blobLen
@@ -33,7 +44,7 @@
 
 + (instancetype)dBusMessage
 {
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new(), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new(), G_TYPE_DBUS_MESSAGE, GDBusMessage);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -55,7 +66,7 @@
 {
 	GError* err = NULL;
 
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_from_blob(blob, blobLen, capabilities, &err), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_from_blob(blob, blobLen, capabilities, &err), G_TYPE_DBUS_MESSAGE, GDBusMessage);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -77,7 +88,7 @@
 
 + (instancetype)dBusMessageMethodCallWithName:(OFString*)name path:(OFString*)path interface:(OFString*)interface method:(OFString*)method
 {
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_call([name UTF8String], [path UTF8String], [interface UTF8String], [method UTF8String]), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_method_call([name UTF8String], [path UTF8String], [interface UTF8String], [method UTF8String]), G_TYPE_DBUS_MESSAGE, GDBusMessage);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -97,7 +108,7 @@
 
 + (instancetype)dBusMessageSignalWithPath:(OFString*)path interface:(OFString*)interface signal:(OFString*)signal
 {
-	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_signal([path UTF8String], [interface UTF8String], [signal UTF8String]), GDBusMessage, GDBusMessage);
+	GDBusMessage* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_message_new_signal([path UTF8String], [interface UTF8String], [signal UTF8String]), G_TYPE_DBUS_MESSAGE, GDBusMessage);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -117,7 +128,7 @@
 
 - (GDBusMessage*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusMessage, GDBusMessage);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DBUS_MESSAGE, GDBusMessage);
 }
 
 - (OGDBusMessage*)copy

@@ -8,6 +8,8 @@
 
 @implementation OGMemoryOutputStream
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_MEMORY_OUTPUT_STREAM;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_MEMORY_OUTPUT_STREAM);
+	return gObjectClass;
+}
+
 + (instancetype)memoryOutputStreamWithData:(gpointer)data size:(gsize)size reallocFunction:(GReallocFunc)reallocFunction destroyFunction:(GDestroyNotify)destroyFunction
 {
-	GMemoryOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_output_stream_new(data, size, reallocFunction, destroyFunction), GMemoryOutputStream, GMemoryOutputStream);
+	GMemoryOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_output_stream_new(data, size, reallocFunction, destroyFunction), G_TYPE_MEMORY_OUTPUT_STREAM, GMemoryOutputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 + (instancetype)memoryOutputStreamResizable
 {
-	GMemoryOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_output_stream_new_resizable(), GMemoryOutputStream, GMemoryOutputStream);
+	GMemoryOutputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_memory_output_stream_new_resizable(), G_TYPE_MEMORY_OUTPUT_STREAM, GMemoryOutputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -60,7 +71,7 @@
 
 - (GMemoryOutputStream*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMemoryOutputStream, GMemoryOutputStream);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_MEMORY_OUTPUT_STREAM, GMemoryOutputStream);
 }
 
 - (gpointer)data

@@ -8,6 +8,8 @@
 
 @implementation OGUnixFDList
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_UNIX_FD_LIST;
@@ -18,9 +20,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_UNIX_FD_LIST);
+	return gObjectClass;
+}
+
 + (instancetype)unixFDList
 {
-	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_list_new(), GUnixFDList, GUnixFDList);
+	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_list_new(), G_TYPE_UNIX_FD_LIST, GUnixFDList);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -40,7 +51,7 @@
 
 + (instancetype)unixFDListFromArrayWithFds:(const gint*)fds nfds:(gint)nfds
 {
-	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_list_new_from_array(fds, nfds), GUnixFDList, GUnixFDList);
+	GUnixFDList* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_unix_fd_list_new_from_array(fds, nfds), G_TYPE_UNIX_FD_LIST, GUnixFDList);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -60,7 +71,7 @@
 
 - (GUnixFDList*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GUnixFDList, GUnixFDList);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_UNIX_FD_LIST, GUnixFDList);
 }
 
 - (gint)appendWithFd:(gint)fd

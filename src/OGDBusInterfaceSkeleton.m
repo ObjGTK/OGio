@@ -10,6 +10,8 @@
 
 @implementation OGDBusInterfaceSkeleton
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DBUS_INTERFACE_SKELETON;
@@ -20,9 +22,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DBUS_INTERFACE_SKELETON);
+	return gObjectClass;
+}
+
 - (GDBusInterfaceSkeleton*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusInterfaceSkeleton, GDBusInterfaceSkeleton);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DBUS_INTERFACE_SKELETON, GDBusInterfaceSkeleton);
 }
 
 - (bool)exportWithConnection:(OGDBusConnection*)connection objectPath:(OFString*)objectPath

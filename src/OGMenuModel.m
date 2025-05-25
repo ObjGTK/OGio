@@ -11,6 +11,8 @@
 
 @implementation OGMenuModel
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_MENU_MODEL;
@@ -21,9 +23,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_MENU_MODEL);
+	return gObjectClass;
+}
+
 - (GMenuModel*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GMenuModel, GMenuModel);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_MENU_MODEL, GMenuModel);
 }
 
 - (GVariant*)itemAttributeValueWithItemIndex:(gint)itemIndex attribute:(OFString*)attribute expectedType:(const GVariantType*)expectedType

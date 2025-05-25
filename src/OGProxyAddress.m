@@ -11,6 +11,8 @@
 
 @implementation OGProxyAddress
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_PROXY_ADDRESS;
@@ -21,9 +23,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_PROXY_ADDRESS);
+	return gObjectClass;
+}
+
 + (instancetype)proxyAddressWithInetaddr:(OGInetAddress*)inetaddr port:(guint16)port protocol:(OFString*)protocol destHostname:(OFString*)destHostname destPort:(guint16)destPort username:(OFString*)username password:(OFString*)password
 {
-	GProxyAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_proxy_address_new([inetaddr castedGObject], port, [protocol UTF8String], [destHostname UTF8String], destPort, [username UTF8String], [password UTF8String]), GProxyAddress, GProxyAddress);
+	GProxyAddress* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_proxy_address_new([inetaddr castedGObject], port, [protocol UTF8String], [destHostname UTF8String], destPort, [username UTF8String], [password UTF8String]), G_TYPE_PROXY_ADDRESS, GProxyAddress);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -43,7 +54,7 @@
 
 - (GProxyAddress*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GProxyAddress, GProxyAddress);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_PROXY_ADDRESS, GProxyAddress);
 }
 
 - (OFString*)destinationHostname

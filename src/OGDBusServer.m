@@ -11,6 +11,8 @@
 
 @implementation OGDBusServer
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DBUS_SERVER;
@@ -21,11 +23,20 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DBUS_SERVER);
+	return gObjectClass;
+}
+
 + (instancetype)dBusServerSyncWithAddress:(OFString*)address flags:(GDBusServerFlags)flags guid:(OFString*)guid observer:(OGDBusAuthObserver*)observer cancellable:(OGCancellable*)cancellable
 {
 	GError* err = NULL;
 
-	GDBusServer* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_server_new_sync([address UTF8String], flags, [guid UTF8String], [observer castedGObject], [cancellable castedGObject], &err), GDBusServer, GDBusServer);
+	GDBusServer* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_dbus_server_new_sync([address UTF8String], flags, [guid UTF8String], [observer castedGObject], [cancellable castedGObject], &err), G_TYPE_DBUS_SERVER, GDBusServer);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -47,7 +58,7 @@
 
 - (GDBusServer*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDBusServer, GDBusServer);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DBUS_SERVER, GDBusServer);
 }
 
 - (OFString*)clientAddress

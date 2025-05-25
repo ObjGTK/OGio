@@ -11,6 +11,8 @@
 
 @implementation OGDataInputStream
 
+static GTypeClass *gObjectClass = NULL;
+
 + (void)load
 {
 	GType gtypeToAssociate = G_TYPE_DATA_INPUT_STREAM;
@@ -21,9 +23,18 @@
 	g_type_set_qdata(gtypeToAssociate, [super wrapperQuark], [self class]);
 }
 
++ (GTypeClass*)gObjectClass
+{
+	if(gObjectClass != NULL)
+		return gObjectClass;
+
+	gObjectClass = g_type_class_ref(G_TYPE_DATA_INPUT_STREAM);
+	return gObjectClass;
+}
+
 + (instancetype)dataInputStreamWithBaseStream:(OGInputStream*)baseStream
 {
-	GDataInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_data_input_stream_new([baseStream castedGObject]), GDataInputStream, GDataInputStream);
+	GDataInputStream* gobjectValue = G_TYPE_CHECK_INSTANCE_CAST(g_data_input_stream_new([baseStream castedGObject]), G_TYPE_DATA_INPUT_STREAM, GDataInputStream);
 
 	if OF_UNLIKELY(!gobjectValue)
 		@throw [OGObjectGObjectToWrapCreationFailedException exception];
@@ -43,7 +54,7 @@
 
 - (GDataInputStream*)castedGObject
 {
-	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], GDataInputStream, GDataInputStream);
+	return G_TYPE_CHECK_INSTANCE_CAST([self gObject], G_TYPE_DATA_INPUT_STREAM, GDataInputStream);
 }
 
 - (GDataStreamByteOrder)byteOrder
